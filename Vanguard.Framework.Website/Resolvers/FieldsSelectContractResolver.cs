@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Reflection;
 
 namespace Vanguard.Framework.Website.Resolvers
 {
@@ -14,12 +12,12 @@ namespace Vanguard.Framework.Website.Resolvers
 
             property.GetIsSpecified = (t) =>
             {
-                //var fields = HttpContext.Current.Request["fields"];
+                ////var fields = HttpContext.Current.Request["fields"];
 
-                //if (fields != null)
-                //{
-                //    return fields.IndexOf(member.Name, StringComparison.OrdinalIgnoreCase) > -1;
-                //}
+                ////if (fields != null)
+                ////{
+                ////    return fields.IndexOf(member.Name, StringComparison.OrdinalIgnoreCase) > -1;
+                ////}
 
                 return true;
             };

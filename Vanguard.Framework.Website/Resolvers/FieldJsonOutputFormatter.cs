@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -21,11 +19,11 @@ namespace Vanguard.Framework.Website.Resolvers
         private JsonSerializer _serializer;
 
         /// <summary>
-        /// Initializes a new <see cref="JsonOutputFormatter"/> instance.
+        /// Initializes a new instance of the <see cref="FieldJsonOutputFormatter"/> class.
         /// </summary>
         /// <param name="serializerSettings">
         /// The <see cref="JsonSerializerSettings"/>. Should be either the application-wide settings
-        /// (<see cref="MvcJsonOptions.SerializerSettings"/>) or an instance
+        /// (<see cref="Microsoft.AspNetCore.Mvc.MvcJsonOptions.SerializerSettings"/>) or an instance
         /// <see cref="JsonSerializerSettingsProvider.CreateSerializerSettings"/> initially returned.
         /// </param>
         /// <param name="charPool">The <see cref="ArrayPool{Char}"/>.</param>
@@ -79,6 +77,31 @@ namespace Vanguard.Framework.Website.Resolvers
             }
         }
 
+        /// <inheritdoc />
+        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (selectedEncoding == null)
+            {
+                throw new ArgumentNullException(nameof(selectedEncoding));
+            }
+
+            var response = context.HttpContext.Response;
+            using (var writer = context.WriterFactory(response.Body, selectedEncoding))
+            {
+                WriteObject(writer, context.Object);
+
+                // Perf: call FlushAsync to call WriteAsync on the stream with any content left in the TextWriter's
+                // buffers. This is better than just letting dispose handle it (which would result in a synchronous
+                // write).
+                await writer.FlushAsync();
+            }
+        }
+
         /// <summary>
         /// Called during serialization to create the <see cref="JsonWriter"/>.
         /// </summary>
@@ -112,31 +135,6 @@ namespace Vanguard.Framework.Website.Resolvers
             }
 
             return _serializer;
-        }
-
-        /// <inheritdoc />
-        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (selectedEncoding == null)
-            {
-                throw new ArgumentNullException(nameof(selectedEncoding));
-            }
-
-            var response = context.HttpContext.Response;
-            using (var writer = context.WriterFactory(response.Body, selectedEncoding))
-            {
-                WriteObject(writer, context.Object);
-
-                // Perf: call FlushAsync to call WriteAsync on the stream with any content left in the TextWriter's
-                // buffers. This is better than just letting dispose handle it (which would result in a synchronous
-                // write).
-                await writer.FlushAsync();
-            }
         }
     }
 }

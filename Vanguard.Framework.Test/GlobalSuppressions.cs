@@ -1,0 +1,1 @@
+﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name must match first type name", Justification = "Generic classes are excluded from this rule.", Scope = "type", Target = "~T:Vanguard.Framework.Test.TestBase`1")]

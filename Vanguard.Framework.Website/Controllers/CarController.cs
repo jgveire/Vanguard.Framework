@@ -18,16 +18,6 @@ namespace Vanguard.Framework.Website.Controllers
             InitContext();
         }
 
-        private void InitContext()
-        {
-            if (_context.Cars.Count() == 0)
-            {
-                _context.Cars.Add(new Car("BMW", "Z5"));
-                _context.Cars.Add(new Car("Audi", "A4"));
-                _context.SaveChanges();
-            }
-        }
-
         // GET api/values
         [HttpGet]
         public IActionResult Get(FilterModel model)
@@ -35,7 +25,7 @@ namespace Vanguard.Framework.Website.Controllers
             if (model.Page.HasValue)
             {
                 Response.Headers.Add("X-Total-Count", _context.Cars.Count().ToString());
-                return Json(_context.Cars.Skip(model.Page.Value - 1 * model.PageSize.GetValueOrDefault(20)).Take(model.PageSize.GetValueOrDefault(20)));
+                return Json(_context.Cars.Skip(model.Page.Value - (1 * model.PageSize.GetValueOrDefault(20))).Take(model.PageSize.GetValueOrDefault(20)));
             }
 
             return Json(_context.Cars);
@@ -44,7 +34,7 @@ namespace Vanguard.Framework.Website.Controllers
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
-        {            
+        {
             return Json(_context.Cars.Find(id));
         }
 
@@ -77,6 +67,16 @@ namespace Vanguard.Framework.Website.Controllers
             _context.Cars.Remove(car);
             _context.SaveChanges();
             return new NoContentResult();
+        }
+
+        private void InitContext()
+        {
+            if (_context.Cars.Count() == 0)
+            {
+                _context.Cars.Add(new Car("BMW", "Z5"));
+                _context.Cars.Add(new Car("Audi", "A4"));
+                _context.SaveChanges();
+            }
         }
     }
 }

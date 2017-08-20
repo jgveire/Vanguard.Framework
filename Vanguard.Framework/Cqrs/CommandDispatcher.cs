@@ -1,0 +1,43 @@
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Vanguard.Framework.Core.Cqrs
+{
+    /// <summary>
+    /// The command dispatcher class.
+    /// </summary>
+    /// <seealso cref="ICommandDispatcher" />
+    public class CommandDispatcher : ICommandDispatcher
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandDispatcher"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        public CommandDispatcher(IServiceProvider serviceProvider)
+        {
+            Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
+            ServiceProvider = serviceProvider;
+        }
+
+        /// <summary>
+        /// Gets the service provider.
+        /// </summary>
+        /// <value>
+        /// The service provider.
+        /// </value>
+        protected IServiceProvider ServiceProvider { get; }
+
+        /// <summary>
+        /// Dispatches the specified command.
+        /// </summary>
+        /// <typeparam name="TCommand">The type of the command.</typeparam>
+        /// <param name="command">The command.</param>
+        public void Dispatch<TCommand>(TCommand command)
+            where TCommand : ICommand
+        {
+            Guard.ArgumentNotNull(command, nameof(command));
+            var commandHandler = ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
+            commandHandler.Execute(command);
+        }
+    }
+}

@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +21,8 @@ namespace Vanguard.Framework.Website
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            //var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-            //jsonFormatter.SerializerSettings.ContractResolver = new FieldsSelectContractResolver()
+            ////var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            ////jsonFormatter.SerializerSettings.ContractResolver = new FieldsSelectContractResolver()
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -42,7 +40,7 @@ namespace Vanguard.Framework.Website
                 {
                     options.SerializerSettings.ContractResolver = new FieldsSelectContractResolver();
                 });
-            services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase());
+            services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Test"));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 

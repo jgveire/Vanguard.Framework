@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Vanguard.Framework.Website.Repositories;
+using Vanguard.Framework.Core.Repositories;
 
 namespace Vanguard.Framework.Website.Entities
 {

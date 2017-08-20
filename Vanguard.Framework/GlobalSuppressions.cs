@@ -1,0 +1,1 @@
+﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name must match first type name", Justification = "For generic types we have a different naming convention.", Scope = "type", Target = "~T:Vanguard.Framework.Core.Repositories.IUniqueEntity`1")]
