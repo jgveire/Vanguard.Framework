@@ -78,7 +78,7 @@ namespace Vanguard.Framework.Data.Repositories
                 query = query.Where(findData.Filter);
             }
 
-            if (string.IsNullOrEmpty(findData.Select))
+            if (!string.IsNullOrEmpty(findData.Select))
             {
                 string select = CleanSelect(findData.Select);
                 if (string.IsNullOrEmpty(select))
@@ -93,7 +93,7 @@ namespace Vanguard.Framework.Data.Repositories
             }
             else if (!string.IsNullOrEmpty(findData.OrderBy) && findData.SortOrder == SortOrder.Desc)
             {
-                query = query.OrderBy(findData.OrderBy);
+                query = query.OrderByDescending(findData.OrderBy);
             }
 
             query = query.GetPage(findData.Page, findData.PageSize);

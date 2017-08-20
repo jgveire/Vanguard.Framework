@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "Vanguard.Framework\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "Vanguard.Framework.Core\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Website", "Vanguard.Framework.Website\Vanguard.Framework.Website.csproj", "{1F3FFCC8-8F48-4858-BA17-B516D609F831}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core.Tests", "Vanguard.Framework.Tests\Vanguard.Framework.Core.Tests.csproj", "{F38C8C6D-BB10-4E8D-B4AC-C369DAE646D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core.Tests", "Vanguard.Framework.Core.Tests\Vanguard.Framework.Core.Tests.csproj", "{F38C8C6D-BB10-4E8D-B4AC-C369DAE646D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Test", "Vanguard.Framework.Test\Vanguard.Framework.Test.csproj", "{7D786E4A-1038-4967-BFA8-C3625EB2D27E}"
 EndProject

@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
     <ProjectReference Include="..\Vanguard.Framework.Test\Vanguard.Framework.Test.csproj" />
-    <ProjectReference Include="..\Vanguard.Framework\Vanguard.Framework.Core.csproj" />
   </ItemGroup>
 
 </Project>
