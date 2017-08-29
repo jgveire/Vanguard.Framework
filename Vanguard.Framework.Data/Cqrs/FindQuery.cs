@@ -15,7 +15,7 @@ namespace Vanguard.Framework.Data.Cqrs
         /// Initializes a new instance of the <see cref="FindQuery{TModel}"/> class.
         /// </summary>
         /// <param name="criteria">The find criteria.</param>
-        public FindQuery(FindData criteria)
+        public FindQuery(FindCriteria criteria)
         {
             Guard.ArgumentNotNull(criteria, nameof(criteria));
             Criteria = criteria;
@@ -27,6 +27,6 @@ namespace Vanguard.Framework.Data.Cqrs
         /// <value>
         /// The find criteria.
         /// </value>
-        public FindData Criteria { get; }
+        public FindCriteria Criteria { get; }
     }
 }

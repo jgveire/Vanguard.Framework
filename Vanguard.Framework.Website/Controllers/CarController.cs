@@ -20,13 +20,13 @@ namespace Vanguard.Framework.Website.Controllers
 
         // GET api/values
         [HttpGet]
-        public IActionResult Get(FilterModel model)
+        public IActionResult Get()
         {
-            if (model.Page.HasValue)
-            {
-                Response.Headers.Add("X-Total-Count", _context.Cars.Count().ToString());
-                return Json(_context.Cars.Skip(model.Page.Value - (1 * model.PageSize.GetValueOrDefault(20))).Take(model.PageSize.GetValueOrDefault(20)));
-            }
+            //if (model.Page.HasValue)
+            //{
+            //    Response.Headers.Add("X-Total-Count", _context.Cars.Count().ToString());
+            //    return Json(_context.Cars.Skip(model.Page.Value - (1 * model.PageSize.GetValueOrDefault(20))).Take(model.PageSize.GetValueOrDefault(20)));
+            //}
 
             return Json(_context.Cars);
         }
@@ -75,6 +75,8 @@ namespace Vanguard.Framework.Website.Controllers
             {
                 _context.Cars.Add(new Car("BMW", "Z5"));
                 _context.Cars.Add(new Car("Audi", "A4"));
+                _context.Cars.Add(new Car("Audi", "A5"));
+                _context.Cars.Add(new Car("Opel", "Astra"));
                 _context.SaveChanges();
             }
         }

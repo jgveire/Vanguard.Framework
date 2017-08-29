@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core;
+using Vanguard.Framework.Core.Extensions;
 using Vanguard.Framework.Core.Repositories;
 
 namespace Vanguard.Framework.Data.Repositories
@@ -62,7 +62,7 @@ namespace Vanguard.Framework.Data.Repositories
         /// </summary>
         /// <param name="findData">The find data.</param>
         /// <returns>A collection of entities.</returns>
-        public IEnumerable<TEntity> Find(FindData findData = null)
+        public IEnumerable<TEntity> Find(FindCriteria findData = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -73,18 +73,9 @@ namespace Vanguard.Framework.Data.Repositories
 
             Validate(findData);
 
-            if (!string.IsNullOrEmpty(findData.Filter))
+            if (!string.IsNullOrEmpty(findData.Search))
             {
-                query = query.Where(findData.Filter);
-            }
-
-            if (!string.IsNullOrEmpty(findData.Select))
-            {
-                string select = CleanSelect(findData.Select);
-                if (string.IsNullOrEmpty(select))
-                {
-                    query = query.Select<TEntity>(select);
-                }
+                query = query.Search(findData.Search);
             }
 
             if (!string.IsNullOrEmpty(findData.OrderBy) && findData.SortOrder == SortOrder.Asc)
@@ -156,12 +147,14 @@ namespace Vanguard.Framework.Data.Repositories
                 var properties = type
                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .Where(x => x.PropertyType.IsPrimitive || x.PropertyType.IsEnum || x.PropertyType == typeof(string));
+
+                properties.ForEach(property => _entityProperties.Add(property.Name));
             }
 
             return _entityProperties;
         }
 
-        private void Validate(FindData findData)
+        private void Validate(FindCriteria findData)
         {
         }
 
@@ -170,7 +163,7 @@ namespace Vanguard.Framework.Data.Repositories
             IEnumerable<string> items = select
                 .Split(',', StringSplitOptions.RemoveEmptyEntries)
                 .Select(item => item.Trim());
-            items = items.Where(item => EntityProperties.Contains(item));
+            items = items.Where(item => EntityProperties.Contains(item, StringComparer.InvariantCultureIgnoreCase));
 
             return string.Join(',', items);
         }

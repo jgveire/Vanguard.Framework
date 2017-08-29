@@ -5,16 +5,8 @@ namespace Vanguard.Framework.Core
     /// <summary>
     /// The find data class.
     /// </summary>
-    public class FindData
+    public class FindCriteria
     {
-        /// <summary>
-        /// Gets or sets the search filter.
-        /// </summary>
-        /// <value>
-        /// The search filter.
-        /// </value>
-        public string Filter { get; set; }
-
         /// <summary>
         /// Gets or sets the order by.
         /// </summary>
@@ -49,6 +41,14 @@ namespace Vanguard.Framework.Core
         /// The size of the page.
         /// </value>
         public int PageSize { get; set; } = 20;
+
+        /// <summary>
+        /// Gets or sets the search string.
+        /// </summary>
+        /// <value>
+        /// The search string.
+        /// </value>
+        public string Search { get; set; }
 
         /// <summary>
         /// Gets or sets the fields that should be selected.

@@ -44,9 +44,9 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Collection_Should_Be_Ordered_Ascending()
         {
             // Arrange
-            var findData = new FindData
+            var findData = new FindCriteria
             {
-                OrderBy = "Name"
+                OrderBy = "name"
             };
 
             // Act
@@ -60,9 +60,9 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Collection_Should_Be_Ordered_Descending()
         {
             // Arrange
-            var findData = new FindData
+            var findData = new FindCriteria
             {
-                OrderBy = "Name",
+                OrderBy = "name",
                 SortOrder = SortOrder.Desc
             };
 
@@ -77,7 +77,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Collection_Should_Be_Paged()
         {
             // Arrange
-            var findData = new FindData
+            var findData = new FindCriteria
             {
                 Page = 2,
                 PageSize = 1
@@ -89,6 +89,23 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             // Assert
             result.Count().Should().Be(1, because: "the page size is 1");
             result.First().Name.Should().Be("How To Cook", because: "the page is 2, the page size is 1 and the product 'How To Cook' is the second item in the collection");
+        }
+
+        [TestMethod]
+        public void When_Find_Is_Called_Then_Fields_Should_Be_Selected()
+        {
+            // Arrange
+            var findData = new FindCriteria
+            {
+                Select = "Id,Name"
+            };
+
+            // Act
+            var result = SystemUnderTest.Find(findData);
+
+            // Assert
+            result.Count().Should().Be(3, because: "we dit not supply a filter");
+            result.First().Category.Should().BeNull(because: "we have only selected the Id and Name fields");
         }
 
         protected override Repository<Product> CreateSystemUnderTest()

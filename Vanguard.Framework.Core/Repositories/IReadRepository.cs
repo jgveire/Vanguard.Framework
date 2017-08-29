@@ -17,7 +17,7 @@ namespace Vanguard.Framework.Core.Repositories
         /// </summary>
         /// <param name="findData">The find data.</param>
         /// <returns>A collection of entities.</returns>
-        IEnumerable<TEntity> Find(FindData findData);
+        IEnumerable<TEntity> Find(FindCriteria findData);
 
         /// <summary>
         /// Gets a entity by identifier.
