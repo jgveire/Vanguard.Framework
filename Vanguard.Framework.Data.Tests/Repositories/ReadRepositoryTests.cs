@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Transactions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Vanguard.Framework.Core;
@@ -44,13 +42,13 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Collection_Should_Be_Ordered_Ascending()
         {
             // Arrange
-            var findData = new FindCriteria
+            var findCriteria = new FindCriteria
             {
                 OrderBy = "name"
             };
 
             // Act
-            var result = SystemUnderTest.Find(findData);
+            var result = SystemUnderTest.Find(findCriteria);
 
             // Assert
             result.First().Name.Should().Be("Apple", because: "the collection is ordered by product name ascending");
@@ -60,14 +58,14 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Collection_Should_Be_Ordered_Descending()
         {
             // Arrange
-            var findData = new FindCriteria
+            var findCriteria = new FindCriteria
             {
                 OrderBy = "name",
                 SortOrder = SortOrder.Desc
             };
 
             // Act
-            var result = SystemUnderTest.Find(findData);
+            var result = SystemUnderTest.Find(findCriteria);
 
             // Assert
             result.First().Name.Should().Be("How To Cook", because: "the collection is ordered by product name descending");
@@ -77,14 +75,14 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Collection_Should_Be_Paged()
         {
             // Arrange
-            var findData = new FindCriteria
+            var findCriteria = new FindCriteria
             {
                 Page = 2,
                 PageSize = 1
             };
 
             // Act
-            var result = SystemUnderTest.Find(findData);
+            var result = SystemUnderTest.Find(findCriteria);
 
             // Assert
             result.Count().Should().Be(1, because: "the page size is 1");
@@ -95,13 +93,13 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_Is_Called_Then_Fields_Should_Be_Selected()
         {
             // Arrange
-            var findData = new FindCriteria
+            var findCriteria = new FindCriteria
             {
                 Select = "Id,Name"
             };
 
             // Act
-            var result = SystemUnderTest.Find(findData);
+            var result = SystemUnderTest.Find(findCriteria);
 
             // Assert
             result.Count().Should().Be(3, because: "we dit not supply a filter");

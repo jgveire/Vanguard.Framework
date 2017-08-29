@@ -58,36 +58,36 @@ namespace Vanguard.Framework.Data.Repositories
         protected DbSet<TEntity> DbSet { get; }
 
         /// <summary>
-        /// Finds entities accoording to the supplied find data.
+        /// Finds entities accoording to the supplied find criteria.
         /// </summary>
-        /// <param name="findData">The find data.</param>
+        /// <param name="findCriteria">The find criteria.</param>
         /// <returns>A collection of entities.</returns>
-        public IEnumerable<TEntity> Find(FindCriteria findData = null)
+        public IEnumerable<TEntity> Find(FindCriteria findCriteria = null)
         {
             IQueryable<TEntity> query = DbSet;
 
-            if (findData == null)
+            if (findCriteria == null)
             {
                 return query.ToList();
             }
 
-            Validate(findData);
+            Validate(findCriteria);
 
-            if (!string.IsNullOrEmpty(findData.Search))
+            if (!string.IsNullOrEmpty(findCriteria.Search))
             {
-                query = query.Search(findData.Search);
+                query = query.Search(findCriteria.Search);
             }
 
-            if (!string.IsNullOrEmpty(findData.OrderBy) && findData.SortOrder == SortOrder.Asc)
+            if (!string.IsNullOrEmpty(findCriteria.OrderBy) && findCriteria.SortOrder == SortOrder.Asc)
             {
-                query = query.OrderBy(findData.OrderBy);
+                query = query.OrderBy(findCriteria.OrderBy);
             }
-            else if (!string.IsNullOrEmpty(findData.OrderBy) && findData.SortOrder == SortOrder.Desc)
+            else if (!string.IsNullOrEmpty(findCriteria.OrderBy) && findCriteria.SortOrder == SortOrder.Desc)
             {
-                query = query.OrderByDescending(findData.OrderBy);
+                query = query.OrderByDescending(findCriteria.OrderBy);
             }
 
-            query = query.GetPage(findData.Page, findData.PageSize);
+            query = query.GetPage(findCriteria.Page, findCriteria.PageSize);
 
             return query.ToList();
         }
@@ -137,6 +137,43 @@ namespace Vanguard.Framework.Data.Repositories
             return query.ToList();
         }
 
+        /// <summary>
+        /// Gets the number of items in the database accoording to the supplied find criteria.
+        /// </summary>
+        /// <param name="findCriteria">The find criteria.</param>
+        /// <returns>
+        /// The total number of items in the database accoording to the supplied find criteria.
+        /// </returns>
+        public int GetCount(FindCriteria findCriteria)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            if (findCriteria != null && !string.IsNullOrEmpty(findCriteria.Search))
+            {
+                query = query.Search(findCriteria.Search);
+            }
+
+            return query.Count();
+        }
+
+        /// <summary>
+        /// Gets the number of items in the database accoording to the supplied filter.
+        /// </summary>
+        /// <param name="filter">The filter predicate.</param>
+        /// <returns>
+        /// The total number of items in the database accoording to the supplied filter.
+        /// </returns>
+        public int GetCount(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Count();
+        }
+
         private static ICollection<string> GetEntityProperties()
         {
             if (_entityProperties == null)
@@ -154,7 +191,7 @@ namespace Vanguard.Framework.Data.Repositories
             return _entityProperties;
         }
 
-        private void Validate(FindCriteria findData)
+        private void Validate(FindCriteria findCriteria)
         {
         }
 

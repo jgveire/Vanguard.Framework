@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Vanguard.Framework.Data.Tests.Repositories

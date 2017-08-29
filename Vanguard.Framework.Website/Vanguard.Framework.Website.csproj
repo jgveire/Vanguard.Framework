@@ -16,6 +16,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
@@ -28,6 +30,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
+    <ProjectReference Include="..\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj" />
+    <ProjectReference Include="..\Vanguard.Framework.Http\Vanguard.Framework.Http.csproj" />
   </ItemGroup>
 
 </Project>

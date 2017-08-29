@@ -1,82 +1,34 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Vanguard.Framework.Core.Cqrs;
+using Vanguard.Framework.Http;
 using Vanguard.Framework.Website.Contexts;
 using Vanguard.Framework.Website.Entities;
+using Vanguard.Framework.Website.Models;
 
 namespace Vanguard.Framework.Website.Controllers
 {
     [Route("api/cars")]
-    public class CarController : Controller
+    public class CarController : CrudController<Guid, CarModel>
     {
         private ExampleContext _context;
 
-        public CarController(ExampleContext context)
+        public CarController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, ExampleContext context)
+            : base(commandDispatcher, queryDispatcher)
         {
             _context = context;
             InitContext();
-        }
-
-        // GET api/values
-        [HttpGet]
-        public IActionResult Get()
-        {
-            //if (model.Page.HasValue)
-            //{
-            //    Response.Headers.Add("X-Total-Count", _context.Cars.Count().ToString());
-            //    return Json(_context.Cars.Skip(model.Page.Value - (1 * model.PageSize.GetValueOrDefault(20))).Take(model.PageSize.GetValueOrDefault(20)));
-            //}
-
-            return Json(_context.Cars);
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
-        {
-            return Json(_context.Cars.Find(id));
-        }
-
-        // POST api/values
-        [HttpPost]
-        public IActionResult Create([FromBody, Required]string brand, [Required]string model)
-        {
-            var car = new Car(brand, model);
-            _context.Cars.Add(car);
-            _context.SaveChanges();
-            return CreatedAtRoute(nameof(Get), car.Id, car);
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody, Required]string brand, [Required]string model)
-        {
-            var car = _context.Cars.Find(id);
-            car.Brand = brand;
-            car.Model = model;
-            _context.SaveChanges();
-            return new NoContentResult();
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
-        {
-            var car = _context.Cars.Find(id);
-            _context.Cars.Remove(car);
-            _context.SaveChanges();
-            return new NoContentResult();
         }
 
         private void InitContext()
         {
             if (_context.Cars.Count() == 0)
             {
-                _context.Cars.Add(new Car("BMW", "Z5"));
-                _context.Cars.Add(new Car("Audi", "A4"));
-                _context.Cars.Add(new Car("Audi", "A5"));
-                _context.Cars.Add(new Car("Opel", "Astra"));
+                _context.Cars.Add(new Car(new Guid("9f490218-7db0-452f-8809-a390f9ca5a95"), "BMW", "Z5"));
+                _context.Cars.Add(new Car(new Guid("5b2ca291-9fd6-4b36-abaf-4af27a64f322"), "Audi", "A4"));
+                _context.Cars.Add(new Car(new Guid("e8289985-aeaf-4867-85ab-af354c0d1d85"), "Audi", "A5"));
+                _context.Cars.Add(new Car(new Guid("fa47ff63-f5b7-4697-beae-6bb8384fd5b2"), "Opel", "Astra"));
                 _context.SaveChanges();
             }
         }

@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Vanguard.Framework.Website.Contexts;
+using Vanguard.Framework.Website.Entities;
+using Vanguard.Framework.Website.Models;
 using Vanguard.Framework.Website.Resolvers;
 
 namespace Vanguard.Framework.Website
@@ -21,6 +26,12 @@ namespace Vanguard.Framework.Website
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
 
+            Mapper.Initialize(config =>
+                {
+                    config.CreateMap<Car, CarModel>();
+                    config.CreateMap<CarModel, Car>();
+                });
+
             ////var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             ////jsonFormatter.SerializerSettings.ContractResolver = new FieldsSelectContractResolver()
         }
@@ -28,7 +39,7 @@ namespace Vanguard.Framework.Website
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services
@@ -40,8 +51,15 @@ namespace Vanguard.Framework.Website
                 {
                     options.SerializerSettings.ContractResolver = new FieldsSelectContractResolver();
                 });
+
             services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Test"));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // Add Autofac
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<DefaultModule>();
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

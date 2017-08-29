@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Vanguard.Framework.Core
+﻿namespace Vanguard.Framework.Core
 {
     /// <summary>
-    /// The find data class.
+    /// The find criteria class.
     /// </summary>
     public class FindCriteria
     {

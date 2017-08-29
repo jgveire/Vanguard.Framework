@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "Vanguard.Framework.Core\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
 EndProject
@@ -19,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5910B2D3-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{9028BADB-AB90-4432-8E23-40D533008578}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanguard.Framework.Data.Tests", "Vanguard.Framework.Data.Tests\Vanguard.Framework.Data.Tests.csproj", "{969C100B-D456-4108-9FB3-32E271E59105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data.Tests", "Vanguard.Framework.Data.Tests\Vanguard.Framework.Data.Tests.csproj", "{969C100B-D456-4108-9FB3-32E271E59105}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanguard.Framework.Http", "Vanguard.Framework.Http\Vanguard.Framework.Http.csproj", "{0E7036EB-3863-42F7-B266-058FD4985DE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{969C100B-D456-4108-9FB3-32E271E59105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{969C100B-D456-4108-9FB3-32E271E59105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{969C100B-D456-4108-9FB3-32E271E59105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E7036EB-3863-42F7-B266-058FD4985DE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E7036EB-3863-42F7-B266-058FD4985DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E7036EB-3863-42F7-B266-058FD4985DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E7036EB-3863-42F7-B266-058FD4985DE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{7D786E4A-1038-4967-BFA8-C3625EB2D27E} = {598C29F1-A96E-4ECE-9A0B-076173C0B418}
 		{7EF90957-2464-4445-99B3-9450F4ACA9A1} = {598C29F1-A96E-4ECE-9A0B-076173C0B418}
 		{969C100B-D456-4108-9FB3-32E271E59105} = {5910B2D3-89FA-4698-98E3-E29205FDF9E7}
+		{0E7036EB-3863-42F7-B266-058FD4985DE4} = {598C29F1-A96E-4ECE-9A0B-076173C0B418}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E5130839-56AB-4ABF-89D0-65E15E0C544D}

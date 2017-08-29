@@ -13,13 +13,13 @@ namespace Vanguard.Framework.Data.Cqrs
     public class GetQueryHandler<TModel, TEntity> : IQueryHandler<TModel, GetQuery<TModel>>
         where TEntity : class, IEntity
     {
-        private readonly IRepository<TEntity> _repository;
+        private readonly IReadRepository<TEntity> _repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GetQueryHandler{TModel, TEntity}"/> class.
         /// </summary>
         /// <param name="repository">The entity repository.</param>
-        public GetQueryHandler(IRepository<TEntity> repository)
+        public GetQueryHandler(IReadRepository<TEntity> repository)
         {
             Guard.ArgumentNotNull(repository, nameof(repository));
             _repository = repository;

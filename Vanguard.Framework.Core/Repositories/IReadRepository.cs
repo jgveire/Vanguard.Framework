@@ -13,11 +13,25 @@ namespace Vanguard.Framework.Core.Repositories
         where TEntity : class, IEntity
     {
         /// <summary>
-        /// Finds entities accoording to the supplied find data.
+        /// Finds entities accoording to the supplied find criteria.
         /// </summary>
-        /// <param name="findData">The find data.</param>
+        /// <param name="findCriteria">The find criteria.</param>
         /// <returns>A collection of entities.</returns>
-        IEnumerable<TEntity> Find(FindCriteria findData);
+        IEnumerable<TEntity> Find(FindCriteria findCriteria);
+
+        /// <summary>
+        /// Gets the number of items in the database accoording to the supplied find criteria.
+        /// </summary>
+        /// <param name="findCriteria">The find criteria.</param>
+        /// <returns>The total number of items in the database accoording to the supplied find criteria.</returns>
+        int GetCount(FindCriteria findCriteria);
+
+        /// <summary>
+        /// Gets the number of items in the database accoording to the supplied filter.
+        /// </summary>
+        /// <param name="filter">The filter predicate.</param>
+        /// <returns>The total number of items in the database accoording to the supplied filter.</returns>
+        int GetCount(Expression<Func<TEntity, bool>> filter = null);
 
         /// <summary>
         /// Gets a entity by identifier.

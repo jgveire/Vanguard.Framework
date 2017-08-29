@@ -16,8 +16,15 @@ namespace Vanguard.Framework.Website.Entities
             Model = model;
         }
 
+        public Car(Guid id, string brand, string model)
+        {
+            Id = id;
+            Brand = brand;
+            Model = model;
+        }
+
         [Key]
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [StringLength(20)]
