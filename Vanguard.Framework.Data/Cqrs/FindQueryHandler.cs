@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Vanguard.Framework.Core.Cqrs;
 using Vanguard.Framework.Core.Repositories;

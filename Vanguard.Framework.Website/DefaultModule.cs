@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Autofac;
+﻿using Autofac;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Data.Cqrs;
 using Vanguard.Framework.Data.Repositories;
 using Vanguard.Framework.Website.Contexts;
 using Vanguard.Framework.Website.Entities;

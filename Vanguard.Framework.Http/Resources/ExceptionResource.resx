@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CannotFindEntity" xml:space="preserve">
-    <value>The entity with identifier "{0}" cannot be found.</value>
+  <data name="ServerError" xml:space="preserve">
+    <value>A server error occurred.</value>
   </data>
-  <data name="CannotOrderBy" xml:space="preserve">
-    <value>Cannot order by "{0}".</value>
+  <data name="UnauthorizedAccess" xml:space="preserve">
+    <value>Unauthorized access.</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>An unexpected error has occurred.</value>
   </data>
 </root>

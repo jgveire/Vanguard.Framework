@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core;
+using Vanguard.Framework.Core.Exceptions;
 using Vanguard.Framework.Core.Extensions;
 using Vanguard.Framework.Core.Repositories;
+using Vanguard.Framework.Data.Resources;
 
 namespace Vanguard.Framework.Data.Repositories
 {
@@ -193,6 +195,19 @@ namespace Vanguard.Framework.Data.Repositories
 
         private void Validate(FindCriteria findCriteria)
         {
+            if (!string.IsNullOrWhiteSpace(findCriteria.OrderBy))
+            {
+                ValidateOrderBy(findCriteria.OrderBy);
+            }
+        }
+
+        private void ValidateOrderBy(string orderBy)
+        {
+            if (!EntityProperties.Contains(orderBy, StringComparer.InvariantCultureIgnoreCase))
+            {
+                string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
+                throw new ValidationException(message, nameof(FindCriteria.OrderBy));
+            }
         }
 
         private string CleanSelect(string select)

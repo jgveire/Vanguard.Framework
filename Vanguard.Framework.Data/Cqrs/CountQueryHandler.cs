@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Vanguard.Framework.Core.Cqrs;
+﻿using Vanguard.Framework.Core.Cqrs;
 using Vanguard.Framework.Core.Repositories;
 
 namespace Vanguard.Framework.Data.Cqrs

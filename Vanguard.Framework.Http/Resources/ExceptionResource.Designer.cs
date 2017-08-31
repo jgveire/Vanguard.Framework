@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vanguard.Framework.Data.Resources {
+namespace Vanguard.Framework.Http.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Vanguard.Framework.Data.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Vanguard.Framework.Data.Resources.ExceptionResource", typeof(ExceptionResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Vanguard.Framework.Http.Resources.ExceptionResource", typeof(ExceptionResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace Vanguard.Framework.Data.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The entity with identifier &quot;{0}&quot; cannot be found..
+        ///   Looks up a localized string similar to A server error occurred..
         /// </summary>
-        internal static string CannotFindEntity {
+        internal static string ServerError {
             get {
-                return ResourceManager.GetString("CannotFindEntity", resourceCulture);
+                return ResourceManager.GetString("ServerError", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot order by &quot;{0}&quot;..
+        ///   Looks up a localized string similar to Unauthorized access..
         /// </summary>
-        internal static string CannotOrderBy {
+        internal static string UnauthorizedAccess {
             get {
-                return ResourceManager.GetString("CannotOrderBy", resourceCulture);
+                return ResourceManager.GetString("UnauthorizedAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error has occurred..
+        /// </summary>
+        internal static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
             }
         }
     }
