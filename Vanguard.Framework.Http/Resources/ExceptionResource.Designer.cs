@@ -86,5 +86,14 @@ namespace Vanguard.Framework.Http.Resources {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An validation error has occurred..
+        /// </summary>
+        internal static string ValidationError {
+            get {
+                return ResourceManager.GetString("ValidationError", resourceCulture);
+            }
+        }
     }
 }

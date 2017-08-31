@@ -50,6 +50,7 @@ namespace Vanguard.Framework.Website
                 {
                     options.Filters.Add(typeof(FieldResultFilter));
                     options.Filters.Add(typeof(ExceptionFilter));
+                    options.Filters.Add(typeof(ValidateModelAttribute));
                 })
                 .AddJsonOptions(options =>
                 {

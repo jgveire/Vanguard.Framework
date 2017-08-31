@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Vanguard.Framework.Core.Cqrs;
@@ -45,6 +46,13 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
 
             // Assert
             result.Should().Be("Success", because: "the test query handler returns the string 'Success'");
+        }
+
+        [TestMethod]
+        public void Temp()
+        {
+            string result = Regex.Replace("Test.This", @"^([A-Z]{1})|\.([A-Z]{1})", match => match.ToString().ToLower());
+            Assert.AreEqual("test.this", result);
         }
     }
 }

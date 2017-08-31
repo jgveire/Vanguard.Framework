@@ -126,4 +126,7 @@
   <data name="UnexpectedError" xml:space="preserve">
     <value>An unexpected error has occurred.</value>
   </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>An validation error has occurred.</value>
+  </data>
 </root>
