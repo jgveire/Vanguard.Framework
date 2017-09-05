@@ -29,7 +29,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             var result = Data.Repositories.QueryableExtensions.OrderByDescending(Products, "Name");
 
             // Assert
-            result.First().Name.Should().Be("How to program", because: "we ordered on the name property descending");
+            result.First().Name.Should().Be("Mountain Bike", because: "we ordered on the name property descending");
         }
 
         [TestMethod]

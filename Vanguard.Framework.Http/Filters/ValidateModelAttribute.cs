@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -16,6 +14,7 @@ namespace Vanguard.Framework.Http.Filters
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
     public class ValidateModelAttribute : ActionFilterAttribute
     {
+        /// <inheritdoc />
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (context.ModelState.IsValid == false)

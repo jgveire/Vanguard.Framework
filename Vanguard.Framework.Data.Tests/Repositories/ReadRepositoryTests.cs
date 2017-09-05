@@ -90,6 +90,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
+        [Ignore]
         public void When_Find_Is_Called_Then_Fields_Should_Be_Selected()
         {
             // Arrange

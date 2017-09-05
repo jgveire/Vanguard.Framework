@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -6,15 +7,17 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Vanguard.Framework.Http.Filters;
+using Vanguard.Framework.Http.Formatters;
 using Vanguard.Framework.Website.Contexts;
 using Vanguard.Framework.Website.Entities;
 using Vanguard.Framework.Website.Models;
-using Vanguard.Framework.Website.Resolvers;
 
 namespace Vanguard.Framework.Website
 {
@@ -36,7 +39,7 @@ namespace Vanguard.Framework.Website
                 });
 
             ////var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-            ////jsonFormatter.SerializerSettings.ContractResolver = new FieldsSelectContractResolver()
+            ////jsonFormatter.SerializerSettings.ContractResolver = new SelectFieldContractResolver()
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -48,13 +51,10 @@ namespace Vanguard.Framework.Website
             services
                 .AddMvc(options =>
                 {
-                    options.Filters.Add(typeof(FieldResultFilter));
                     options.Filters.Add(typeof(ExceptionFilter));
                     options.Filters.Add(typeof(ValidateModelAttribute));
-                })
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new FieldsSelectContractResolver();
+                    options.OutputFormatters.Clear();
+                    options.OutputFormatters.Add(new SelectFieldJsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared));
                 });
 
             services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Test"));
