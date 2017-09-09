@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Website.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Example.Website.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Website.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Example.Website.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,9 +29,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
-    <ProjectReference Include="..\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj" />
-    <ProjectReference Include="..\Vanguard.Framework.Http\Vanguard.Framework.Http.csproj" />
+    <ProjectReference Include="..\..\src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\src\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj" />
+    <ProjectReference Include="..\..\src\Vanguard.Framework.Http\Vanguard.Framework.Http.csproj" />
   </ItemGroup>
 
 </Project>

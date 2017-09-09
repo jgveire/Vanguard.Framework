@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "Vanguard.Framework.Core\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Website", "Vanguard.Framework.Website\Vanguard.Framework.Website.csproj", "{1F3FFCC8-8F48-4858-BA17-B516D609F831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Website", "examples\Example.Website\Example.Website.csproj", "{1F3FFCC8-8F48-4858-BA17-B516D609F831}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core.Tests", "Vanguard.Framework.Core.Tests\Vanguard.Framework.Core.Tests.csproj", "{F38C8C6D-BB10-4E8D-B4AC-C369DAE646D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core.Tests", "tests\Vanguard.Framework.Core.Tests\Vanguard.Framework.Core.Tests.csproj", "{F38C8C6D-BB10-4E8D-B4AC-C369DAE646D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Test", "Vanguard.Framework.Test\Vanguard.Framework.Test.csproj", "{7D786E4A-1038-4967-BFA8-C3625EB2D27E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Test", "src\Vanguard.Framework.Test\Vanguard.Framework.Test.csproj", "{7D786E4A-1038-4967-BFA8-C3625EB2D27E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data", "Vanguard.Framework.Data\Vanguard.Framework.Data.csproj", "{7EF90957-2464-4445-99B3-9450F4ACA9A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data", "src\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj", "{7EF90957-2464-4445-99B3-9450F4ACA9A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{598C29F1-A96E-4ECE-9A0B-076173C0B418}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5910B2D3-89FA-4698-98E3-E29205FDF9E7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example", "example", "{9028BADB-AB90-4432-8E23-40D533008578}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{9028BADB-AB90-4432-8E23-40D533008578}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data.Tests", "Vanguard.Framework.Data.Tests\Vanguard.Framework.Data.Tests.csproj", "{969C100B-D456-4108-9FB3-32E271E59105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data.Tests", "tests\Vanguard.Framework.Data.Tests\Vanguard.Framework.Data.Tests.csproj", "{969C100B-D456-4108-9FB3-32E271E59105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanguard.Framework.Http", "Vanguard.Framework.Http\Vanguard.Framework.Http.csproj", "{0E7036EB-3863-42F7-B266-058FD4985DE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vanguard.Framework.Http", "src\Vanguard.Framework.Http\Vanguard.Framework.Http.csproj", "{0E7036EB-3863-42F7-B266-058FD4985DE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
