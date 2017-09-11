@@ -36,7 +36,7 @@ public class SimpleTests : TestBase<Simple>
 ```
 
 When the system under test has a constructor with arguments you must ensure these arguments are mocked. You can do this by calling the ```Mocks<T>()``` method.
-This allows you to setup the mocking behavior of the type you want to mock. For more information about mock please look at the documentation of [Moq](https://github.com/moq/moq4).
+This allows you to setup the mocking behavior of the type you want to mock. For more information about mocking please look at the documentation of [Moq](https://github.com/moq/moq4).
 
 ```csharp
 public interface IRepository
@@ -89,6 +89,7 @@ Mocks<IRepository>();
 If you don't want an argument to be mocked don't call the ```Mocks<T>()``` method for that type. 
 
 If you want to create the system under test manually you can override the CreateSystemUnderTest method.
+The default value will be used for that argument; for example an ```int``` will result in ```0``` and a ```string``` will result in ```null```.
 
 ```csharp
 [TestClass]
