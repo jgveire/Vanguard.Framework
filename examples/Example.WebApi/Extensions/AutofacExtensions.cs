@@ -4,7 +4,7 @@ using Vanguard.Framework.Core.Cqrs;
 using Vanguard.Framework.Core.Repositories;
 using Vanguard.Framework.Data.Cqrs;
 
-namespace Vanguard.Framework.Website.Extensions
+namespace Example.WebApi.Extensions
 {
     /// <summary>
     /// The Autofac extensions class.

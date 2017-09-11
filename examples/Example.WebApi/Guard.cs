@@ -1,4 +1,4 @@
-﻿namespace Vanguard.Framework.Website
+﻿namespace Example.WebApi
 {
     public static class Guard
     {

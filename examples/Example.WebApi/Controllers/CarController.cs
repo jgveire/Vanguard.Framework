@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Http;
-using Vanguard.Framework.Website.Contexts;
-using Vanguard.Framework.Website.Entities;
-using Vanguard.Framework.Website.Models;
-
-namespace Vanguard.Framework.Website.Controllers
+﻿namespace Example.WebApi.Controllers
 {
+    using System;
+    using System.Linq;
+    using Example.WebApi.Contexts;
+    using Example.WebApi.Entities;
+    using Example.WebApi.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Http;
+
     [Route("api/cars")]
     public class CarController : CrudController<Guid, CarModel>
     {

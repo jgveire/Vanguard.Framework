@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Vanguard.Framework.Website
+namespace Example.WebApi
 {
     public class Program
     {

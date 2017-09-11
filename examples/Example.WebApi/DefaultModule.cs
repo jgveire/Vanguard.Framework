@@ -1,15 +1,15 @@
-﻿using Autofac;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Data.Repositories;
-using Vanguard.Framework.Website.Contexts;
-using Vanguard.Framework.Website.Entities;
-using Vanguard.Framework.Website.Extensions;
-using Vanguard.Framework.Website.Models;
-
-namespace Vanguard.Framework.Website
+﻿namespace Example.WebApi
 {
+    using Autofac;
+    using Example.WebApi.Contexts;
+    using Example.WebApi.Entities;
+    using Example.WebApi.Extensions;
+    using Example.WebApi.Models;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Data.Repositories;
+
     public class DefaultModule : Module
     {
         protected override void Load(ContainerBuilder builder)

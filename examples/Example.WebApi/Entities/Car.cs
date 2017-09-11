@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Vanguard.Framework.Core.Repositories;
 
-namespace Vanguard.Framework.Website.Entities
+namespace Example.WebApi.Entities
 {
     public class Car : IEntity
     {

@@ -1,23 +1,23 @@
-﻿using System;
-using System.Buffers;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Vanguard.Framework.Http.Filters;
-using Vanguard.Framework.Http.Formatters;
-using Vanguard.Framework.Website.Contexts;
-using Vanguard.Framework.Website.Entities;
-using Vanguard.Framework.Website.Models;
-
-namespace Vanguard.Framework.Website
+﻿namespace Example.WebApi
 {
+    using System;
+    using System.Buffers;
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
+    using AutoMapper;
+    using Example.WebApi.Contexts;
+    using Example.WebApi.Entities;
+    using Example.WebApi.Models;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Vanguard.Framework.Http.Filters;
+    using Vanguard.Framework.Http.Formatters;
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)

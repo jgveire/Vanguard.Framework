@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Vanguard.Framework.Website.Entities;
-
-namespace Vanguard.Framework.Website.Contexts
+﻿namespace Example.WebApi.Contexts
 {
+    using Example.WebApi.Entities;
+    using Microsoft.EntityFrameworkCore;
+
     public class ExampleContext : DbContext
     {
         public ExampleContext(DbContextOptions<ExampleContext> options)
