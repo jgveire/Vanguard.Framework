@@ -10,7 +10,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
     public class CommandDispatcherTests : TestBase<CommandDispatcher>
     {
         [TestMethod]
-        public void When_Dispatch_Is_Called_The_Command_Handler_Should_Be_Executed()
+        public void When_Dispatch_is_called_the_command_handler_should_be_executed()
         {
             // Arrange
             var command = new TestCommand();
@@ -22,10 +22,10 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
                 .Returns(commandHandler);
 
             // Act
-            Action action = () => SystemUnderTest.Dispatch(command);
+            SystemUnderTest.Dispatch(command);
 
             // Assert
-            action.ShouldThrow<NotImplementedException>(because: "we did not implement the Execute method of the TestCommandHandler.");
+            command.IsHandlerExecuted.Should().BeTrue(because: "the test command handler changes the value of the test command");
         }
     }
 }

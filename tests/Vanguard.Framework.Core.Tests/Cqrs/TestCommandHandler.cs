@@ -7,7 +7,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
     {
         public void Execute(TestCommand command)
         {
-            throw new NotImplementedException();
+            command.IsHandlerExecuted = true;
         }
     }
 }

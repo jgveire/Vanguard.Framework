@@ -13,7 +13,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         private static IQueryable<Product> Products => GetProducts();
 
         [TestMethod]
-        public void When_OrderBy_Is_Called_Then_Apple_Should_Be_First_Item_In_The_Collection()
+        public void When_OrderBy_is_called_then_apple_should_be_first_item_in_the_collection()
         {
             // Act
             var result = Data.Repositories.QueryableExtensions.OrderBy(Products, "Name");
@@ -23,7 +23,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public void When_OrderByDescending_Is_Called_Then_HowToProgram_Should_Be_First_Item_In_The_Collection()
+        public void When_OrderByDescending_is_called_then_HowToProgram_should_be_first_item_in_the_collection()
         {
             // Act
             var result = Data.Repositories.QueryableExtensions.OrderByDescending(Products, "Name");
@@ -33,7 +33,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public void When_Search_Is_Called_Then_Apple_Should_Be_First_Item_In_The_Collection()
+        public void When_Search_is_called_then_apple_should_be_first_item_in_the_collection()
         {
             // Act
             var result = Data.Repositories.QueryableExtensions.Search(Products, "Appl");
@@ -43,7 +43,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public void When_Search_Is_Called_Then_Bike_Should_Be_First_Item_In_The_Collection()
+        public void When_Search_is_called_then_bike_should_be_first_item_in_the_collection()
         {
             // Act
             var result = Data.Repositories.QueryableExtensions.Search(Products, "3");

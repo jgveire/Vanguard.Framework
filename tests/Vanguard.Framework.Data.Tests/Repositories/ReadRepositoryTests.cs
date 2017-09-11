@@ -39,7 +39,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public void When_Find_Is_Called_Then_Collection_Should_Be_Ordered_Ascending()
+        public void When_Find_is_called_then_collection_should_be_ordered_ascending()
         {
             // Arrange
             var findCriteria = new FindCriteria
@@ -55,7 +55,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public void When_Find_Is_Called_Then_Collection_Should_Be_Ordered_Descending()
+        public void When_Find_is_called_then_collection_should_be_ordered_descending()
         {
             // Arrange
             var findCriteria = new FindCriteria
@@ -72,7 +72,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        public void When_Find_Is_Called_Then_Collection_Should_Be_Paged()
+        public void When_Find_is_called_then_collection_should_be_paged()
         {
             // Arrange
             var findCriteria = new FindCriteria
@@ -91,7 +91,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
 
         [TestMethod]
         [Ignore]
-        public void When_Find_Is_Called_Then_Fields_Should_Be_Selected()
+        public void When_Find_is_called_then_fields_should_be_selected()
         {
             // Arrange
             var findCriteria = new FindCriteria

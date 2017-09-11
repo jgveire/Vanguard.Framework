@@ -11,7 +11,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
     public class QueryDispatcherTests : TestBase<QueryDispatcher>
     {
         [TestMethod]
-        public void When_Dispatch_Is_Called_The_Query_Handler_Should_Return_Success_String()
+        public void When_Dispatch_is_called_the_query_handler_should_return_success_string()
         {
             // Arrange
             var query = new TestQuery();
@@ -30,7 +30,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
         }
 
         [TestMethod]
-        public void When_Explicit_Dispatch_Is_Called_The_Query_Handler_Should_Return_Success_String()
+        public void When_Dispatch_is_called_explicitly_the_query_handler_should_return_success_string()
         {
             // Arrange
             var query = new TestQuery();
@@ -46,13 +46,6 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
 
             // Assert
             result.Should().Be("Success", because: "the test query handler returns the string 'Success'");
-        }
-
-        [TestMethod]
-        public void Temp()
-        {
-            string result = Regex.Replace("Test.This", @"^([A-Z]{1})|\.([A-Z]{1})", match => match.ToString().ToLower());
-            Assert.AreEqual("test.this", result);
         }
     }
 }
