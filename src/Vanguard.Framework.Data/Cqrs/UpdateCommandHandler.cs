@@ -42,6 +42,7 @@ namespace Vanguard.Framework.Data.Cqrs
 
             Mapper.Map(command.Model, entity);
             _repository.Update(entity);
+            _repository.Save();
         }
     }
 }

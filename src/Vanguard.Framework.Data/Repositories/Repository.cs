@@ -30,7 +30,6 @@ namespace Vanguard.Framework.Data.Repositories
         public void Add(TEntity entity)
         {
             DbSet.Add(entity);
-            DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -40,7 +39,6 @@ namespace Vanguard.Framework.Data.Repositories
         public void Update(TEntity entity)
         {
             DbContext.Entry(entity).State = EntityState.Modified;
-            DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -50,6 +48,13 @@ namespace Vanguard.Framework.Data.Repositories
         public void Delete(TEntity entity)
         {
             DbSet.Remove(entity);
+        }
+
+        /// <summary>
+        /// Saves all changes.
+        /// </summary>
+        public void Save()
+        {
             DbContext.SaveChanges();
         }
     }

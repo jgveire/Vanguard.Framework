@@ -24,5 +24,10 @@
         /// </summary>
         /// <param name="entity">The entity.</param>
         void Update(TEntity entity);
+
+        /// <summary>
+        /// Saves all changes.
+        /// </summary>
+        void Save();
     }
 }

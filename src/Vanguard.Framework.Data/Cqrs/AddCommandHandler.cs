@@ -33,6 +33,7 @@ namespace Vanguard.Framework.Data.Cqrs
         {
             var entity = Mapper.Map<TEntity>(command.Model);
             _repository.Add(entity);
+            _repository.Save();
         }
     }
 }

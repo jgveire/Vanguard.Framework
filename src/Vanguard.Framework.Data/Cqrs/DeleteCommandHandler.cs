@@ -31,10 +31,13 @@ namespace Vanguard.Framework.Data.Cqrs
         public virtual void Execute(DeleteCommand<TModel> command)
         {
             var entity = _repository.GetById(command.Id);
-            if (entity != null)
+            if (entity == null)
             {
-                _repository.Delete(entity);
+                return;
             }
+
+            _repository.Delete(entity);
+            _repository.Save();
         }
     }
 }
