@@ -1,5 +1,4 @@
-﻿using System;
-using Vanguard.Framework.Core.Cqrs;
+﻿using Vanguard.Framework.Core.Cqrs;
 
 namespace Vanguard.Framework.Core.Tests.Cqrs
 {
