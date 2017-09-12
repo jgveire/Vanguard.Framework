@@ -1,4 +1,4 @@
-﻿namespace Example.WebApi
+﻿namespace ExampleService
 {
     public static class Guard
     {

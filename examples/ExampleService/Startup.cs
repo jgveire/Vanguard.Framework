@@ -1,13 +1,13 @@
-﻿namespace Example.WebApi
+﻿namespace ExampleService
 {
     using System;
     using System.Buffers;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
     using AutoMapper;
-    using Example.WebApi.Contexts;
-    using Example.WebApi.Entities;
-    using Example.WebApi.Models;
+    using ExampleData;
+    using ExampleData.Entities;
+    using ExampleService.Models;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;

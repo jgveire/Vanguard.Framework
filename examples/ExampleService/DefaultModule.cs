@@ -1,10 +1,10 @@
-﻿namespace Example.WebApi
+﻿namespace ExampleService
 {
     using Autofac;
-    using Example.WebApi.Contexts;
-    using Example.WebApi.Entities;
-    using Example.WebApi.Extensions;
-    using Example.WebApi.Models;
+    using ExampleData;
+    using ExampleData.Entities;
+    using ExampleService.Extensions;
+    using ExampleService.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core.Cqrs;

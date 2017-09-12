@@ -2,14 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ExampleService</AssemblyName>
+    <RootNamespace>ExampleService</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Example.Website.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Example.Website.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +37,7 @@
     <ProjectReference Include="..\..\src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
     <ProjectReference Include="..\..\src\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj" />
     <ProjectReference Include="..\..\src\Vanguard.Framework.Http\Vanguard.Framework.Http.csproj" />
+    <ProjectReference Include="..\ExampleData\ExampleData.csproj" />
   </ItemGroup>
 
 </Project>
