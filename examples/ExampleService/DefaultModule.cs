@@ -1,4 +1,10 @@
-﻿namespace ExampleService
+﻿using ExampleBusiness;
+using ExampleBusiness.CommandHandlers;
+using ExampleBusiness.EventHandlers;
+using ExampleCommon.Events;
+using Vanguard.Framework.Core.DomainEvents;
+
+namespace ExampleService
 {
     using Autofac;
     using ExampleData;
@@ -17,10 +23,23 @@
             builder.RegisterType<HttpContextAccessor>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<CommandDispatcher>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<QueryDispatcher>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<ReadRepository<Car>>().AsImplementedInterfaces();
+            builder.RegisterType<EventDispatcher>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterGeneric(typeof(Repository<>)).AsImplementedInterfaces();
+            builder.RegisterGeneric(typeof(ReadRepository<>)).AsImplementedInterfaces();
             builder.RegisterType<ExampleContext>().As<DbContext>();
 
-            builder.RegisterCrudCommandAndQueryHandlers<CarModel, Car>();
+            var businessLayer = typeof(BusinessLayer).Assembly;
+            builder.RegisterAssemblyTypes(businessLayer)
+                .Where(type => type.Name.EndsWith("CommandHandler"))
+                .AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(businessLayer)
+                .Where(type => type.Name.EndsWith("QueryHandler"))
+                .AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(businessLayer)
+                .Where(type => type.Name.EndsWith("EventHandler"))
+                .AsImplementedInterfaces();
+
+            builder.RegisterCrudHandlers<CarModel, Car>();
         }
     }
 }

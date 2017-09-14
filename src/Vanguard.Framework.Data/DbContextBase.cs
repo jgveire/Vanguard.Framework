@@ -19,8 +19,29 @@ namespace Vanguard.Framework.Data
         /// <summary>
         /// Initializes a new instance of the <see cref="DbContextBase"/> class.
         /// </summary>
+        /// <param name="options">The options for this context.</param>
+        public DbContextBase(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DbContextBase"/> class.
+        /// </summary>
         /// <param name="eventDispatcher">The event dispatcher.</param>
         public DbContextBase(IEventDispatcher eventDispatcher)
+        {
+            Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            _eventDispatcher = eventDispatcher;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DbContextBase"/> class.
+        /// </summary>
+        /// <param name="eventDispatcher">The event dispatcher.</param>
+        /// <param name="options">The options for this context.</param>
+        public DbContextBase(IEventDispatcher eventDispatcher, DbContextOptions options)
+            : base(options)
         {
             Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
             _eventDispatcher = eventDispatcher;

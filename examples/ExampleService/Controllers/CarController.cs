@@ -1,4 +1,6 @@
-﻿namespace ExampleService.Controllers
+﻿using ExampleBusiness.Commands;
+
+namespace ExampleService.Controllers
 {
     using System;
     using System.Linq;
@@ -19,6 +21,14 @@
         {
             _context = context;
             InitContext();
+        }
+
+        [HttpPut("{id}/reportstolen")]
+        public IActionResult ReportCarStolen(Guid id)
+        {
+            var command = new ReportCarStolenCommand(id);
+            CommandDispatcher.Dispatch(command);
+            return new NoContentResult();
         }
 
         private void InitContext()

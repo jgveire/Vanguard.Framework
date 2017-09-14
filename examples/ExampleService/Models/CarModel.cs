@@ -15,5 +15,12 @@ namespace ExampleService.Models
         [Required]
         [MaxLength(100)]
         public string Model { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string LicensePlate { get; protected set; }
+
+        [Required]
+        public bool IsStolen { get; protected set; }
     }
 }

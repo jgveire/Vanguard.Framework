@@ -17,7 +17,7 @@ namespace ExampleService.Extensions
         /// <typeparam name="TModel">The type of the model.</typeparam>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="builder">The Autofac container builder.</param>
-        public static void RegisterCrudCommandAndQueryHandlers<TModel, TEntity>(this ContainerBuilder builder)
+        public static void RegisterCrudHandlers<TModel, TEntity>(this ContainerBuilder builder)
             where TEntity : class, IEntity
         {
             builder.RegisterType<GetQueryHandler<TModel, TEntity>>().As<IQueryHandler<TModel, GetQuery<TModel>>>();

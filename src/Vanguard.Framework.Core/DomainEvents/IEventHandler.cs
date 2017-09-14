@@ -4,7 +4,7 @@
     /// The domain event handler class.
     /// </summary>
     /// <typeparam name="TEvent">The type of the event.</typeparam>
-    public interface IEventHandler<TEvent>
+    public interface IEventHandler<in TEvent>
         where TEvent : IDomainEvent
     {
         /// <summary>
