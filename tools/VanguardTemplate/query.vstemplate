@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Query and Query Handler</Name>
+    <Description>This is an item template that creates a query and query handler. The query is placed in the Queries folder and query handler is placed in the QueryHandlers folder of the selected project.</Description>
+    <Icon>Vanguard.png</Icon>
+    <TemplateID>40CAA629-3CBD-4E85-A9B2-ED4CF4D86EE9</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>Query.cs</DefaultName>
+    <TemplateGroupID>Vanguard</TemplateGroupID>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="Code" TargetFileName="\Queries\$fileinputname$Query.cs" ReplaceParameters="true">Query.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="\QueryHandlers\$fileinputname$QueryHandler.cs" ReplaceParameters="true">QueryHandler.cs</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>VanguardWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=2818fdb799b962a3</Assembly>
+    <FullClassName>VanguardWizard.VanguardFrameworkWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
