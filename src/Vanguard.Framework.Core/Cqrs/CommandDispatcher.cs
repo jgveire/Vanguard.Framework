@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Vanguard.Framework.Core.Cqrs
@@ -27,17 +28,22 @@ namespace Vanguard.Framework.Core.Cqrs
         /// </value>
         protected IServiceProvider ServiceProvider { get; }
 
-        /// <summary>
-        /// Dispatches the specified command.
-        /// </summary>
-        /// <typeparam name="TCommand">The type of the command.</typeparam>
-        /// <param name="command">The command.</param>
+        /// <inheritdoc />
         public void Dispatch<TCommand>(TCommand command)
             where TCommand : ICommand
         {
             Guard.ArgumentNotNull(command, nameof(command));
             var commandHandler = ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
             commandHandler.Execute(command);
+        }
+
+        /// <inheritdoc />
+        public async Task DispatchAsync<TCommand>(TCommand command)
+            where TCommand : ICommand
+        {
+            Guard.ArgumentNotNull(command, nameof(command));
+            var commandHandler = ServiceProvider.GetRequiredService<IAsyncCommandHandler<TCommand>>();
+            await commandHandler.Execute(command);
         }
     }
 }

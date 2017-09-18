@@ -25,7 +25,26 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
             SystemUnderTest.Dispatch(command);
 
             // Assert
-            command.IsHandlerExecuted.Should().BeTrue(because: "the test command handler changes the value of the test command");
+            command.IsHandlerExecuted.Should().BeTrue(because: "the command handler changes the value of the test command");
+        }
+
+        [TestMethod]
+        public void When_DispatchAsync_is_called_the_command_handler_should_be_executed()
+        {
+            // Arrange
+            var command = new TestCommand();
+            var commandHandler = new TestAsyncCommandHandler();
+
+            // Arrange mocks
+            Mocks<IServiceProvider>()
+                .Setup(provider => provider.GetService(typeof(IAsyncCommandHandler<TestCommand>)))
+                .Returns(commandHandler);
+
+            // Act
+            SystemUnderTest.DispatchAsync(command).Wait();
+
+            // Assert
+            command.IsHandlerExecuted.Should().BeTrue(because: "the command handler changes the value of the test command");
         }
     }
 }

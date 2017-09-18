@@ -25,7 +25,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
             string result = SystemUnderTest.Dispatch(query);
 
             // Assert
-            result.Should().Be("Success", because: "the test query handler returns the string 'Success'");
+            result.Should().Be("Success", because: "the query handler returns the string 'Success'");
         }
 
         [TestMethod]
@@ -44,7 +44,45 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
             string result = SystemUnderTest.Dispatch<string, TestQuery>(query);
 
             // Assert
-            result.Should().Be("Success", because: "the test query handler returns the string 'Success'");
+            result.Should().Be("Success", because: "the query handler returns the string 'Success'");
+        }
+
+        [TestMethod]
+        public void When_DispatchAsync_is_called_the_query_handler_should_return_success_string()
+        {
+            // Arrange
+            var query = new TestQuery();
+            var queryHandler = new TestAsyncQueryHandler();
+
+            // Arrange mocks
+            Mocks<IServiceProvider>()
+                .Setup(provider => provider.GetService(typeof(IAsyncQueryHandler<string, TestQuery>)))
+                .Returns(queryHandler);
+
+            // Act
+            string result = SystemUnderTest.DispatchAsync(query).Result;
+
+            // Assert
+            result.Should().Be("Success", because: "the query handler returns the string 'Success'");
+        }
+
+        [TestMethod]
+        public void When_DispatchAsync_is_called_explicitly_the_query_handler_should_return_success_string()
+        {
+            // Arrange
+            var query = new TestQuery();
+            var queryHandler = new TestAsyncQueryHandler();
+
+            // Arrange mocks
+            Mocks<IServiceProvider>()
+                .Setup(provider => provider.GetService(typeof(IAsyncQueryHandler<string, TestQuery>)))
+                .Returns(queryHandler);
+
+            // Act
+            string result = SystemUnderTest.DispatchAsync<string, TestQuery>(query).Result;
+
+            // Assert
+            result.Should().Be("Success", because: "the query handler returns the string 'Success'");
         }
     }
 }

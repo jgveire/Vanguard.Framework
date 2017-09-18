@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Vanguard.Framework.Core.DomainEvents
@@ -28,10 +29,7 @@ namespace Vanguard.Framework.Core.DomainEvents
         /// </value>
         protected IServiceProvider ServiceProvider { get; }
 
-        /// <summary>
-        /// Dispatches the specified event.
-        /// </summary>
-        /// <param name="domainEvent">The domain event.</param>
+        /// <inheritdoc />
         public void Dispatch(IDomainEvent domainEvent)
         {
             Guard.ArgumentNotNull(domainEvent, nameof(domainEvent));
@@ -44,17 +42,31 @@ namespace Vanguard.Framework.Core.DomainEvents
 
             foreach (var eventHandler in eventHandlers)
             {
-                // Invoke retrieve method.
+                // Invoke handle method.
                 MethodInfo retrieveMethod = eventHandlerType.GetMethod("Handle");
                 retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
             }
         }
 
-        /// <summary>
-        /// Dispatches the specified event.
-        /// </summary>
-        /// <typeparam name="TEvent">The type of the event.</typeparam>
-        /// <param name="domainEvent">The domain event.</param>
+        /// <inheritdoc />
+        public async Task DispatchAsync(IDomainEvent domainEvent)
+        {
+            // Retriever query handler.
+            Type genericType = typeof(IAsyncEventHandler<>);
+            Type[] typeArguments = { domainEvent.GetType() };
+            Type eventHandlerType = genericType.MakeGenericType(typeArguments);
+            var eventHandlers = ServiceProvider.GetServices(eventHandlerType);
+
+            foreach (var eventHandler in eventHandlers)
+            {
+                // Invoke handle method.
+                MethodInfo retrieveMethod = eventHandlerType.GetMethod("Handle");
+                var result = (Task)retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
+                await result;
+            }
+        }
+
+        /// <inheritdoc />
         public void Dispatch<TEvent>(TEvent domainEvent)
             where TEvent : IDomainEvent
         {
@@ -64,6 +76,19 @@ namespace Vanguard.Framework.Core.DomainEvents
             foreach (var eventHandler in eventHandlers)
             {
                 eventHandler.Handle(domainEvent);
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task DispatchAsync<TEvent>(TEvent domainEvent)
+            where TEvent : IDomainEvent
+        {
+            Guard.ArgumentNotNull(domainEvent, nameof(domainEvent));
+            var eventHandlers = ServiceProvider.GetServices<IAsyncEventHandler<TEvent>>();
+
+            foreach (var eventHandler in eventHandlers)
+            {
+                await eventHandler.Handle(domainEvent);
             }
         }
     }

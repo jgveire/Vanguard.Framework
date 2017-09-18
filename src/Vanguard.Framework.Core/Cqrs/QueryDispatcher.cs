@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Vanguard.Framework.Core.Cqrs
@@ -28,12 +29,7 @@ namespace Vanguard.Framework.Core.Cqrs
         /// </value>
         protected IServiceProvider ServiceProvider { get; }
 
-        /// <summary>
-        /// Dispatches the specified query.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="query">The query.</param>
-        /// <returns>The query handler result.</returns>
+        /// <inheritdoc />
         public TResult Dispatch<TResult>(IQuery<TResult> query)
         {
             Guard.ArgumentNotNull(query, nameof(query));
@@ -50,19 +46,39 @@ namespace Vanguard.Framework.Core.Cqrs
             return result;
         }
 
-        /// <summary>
-        /// Dispatches the specified query.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <typeparam name="TQuery">The type of the query.</typeparam>
-        /// <param name="query">The query.</param>
-        /// <returns> The query handler result. </returns>
+        /// <inheritdoc />
+        public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query)
+        {
+            Guard.ArgumentNotNull(query, nameof(query));
+
+            // Retriever query handler.
+            Type genericType = typeof(IAsyncQueryHandler<,>);
+            Type[] typeArguments = { typeof(TResult), query.GetType() };
+            Type queryHandlerType = genericType.MakeGenericType(typeArguments);
+            var queryHandler = ServiceProvider.GetRequiredService(queryHandlerType);
+
+            // Invoke retrieve method.
+            MethodInfo retrieveMethod = queryHandlerType.GetMethod("Retrieve");
+            var result = (Task<TResult>)retrieveMethod.Invoke(queryHandler, new object[] { query });
+            return await result;
+        }
+
+        /// <inheritdoc />
         public TResult Dispatch<TResult, TQuery>(TQuery query)
             where TQuery : IQuery<TResult>
         {
             Guard.ArgumentNotNull(query, nameof(query));
             var queryHandler = ServiceProvider.GetRequiredService<IQueryHandler<TResult, TQuery>>();
             return queryHandler.Retrieve(query);
+        }
+
+        /// <inheritdoc />
+        public async Task<TResult> DispatchAsync<TResult, TQuery>(TQuery query)
+            where TQuery : IQuery<TResult>
+        {
+            Guard.ArgumentNotNull(query, nameof(query));
+            var queryHandler = ServiceProvider.GetRequiredService<IAsyncQueryHandler<TResult, TQuery>>();
+            return await queryHandler.Retrieve(query);
         }
     }
 }
