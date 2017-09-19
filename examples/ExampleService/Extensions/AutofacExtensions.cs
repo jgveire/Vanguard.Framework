@@ -2,7 +2,6 @@
 using Autofac;
 using Vanguard.Framework.Core.Cqrs;
 using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Cqrs;
 
 namespace ExampleService.Extensions
 {

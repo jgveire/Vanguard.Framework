@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Exceptions;
+﻿using Vanguard.Framework.Core.Exceptions;
 using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Resources;
+using Vanguard.Framework.Core.Resources;
 
-namespace Vanguard.Framework.Data.Cqrs
+namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
     /// The update command handler class.
@@ -16,15 +14,19 @@ namespace Vanguard.Framework.Data.Cqrs
         where TEntity : class, IEntity
     {
         private readonly IRepository<TEntity> _repository;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateCommandHandler{TModel, TEntity}"/> class.
         /// </summary>
         /// <param name="repository">The entity repository.</param>
-        public UpdateCommandHandler(IRepository<TEntity> repository)
+        /// <param name="mapper">The entity mapper.</param>
+        public UpdateCommandHandler(IRepository<TEntity> repository, IMapper mapper)
         {
             Guard.ArgumentNotNull(repository, nameof(repository));
+            Guard.ArgumentNotNull(mapper, nameof(mapper));
             _repository = repository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace Vanguard.Framework.Data.Cqrs
                 throw new DataException(message);
             }
 
-            Mapper.Map(command.Model, entity);
+            _mapper.Map(command.Model, entity);
             _repository.Update(entity);
             _repository.Save();
         }

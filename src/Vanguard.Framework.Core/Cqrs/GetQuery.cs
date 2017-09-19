@@ -1,6 +1,4 @@
-﻿using Vanguard.Framework.Core.Cqrs;
-
-namespace Vanguard.Framework.Data.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
     /// The get query class.

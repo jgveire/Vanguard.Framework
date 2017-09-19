@@ -1,20 +1,19 @@
-﻿using Vanguard.Framework.Core;
-using Vanguard.Framework.Core.Cqrs;
+﻿using System.Collections.Generic;
 
-namespace Vanguard.Framework.Data.Cqrs
+namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
-    /// The total count query class.
+    /// The find query class.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
-    /// <seealso cref="Vanguard.Framework.Core.Cqrs.ICommand" />
-    public class CountQuery<TModel> : IQuery<int>
+    /// <seealso cref="IQuery{TResult}" />
+    public class FindQuery<TModel> : IQuery<IEnumerable<TModel>>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CountQuery{TModel}"/> class.
+        /// Initializes a new instance of the <see cref="FindQuery{TModel}"/> class.
         /// </summary>
         /// <param name="criteria">The find criteria.</param>
-        public CountQuery(FindCriteria criteria)
+        public FindQuery(FindCriteria criteria)
         {
             Guard.ArgumentNotNull(criteria, nameof(criteria));
             Criteria = criteria;

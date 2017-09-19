@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using AutoMapper;
-using Vanguard.Framework.Core.Cqrs;
 using Vanguard.Framework.Core.Repositories;
 
-namespace Vanguard.Framework.Data.Cqrs
+namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
     /// The find query handler class.
@@ -15,15 +13,19 @@ namespace Vanguard.Framework.Data.Cqrs
             where TEntity : class, IEntity
     {
         private readonly IReadRepository<TEntity> _repository;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FindQueryHandler{TModel, TEntity}"/> class.
         /// </summary>
         /// <param name="repository">The entity repository.</param>
-        public FindQueryHandler(IReadRepository<TEntity> repository)
+        /// <param name="mapper">The entity mapper.</param>
+        public FindQueryHandler(IReadRepository<TEntity> repository, IMapper mapper)
         {
             Guard.ArgumentNotNull(repository, nameof(repository));
+            Guard.ArgumentNotNull(mapper, nameof(mapper));
             _repository = repository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -34,7 +36,7 @@ namespace Vanguard.Framework.Data.Cqrs
         public IEnumerable<TModel> Retrieve(FindQuery<TModel> query)
         {
             var entities = _repository.Find(query.Criteria);
-            var model = Mapper.Map<IEnumerable<TModel>>(entities);
+            var model = _mapper.Map<IEnumerable<TModel>>(entities);
             return model;
         }
     }

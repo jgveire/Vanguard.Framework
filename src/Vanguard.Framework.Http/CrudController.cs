@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Vanguard.Framework.Core;
 using Vanguard.Framework.Core.Cqrs;
 using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Cqrs;
 
 namespace Vanguard.Framework.Http
 {

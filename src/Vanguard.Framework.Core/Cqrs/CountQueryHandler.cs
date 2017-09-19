@@ -1,7 +1,6 @@
-﻿using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
+﻿using Vanguard.Framework.Core.Repositories;
 
-namespace Vanguard.Framework.Data.Cqrs
+namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
     /// The total count command handler class.

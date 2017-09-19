@@ -1,6 +1,7 @@
 ﻿using ExampleBusiness;
 using ExampleBusiness.CommandHandlers;
 using ExampleBusiness.EventHandlers;
+using ExampleCommon;
 using ExampleCommon.Events;
 using Vanguard.Framework.Core.DomainEvents;
 
@@ -24,6 +25,7 @@ namespace ExampleService
             builder.RegisterType<CommandDispatcher>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<QueryDispatcher>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<EventDispatcher>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<Mapper>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterGeneric(typeof(Repository<>)).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(ReadRepository<>)).AsImplementedInterfaces();
             builder.RegisterType<ExampleContext>().As<DbContext>();

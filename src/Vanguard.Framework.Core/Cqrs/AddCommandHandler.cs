@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
+﻿using Vanguard.Framework.Core.Repositories;
 
-namespace Vanguard.Framework.Data.Cqrs
+namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
     /// The add command handler class.
@@ -14,15 +12,19 @@ namespace Vanguard.Framework.Data.Cqrs
         where TEntity : class, IEntity
     {
         private readonly IRepository<TEntity> _repository;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddCommandHandler{TModel, TEntity}"/> class.
         /// </summary>
         /// <param name="repository">The entity repository.</param>
-        public AddCommandHandler(IRepository<TEntity> repository)
+        /// <param name="mapper">The entity mapper.</param>
+        public AddCommandHandler(IRepository<TEntity> repository, IMapper mapper)
         {
             Guard.ArgumentNotNull(repository, nameof(repository));
+            Guard.ArgumentNotNull(mapper, nameof(mapper));
             _repository = repository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace Vanguard.Framework.Data.Cqrs
         /// <param name="command">The command.</param>
         public virtual void Execute(AddCommand<TModel> command)
         {
-            var entity = Mapper.Map<TEntity>(command.Model);
+            var entity = _mapper.Map<TEntity>(command.Model);
             _repository.Add(entity);
             _repository.Save();
         }

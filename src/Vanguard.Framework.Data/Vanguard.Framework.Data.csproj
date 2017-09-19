@@ -2,6 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Authors>Veire Solutions</Authors>
+    <Company>Veire Solutions</Company>
+    <Product>Vanguard Framework</Product>
+    <Description>The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.</Description>
+    <Copyright>Copyright (c) 2017 Veire Solutions</Copyright>
+    <PackageLicenseUrl>https://github.com/jgveire/Vanguard.Framework/License.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
+    <PackageIconUrl>https://jgveire.github.io/Vanguard/Vanguard.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Vanguard Framework Data</PackageTags>
+    <PackageReleaseNotes>Version 0.0.1
+-First release</PackageReleaseNotes>
+    <NeutralLanguage>Eng</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -19,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
     <PackageReference Include="Vanguard" Version="2.4.0" />

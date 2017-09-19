@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vanguard.Framework.Data.Resources {
+namespace Vanguard.Framework.Core.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Vanguard.Framework.Data.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Vanguard.Framework.Data.Resources.ExceptionResource", typeof(ExceptionResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Vanguard.Framework.Core.Resources.ExceptionResource", typeof(ExceptionResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace Vanguard.Framework.Data.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot order by &quot;{0}&quot;..
+        ///   Looks up a localized string similar to The entity with identifier &quot;{0}&quot; cannot be found..
         /// </summary>
-        internal static string CannotOrderBy {
+        internal static string CannotFindEntity {
             get {
-                return ResourceManager.GetString("CannotOrderBy", resourceCulture);
+                return ResourceManager.GetString("CannotFindEntity", resourceCulture);
             }
         }
     }

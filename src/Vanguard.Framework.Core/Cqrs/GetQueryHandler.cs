@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
+﻿using Vanguard.Framework.Core.Repositories;
 
-namespace Vanguard.Framework.Data.Cqrs
+namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
     /// The get command handler class.
@@ -14,15 +12,19 @@ namespace Vanguard.Framework.Data.Cqrs
         where TEntity : class, IEntity
     {
         private readonly IReadRepository<TEntity> _repository;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GetQueryHandler{TModel, TEntity}"/> class.
         /// </summary>
         /// <param name="repository">The entity repository.</param>
-        public GetQueryHandler(IReadRepository<TEntity> repository)
+        /// <param name="mapper">The entity mapper.</param>
+        public GetQueryHandler(IReadRepository<TEntity> repository, IMapper mapper)
         {
             Guard.ArgumentNotNull(repository, nameof(repository));
+            Guard.ArgumentNotNull(mapper, nameof(mapper));
             _repository = repository;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace Vanguard.Framework.Data.Cqrs
                 return default(TModel);
             }
 
-            var model = Mapper.Map<TModel>(entity);
+            var model = _mapper.Map<TModel>(entity);
             return model;
         }
     }
