@@ -1,13 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Vanguard.Framework.Core.Repositories;
+﻿using System.ComponentModel.DataAnnotations;
+using Vanguard.Framework.Core.Models;
 
 namespace ExampleService.Models
 {
-    public class CarModel : IUniqueEntity
+    public class CarModel : UniqueModel
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-
         [Required]
         [MaxLength(100)]
         public string Brand { get; set; }
