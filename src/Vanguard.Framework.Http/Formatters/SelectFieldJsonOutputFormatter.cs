@@ -9,8 +9,19 @@ using Vanguard.Framework.Http.Resolvers;
 
 namespace Vanguard.Framework.Http.Formatters
 {
+    /// <summary>
+    /// The select field JSON output formatter.
+    /// </summary>
     public class SelectFieldJsonOutputFormatter : JsonOutputFormatter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectFieldJsonOutputFormatter"/> class.
+        /// </summary>
+        public SelectFieldJsonOutputFormatter()
+            : base(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared)
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectFieldJsonOutputFormatter"/> class.
         /// </summary>
