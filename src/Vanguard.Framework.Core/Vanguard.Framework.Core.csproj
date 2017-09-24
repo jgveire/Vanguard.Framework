@@ -26,12 +26,12 @@ Version 0.0.1
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Core.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\netstandard2.0\Vanguard.Framework.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Core.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\netstandard2.0\Vanguard.Framework.xml</DocumentationFile>
   </PropertyGroup>
 

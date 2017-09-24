@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,18 +15,21 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.1
+    <PackageReleaseNotes>Version 0.0.2
+- The Id property of DataEntity isn't auto generated anymore.
+
+Version 0.0.1
 -First release</PackageReleaseNotes>
     <NeutralLanguage>Eng</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Data.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\netcoreapp2.0\Vanguard.Framework.Data.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Data.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Vanguard.Framework.Data.xml</DocumentationFile>
   </PropertyGroup>
 

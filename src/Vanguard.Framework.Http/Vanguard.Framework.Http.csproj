@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.2</Version>
+    <Version>0.0.5</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,20 +15,31 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Http</PackageTags>
-    <PackageReleaseNotes>Version 0.0.2
+    <PackageReleaseNotes>Version 0.0.5
+- Bugfix: SelectFieldContractResolver did not filter fields.
+
+Version 0.0.4
+- Added default constructor to SelectFieldJsonOutputFormatter
+
+Version 0.0.3
+- Changed order of fields in the SelectFieldContractResolver.
+
+Version 0.0.2
 - Did some refactoring on the CRUD controllers.
 
 Version 0.0.1
 -First release</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Http.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Vanguard.Framework.Http.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

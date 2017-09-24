@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net45</TargetFrameworks>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <Version>0.0.2</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
@@ -23,23 +23,13 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
+    <CodeAnalysisRuleSet>..\..\settings\VanguardTest.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Vanguard.Framework.Test.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>Vanguard.Framework.Test.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp2.0|AnyCPU'">
+    <CodeAnalysisRuleSet>..\..\settings\VanguardTest.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\netcoreapp2.0\Vanguard.Framework.Test.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>Vanguard.Framework.Test.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
-    <DocumentationFile>bin\Debug\net45\Vanguard.Framework.Test.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>Vanguard.Framework.Test.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
-    <DocumentationFile>bin\Release\net45\Vanguard.Framework.Test.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>Vanguard.Framework.Test.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
