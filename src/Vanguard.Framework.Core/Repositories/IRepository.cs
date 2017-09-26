@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public interface IRepository<TEntity> : IReadRepository<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         /// <summary>
         /// Adds the specified entity.

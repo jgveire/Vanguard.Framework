@@ -1,9 +1,9 @@
 ﻿namespace Vanguard.Framework.Core.Repositories
 {
     /// <summary>
-    /// The entity interface.
+    /// The data entity interface.
     /// </summary>
-    public interface IEntity
+    public interface IDataEntity
     {
     }
 }

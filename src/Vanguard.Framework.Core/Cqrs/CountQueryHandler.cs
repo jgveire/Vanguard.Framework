@@ -9,7 +9,7 @@ namespace Vanguard.Framework.Core.Cqrs
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="IQueryHandler{TResult, TQuery}" />
     public class CountQueryHandler<TModel, TEntity> : IQueryHandler<int, CountQuery<TModel>>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         private readonly IReadRepository<TEntity> _repository;
 

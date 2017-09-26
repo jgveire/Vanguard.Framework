@@ -18,7 +18,7 @@ namespace Vanguard.Framework.Data.Repositories
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="IReadRepository{TEntity}" />
     public class ReadRepository<TEntity> : IReadRepository<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         private static ICollection<string> _entityProperties;
 
@@ -63,10 +63,18 @@ namespace Vanguard.Framework.Data.Repositories
         /// Finds entities accoording to the supplied find criteria.
         /// </summary>
         /// <param name="findCriteria">The find criteria.</param>
+        /// <param name="filter">An aditional filter to apply on the result query.</param>
         /// <returns>A collection of entities.</returns>
-        public IEnumerable<TEntity> Find(FindCriteria findCriteria = null)
+        public IEnumerable<TEntity> Find(
+            FindCriteria findCriteria = null,
+            Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = DbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
 
             if (findCriteria == null)
             {

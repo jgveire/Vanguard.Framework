@@ -3,7 +3,7 @@ using Vanguard.Framework.Core.Repositories;
 
 namespace Vanguard.Framework.Data.Tests.Repositories
 {
-    public class Product : IEntity
+    public class Product : IDataEntity
     {
         public Product()
         {

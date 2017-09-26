@@ -9,7 +9,7 @@ namespace Vanguard.Framework.Core.Cqrs
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="IQueryHandler{TResult, TQuery}" />
     public class GetQueryHandler<TModel, TEntity> : IQueryHandler<TModel, GetQuery<TModel>>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         private readonly IReadRepository<TEntity> _repository;
         private readonly IMapper _mapper;

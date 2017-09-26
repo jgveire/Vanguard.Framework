@@ -10,7 +10,7 @@ namespace Vanguard.Framework.Data.Repositories
     /// <seealso cref="ReadRepository{TEntity}" />
     /// <seealso cref="IRepository{TEntity}" />
     public class Repository<TEntity> : ReadRepository<TEntity>, IRepository<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Repository{TEntity}"/> class.

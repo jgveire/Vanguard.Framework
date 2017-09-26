@@ -5,7 +5,7 @@ namespace Vanguard.Framework.Core.Repositories
     /// <summary>
     /// The unique entity interface.
     /// </summary>
-    /// <seealso cref="Vanguard.Framework.Core.Repositories.IEntity" />
+    /// <seealso cref="IDataEntity" />
     public interface IUniqueEntity : IUniqueEntity<Guid>
     {
     }

@@ -11,7 +11,7 @@ namespace Vanguard.Framework.Core.Cqrs
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="ICommandHandler{TCommand}" />
     public class UpdateCommandHandler<TModel, TEntity> : ICommandHandler<UpdateCommand<TModel>>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         private readonly IRepository<TEntity> _repository;
         private readonly IMapper _mapper;

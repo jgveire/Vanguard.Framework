@@ -10,14 +10,17 @@ namespace Vanguard.Framework.Core.Repositories
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public interface IReadRepository<TEntity>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         /// <summary>
         /// Finds entities accoording to the supplied find criteria.
         /// </summary>
         /// <param name="findCriteria">The find criteria.</param>
+        /// <param name="filter">An aditional filter to apply on the result query.</param>
         /// <returns>A collection of entities.</returns>
-        IEnumerable<TEntity> Find(FindCriteria findCriteria);
+        IEnumerable<TEntity> Find(
+            FindCriteria findCriteria,
+            Expression<Func<TEntity, bool>> filter = null);
 
         /// <summary>
         /// Gets the number of items in the database accoording to the supplied find criteria.

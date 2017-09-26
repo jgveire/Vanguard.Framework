@@ -9,7 +9,7 @@ namespace Vanguard.Framework.Core.Cqrs
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="ICommandHandler{TCommand}" />
     public class DeleteCommandHandler<TModel, TEntity> : ICommandHandler<DeleteCommand<TModel>>
-        where TEntity : class, IEntity
+        where TEntity : class, IDataEntity
     {
         private readonly IRepository<TEntity> _repository;
 
