@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.2</Version>
+    <Version>0.0.4</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,7 +15,13 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.2
+    <PackageReleaseNotes>Version 0.0.4
+- Added documentation to package.
+
+Version 0.0.3
+- Renamed IEntity to IDataEntity.
+
+Version 0.0.2
 - The Id property of DataEntity isn't auto generated anymore.
 
 Version 0.0.1
