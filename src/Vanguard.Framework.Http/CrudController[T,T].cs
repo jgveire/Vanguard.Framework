@@ -21,29 +21,9 @@ namespace Vanguard.Framework.Http
         /// <param name="commandDispatcher">The command dispatcher.</param>
         /// <param name="queryDispatcher">The query dispatcher.</param>
         public CrudController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+            : base(commandDispatcher, queryDispatcher)
         {
-            Guard.ArgumentNotNull(commandDispatcher, nameof(commandDispatcher));
-            Guard.ArgumentNotNull(queryDispatcher, nameof(queryDispatcher));
-
-            CommandDispatcher = commandDispatcher;
-            QueryDispatcher = queryDispatcher;
         }
-
-        /// <summary>
-        /// Gets the command dispatcher.
-        /// </summary>
-        /// <value>
-        /// The command dispatcher.
-        /// </value>
-        protected ICommandDispatcher CommandDispatcher { get; }
-
-        /// <summary>
-        /// Gets the query dispatcher.
-        /// </summary>
-        /// <value>
-        /// The query dispatcher.
-        /// </value>
-        protected IQueryDispatcher QueryDispatcher { get; }
 
         /// <summary>
         /// Gets the number of items that conform with the specified find criteria.

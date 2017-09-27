@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Vanguard.Framework.Core.Cqrs;
 
 namespace Vanguard.Framework.Http
 {
@@ -8,6 +9,36 @@ namespace Vanguard.Framework.Http
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class ControllerBase : Controller
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ControllerBase"/> class.
+        /// </summary>
+        /// <param name="commandDispatcher">The command dispatcher.</param>
+        /// <param name="queryDispatcher">The query dispatcher.</param>
+        public ControllerBase(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+        {
+            Guard.ArgumentNotNull(commandDispatcher, nameof(commandDispatcher));
+            Guard.ArgumentNotNull(queryDispatcher, nameof(queryDispatcher));
+
+            CommandDispatcher = commandDispatcher;
+            QueryDispatcher = queryDispatcher;
+        }
+
+        /// <summary>
+        /// Gets the command dispatcher.
+        /// </summary>
+        /// <value>
+        /// The command dispatcher.
+        /// </value>
+        protected ICommandDispatcher CommandDispatcher { get; }
+
+        /// <summary>
+        /// Gets the query dispatcher.
+        /// </summary>
+        /// <value>
+        /// The query dispatcher.
+        /// </value>
+        protected IQueryDispatcher QueryDispatcher { get; }
+
         /// <summary>
         /// Creates an <see cref="OkObjectResult"/> object that produces an
         /// <see cref="Microsoft.AspNetCore.Http.StatusCodes.Status200OK"/> response

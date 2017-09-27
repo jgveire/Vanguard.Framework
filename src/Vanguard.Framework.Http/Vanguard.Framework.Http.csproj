@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.5</Version>
+    <Version>0.0.7</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,7 +15,13 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Http</PackageTags>
-    <PackageReleaseNotes>Version 0.0.5
+    <PackageReleaseNotes>Version 0.0.7
+- Added documentation to package.
+
+Version 0.0.6
+- Added contructor to ControllerBase
+
+Version 0.0.5
 - Bugfix: SelectFieldContractResolver did not filter fields.
 
 Version 0.0.4
@@ -36,6 +42,7 @@ Version 0.0.1
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\netcoreapp2.0\Vanguard.Framework.Http.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
