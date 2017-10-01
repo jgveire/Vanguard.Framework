@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="4d0f1881-8908-4392-8ca7-057266df7570" Version="1.5" Language="en-US" Publisher="Jorrit" />
+        <Identity Id="4d0f1881-8908-4392-8ca7-057266df7570" Version="1.6" Language="en-US" Publisher="Veire Solutions" />
         <DisplayName>Vanguard Framework</DisplayName>
         <Description xml:space="preserve">Code snippets and item templates for the Vanguard Framework.</Description>
         <MoreInfo>https://github.com/jgveire/Vanguard.Framework</MoreInfo>

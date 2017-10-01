@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>vtest</Title>
+      <Shortcut>vtest</Shortcut>
+      <Description>Inserts a Vanguard Test method.</Description>
+      <Author>Veire Solutions</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Test name</ToolTip>
+          <Default>Test</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp">
+        <![CDATA[[TestMethod]
+        public void $name$()
+        {
+            // Arrange
+
+            // Arrange mocks
+
+            // Act
+
+            // Assert
+        }
+]]>
+      </Code>
+      <Imports>
+        <Import>
+          <Namespace>Vanguard</Namespace>
+        </Import>
+      </Imports>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core.Cqrs;
-
-namespace $rootnamespace$.Commands
+﻿namespace $rootnamespace$.Commands
 {
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The $userfriendlycommandname$ command.
     /// </summary>

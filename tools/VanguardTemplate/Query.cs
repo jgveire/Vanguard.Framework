@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core.Cqrs;
-
-namespace $rootnamespace$.Queries
+﻿namespace $rootnamespace$.Queries
 {
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The $userfriendlyqueryname$ query.
     /// </summary>

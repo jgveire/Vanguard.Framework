@@ -1,9 +1,9 @@
-﻿using $rootnamespace$.Events;
-using System;
-using Vanguard.Framework.Core.Cqrs;
-
-namespace $rootnamespace$.EventHandlers
+﻿namespace $rootnamespace$.EventHandlers
 {
+    using $rootnamespace$.Events;
+    using System;
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The $userfriendlyeventname$ event handler.
     /// </summary>

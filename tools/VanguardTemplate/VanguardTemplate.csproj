@@ -60,6 +60,7 @@
     <None Include="Query.cs" />
     <None Include="Event.cs" />
     <None Include="EventHandler.cs" />
+    <None Include="UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <VSTemplate Include="command.vstemplate">
       <SubType>Designer</SubType>
@@ -73,6 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="event.vstemplate">
+      <SubType>Designer</SubType>
+    </VSTemplate>
+  </ItemGroup>
+  <ItemGroup>
+    <VSTemplate Include="unittests.vstemplate">
       <SubType>Designer</SubType>
     </VSTemplate>
   </ItemGroup>

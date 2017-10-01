@@ -1,9 +1,9 @@
-﻿using $rootnamespace$.Commands;
-using System;
-using Vanguard.Framework.Core.Cqrs;
-
-namespace $rootnamespace$.CommandHandlers
+﻿namespace $rootnamespace$.CommandHandlers
 {
+    using $rootnamespace$.Commands;
+    using System;
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The $userfriendlycommandname$ command handler.
     /// </summary>

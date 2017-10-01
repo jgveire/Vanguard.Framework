@@ -1,9 +1,9 @@
-﻿using $rootnamespace$.Queries;
-using System;
-using Vanguard.Framework.Core.Cqrs;
-
-namespace $rootnamespace$.QueryHandlers
+﻿namespace $rootnamespace$.QueryHandlers
 {
+    using $rootnamespace$.Queries;
+    using System;
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The $userfriendlyqueryname$ query handler.
     /// </summary>
