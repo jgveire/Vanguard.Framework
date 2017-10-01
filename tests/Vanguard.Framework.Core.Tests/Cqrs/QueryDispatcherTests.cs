@@ -9,6 +9,18 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
     [TestClass]
     public class QueryDispatcherTests : TestBase<QueryDispatcher>
     {
+        [TestInitialize]
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+        }
+
+        [TestCleanup]
+        public override void TestCleanup()
+        {
+            base.TestCleanup();
+        }
+
         [TestMethod]
         public void When_Dispatch_is_called_the_query_handler_should_return_success_string()
         {

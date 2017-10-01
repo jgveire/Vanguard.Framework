@@ -52,6 +52,18 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             result.First().Name.Should().Be("BMX Bike", because: "we have one item with the product id 3");
         }
 
+        [TestMethod]
+        public void When_Select_is_called_then_only_id_should_be_set()
+        {
+            // Act
+            var result = Data.Repositories.QueryableExtensions.Select(Products, "Id");
+
+            // Assert
+            result.Any(product => product.Id == 0).Should().BeFalse(because: "we selected the field Id");
+            result.All(product => product.Name == null).Should().BeTrue(because: "we selected the field Id and not Name");
+            result.All(product => product.Category == null).Should().BeTrue(because: "we selected the field Id and not Category");
+        }
+
         private static IQueryable<Product> GetProducts()
         {
             if (_products == null)

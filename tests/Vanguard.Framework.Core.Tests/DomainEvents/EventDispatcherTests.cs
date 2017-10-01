@@ -11,6 +11,18 @@ namespace Vanguard.Framework.Core.Tests.DomainEvents
     [TestClass]
     public class EventDispatcherTests : TestBase<EventDispatcher>
     {
+        [TestInitialize]
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+        }
+
+        [TestCleanup]
+        public override void TestCleanup()
+        {
+            base.TestCleanup();
+        }
+
         [TestMethod]
         public void When_Dispatch_is_called_the_event_handler_should_set_the_value_to_true()
         {

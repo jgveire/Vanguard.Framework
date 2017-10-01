@@ -9,6 +9,18 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
     [TestClass]
     public class CommandDispatcherTests : TestBase<CommandDispatcher>
     {
+        [TestInitialize]
+        public override void TestInitialize()
+        {
+            base.TestInitialize();
+        }
+
+        [TestCleanup]
+        public override void TestCleanup()
+        {
+            base.TestCleanup();
+        }
+
         [TestMethod]
         public void When_Dispatch_is_called_the_command_handler_should_be_executed()
         {

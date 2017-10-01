@@ -71,6 +71,7 @@ namespace Vanguard.Framework.Data.Repositories
         {
             IQueryable<TEntity> query = DbSet;
 
+            // Filter
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -83,20 +84,26 @@ namespace Vanguard.Framework.Data.Repositories
 
             Validate(findCriteria);
 
+            // Search
             if (!string.IsNullOrEmpty(findCriteria.Search))
             {
                 query = query.Search(findCriteria.Search);
             }
 
-            if (!string.IsNullOrEmpty(findCriteria.OrderBy) && findCriteria.SortOrder == SortOrder.Asc)
+            // Order by
+            if (!string.IsNullOrEmpty(findCriteria.OrderBy))
             {
-                query = query.OrderBy(findCriteria.OrderBy);
-            }
-            else if (!string.IsNullOrEmpty(findCriteria.OrderBy) && findCriteria.SortOrder == SortOrder.Desc)
-            {
-                query = query.OrderByDescending(findCriteria.OrderBy);
+                query = query.OrderBy(findCriteria.OrderBy, findCriteria.SortOrder);
             }
 
+            // Select
+            if (!string.IsNullOrWhiteSpace(findCriteria.Select))
+            {
+                string[] fields = GetEntityProperties(findCriteria.Select);
+                query = query.Select(fields);
+            }
+
+            // Paging
             query = query.GetPage(findCriteria.Page, findCriteria.PageSize);
 
             return query.ToList();
@@ -193,7 +200,7 @@ namespace Vanguard.Framework.Data.Repositories
                 Type type = typeof(TEntity);
                 var properties = type
                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(x => x.PropertyType.IsPrimitive || x.PropertyType.IsEnum || x.PropertyType == typeof(string));
+                    .Where(prop => prop.PropertyType.IsPrimitive || prop.PropertyType.IsEnum || prop.PropertyType == typeof(string));
 
                 properties.ForEach(property => _entityProperties.Add(property.Name));
             }
@@ -218,14 +225,14 @@ namespace Vanguard.Framework.Data.Repositories
             }
         }
 
-        private string CleanSelect(string select)
+        private string[] GetEntityProperties(string select)
         {
             IEnumerable<string> items = select
                 .Split(',', StringSplitOptions.RemoveEmptyEntries)
                 .Select(item => item.Trim());
             items = items.Where(item => EntityProperties.Contains(item, StringComparer.InvariantCultureIgnoreCase));
 
-            return string.Join(',', items);
+            return items.ToArray();
         }
     }
 }

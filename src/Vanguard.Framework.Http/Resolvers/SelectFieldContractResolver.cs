@@ -10,13 +10,27 @@ using Vanguard.Framework.Http.Extensions;
 
 namespace Vanguard.Framework.Http.Resolvers
 {
+    /// <summary>
+    /// The select field contract resolver class.
+    /// </summary>
+    /// <seealso cref="Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver" />
     public class SelectFieldContractResolver : CamelCasePropertyNamesContractResolver
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SelectFieldContractResolver"/> class.
+        /// </summary>
+        /// <param name="query">The query collection.</param>
         public SelectFieldContractResolver(IQueryCollection query)
         {
             Query = query;
         }
 
+        /// <summary>
+        /// Gets the query collection.
+        /// </summary>
+        /// <value>
+        /// The query collection.
+        /// </value>
         public IQueryCollection Query { get; }
 
         /// <inheritdoc />

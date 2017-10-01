@@ -106,7 +106,6 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
-        [Ignore]
         public void When_Find_is_called_then_fields_should_be_selected()
         {
             // Arrange
@@ -119,8 +118,9 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             var result = SystemUnderTest.Find(findCriteria);
 
             // Assert
-            result.Count().Should().Be(3, because: "we dit not supply a filter");
-            result.First().Category.Should().BeNull(because: "we have only selected the Id and Name fields");
+            result.Any(product => product.Id == 0).Should().BeFalse(because: "we selected the field Id and Name");
+            result.Any(product => product.Name == null).Should().BeFalse(because: "we selected the field Id and Name");
+            result.All(product => product.Category == null).Should().BeTrue(because: "we selected the field Id and Name and not Category");
         }
 
         protected override Repository<Product> CreateSystemUnderTest()
