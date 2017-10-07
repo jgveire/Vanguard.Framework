@@ -63,12 +63,12 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
         public void When_DispatchAsync_is_called_the_query_handler_should_return_success_string()
         {
             // Arrange
-            var query = new TestQuery();
+            var query = new TestAsyncQuery();
             var queryHandler = new TestAsyncQueryHandler();
 
             // Arrange mocks
             Mocks<IServiceProvider>()
-                .Setup(provider => provider.GetService(typeof(IAsyncQueryHandler<string, TestQuery>)))
+                .Setup(provider => provider.GetService(typeof(IAsyncQueryHandler<string, TestAsyncQuery>)))
                 .Returns(queryHandler);
 
             // Act
@@ -82,16 +82,16 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
         public void When_DispatchAsync_is_called_explicitly_the_query_handler_should_return_success_string()
         {
             // Arrange
-            var query = new TestQuery();
+            var query = new TestAsyncQuery();
             var queryHandler = new TestAsyncQueryHandler();
 
             // Arrange mocks
             Mocks<IServiceProvider>()
-                .Setup(provider => provider.GetService(typeof(IAsyncQueryHandler<string, TestQuery>)))
+                .Setup(provider => provider.GetService(typeof(IAsyncQueryHandler<string, TestAsyncQuery>)))
                 .Returns(queryHandler);
 
             // Act
-            string result = SystemUnderTest.DispatchAsync<string, TestQuery>(query).Result;
+            string result = SystemUnderTest.DispatchAsync<string, TestAsyncQuery>(query).Result;
 
             // Assert
             result.Should().Be("Success", because: "the query handler returns the string 'Success'");

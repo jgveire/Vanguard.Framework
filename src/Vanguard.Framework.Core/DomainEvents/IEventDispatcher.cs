@@ -18,7 +18,7 @@ namespace Vanguard.Framework.Core.DomainEvents
         /// </summary>
         /// <param name="domainEvent">The domain event.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task DispatchAsync(IDomainEvent domainEvent);
+        Task DispatchAsync(IAsyncDomainEvent domainEvent);
 
         /// <summary>
         /// Dispatches the specified event.
@@ -35,6 +35,6 @@ namespace Vanguard.Framework.Core.DomainEvents
         /// <param name="domainEvent">The domain event.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         Task DispatchAsync<TEvent>(TEvent domainEvent)
-            where TEvent : IDomainEvent;
+            where TEvent : IAsyncDomainEvent;
     }
 }

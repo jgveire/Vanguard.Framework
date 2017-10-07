@@ -7,7 +7,7 @@ namespace Vanguard.Framework.Core.DomainEvents
     /// </summary>
     /// <typeparam name="TEvent">The type of the event.</typeparam>
     public interface IAsyncEventHandler<in TEvent>
-        where TEvent : IDomainEvent
+        where TEvent : IAsyncDomainEvent
     {
         /// <summary>
         /// Handles an event asynchronously.

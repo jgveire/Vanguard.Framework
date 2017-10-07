@@ -44,12 +44,12 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
         public void When_DispatchAsync_is_called_the_command_handler_should_be_executed()
         {
             // Arrange
-            var command = new TestCommand();
+            var command = new TestAsyncCommand();
             var commandHandler = new TestAsyncCommandHandler();
 
             // Arrange mocks
             Mocks<IServiceProvider>()
-                .Setup(provider => provider.GetService(typeof(IAsyncCommandHandler<TestCommand>)))
+                .Setup(provider => provider.GetService(typeof(IAsyncCommandHandler<TestAsyncCommand>)))
                 .Returns(commandHandler);
 
             // Act

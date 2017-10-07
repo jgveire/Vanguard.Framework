@@ -8,7 +8,7 @@ namespace Vanguard.Framework.Core.Cqrs
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <typeparam name="TQuery">The type of the query.</typeparam>
     public interface IAsyncQueryHandler<TResult, in TQuery>
-        where TQuery : IQuery<TResult>
+        where TQuery : IAsyncQuery<TResult>
     {
         /// <summary>
         /// Retrieves the result for the specified query asynchronously.

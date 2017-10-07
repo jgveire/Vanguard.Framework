@@ -7,7 +7,7 @@ namespace Vanguard.Framework.Core.Cqrs
     /// </summary>
     /// <typeparam name="TCommand">The type of the command.</typeparam>
     public interface IAsyncCommandHandler<in TCommand>
-        where TCommand : ICommand
+        where TCommand : IAsyncCommand
     {
         /// <summary>
         /// Executes the specified command asynchronously.

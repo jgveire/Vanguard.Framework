@@ -3,9 +3,9 @@ using Vanguard.Framework.Core.DomainEvents;
 
 namespace Vanguard.Framework.Core.Tests.DomainEvents
 {
-    public class TestAsyncEventHandler : IAsyncEventHandler<TestEvent>
+    public class TestAsyncEventHandler : IAsyncEventHandler<TestAsyncEvent>
     {
-        public async Task Handle(TestEvent domainEvent)
+        public async Task Handle(TestAsyncEvent domainEvent)
         {
             await Task.Delay(10);
             domainEvent.IsHandlerExecuted = true;

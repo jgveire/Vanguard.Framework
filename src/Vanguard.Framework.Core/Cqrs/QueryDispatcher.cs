@@ -47,7 +47,7 @@ namespace Vanguard.Framework.Core.Cqrs
         }
 
         /// <inheritdoc />
-        public async Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query)
+        public async Task<TResult> DispatchAsync<TResult>(IAsyncQuery<TResult> query)
         {
             Guard.ArgumentNotNull(query, nameof(query));
 
@@ -74,7 +74,7 @@ namespace Vanguard.Framework.Core.Cqrs
 
         /// <inheritdoc />
         public async Task<TResult> DispatchAsync<TResult, TQuery>(TQuery query)
-            where TQuery : IQuery<TResult>
+            where TQuery : IAsyncQuery<TResult>
         {
             Guard.ArgumentNotNull(query, nameof(query));
             var queryHandler = ServiceProvider.GetRequiredService<IAsyncQueryHandler<TResult, TQuery>>();

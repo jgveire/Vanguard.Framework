@@ -39,7 +39,7 @@ namespace Vanguard.Framework.Core.Cqrs
 
         /// <inheritdoc />
         public async Task DispatchAsync<TCommand>(TCommand command)
-            where TCommand : ICommand
+            where TCommand : IAsyncCommand
         {
             Guard.ArgumentNotNull(command, nameof(command));
             var commandHandler = ServiceProvider.GetRequiredService<IAsyncCommandHandler<TCommand>>();

@@ -49,7 +49,7 @@ namespace Vanguard.Framework.Core.DomainEvents
         }
 
         /// <inheritdoc />
-        public async Task DispatchAsync(IDomainEvent domainEvent)
+        public async Task DispatchAsync(IAsyncDomainEvent domainEvent)
         {
             // Retriever query handler.
             Type genericType = typeof(IAsyncEventHandler<>);
@@ -81,7 +81,7 @@ namespace Vanguard.Framework.Core.DomainEvents
 
         /// <inheritdoc />
         public async Task DispatchAsync<TEvent>(TEvent domainEvent)
-            where TEvent : IDomainEvent
+            where TEvent : IAsyncDomainEvent
         {
             Guard.ArgumentNotNull(domainEvent, nameof(domainEvent));
             var eventHandlers = ServiceProvider.GetServices<IAsyncEventHandler<TEvent>>();

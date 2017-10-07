@@ -21,7 +21,7 @@ namespace Vanguard.Framework.Core.Cqrs
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="query">The query.</param>
         /// <returns>The query handler result asynchronously.</returns>
-        Task<TResult> DispatchAsync<TResult>(IQuery<TResult> query);
+        Task<TResult> DispatchAsync<TResult>(IAsyncQuery<TResult> query);
 
         /// <summary>
         /// Dispatches the specified query.
@@ -41,6 +41,6 @@ namespace Vanguard.Framework.Core.Cqrs
         /// <param name="query">The query.</param>
         /// <returns>The query handler result asynchronously.</returns>
         Task<TResult> DispatchAsync<TResult, TQuery>(TQuery query)
-            where TQuery : IQuery<TResult>;
+            where TQuery : IAsyncQuery<TResult>;
     }
 }
