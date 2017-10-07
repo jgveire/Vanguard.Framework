@@ -244,10 +244,11 @@ namespace Vanguard.Framework.Data.Repositories
 
         private string[] GetEntityProperties(string select)
         {
-            IEnumerable<string> items = select
+            IEnumerable<string> selectItems = select
                 .Split(',', StringSplitOptions.RemoveEmptyEntries)
                 .Select(item => item.Trim());
-            items = items.Where(item => EntityProperties.Contains(item, StringComparer.InvariantCultureIgnoreCase));
+            IEnumerable<string> items = EntityProperties
+                .Where(item => selectItems.Contains(item, StringComparer.InvariantCultureIgnoreCase));
 
             return items.ToArray();
         }

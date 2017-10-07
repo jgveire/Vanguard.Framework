@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.5</Version>
+    <Version>0.0.7</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,7 +15,14 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.5
+    <PackageReleaseNotes>Version 0.0.6
+- Fixed issue in repository concerning field selection.
+
+Version 0.0.6
+- Added async functionalitity to the repositories
+- Refactored async commands, queries and domain events.
+
+Version 0.0.5
 - The select fields is now also executed database side instead of only web server side.
 
 Version 0.0.4
