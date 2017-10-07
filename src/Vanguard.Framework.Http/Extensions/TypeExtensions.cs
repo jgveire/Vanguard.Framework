@@ -3,14 +3,22 @@ using System.Collections.Generic;
 
 namespace Vanguard.Framework.Http.Extensions
 {
+    /// <summary>
+    /// The source extensions class.
+    /// </summary>
     public static class TypeExtensions
     {
-        public static IEnumerable<Type> BaseTypesAndSelf(this Type type)
+        /// <summary>
+        /// Gets all base types and the class type.
+        /// </summary>
+        /// <param name="source">The source type.</param>
+        /// <returns>A collection of type where the deepest base type is returned first.</returns>
+        public static IEnumerable<Type> BaseTypesAndSelf(this Type source)
         {
-            while (type != null)
+            while (source != null)
             {
-                yield return type;
-                type = type.BaseType;
+                yield return source;
+                source = source.BaseType;
             }
         }
     }

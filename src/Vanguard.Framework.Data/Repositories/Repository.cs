@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core.Repositories;
 
 namespace Vanguard.Framework.Data.Repositories
@@ -23,39 +24,34 @@ namespace Vanguard.Framework.Data.Repositories
             DbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
         }
 
-        /// <summary>
-        /// Adds the specified entity.
-        /// </summary>
-        /// <param name="entity">The entity.</param>
+        /// <inheritdoc />
         public void Add(TEntity entity)
         {
             DbSet.Add(entity);
         }
 
-        /// <summary>
-        /// Updates the specified entity.
-        /// </summary>
-        /// <param name="entity">The entity.</param>
-        public void Update(TEntity entity)
-        {
-            DbContext.Entry(entity).State = EntityState.Modified;
-        }
-
-        /// <summary>
-        /// Deletes the specified entity.
-        /// </summary>
-        /// <param name="entity">The entity.</param>
+        /// <inheritdoc />
         public void Delete(TEntity entity)
         {
             DbSet.Remove(entity);
         }
 
-        /// <summary>
-        /// Saves all changes.
-        /// </summary>
-        public void Save()
+        /// <inheritdoc />
+        public int Save()
         {
-            DbContext.SaveChanges();
+            return DbContext.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> SaveAsync()
+        {
+            return await DbContext.SaveChangesAsync();
+        }
+
+        /// <inheritdoc />
+        public void Update(TEntity entity)
+        {
+            DbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }

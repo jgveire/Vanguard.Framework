@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core;
 using Vanguard.Framework.Core.Exceptions;
@@ -59,112 +60,57 @@ namespace Vanguard.Framework.Data.Repositories
         /// </value>
         protected DbSet<TEntity> DbSet { get; }
 
-        /// <summary>
-        /// Finds entities accoording to the supplied find criteria.
-        /// </summary>
-        /// <param name="findCriteria">The find criteria.</param>
-        /// <param name="filter">An aditional filter to apply on the result query.</param>
-        /// <returns>A collection of entities.</returns>
+        /// <inheritdoc />
         public IEnumerable<TEntity> Find(
             FindCriteria findCriteria = null,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            IQueryable<TEntity> query = DbSet;
-
-            // Filter
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            if (findCriteria == null)
-            {
-                return query.ToList();
-            }
-
-            Validate(findCriteria);
-
-            // Search
-            if (!string.IsNullOrEmpty(findCriteria.Search))
-            {
-                query = query.Search(findCriteria.Search);
-            }
-
-            // Order by
-            if (!string.IsNullOrEmpty(findCriteria.OrderBy))
-            {
-                query = query.OrderBy(findCriteria.OrderBy, findCriteria.SortOrder);
-            }
-
-            // Select
-            if (!string.IsNullOrWhiteSpace(findCriteria.Select))
-            {
-                string[] fields = GetEntityProperties(findCriteria.Select);
-                query = query.Select(fields);
-            }
-
-            // Paging
-            query = query.GetPage(findCriteria.Page, findCriteria.PageSize);
-
+            var query = CompileQuery(findCriteria, filter);
             return query.ToList();
         }
 
-        /// <summary>
-        /// Gets a entity by identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>A entity.</returns>
-        public virtual TEntity GetById(params object[] id)
+        /// <inheritdoc />
+        public async Task<IEnumerable<TEntity>> FindAsync(
+            FindCriteria findCriteria,
+            Expression<Func<TEntity, bool>> filter = null)
         {
-            return DbSet.Find(id);
+            var query = CompileQuery(findCriteria, filter);
+            return await query.ToListAsync();
         }
 
-        /// <summary>
-        /// Gets the enties accoording to the specified filter.
-        /// </summary>
-        /// <param name="filter">The filter predicate.</param>
-        /// <param name="orderBy">The order by predicate.</param>
-        /// <param name="includeProperties">The properties that should be include in the query.</param>
-        /// <returns>A collection of TEntity.</returns>
+        /// <inheritdoc />
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             params string[] includeProperties)
         {
-            IQueryable<TEntity> query = DbSet;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            if (includeProperties != null)
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
-            }
-
-            if (orderBy != null)
-            {
-                return orderBy(query).ToList();
-            }
-
+            var query = CompileQuery(filter, orderBy, includeProperties);
             return query.ToList();
         }
 
-        /// <summary>
-        /// Gets the number of items in the database accoording to the supplied find criteria.
-        /// </summary>
-        /// <param name="findCriteria">The find criteria.</param>
-        /// <returns>
-        /// The total number of items in the database accoording to the supplied find criteria.
-        /// </returns>
+        /// <inheritdoc />
+        public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params string[] includeProperties)
+        {
+            var query = CompileQuery(filter, orderBy, includeProperties);
+            return await query.ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public virtual TEntity GetById(params object[] id)
+        {
+            return DbSet.Find(id);
+        }
+
+        /// <inheritdoc />
+        public async Task<TEntity> GetByIdAsync(params object[] id)
+        {
+            return await DbSet.FindAsync(id);
+        }
+
+        /// <inheritdoc />
         public int GetCount(FindCriteria findCriteria)
         {
             IQueryable<TEntity> query = DbSet;
-
             if (findCriteria != null && !string.IsNullOrEmpty(findCriteria.Search))
             {
                 query = query.Search(findCriteria.Search);
@@ -173,13 +119,7 @@ namespace Vanguard.Framework.Data.Repositories
             return query.Count();
         }
 
-        /// <summary>
-        /// Gets the number of items in the database accoording to the supplied filter.
-        /// </summary>
-        /// <param name="filter">The filter predicate.</param>
-        /// <returns>
-        /// The total number of items in the database accoording to the supplied filter.
-        /// </returns>
+        /// <inheritdoc />
         public int GetCount(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = DbSet;
@@ -189,6 +129,30 @@ namespace Vanguard.Framework.Data.Repositories
             }
 
             return query.Count();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.CountAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(FindCriteria findCriteria)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (findCriteria != null && !string.IsNullOrEmpty(findCriteria.Search))
+            {
+                query = query.Search(findCriteria.Search);
+            }
+
+            return await query.CountAsync();
         }
 
         private static ICollection<string> GetEntityProperties()
@@ -208,6 +172,86 @@ namespace Vanguard.Framework.Data.Repositories
             return _entityProperties;
         }
 
+        private IQueryable<TEntity> CompileQuery(
+            Expression<Func<TEntity, bool>> filter,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+            params string[] includeProperties)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return query;
+        }
+
+        private IQueryable<TEntity> CompileQuery(
+            FindCriteria findCriteria,
+            Expression<Func<TEntity, bool>> filter)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (findCriteria != null)
+            {
+                Validate(findCriteria);
+
+                // Search
+                if (!string.IsNullOrEmpty(findCriteria.Search))
+                {
+                    query = query.Search(findCriteria.Search);
+                }
+
+                // Order by
+                if (!string.IsNullOrEmpty(findCriteria.OrderBy))
+                {
+                    query = query.OrderBy(findCriteria.OrderBy, findCriteria.SortOrder);
+                }
+
+                // Select
+                if (!string.IsNullOrWhiteSpace(findCriteria.Select))
+                {
+                    string[] fields = GetEntityProperties(findCriteria.Select);
+                    query = query.Select(fields);
+                }
+
+                // Paging
+                query = query.GetPage(findCriteria.Page, findCriteria.PageSize);
+            }
+
+            return query;
+        }
+
+        private string[] GetEntityProperties(string select)
+        {
+            IEnumerable<string> items = select
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(item => item.Trim());
+            items = items.Where(item => EntityProperties.Contains(item, StringComparer.InvariantCultureIgnoreCase));
+
+            return items.ToArray();
+        }
+
         private void Validate(FindCriteria findCriteria)
         {
             if (!string.IsNullOrWhiteSpace(findCriteria.OrderBy))
@@ -223,16 +267,6 @@ namespace Vanguard.Framework.Data.Repositories
                 string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
                 throw new ValidationException(message, nameof(FindCriteria.OrderBy));
             }
-        }
-
-        private string[] GetEntityProperties(string select)
-        {
-            IEnumerable<string> items = select
-                .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(item => item.Trim());
-            items = items.Where(item => EntityProperties.Contains(item, StringComparer.InvariantCultureIgnoreCase));
-
-            return items.ToArray();
         }
     }
 }
