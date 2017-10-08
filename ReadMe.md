@@ -1,5 +1,4 @@
 # Vanguard Framework
-# What
 The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.
 
 By using the Vanguard Framework and following its design patterns you ensure that your code is of good quality, can be maintained easily and extended without a lot of hassle.
@@ -33,3 +32,6 @@ The service layer is based on ASP.NET Web API 2.0 and make functionality availab
 
 ### User Interface Layer
 The framework for the user interface layer has not been identified yet because the Vanguard Framework is work in progress. As soon as the functionality for the other layers are finished we will decide on this. For now we are leaning towards AngularJS 4.0 but this is not set in stone.
+
+# Documentation
+Take a look at the [Wiki](https://github.com/jgveire/Vanguard.Framework/wiki) for more documentation.
