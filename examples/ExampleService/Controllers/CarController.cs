@@ -11,7 +11,7 @@ namespace ExampleService.Controllers
     using Vanguard.Framework.Core.Cqrs;
     using Vanguard.Framework.Http;
 
-    [Route("api/cars")]
+    [Route("v1/cars")]
     public class CarController : CrudController<Guid, CarModel>
     {
         private readonly ExampleContext _context;
