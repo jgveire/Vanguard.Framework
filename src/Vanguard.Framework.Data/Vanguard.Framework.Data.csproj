@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.7</Version>
+    <Version>0.0.10</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,7 +15,13 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.6
+    <PackageReleaseNotes>Version 0.0.9
+- Nothing changed
+
+Version 0.0.8
+- Added repository base
+
+Version 0.0.6
 - Fixed issue in repository concerning field selection.
 
 Version 0.0.6
@@ -37,6 +43,8 @@ Version 0.0.2
 Version 0.0.1
 -First release</PackageReleaseNotes>
     <NeutralLanguage>Eng</NeutralLanguage>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

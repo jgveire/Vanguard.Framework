@@ -16,6 +16,7 @@
         {
             Guard.ArgumentNotNull(id, nameof(id));
             Guard.ArgumentNotNull(model, nameof(model));
+            Id = id;
             Model = model;
         }
 

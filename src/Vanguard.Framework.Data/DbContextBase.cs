@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core.DomainEvents;
 
@@ -61,10 +63,7 @@ namespace Vanguard.Framework.Data
                 return;
             }
 
-            var entities = ChangeTracker.Entries<IDomainEntity>()
-                .Select(entry => entry.Entity)
-                .Where(entry => entry.Events.Any())
-                .ToArray();
+            var entities = GetChangedDomainEntities();
 
             foreach (var entity in entities)
             {
@@ -75,6 +74,15 @@ namespace Vanguard.Framework.Data
                     _eventDispatcher.Dispatch(domainEvent);
                 }
             }
+        }
+
+        private IDomainEntity[] GetChangedDomainEntities()
+        {
+            var entities = ChangeTracker.Entries<IDomainEntity>()
+                .Select(entry => entry.Entity)
+                .Where(entry => entry.Events.Any())
+                .ToArray();
+            return entities;
         }
     }
 }

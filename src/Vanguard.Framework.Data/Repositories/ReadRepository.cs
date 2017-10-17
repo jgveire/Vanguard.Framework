@@ -18,7 +18,7 @@ namespace Vanguard.Framework.Data.Repositories
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="IReadRepository{TEntity}" />
-    public class ReadRepository<TEntity> : IReadRepository<TEntity>
+    public class ReadRepository<TEntity> : RepositoryBase<DbContext>, IReadRepository<TEntity>
         where TEntity : class, IDataEntity
     {
         private static ICollection<string> _entityProperties;
@@ -28,9 +28,9 @@ namespace Vanguard.Framework.Data.Repositories
         /// </summary>
         /// <param name="dbContext">The database context.</param>
         public ReadRepository(DbContext dbContext)
+            : base(dbContext)
         {
             Guard.ArgumentNotNull(dbContext, nameof(dbContext));
-            DbContext = dbContext;
             DbSet = dbContext.Set<TEntity>();
             DbContext.ChangeTracker.AutoDetectChangesEnabled = false;
             DbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -43,14 +43,6 @@ namespace Vanguard.Framework.Data.Repositories
         /// A collection of entity properties.
         /// </value>
         protected static ICollection<string> EntityProperties => GetEntityProperties();
-
-        /// <summary>
-        /// Gets the database context.
-        /// </summary>
-        /// <value>
-        /// The database context.
-        /// </value>
-        protected DbContext DbContext { get; }
 
         /// <summary>
         /// Gets the database set.
@@ -212,32 +204,7 @@ namespace Vanguard.Framework.Data.Repositories
                 query = query.Where(filter);
             }
 
-            if (findCriteria != null)
-            {
-                Validate(findCriteria);
-
-                // Search
-                if (!string.IsNullOrEmpty(findCriteria.Search))
-                {
-                    query = query.Search(findCriteria.Search);
-                }
-
-                // Order by
-                if (!string.IsNullOrEmpty(findCriteria.OrderBy))
-                {
-                    query = query.OrderBy(findCriteria.OrderBy, findCriteria.SortOrder);
-                }
-
-                // Select
-                if (!string.IsNullOrWhiteSpace(findCriteria.Select))
-                {
-                    string[] fields = GetEntityProperties(findCriteria.Select);
-                    query = query.Select(fields);
-                }
-
-                // Paging
-                query = query.GetPage(findCriteria.Page, findCriteria.PageSize);
-            }
+            query = ApplyFindCriteria(query, findCriteria);
 
             return query;
         }

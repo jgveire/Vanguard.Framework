@@ -74,7 +74,14 @@ namespace Vanguard.Framework.Http.Resolvers
 
         private static bool IsFieldInSelect(string fieldName, StringValues selectFields)
         {
-            return selectFields.Any(field => string.Equals(field, fieldName, StringComparison.OrdinalIgnoreCase));
+            var fields = new List<string>();
+            foreach (string field in selectFields)
+            {
+                string[] items = field.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                fields.AddRange(items.Select(item => item.Trim()));
+            }
+
+            return fields.Any(field => string.Equals(field, fieldName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
