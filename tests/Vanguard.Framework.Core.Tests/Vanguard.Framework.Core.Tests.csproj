@@ -28,10 +28,4 @@
     <ProjectReference Include="..\..\src\Vanguard.Framework.Test\Vanguard.Framework.Test.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Generators\TemplateServiceTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>
