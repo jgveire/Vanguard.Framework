@@ -33,6 +33,8 @@
                 {
                     config.CreateMap<Car, CarModel>();
                     config.CreateMap<CarModel, Car>();
+                    config.CreateMap<Garage, GarageModel>();
+                    config.CreateMap<GarageModel, Garage>();
                 });
 
             ////var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
@@ -61,6 +63,9 @@
             containerBuilder.RegisterModule<DefaultModule>();
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();
+
+            InitContext(container.Resolve<ExampleContext>());
+
             return new AutofacServiceProvider(container);
         }
 
@@ -72,6 +77,19 @@
 
             app.UseMvc();
             app.UseDeveloperExceptionPage();
+        }
+
+        private void InitContext(ExampleContext context)
+        {
+            context.Cars.Add(new Car(new Guid("9f490218-7db0-452f-8809-a390f9ca5a95"), "BMW", "Z5", "14-ZXD-5"));
+            context.Cars.Add(new Car(new Guid("5b2ca291-9fd6-4b36-abaf-4af27a64f322"), "Audi", "A4", "63-KDI-8"));
+            context.Cars.Add(new Car(new Guid("e8289985-aeaf-4867-85ab-af354c0d1d85"), "Audi", "A5", "03-UWE-3"));
+            context.Cars.Add(new Car(new Guid("fa47ff63-f5b7-4697-beae-6bb8384fd5b2"), "Opel", "Astra", "92-WUD-2"));
+
+            context.Garages.Add(new Garage("B.I.G. Garage", "Black Pool 56, Manchester"));
+            context.Garages.Add(new Garage("S.I.M. Garage", "West Lake 23, London"));
+
+            context.SaveChanges();
         }
     }
 }

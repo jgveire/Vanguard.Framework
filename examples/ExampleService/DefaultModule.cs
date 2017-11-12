@@ -42,6 +42,7 @@ namespace ExampleService
                 .AsImplementedInterfaces();
 
             builder.RegisterCrudHandlers<CarModel, Car>();
+            builder.RegisterCrudHandlers<GarageModel, Garage>();
         }
     }
 }

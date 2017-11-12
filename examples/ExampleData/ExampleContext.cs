@@ -18,5 +18,7 @@
         }
 
         public DbSet<Car> Cars { get; set; }
+
+        public DbSet<Garage> Garages { get; set; }
     }
 }

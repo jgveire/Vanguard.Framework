@@ -1,12 +1,11 @@
-﻿using ExampleCommon.Entities;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using ExampleCommon.Entities;
 using ExampleCommon.Events;
 using Vanguard.Framework.Data.Entities;
 
 namespace ExampleData.Entities
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
     public class Car : DataEntity, ICar
     {
         public Car()
