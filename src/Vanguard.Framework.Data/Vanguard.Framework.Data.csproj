@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.10</Version>
+    <Version>0.0.11</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,7 +15,10 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.9
+    <PackageReleaseNotes>Version 0.0.11
+- Fixed null reference issue in repository base.
+
+Version 0.0.9
 - Nothing changed
 
 Version 0.0.8

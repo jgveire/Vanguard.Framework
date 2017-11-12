@@ -18,8 +18,6 @@ namespace Vanguard.Framework.Data.Repositories
     public class RepositoryBase<TDbContext>
         where TDbContext : DbContext
     {
-        private static readonly Dictionary<Type, ICollection<string>> EntityProperties = new Dictionary<Type, ICollection<string>>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RepositoryBase{TDbContext}"/> class.
         /// </summary>
@@ -82,21 +80,13 @@ namespace Vanguard.Framework.Data.Repositories
             return query;
         }
 
-        private static ICollection<string> GetEntityProperties<TEntity>()
+        private static IEnumerable<string> GetEntityProperties<TEntity>()
         {
             var type = typeof(TEntity);
-            if (!EntityProperties.ContainsKey(type))
-            {
-                var entityProperties = new List<string>();
-                var properties = type
-                    .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(prop => prop.PropertyType.IsPrimitive || prop.PropertyType.IsEnum || prop.PropertyType == typeof(string));
-
-                properties.ForEach(property => entityProperties.Add(property.Name));
-                EntityProperties.Add(type, entityProperties);
-            }
-
-            return EntityProperties[type];
+            var properties = type
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(prop => prop.PropertyType.IsPrimitive || prop.PropertyType.IsEnum || prop.PropertyType == typeof(string));
+            return properties.Select(property => property.Name);
         }
 
         private string[] GetEntityProperties<TEntity>(string select)
