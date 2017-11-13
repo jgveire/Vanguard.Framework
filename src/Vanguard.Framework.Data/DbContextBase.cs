@@ -1,14 +1,17 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Vanguard.Framework.Core;
 using Vanguard.Framework.Core.DomainEvents;
+using Vanguard.Framework.Data.Managers;
 
 namespace Vanguard.Framework.Data
 {
     /// <inheritdoc />
     public class DbContextBase : DbContext
     {
+        private readonly IAuditManager _auditManager;
+        private readonly ICurrentUser _currentUser;
         private readonly IEventDispatcher _eventDispatcher;
 
         /// <summary>
@@ -16,6 +19,7 @@ namespace Vanguard.Framework.Data
         /// </summary>
         public DbContextBase()
         {
+            _auditManager = new AuditManager(this);
         }
 
         /// <summary>
@@ -25,6 +29,7 @@ namespace Vanguard.Framework.Data
         public DbContextBase(DbContextOptions options)
             : base(options)
         {
+            _auditManager = new AuditManager(this);
         }
 
         /// <summary>
@@ -34,6 +39,7 @@ namespace Vanguard.Framework.Data
         public DbContextBase(IEventDispatcher eventDispatcher)
         {
             Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            _auditManager = new AuditManager(this);
             _eventDispatcher = eventDispatcher;
         }
 
@@ -46,14 +52,42 @@ namespace Vanguard.Framework.Data
             : base(options)
         {
             Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            _auditManager = new AuditManager(this);
             _eventDispatcher = eventDispatcher;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DbContextBase"/> class.
+        /// </summary>
+        /// <param name="eventDispatcher">The event dispatcher.</param>
+        /// <param name="currentUser">The current user.</param>
+        /// <param name="options">The options for this context.</param>
+        public DbContextBase(IEventDispatcher eventDispatcher, ICurrentUser currentUser, DbContextOptions options)
+            : base(options)
+        {
+            Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            Guard.ArgumentNotNull(currentUser, nameof(currentUser));
+            _auditManager = new AuditManager(this);
+            _eventDispatcher = eventDispatcher;
+            _currentUser = currentUser;
         }
 
         /// <inheritdoc />
         public override int SaveChanges()
         {
             DispatchEvents();
+            CreateAuditRecords();
             return base.SaveChanges();
+        }
+
+        private void CreateAuditRecords()
+        {
+            if (_currentUser == null)
+            {
+                return;
+            }
+
+            _auditManager.CreateAuditRecords(_currentUser.UserId, DateTime.UtcNow);
         }
 
         private void DispatchEvents()

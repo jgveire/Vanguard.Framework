@@ -13,8 +13,8 @@
   </TemplateData>
   <TemplateContent>
     <References />
-    <ProjectItem SubType="Code" TargetFileName="\Events\$fileinputname$Event.cs" ReplaceParameters="true">Event.cs</ProjectItem>
-    <ProjectItem SubType="Code" TargetFileName="\EventHandlers\$fileinputname$EventHandler.cs" ReplaceParameters="true">EventHandler.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="Events\$fileinputname$Event.cs" ReplaceParameters="true">Event.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="EventHandlers\$fileinputname$EventHandler.cs" ReplaceParameters="true">EventHandler.cs</ProjectItem>
   </TemplateContent>
   <WizardExtension>
     <Assembly>VanguardWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=2818fdb799b962a3</Assembly>

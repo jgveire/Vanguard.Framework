@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Vanguard.Framework.Core.Repositories;
 using Vanguard.Framework.Data.Entities;
 
 namespace ExampleData.Entities
 {
-    public class Garage : DataEntity
+    public class Garage : DataEntity, IAuditable
     {
         public Garage()
         {
@@ -14,6 +15,8 @@ namespace ExampleData.Entities
             Name = name;
             Address = address;
         }
+
+        public string EntityId => Id.ToString();
 
         [Required]
         [MaxLength(20)]

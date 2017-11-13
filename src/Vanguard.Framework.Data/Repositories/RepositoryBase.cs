@@ -5,7 +5,6 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Vanguard.Framework.Core;
 using Vanguard.Framework.Core.Exceptions;
-using Vanguard.Framework.Core.Extensions;
 using Vanguard.Framework.Core.Repositories;
 using Vanguard.Framework.Data.Resources;
 

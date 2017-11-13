@@ -13,8 +13,8 @@
   </TemplateData>
   <TemplateContent>
     <References />
-    <ProjectItem SubType="Code" TargetFileName="\Queries\$fileinputname$Query.cs" ReplaceParameters="true">Query.cs</ProjectItem>
-    <ProjectItem SubType="Code" TargetFileName="\QueryHandlers\$fileinputname$QueryHandler.cs" ReplaceParameters="true">QueryHandler.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="Queries\$fileinputname$Query.cs" ReplaceParameters="true">Query.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="QueryHandlers\$fileinputname$QueryHandler.cs" ReplaceParameters="true">QueryHandler.cs</ProjectItem>
   </TemplateContent>
   <WizardExtension>
     <Assembly>VanguardWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=2818fdb799b962a3</Assembly>

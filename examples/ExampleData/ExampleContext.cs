@@ -1,4 +1,8 @@
-﻿namespace ExampleData
+﻿using System;
+using Vanguard.Framework.Data.Entities;
+using Vanguard.Framework.Data.Managers;
+
+namespace ExampleData
 {
     using ExampleData.Entities;
     using Microsoft.EntityFrameworkCore;
@@ -17,8 +21,17 @@
         {
         }
 
+        public DbSet<AuditEntry> AuditEntries { get; set; }
+
         public DbSet<Car> Cars { get; set; }
 
         public DbSet<Garage> Garages { get; set; }
+
+        public override int SaveChanges()
+        {
+            var auditManager = new AuditManager(this);
+            auditManager.CreateAuditRecords("Test", DateTime.UtcNow);
+            return base.SaveChanges();
+        }
     }
 }

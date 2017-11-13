@@ -1,8 +1,5 @@
 ﻿using ExampleBusiness;
-using ExampleBusiness.CommandHandlers;
-using ExampleBusiness.EventHandlers;
 using ExampleCommon;
-using ExampleCommon.Events;
 using Vanguard.Framework.Core.DomainEvents;
 
 namespace ExampleService

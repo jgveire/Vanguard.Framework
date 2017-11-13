@@ -1,4 +1,4 @@
-﻿namespace Vanguard.Framework.Core
+﻿namespace Vanguard.Framework.Core.Repositories
 {
     /// <summary>
     /// The auditable interface make a data entity autditable.
@@ -6,11 +6,11 @@
     public interface IAuditable
     {
         /// <summary>
-        /// Gets a string representation of the identifier of the data entity.
+        /// Gets a string representation of the data entity identifier.
         /// </summary>
         /// <value>
-        /// A string representation of the identifier of the data entity.
+        /// A string representation of the data entity identifier.
         /// </value>
-        string AuditId { get; }
+        string EntityId { get; }
     }
 }

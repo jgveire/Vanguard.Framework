@@ -13,8 +13,8 @@
   </TemplateData>
   <TemplateContent>
     <References />
-    <ProjectItem SubType="Code" TargetFileName="\Commands\$fileinputname$Command.cs" ReplaceParameters="true">Command.cs</ProjectItem>
-    <ProjectItem SubType="Code" TargetFileName="\CommandHandlers\$fileinputname$CommandHandler.cs" ReplaceParameters="true">CommandHandler.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="Commands\$fileinputname$Command.cs" ReplaceParameters="true">Command.cs</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="CommandHandlers\$fileinputname$CommandHandler.cs" ReplaceParameters="true">CommandHandler.cs</ProjectItem>
   </TemplateContent>
   <WizardExtension>
     <Assembly>VanguardWizard, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=2818fdb799b962a3</Assembly>
