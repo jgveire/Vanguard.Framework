@@ -16,7 +16,7 @@ namespace Vanguard.Framework.Data.Entities
         /// The audit identifier.
         /// </value>
         [Key]
-        public long Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary>
         /// Gets or sets the type of the audit.
@@ -43,7 +43,7 @@ namespace Vanguard.Framework.Data.Entities
         /// The entity identifier.
         /// </value>
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string EntityId { get; set; }
 
         /// <summary>

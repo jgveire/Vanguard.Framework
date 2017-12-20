@@ -28,6 +28,19 @@ namespace Vanguard.Framework.Data.Helpers
         };
 
         /// <summary>
+        /// Determines whether the specified type is a byte array.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified type is a byte array; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsByteArray(Type type)
+        {
+            return type == typeof(byte[]) ||
+                   type == typeof(byte?[]);
+        }
+
+        /// <summary>
         /// Determines whether the specified type is boolean.
         /// </summary>
         /// <param name="type">The type.</param>

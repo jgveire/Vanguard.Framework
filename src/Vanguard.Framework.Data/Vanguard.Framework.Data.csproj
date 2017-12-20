@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.13</Version>
+    <Version>0.0.16</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,7 +15,10 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.12
+    <PackageReleaseNotes>Version 0.0.16 and 0.0.15
+- Made some changes to the AuditEntry class.
+
+Version 0.0.12
 - Implemented audit manager in context base.
 
 Version 0.0.12

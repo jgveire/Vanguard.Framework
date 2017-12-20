@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Vanguard.Framework.Core.Repositories;
+using Vanguard.Framework.Data.Builders;
 using Vanguard.Framework.Data.Entities;
 using Vanguard.Framework.Data.Helpers;
 
@@ -15,7 +14,6 @@ namespace Vanguard.Framework.Data.Managers
     public class AuditManager : IAuditManager
     {
         private readonly DbContext _dbContext;
-        private readonly CultureInfo _cultureInfo = CreateCulture();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuditManager"/> class.
@@ -51,12 +49,6 @@ namespace Vanguard.Framework.Data.Managers
         public void CreateUpdateAuditRecords(string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
         {
             CreateAuditRecords(AuditType.Update, userId, utcChangeDate, entityEntries);
-        }
-
-        private static CultureInfo CreateCulture()
-        {
-            var cultureInfo = new CultureInfo("en-US");
-            return cultureInfo;
         }
 
         private void CreateAuditRecords(AuditType auditType, string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
@@ -108,46 +100,19 @@ namespace Vanguard.Framework.Data.Managers
 
         private string SerializeEntity(EntityEntry<IAuditable> entry)
         {
-            StringBuilder jsonBuilder = new StringBuilder();
-            jsonBuilder.Append("{");
+            var jsonBuilder = new JsonBuilder();
             foreach (PropertyEntry propertyEntry in entry.Properties)
             {
-                if (jsonBuilder.Length > 1)
+                if (TypeHelper.IsByteArray(propertyEntry.Metadata.ClrType))
                 {
-                    jsonBuilder.Append(",");
+                    continue;
                 }
 
                 string name = propertyEntry.Metadata.Name;
-                var value = ConvertValue(propertyEntry.Metadata.ClrType, propertyEntry.CurrentValue);
-                jsonBuilder.Append($"\"{name}\":{value}");
+                jsonBuilder.AddProperty(name, propertyEntry.Metadata.ClrType, propertyEntry.CurrentValue);
             }
 
-            jsonBuilder.Append("}");
             return jsonBuilder.ToString();
-        }
-
-        private string ConvertValue(Type valueType, object value)
-        {
-            if (value == null)
-            {
-                return "null";
-            }
-
-            string stringValue = Convert.ToString(value, _cultureInfo);
-            if (TypeHelper.IsNumeric(valueType))
-            {
-                return stringValue;
-            }
-            else if (TypeHelper.IsBoolean(valueType))
-            {
-                return stringValue.ToLower();
-            }
-            else if (TypeHelper.IsDateTime(valueType))
-            {
-                return string.Format("\"{0:O}\"", value);
-            }
-
-            return $"\"{stringValue}\"";
         }
     }
 }
