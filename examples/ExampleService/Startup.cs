@@ -22,8 +22,15 @@
     using Vanguard.Framework.Http.Filters;
     using Vanguard.Framework.Http.Formatters;
 
+    /// <summary>
+    /// The startup class.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="env">The hosting environment</param>
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -45,9 +52,23 @@
             ////jsonFormatter.SerializerSettings.ContractResolver = new SelectFieldContractResolver()
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>
+        /// The configuration.
+        /// </value>
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the application.
+        /// </summary>
+        /// <remarks>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </remarks>
+        /// <param name="app">The application.</param>
+        /// <param name="env">The hosting environment.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
@@ -60,7 +81,14 @@
             app.UseDeveloperExceptionPage();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configures the services.
+        /// </summary>
+        /// <remarks>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </remarks>
+        /// <param name="services">The service collection.</param>
+        /// <returns>The service provider.</returns>
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.

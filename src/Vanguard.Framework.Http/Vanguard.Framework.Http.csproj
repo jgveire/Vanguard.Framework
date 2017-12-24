@@ -50,6 +50,7 @@ Version 0.0.1
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Vanguard.Framework.Http.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

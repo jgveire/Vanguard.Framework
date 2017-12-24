@@ -13,8 +13,13 @@
     using Vanguard.Framework.Core.DomainEvents;
     using Vanguard.Framework.Data.Repositories;
 
+    /// <summary>
+    /// The default Autofac module.
+    /// </summary>
+    /// <seealso cref="Autofac.Module" />
     public class DefaultModule : Module
     {
+        /// <inheritdoc />
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<HttpContextAccessor>().AsImplementedInterfaces().SingleInstance();
