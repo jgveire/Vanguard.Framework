@@ -1,7 +1,8 @@
-﻿namespace ExampleModels
+﻿using Vanguard.Framework.Core.Models;
+
+namespace ExampleModels
 {
     using System.ComponentModel.DataAnnotations;
-    using Vanguard.Framework.Core.Models;
 
     public class CarModel : UniqueModel
     {

@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanguardWizard.Tests", "tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanguardTemplate", "tools\VanguardTemplate\VanguardTemplate.csproj", "{E8C608F5-6A67-4B89-A04B-5B6417AADA39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleModels", "src\ExampleModels\ExampleModels.csproj", "{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleModels", "examples\ExampleModels\ExampleModels.csproj", "{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
