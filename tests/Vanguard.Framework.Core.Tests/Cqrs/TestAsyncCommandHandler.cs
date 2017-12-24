@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Vanguard.Framework.Core.Cqrs;
-
-namespace Vanguard.Framework.Core.Tests.Cqrs
+﻿namespace Vanguard.Framework.Core.Tests.Cqrs
 {
+    using System.Threading.Tasks;
+    using Vanguard.Framework.Core.Cqrs;
+
     public class TestAsyncCommandHandler : IAsyncCommandHandler<TestAsyncCommand>
     {
         public async Task Execute(TestAsyncCommand command)

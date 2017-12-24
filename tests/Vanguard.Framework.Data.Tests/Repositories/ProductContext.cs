@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Vanguard.Framework.Data.Tests.Repositories
+﻿namespace Vanguard.Framework.Data.Tests.Repositories
 {
+    using Microsoft.EntityFrameworkCore;
+
     public class ProductContext : DbContext
     {
         public DbSet<Product> Products { get; set; }

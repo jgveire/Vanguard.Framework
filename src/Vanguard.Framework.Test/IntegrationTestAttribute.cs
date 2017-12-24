@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Vanguard.Framework.Test
+﻿namespace Vanguard.Framework.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// The integration test category attribute class.
     /// </summary>

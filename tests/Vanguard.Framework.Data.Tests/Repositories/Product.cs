@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Data.Tests.Repositories
+﻿namespace Vanguard.Framework.Data.Tests.Repositories
 {
+    using System.ComponentModel.DataAnnotations;
+    using Vanguard.Framework.Core.Repositories;
+
     public class Product : IDataEntity
     {
         public Product()

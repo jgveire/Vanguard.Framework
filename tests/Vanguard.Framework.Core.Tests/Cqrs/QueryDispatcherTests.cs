@@ -1,11 +1,11 @@
-using System;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Test;
-
 namespace Vanguard.Framework.Core.Tests.Cqrs
 {
+    using System;
+    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Test;
+
     [TestClass]
     public class QueryDispatcherTests : TestBase<QueryDispatcher>
     {

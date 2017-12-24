@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core.Cqrs;
-
-namespace Vanguard.Framework.Core.Tests.Cqrs
+﻿namespace Vanguard.Framework.Core.Tests.Cqrs
 {
+    using Vanguard.Framework.Core.Cqrs;
+
     public class TestAsyncQuery : IAsyncQuery<string>
     {
     }

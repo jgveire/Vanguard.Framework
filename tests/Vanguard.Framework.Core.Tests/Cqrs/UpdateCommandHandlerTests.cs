@@ -1,11 +1,11 @@
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Test;
-
 namespace Vanguard.Framework.Core.Tests.Cqrs
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Test;
+
     [TestClass]
     public class UpdateCommandHandlerTests : TestBase<UpdateCommandHandler<TestModel, TestEntity>>
     {

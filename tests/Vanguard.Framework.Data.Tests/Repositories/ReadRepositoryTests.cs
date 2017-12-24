@@ -1,14 +1,14 @@
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Vanguard.Framework.Core;
-using Vanguard.Framework.Data.Repositories;
-using Vanguard.Framework.Test;
-
 namespace Vanguard.Framework.Data.Tests.Repositories
 {
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Core;
+    using Vanguard.Framework.Data.Repositories;
+    using Vanguard.Framework.Test;
+
     [TestClass]
     public class ReadRepositoryTests : TestBase<Repository<Product>>
     {

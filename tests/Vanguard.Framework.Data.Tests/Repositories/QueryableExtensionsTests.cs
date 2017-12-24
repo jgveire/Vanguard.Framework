@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Vanguard.Framework.Data.Tests.Repositories
+﻿namespace Vanguard.Framework.Data.Tests.Repositories
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class QueryableExtensionsTests
     {

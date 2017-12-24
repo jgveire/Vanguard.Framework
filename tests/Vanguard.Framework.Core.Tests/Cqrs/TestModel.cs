@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Vanguard.Framework.Core.Tests.Cqrs
+﻿namespace Vanguard.Framework.Core.Tests.Cqrs
 {
+    using System;
+
     public class TestModel
     {
         public TestModel()

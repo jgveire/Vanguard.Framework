@@ -52,7 +52,7 @@ namespace ExampleService
             services
                 .AddMvc(options =>
                 {
-                    options.Filters.Add(typeof(ExceptionFilter));
+                    options.Filters.Add(typeof(ValidationExceptionFilter));
                     options.Filters.Add(typeof(ValidateModelAttribute));
                     options.OutputFormatters.Clear();
                     options.OutputFormatters.Add(new SelectFieldJsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared));

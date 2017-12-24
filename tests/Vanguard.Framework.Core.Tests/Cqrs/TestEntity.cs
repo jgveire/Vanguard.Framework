@@ -1,8 +1,8 @@
-﻿using System;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Core.Tests.Cqrs
+﻿namespace Vanguard.Framework.Core.Tests.Cqrs
 {
+    using System;
+    using Vanguard.Framework.Core.Repositories;
+
     public class TestEntity : IUniqueEntity
     {
         public TestEntity()

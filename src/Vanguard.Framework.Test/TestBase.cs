@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-
-namespace Vanguard.Framework.Test
+﻿namespace Vanguard.Framework.Test
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     /// <summary>
     /// The test base class.
     /// </summary>

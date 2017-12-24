@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Vanguard.Framework.Core.DomainEvents;
-using Vanguard.Framework.Test;
-
 namespace Vanguard.Framework.Core.Tests.DomainEvents
 {
+    using System;
+    using System.Collections.Generic;
+    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Core.DomainEvents;
+    using Vanguard.Framework.Test;
+
     [TestClass]
     public class EventDispatcherTests : TestBase<EventDispatcher>
     {
