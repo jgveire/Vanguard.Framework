@@ -31,7 +31,7 @@ namespace Vanguard.Framework.Http
         /// <param name="findCriteria">The find criteria.</param>
         /// <returns>The number of items that conform with the specified find criteria.</returns>
         [HttpGet("count")]
-        public virtual IActionResult Count(FindCriteria findCriteria)
+        public virtual IActionResult Count([FromQuery]FindCriteria findCriteria)
         {
             var query = new CountQuery<TModel>(findCriteria);
             var result = QueryDispatcher.Dispatch(query);
@@ -44,7 +44,7 @@ namespace Vanguard.Framework.Http
         /// <param name="findCriteria">The find criteria.</param>
         /// <returns>A collection of items that conform with the specified find criteria.</returns>
         [HttpGet]
-        public virtual IActionResult Find(FindCriteria findCriteria)
+        public virtual IActionResult Find([FromQuery]FindCriteria findCriteria)
         {
             var query = new FindQuery<TModel>(findCriteria);
             var result = QueryDispatcher.Dispatch(query);
@@ -60,7 +60,7 @@ namespace Vanguard.Framework.Http
         /// otherwise an <see cref="NotFoundObjectResult"/> response.
         /// </returns>
         [HttpGet("{id}")]
-        public virtual IActionResult GetById(TIdentifier id)
+        public virtual IActionResult GetById([FromRoute]TIdentifier id)
         {
             var query = new GetQuery<TModel>(id);
             var result = QueryDispatcher.Dispatch(query);
@@ -87,7 +87,7 @@ namespace Vanguard.Framework.Http
         /// <param name="model">The model to update.</param>
         /// <returns>An <see cref="NoContentResult"/> response.</returns>
         [HttpPut("{id}")]
-        public virtual IActionResult Update(TIdentifier id, [FromBody, Required]TModel model)
+        public virtual IActionResult Update([FromRoute]TIdentifier id, [FromBody, Required]TModel model)
         {
             var command = new UpdateCommand<TModel>(id, model);
             CommandDispatcher.Dispatch(command);
@@ -100,7 +100,7 @@ namespace Vanguard.Framework.Http
         /// <param name="id">The identifier.</param>
         /// <returns>An <see cref="NoContentResult"/> response.</returns>
         [HttpDelete("{id}")]
-        public virtual IActionResult Delete(TIdentifier id)
+        public virtual IActionResult Delete([FromRoute]TIdentifier id)
         {
             var command = new DeleteCommand<TModel>(id);
             CommandDispatcher.Dispatch(command);

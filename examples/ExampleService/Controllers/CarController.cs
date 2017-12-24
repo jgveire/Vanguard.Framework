@@ -8,7 +8,7 @@ namespace ExampleService.Controllers
     using Vanguard.Framework.Core.Cqrs;
     using Vanguard.Framework.Http;
 
-    [Route("v1/cars")]
+    [Route("api/v1/cars")]
     public class CarController : CrudController<Guid, CarModel>
     {
         public CarController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)

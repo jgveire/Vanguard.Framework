@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace ExampleService
 {
@@ -45,6 +48,19 @@ namespace ExampleService
 
         public IConfigurationRoot Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            app.UseMvc();
+            app.UseStaticFiles();
+            app.UseSwagger();
+            app.UseSwaggerUI(SetupSwaggerUi);
+            app.UseDeveloperExceptionPage();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
@@ -59,6 +75,7 @@ namespace ExampleService
                 });
 
             services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Example"));
+            services.AddSwaggerGen(SetupSwagger);
 
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
@@ -71,14 +88,14 @@ namespace ExampleService
             return new AutofacServiceProvider(container);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        private static void SetupSwagger(SwaggerGenOptions options)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            options.SwaggerDoc("v1", new Info { Title = "Example API", Version = "v1" });
+        }
 
-            app.UseMvc();
-            app.UseDeveloperExceptionPage();
+        private static void SetupSwaggerUi(SwaggerUIOptions options)
+        {
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Example API V1");
         }
 
         private void InitContext(ExampleContext context)

@@ -22,21 +22,21 @@ namespace Vanguard.Framework.Http
 
         /// <inheritdoc />
         [HttpGet("{id:guid}")]
-        public override IActionResult GetById(Guid id)
+        public override IActionResult GetById([FromRoute]Guid id)
         {
             return base.GetById(id);
         }
 
         /// <inheritdoc />
         [HttpPut("{id:guid}")]
-        public override IActionResult Update(Guid id, [FromBody, Required]TModel model)
+        public override IActionResult Update([FromRoute]Guid id, [FromBody, Required]TModel model)
         {
             return base.Update(id, model);
         }
 
         /// <inheritdoc />
         [HttpDelete("{id:guid}")]
-        public override IActionResult Delete(Guid id)
+        public override IActionResult Delete([FromRoute]Guid id)
         {
             return base.Delete(id);
         }
