@@ -1,6 +1,6 @@
 ﻿namespace ExampleService.Controllers
 {
-    using ExampleService.Models;
+    using ExampleModels;
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core.Cqrs;
     using Vanguard.Framework.Http;

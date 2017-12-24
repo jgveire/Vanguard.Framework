@@ -5,6 +5,7 @@
     using ExampleCommon;
     using ExampleData;
     using ExampleData.Entities;
+    using ExampleModels;
     using ExampleService.Extensions;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;

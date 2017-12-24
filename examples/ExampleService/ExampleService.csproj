@@ -43,6 +43,7 @@
     <ProjectReference Include="..\ExampleBusiness\ExampleBusiness.csproj" />
     <ProjectReference Include="..\ExampleCommon\ExampleCommon.csproj" />
     <ProjectReference Include="..\ExampleData\ExampleData.csproj" />
+    <ProjectReference Include="..\ExampleModels\ExampleModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@
     using AutoMapper;
     using ExampleData;
     using ExampleData.Entities;
-    using ExampleService.Models;
+    using ExampleModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;
