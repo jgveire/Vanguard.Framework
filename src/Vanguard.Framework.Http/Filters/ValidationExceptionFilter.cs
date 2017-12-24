@@ -1,10 +1,10 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Vanguard.Framework.Core.Exceptions;
-
-namespace Vanguard.Framework.Http.Filters
+﻿namespace Vanguard.Framework.Http.Filters
 {
+    using System.Net;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
+    using Vanguard.Framework.Core.Exceptions;
+
     /// <summary>
     /// The validation exception filter class.
     /// </summary>

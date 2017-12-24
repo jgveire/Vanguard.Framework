@@ -1,8 +1,8 @@
-﻿using ExampleCommon.Entities;
-using Vanguard.Framework.Core.DomainEvents;
-
-namespace ExampleCommon.Events
+﻿namespace ExampleCommon.Events
 {
+    using ExampleCommon.Entities;
+    using Vanguard.Framework.Core.DomainEvents;
+
     /// <summary>
     /// The car stolen domain event.
     /// </summary>

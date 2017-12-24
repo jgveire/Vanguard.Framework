@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The get command handler class.
     /// </summary>

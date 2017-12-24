@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Entities;
-
-namespace ExampleData.Entities
+﻿namespace ExampleData.Entities
 {
+    using System.ComponentModel.DataAnnotations;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Entities;
+
     public class Garage : DataEntity, IAuditable
     {
         public Garage()

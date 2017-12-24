@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Http
+﻿namespace Vanguard.Framework.Http
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <inheritdoc />
     public class CrudController<TModel> : CrudController<Guid, TModel>
         where TModel : IUniqueEntity

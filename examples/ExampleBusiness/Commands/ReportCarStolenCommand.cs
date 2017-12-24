@@ -1,8 +1,8 @@
-﻿using System;
-using Vanguard.Framework.Core.Cqrs;
-
-namespace ExampleBusiness.Commands
+﻿namespace ExampleBusiness.Commands
 {
+    using System;
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The report car stolen command.
     /// </summary>

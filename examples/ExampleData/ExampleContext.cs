@@ -1,13 +1,12 @@
-﻿using System;
-using Vanguard.Framework.Data.Entities;
-using Vanguard.Framework.Data.Managers;
-
-namespace ExampleData
+﻿namespace ExampleData
 {
+    using System;
     using ExampleData.Entities;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core.DomainEvents;
     using Vanguard.Framework.Data;
+    using Vanguard.Framework.Data.Entities;
+    using Vanguard.Framework.Data.Managers;
 
     public class ExampleContext : DbContextBase
     {

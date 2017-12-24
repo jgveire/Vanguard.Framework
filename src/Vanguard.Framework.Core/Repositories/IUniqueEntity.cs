@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Vanguard.Framework.Core.Repositories
+﻿namespace Vanguard.Framework.Core.Repositories
 {
+    using System;
+
     /// <summary>
     /// The unique entity interface.
     /// </summary>

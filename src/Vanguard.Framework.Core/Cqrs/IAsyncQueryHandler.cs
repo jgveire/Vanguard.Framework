@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// The asynchronous query handler interface.
     /// </summary>

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Vanguard.Framework.Core.Extensions
+﻿namespace Vanguard.Framework.Core.Extensions
 {
+    using System;
+
     /// <summary>
     /// The string extensions.
     /// </summary>

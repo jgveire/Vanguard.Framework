@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Vanguard.Framework.Core.Exceptions
+﻿namespace Vanguard.Framework.Core.Exceptions
 {
+    using System;
+
     /// <summary>
     /// The data exception class.
     /// </summary>

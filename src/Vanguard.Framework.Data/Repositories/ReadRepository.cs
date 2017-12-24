@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Vanguard.Framework.Core;
-using Vanguard.Framework.Core.Exceptions;
-using Vanguard.Framework.Core.Extensions;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Resources;
-
-namespace Vanguard.Framework.Data.Repositories
+﻿namespace Vanguard.Framework.Data.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Vanguard.Framework.Core;
+    using Vanguard.Framework.Core.Exceptions;
+    using Vanguard.Framework.Core.Extensions;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Resources;
+
     /// <summary>
     /// The read repository class.
     /// </summary>

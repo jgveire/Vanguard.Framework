@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using Vanguard.Framework.Core;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Http
+﻿namespace Vanguard.Framework.Http
 {
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc;
+    using Vanguard.Framework.Core;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The Create, Read, Update and Delete (CRUD) controller class.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Vanguard.Framework.Http.Extensions
+﻿namespace Vanguard.Framework.Http.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// The source extensions class.
     /// </summary>

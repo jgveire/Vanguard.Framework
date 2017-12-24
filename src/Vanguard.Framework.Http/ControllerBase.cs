@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Vanguard.Framework.Core.Cqrs;
-
-namespace Vanguard.Framework.Http
+﻿namespace Vanguard.Framework.Http
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Vanguard.Framework.Core.Cqrs;
+
     /// <summary>
     /// The controller base class.
     /// </summary>

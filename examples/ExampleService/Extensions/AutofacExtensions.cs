@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Autofac;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
-
-namespace ExampleService.Extensions
+﻿namespace ExampleService.Extensions
 {
+    using System.Collections.Generic;
+    using Autofac;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The Autofac extensions class.
     /// </summary>

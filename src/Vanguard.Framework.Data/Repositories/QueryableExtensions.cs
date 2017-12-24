@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Vanguard.Framework.Core;
-
-namespace Vanguard.Framework.Data.Repositories
+﻿namespace Vanguard.Framework.Data.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using Vanguard.Framework.Core;
+
     /// <summary>
     /// The queryable extension method class.
     /// </summary>

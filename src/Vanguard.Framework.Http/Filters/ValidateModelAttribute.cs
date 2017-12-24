@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Vanguard.Framework.Http.Resources;
-
-namespace Vanguard.Framework.Http.Filters
+﻿namespace Vanguard.Framework.Http.Filters
 {
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Text.RegularExpressions;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Vanguard.Framework.Http.Resources;
+
     /// <summary>
     /// The validate model attribute class.
     /// </summary>

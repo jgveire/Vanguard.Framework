@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace Vanguard.Framework.Data.Entities
+﻿namespace Vanguard.Framework.Data.Entities
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     /// <summary>
     /// The audit data entity keeps track of changes that are
     /// made on other data entities.

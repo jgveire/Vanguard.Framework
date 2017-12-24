@@ -1,14 +1,14 @@
-﻿using System.Buffers;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Newtonsoft.Json;
-using Vanguard.Framework.Http.Resolvers;
-
-namespace Vanguard.Framework.Http.Formatters
+﻿namespace Vanguard.Framework.Http.Formatters
 {
+    using System.Buffers;
+    using System.IO;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc.Formatters;
+    using Newtonsoft.Json;
+    using Vanguard.Framework.Http.Resolvers;
+
     /// <summary>
     /// The select field JSON output formatter.
     /// </summary>

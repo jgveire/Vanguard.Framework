@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core.Repositories;
-
-namespace ExampleCommon.Entities
+﻿namespace ExampleCommon.Entities
 {
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The car interface.
     /// </summary>

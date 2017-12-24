@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Vanguard.Framework.Core.DomainEvents
+﻿namespace Vanguard.Framework.Core.DomainEvents
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// The domain entity interface.
     /// </summary>

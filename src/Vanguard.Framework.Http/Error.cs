@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Vanguard.Framework.Http
+﻿namespace Vanguard.Framework.Http
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// The error class.
     /// </summary>

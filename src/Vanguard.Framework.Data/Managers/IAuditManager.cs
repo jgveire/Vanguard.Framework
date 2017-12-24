@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Data.Managers
+﻿namespace Vanguard.Framework.Data.Managers
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The audit manager.
     /// </summary>

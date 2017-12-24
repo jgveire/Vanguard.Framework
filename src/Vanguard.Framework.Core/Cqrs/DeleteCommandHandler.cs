@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The delete command handler class.
     /// </summary>

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Data.Repositories
+﻿namespace Vanguard.Framework.Data.Repositories
 {
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The repository class.
     /// </summary>

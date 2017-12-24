@@ -1,8 +1,7 @@
-﻿using ExampleBusiness.Commands;
-
-namespace ExampleService.Controllers
+﻿namespace ExampleService.Controllers
 {
     using System;
+    using ExampleBusiness.Commands;
     using ExampleService.Models;
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core.Cqrs;

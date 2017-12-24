@@ -1,9 +1,9 @@
-﻿using Vanguard.Framework.Core.Exceptions;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Core.Resources;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using Vanguard.Framework.Core.Exceptions;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Core.Resources;
+
     /// <summary>
     /// The update command handler class.
     /// </summary>

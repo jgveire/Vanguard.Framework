@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// The find query class.
     /// </summary>

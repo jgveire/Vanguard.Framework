@@ -1,12 +1,8 @@
-﻿using System.Linq;
-using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerUI;
-
-namespace ExampleService
+﻿namespace ExampleService
 {
     using System;
     using System.Buffers;
+    using System.Linq;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
     using AutoMapper;
@@ -20,6 +16,9 @@ namespace ExampleService
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
+    using Swashbuckle.AspNetCore.SwaggerUI;
     using Vanguard.Framework.Http.Filters;
     using Vanguard.Framework.Http.Formatters;
 

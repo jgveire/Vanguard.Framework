@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Vanguard.Framework.Core;
-using Vanguard.Framework.Core.DomainEvents;
-using Vanguard.Framework.Data.Managers;
-
-namespace Vanguard.Framework.Data
+﻿namespace Vanguard.Framework.Data
 {
+    using System;
+    using System.Linq;
+    using Microsoft.EntityFrameworkCore;
+    using Vanguard.Framework.Core;
+    using Vanguard.Framework.Core.DomainEvents;
+    using Vanguard.Framework.Data.Managers;
+
     /// <inheritdoc />
     public class DbContextBase : DbContext
     {

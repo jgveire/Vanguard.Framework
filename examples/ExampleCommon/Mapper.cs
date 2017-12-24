@@ -1,7 +1,7 @@
-﻿using Vanguard.Framework.Core;
-
-namespace ExampleCommon
+﻿namespace ExampleCommon
 {
+    using Vanguard.Framework.Core;
+
     /// <inheritdoc />
     public class Mapper : IMapper
     {

@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Builders;
-using Vanguard.Framework.Data.Entities;
-using Vanguard.Framework.Data.Helpers;
-
-namespace Vanguard.Framework.Data.Managers
+﻿namespace Vanguard.Framework.Data.Managers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Builders;
+    using Vanguard.Framework.Data.Entities;
+    using Vanguard.Framework.Data.Helpers;
+
     /// <inheritdoc />
     public class AuditManager : IAuditManager
     {

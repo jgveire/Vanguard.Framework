@@ -1,8 +1,8 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
-
-namespace ExampleService
+﻿namespace ExampleService
 {
+    using System.IO;
+    using Microsoft.AspNetCore.Hosting;
+
     public class Program
     {
         public static void Main(string[] args)

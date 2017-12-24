@@ -1,8 +1,8 @@
-﻿using System;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Core.Models
+﻿namespace Vanguard.Framework.Core.Models
 {
+    using System;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The unique model class.
     /// </summary>

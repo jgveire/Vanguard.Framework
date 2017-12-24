@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using ExampleCommon.Events;
-using Vanguard.Framework.Core.DomainEvents;
-
-namespace ExampleBusiness.EventHandlers
+﻿namespace ExampleBusiness.EventHandlers
 {
+    using System.Diagnostics;
+    using ExampleCommon.Events;
+    using Vanguard.Framework.Core.DomainEvents;
+
     /// <summary>
     /// The car stolen event handler.
     /// </summary>

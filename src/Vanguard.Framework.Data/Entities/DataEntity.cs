@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Vanguard.Framework.Core.DomainEvents;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Data.Entities
+﻿namespace Vanguard.Framework.Data.Entities
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Vanguard.Framework.Core.DomainEvents;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The data entity class.
     /// </summary>

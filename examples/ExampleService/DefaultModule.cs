@@ -1,17 +1,15 @@
-﻿using ExampleBusiness;
-using ExampleCommon;
-using Vanguard.Framework.Core.DomainEvents;
-
-namespace ExampleService
+﻿namespace ExampleService
 {
     using Autofac;
+    using ExampleBusiness;
+    using ExampleCommon;
     using ExampleData;
     using ExampleData.Entities;
     using ExampleService.Extensions;
-    using ExampleService.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.DomainEvents;
     using Vanguard.Framework.Data.Repositories;
 
     public class DefaultModule : Module

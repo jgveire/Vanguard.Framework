@@ -1,10 +1,10 @@
-﻿using ExampleBusiness.Commands;
-using ExampleData.Entities;
-using Vanguard.Framework.Core.Cqrs;
-using Vanguard.Framework.Core.Repositories;
-
-namespace ExampleBusiness.CommandHandlers
+﻿namespace ExampleBusiness.CommandHandlers
 {
+    using ExampleBusiness.Commands;
+    using ExampleData.Entities;
+    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The report car stolen command handler.
     /// </summary>

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Vanguard.Framework.Core.DomainEvents
+﻿namespace Vanguard.Framework.Core.DomainEvents
 {
+    using System;
+    using System.Reflection;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
+
     /// <summary>
     /// The event dispatcher class.
     /// </summary>

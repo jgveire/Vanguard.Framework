@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Vanguard.Framework.Core.Extensions
+﻿namespace Vanguard.Framework.Core.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// The enumerable extension method class.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Vanguard.Framework.Data.Helpers
+﻿namespace Vanguard.Framework.Data.Helpers
 {
+    using System;
+    using System.Collections.Generic;
+
     /// <summary>
     /// The type helper class.
     /// </summary>

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Text;
-using Vanguard.Framework.Data.Helpers;
-
-namespace Vanguard.Framework.Data.Builders
+﻿namespace Vanguard.Framework.Data.Builders
 {
+    using System;
+    using System.Globalization;
+    using System.Text;
+    using Vanguard.Framework.Data.Helpers;
+
     /// <summary>
     /// The JSON builder.
     /// </summary>

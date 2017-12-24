@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace Vanguard.Framework.Core.Repositories
+﻿namespace Vanguard.Framework.Core.Repositories
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// The repository interface.
     /// </summary>

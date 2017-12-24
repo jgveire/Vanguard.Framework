@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Vanguard.Framework.Core.Repositories;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using System.Collections.Generic;
+    using Vanguard.Framework.Core.Repositories;
+
     /// <summary>
     /// The find query handler class.
     /// </summary>

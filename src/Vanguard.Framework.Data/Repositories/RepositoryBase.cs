@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore;
-using Vanguard.Framework.Core;
-using Vanguard.Framework.Core.Exceptions;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Resources;
-
-namespace Vanguard.Framework.Data.Repositories
+﻿namespace Vanguard.Framework.Data.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Microsoft.EntityFrameworkCore;
+    using Vanguard.Framework.Core;
+    using Vanguard.Framework.Core.Exceptions;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Resources;
+
     /// <summary>
     /// The repository base class.
     /// </summary>

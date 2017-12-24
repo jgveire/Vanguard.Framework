@@ -1,10 +1,10 @@
-﻿using System;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Vanguard.Framework.Core.Cqrs
+﻿namespace Vanguard.Framework.Core.Cqrs
 {
+    using System;
+    using System.Reflection;
+    using System.Threading.Tasks;
+    using Microsoft.Extensions.DependencyInjection;
+
     /// <summary>
     /// The query dispatcher class.
     /// </summary>

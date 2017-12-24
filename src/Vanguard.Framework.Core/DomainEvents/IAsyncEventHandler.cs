@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace Vanguard.Framework.Core.DomainEvents
+﻿namespace Vanguard.Framework.Core.DomainEvents
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// The asynchronous domain event handler class.
     /// </summary>

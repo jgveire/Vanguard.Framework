@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Vanguard.Framework.Http.Extensions;
-
-namespace Vanguard.Framework.Http.Resolvers
+﻿namespace Vanguard.Framework.Http.Resolvers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Primitives;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
+    using Vanguard.Framework.Http.Extensions;
+
     /// <summary>
     /// The select field contract resolver class.
     /// </summary>

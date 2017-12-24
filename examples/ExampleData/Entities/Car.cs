@@ -1,12 +1,12 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using ExampleCommon.Entities;
-using ExampleCommon.Events;
-using Vanguard.Framework.Core.Repositories;
-using Vanguard.Framework.Data.Entities;
-
-namespace ExampleData.Entities
+﻿namespace ExampleData.Entities
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using ExampleCommon.Entities;
+    using ExampleCommon.Events;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Entities;
+
     public class Car : DataEntity, IAuditable, ICar
     {
         public Car()
