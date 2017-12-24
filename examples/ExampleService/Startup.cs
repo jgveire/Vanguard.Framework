@@ -1,4 +1,7 @@
-﻿namespace ExampleService
+﻿using System.IO;
+using Microsoft.Extensions.PlatformAbstractions;
+
+namespace ExampleService
 {
     using System;
     using System.Buffers;
@@ -118,6 +121,10 @@
         private static void SetupSwagger(SwaggerGenOptions options)
         {
             options.SwaggerDoc("v1", new Info { Title = "Example API", Version = "v1" });
+
+            var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+            options.IncludeXmlComments(Path.Combine(basePath, "ExampleService.xml"));
+            options.IncludeXmlComments(Path.Combine(basePath, "Vanguard.Framework.Http.xml"));
         }
 
         private static void SetupSwaggerUi(SwaggerUIOptions options)

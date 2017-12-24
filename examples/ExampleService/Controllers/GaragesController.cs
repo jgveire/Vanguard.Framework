@@ -10,14 +10,14 @@
     /// </summary>
     /// <seealso cref="Vanguard.Framework.Http.CrudController{TModel}" />
     [Route("api/v1/garages")]
-    public class GarageController : CrudController<GarageModel>
+    public class GaragesController : CrudController<GarageModel>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GarageController"/> class.
+        /// Initializes a new instance of the <see cref="GaragesController"/> class.
         /// </summary>
         /// <param name="commandDispatcher">The command dispatcher.</param>
         /// <param name="queryDispatcher">The query dispatcher.</param>
-        public GarageController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+        public GaragesController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
             : base(commandDispatcher, queryDispatcher)
         {
         }

@@ -20,21 +20,41 @@
         {
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets an item by its identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// An <see cref="T:Microsoft.AspNetCore.Mvc.OkObjectResult" /> response when the item is found
+        /// otherwise an <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundObjectResult" /> response.
+        /// </returns>
         [HttpGet("{id:guid}")]
         public override IActionResult GetById([FromRoute]Guid id)
         {
             return base.GetById(id);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Updates an item with the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="model">The model to update.</param>
+        /// <returns>
+        /// An <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult" /> response.
+        /// </returns>
         [HttpPut("{id:guid}")]
         public override IActionResult Update([FromRoute]Guid id, [FromBody, Required]TModel model)
         {
             return base.Update(id, model);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Deletes an item with the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// An <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult" /> response.
+        /// </returns>
         [HttpDelete("{id:guid}")]
         public override IActionResult Delete([FromRoute]Guid id)
         {
