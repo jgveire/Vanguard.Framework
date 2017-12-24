@@ -1,7 +1,7 @@
 ﻿namespace ExampleBusiness.EventHandlers
 {
     using System.Diagnostics;
-    using ExampleCommon.Events;
+    using ExampleData.Events;
     using Vanguard.Framework.Core.DomainEvents;
 
     /// <summary>

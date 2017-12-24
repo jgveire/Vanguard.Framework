@@ -2,12 +2,11 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using ExampleCommon.Entities;
-    using ExampleCommon.Events;
+    using ExampleData.Events;
     using Vanguard.Framework.Core.Repositories;
     using Vanguard.Framework.Data.Entities;
 
-    public class Car : DataEntity, IAuditable, ICar
+    public class Car : DataEntity, IAuditable
     {
         public Car()
         {
