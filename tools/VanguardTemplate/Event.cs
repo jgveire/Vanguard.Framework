@@ -1,6 +1,6 @@
 ﻿namespace $rootnamespace$.Events
 {
-    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.DomainEvents;
 
     /// <summary>
     /// The $userfriendlyeventname$ event.

@@ -2,7 +2,7 @@
 {
     using $rootnamespace$.Events;
     using System;
-    using Vanguard.Framework.Core.Cqrs;
+    using Vanguard.Framework.Core.DomainEvents;
 
     /// <summary>
     /// The $userfriendlyeventname$ event handler.

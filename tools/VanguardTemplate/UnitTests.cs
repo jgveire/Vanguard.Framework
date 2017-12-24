@@ -3,6 +3,7 @@
     using System;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Test;
 
     [TestClass]
     public class $safeitemname$ : TestBase
@@ -20,7 +21,7 @@
         }
 
         [TestMethod]
-        public void When_then_should()
+        public void When__is_called_then__should()
         {
             // Arrange
 
