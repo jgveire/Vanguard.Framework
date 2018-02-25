@@ -1,10 +1,8 @@
-﻿using System.IO;
-using Microsoft.Extensions.PlatformAbstractions;
-
-namespace ExampleService
+﻿namespace ExampleService
 {
     using System;
     using System.Buffers;
+    using System.IO;
     using System.Linq;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
@@ -19,6 +17,7 @@ namespace ExampleService
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.PlatformAbstractions;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Swashbuckle.AspNetCore.SwaggerUI;

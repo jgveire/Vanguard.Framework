@@ -8,10 +8,8 @@
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
-    using Vanguard.Framework.Core.Exceptions;
     using Vanguard.Framework.Core.Extensions;
     using Vanguard.Framework.Core.Repositories;
-    using Vanguard.Framework.Data.Resources;
 
     /// <summary>
     /// The read repository class.
@@ -54,19 +52,19 @@
 
         /// <inheritdoc />
         public IEnumerable<TEntity> Find(
-            FindCriteria findCriteria = null,
+            SearchCriteria searchCriteria = null,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            var query = CompileQuery(findCriteria, filter);
+            var query = CompileQuery(searchCriteria, filter);
             return query.ToList();
         }
 
         /// <inheritdoc />
         public async Task<IEnumerable<TEntity>> FindAsync(
-            FindCriteria findCriteria,
+            SearchCriteria searchCriteria,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            var query = CompileQuery(findCriteria, filter);
+            var query = CompileQuery(searchCriteria, filter);
             return await query.ToListAsync();
         }
 
@@ -100,12 +98,12 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(FindCriteria findCriteria)
+        public int GetCount(SearchCriteria searchCriteria)
         {
             IQueryable<TEntity> query = DbSet;
-            if (findCriteria != null && !string.IsNullOrEmpty(findCriteria.Search))
+            if (searchCriteria != null && !string.IsNullOrEmpty(searchCriteria.Search))
             {
-                query = query.Search(findCriteria.Search);
+                query = query.Search(searchCriteria.Search);
             }
 
             return query.Count();
@@ -136,12 +134,12 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(FindCriteria findCriteria)
+        public async Task<int> GetCountAsync(SearchCriteria searchCriteria)
         {
             IQueryable<TEntity> query = DbSet;
-            if (findCriteria != null && !string.IsNullOrEmpty(findCriteria.Search))
+            if (searchCriteria != null && !string.IsNullOrEmpty(searchCriteria.Search))
             {
-                query = query.Search(findCriteria.Search);
+                query = query.Search(searchCriteria.Search);
             }
 
             return await query.CountAsync();
@@ -193,7 +191,7 @@
         }
 
         private IQueryable<TEntity> CompileQuery(
-            FindCriteria findCriteria,
+            SearchCriteria searchCriteria,
             Expression<Func<TEntity, bool>> filter)
         {
             IQueryable<TEntity> query = DbSet;
@@ -204,37 +202,7 @@
                 query = query.Where(filter);
             }
 
-            query = ApplyFindCriteria(query, findCriteria);
-
-            return query;
-        }
-
-        private string[] GetEntityProperties(string select)
-        {
-            IEnumerable<string> selectItems = select
-                .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(item => item.Trim());
-            IEnumerable<string> items = EntityProperties
-                .Where(item => selectItems.Contains(item, StringComparer.InvariantCultureIgnoreCase));
-
-            return items.ToArray();
-        }
-
-        private void Validate(FindCriteria findCriteria)
-        {
-            if (!string.IsNullOrWhiteSpace(findCriteria.OrderBy))
-            {
-                ValidateOrderBy(findCriteria.OrderBy);
-            }
-        }
-
-        private void ValidateOrderBy(string orderBy)
-        {
-            if (!EntityProperties.Contains(orderBy, StringComparer.InvariantCultureIgnoreCase))
-            {
-                string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
-                throw new ValidationException(message, nameof(FindCriteria.OrderBy));
-            }
+            return query.ApplySearch(searchCriteria);
         }
     }
 }

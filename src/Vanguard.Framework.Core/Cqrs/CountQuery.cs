@@ -11,7 +11,7 @@
         /// Initializes a new instance of the <see cref="CountQuery{TModel}"/> class.
         /// </summary>
         /// <param name="criteria">The find criteria.</param>
-        public CountQuery(FindCriteria criteria)
+        public CountQuery(SearchCriteria criteria)
         {
             Guard.ArgumentNotNull(criteria, nameof(criteria));
             Criteria = criteria;
@@ -23,6 +23,6 @@
         /// <value>
         /// The find criteria.
         /// </value>
-        public FindCriteria Criteria { get; }
+        public SearchCriteria Criteria { get; }
     }
 }

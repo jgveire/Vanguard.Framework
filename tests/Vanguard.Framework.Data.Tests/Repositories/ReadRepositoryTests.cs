@@ -44,13 +44,13 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_collection_should_be_ordered_ascending()
         {
             // Arrange
-            var findCriteria = new FindCriteria
+            var searchCriteria = new SearchCriteria
             {
                 OrderBy = "name"
             };
 
             // Act
-            var result = SystemUnderTest.Find(findCriteria);
+            var result = SystemUnderTest.Find(searchCriteria);
 
             // Assert
             result.First().Name.Should().Be("Apple", because: "the collection is ordered by product name ascending");
@@ -60,14 +60,14 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_collection_should_be_ordered_descending()
         {
             // Arrange
-            var findCriteria = new FindCriteria
+            var searchCriteria = new SearchCriteria
             {
                 OrderBy = "name",
                 SortOrder = SortOrder.Desc
             };
 
             // Act
-            var result = SystemUnderTest.Find(findCriteria);
+            var result = SystemUnderTest.Find(searchCriteria);
 
             // Assert
             result.First().Name.Should().Be("How To Cook", because: "the collection is ordered by product name descending");
@@ -77,14 +77,14 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_collection_should_be_paged()
         {
             // Arrange
-            var findCriteria = new FindCriteria
+            var searchCriteria = new SearchCriteria
             {
                 Page = 2,
                 PageSize = 1
             };
 
             // Act
-            var result = SystemUnderTest.Find(findCriteria);
+            var result = SystemUnderTest.Find(searchCriteria);
 
             // Assert
             result.Count().Should().Be(1, because: "the page size is 1");
@@ -109,13 +109,13 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_fields_should_be_selected()
         {
             // Arrange
-            var findCriteria = new FindCriteria
+            var searchCriteria = new SearchCriteria
             {
                 Select = "Id,Name"
             };
 
             // Act
-            var result = SystemUnderTest.Find(findCriteria);
+            var result = SystemUnderTest.Find(searchCriteria);
 
             // Assert
             result.Any(product => product.Id == 0).Should().BeFalse(because: "we selected the field Id and Name");

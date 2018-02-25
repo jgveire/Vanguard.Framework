@@ -6,12 +6,59 @@
     using System.Linq.Expressions;
     using System.Reflection;
     using Vanguard.Framework.Core;
+    using Vanguard.Framework.Core.Exceptions;
+    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Resources;
 
     /// <summary>
     /// The queryable extension method class.
     /// </summary>
     internal static class QueryableExtensions
     {
+        /// <summary>
+        /// Applies the find criteria to the querable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="searchCriteria">The find criteria.</param>
+        /// <returns>A collection of entities.</returns>
+        public static IQueryable<TEntity> ApplySearch<TEntity>(
+            this IQueryable<TEntity> source,
+            SearchCriteria searchCriteria)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null || searchCriteria == null)
+            {
+                return source;
+            }
+
+            Validate<TEntity>(searchCriteria);
+
+            // Search
+            if (!string.IsNullOrEmpty(searchCriteria.Search))
+            {
+                source = source.Search(searchCriteria.Search);
+            }
+
+            // Order by
+            if (!string.IsNullOrEmpty(searchCriteria.OrderBy))
+            {
+                source = source.OrderBy(searchCriteria.OrderBy, searchCriteria.SortOrder);
+            }
+
+            // Select
+            if (!string.IsNullOrWhiteSpace(searchCriteria.Select))
+            {
+                string[] fields = GetEntityProperties<TEntity>(searchCriteria.Select);
+                source = source.Select(fields);
+            }
+
+            // Paging
+            source = source.GetPage(searchCriteria.Page, searchCriteria.PageSize);
+
+            return source;
+        }
+
         /// <summary>
         /// Gets the specified page of a sequence of elements.
         /// </summary>
@@ -67,30 +114,6 @@
         public static IOrderedQueryable<TSource> OrderByDescending<TSource>(this IQueryable<TSource> source, string memberPath)
         {
             return source.OrderByUsing(memberPath, "OrderByDescending");
-        }
-
-        /// <summary>
-        /// Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
-        /// <param name="source">The source.</param>
-        /// <param name="memberPath">The member path.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> ThenBy<TSource>(this IOrderedQueryable<TSource> source, string memberPath)
-        {
-            return source.OrderByUsing(memberPath, "ThenBy");
-        }
-
-        /// <summary>
-        /// Performs a subsequent ordering of the elements in a sequence in descending order according to a key.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
-        /// <param name="source">The source.</param>
-        /// <param name="memberPath">The member path.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> ThenByDescending<TSource>(this IOrderedQueryable<TSource> source, string memberPath)
-        {
-            return source.OrderByUsing(memberPath, "ThenByDescending");
         }
 
         /// <summary>
@@ -188,8 +211,78 @@
                 source.Expression,
                 lambda);
 
-            // Create the final query
+            // Create the final source
             return (IQueryable<TSource>)source.Provider.CreateQuery(methodCall);
+        }
+
+        /// <summary>
+        /// Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="memberPath">The member path.</param>
+        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TSource> ThenBy<TSource>(this IOrderedQueryable<TSource> source, string memberPath)
+        {
+            return source.OrderByUsing(memberPath, "ThenBy");
+        }
+
+        /// <summary>
+        /// Performs a subsequent ordering of the elements in a sequence in descending order according to a key.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="memberPath">The member path.</param>
+        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TSource> ThenByDescending<TSource>(this IOrderedQueryable<TSource> source, string memberPath)
+        {
+            return source.OrderByUsing(memberPath, "ThenByDescending");
+        }
+
+        private static IEnumerable<string> GetEntityProperties<TEntity>()
+        {
+            var type = typeof(TEntity);
+            var properties = type
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(prop => prop.PropertyType.IsPrimitive || prop.PropertyType.IsEnum || prop.PropertyType == typeof(string));
+            return properties.Select(property => property.Name);
+        }
+
+        private static string[] GetEntityProperties<TEntity>(string select)
+        {
+            IEnumerable<string> selectItems = select
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(item => item.Trim());
+            IEnumerable<string> items = GetEntityProperties<TEntity>()
+                .Where(item => selectItems.Contains(item, StringComparer.InvariantCultureIgnoreCase));
+
+            return items.ToArray();
+        }
+
+        private static BinaryExpression GetEqualExpression(ParameterExpression parameter, PropertyInfo property, object value)
+        {
+            var memberExpression = Expression.PropertyOrField(parameter, property.Name);
+            var valueExpression = Expression.Constant(value, value.GetType());
+            var equalExpression = Expression.Equal(memberExpression, valueExpression);
+            return equalExpression;
+        }
+
+        private static BinaryExpression GetIntegerExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
+        {
+            if (int.TryParse(searchString, out int value))
+            {
+                return GetEqualExpression(parameter, property, value);
+            }
+
+            return null;
+        }
+
+        private static IEnumerable<PropertyInfo> GetSearchableProperties(Type type)
+        {
+            var supportedTypes = new[] { typeof(string), typeof(int) };
+            return type
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(prop => supportedTypes.Contains(prop.PropertyType) && prop.CanWrite);
         }
 
         private static Expression GetSearchExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
@@ -215,32 +308,6 @@
             return containsExpression;
         }
 
-        private static BinaryExpression GetIntegerExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
-        {
-            if (int.TryParse(searchString, out int value))
-            {
-                return GetEqualExpression(parameter, property, value);
-            }
-
-            return null;
-        }
-
-        private static BinaryExpression GetEqualExpression(ParameterExpression parameter, PropertyInfo property, object value)
-        {
-            var memberExpression = Expression.PropertyOrField(parameter, property.Name);
-            var valueExpression = Expression.Constant(value, value.GetType());
-            var equalExpression = Expression.Equal(memberExpression, valueExpression);
-            return equalExpression;
-        }
-
-        private static IEnumerable<PropertyInfo> GetSearchableProperties(Type type)
-        {
-            var supportedTypes = new[] { typeof(string), typeof(int) };
-            return type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(prop => supportedTypes.Contains(prop.PropertyType) && prop.CanWrite);
-        }
-
         private static IOrderedQueryable<T> OrderByUsing<T>(this IQueryable<T> source, string memberPath, string method)
         {
             var parameter = Expression.Parameter(typeof(T), "item");
@@ -254,6 +321,23 @@
                 source.Expression,
                 Expression.Quote(keySelector));
             return (IOrderedQueryable<T>)source.Provider.CreateQuery(methodCall);
+        }
+
+        private static void Validate<TEntity>(SearchCriteria searchCriteria)
+        {
+            if (!string.IsNullOrWhiteSpace(searchCriteria.OrderBy))
+            {
+                ValidateOrderBy<TEntity>(searchCriteria.OrderBy);
+            }
+        }
+
+        private static void ValidateOrderBy<TEntity>(string orderBy)
+        {
+            if (!GetEntityProperties<TEntity>().Contains(orderBy, StringComparer.InvariantCultureIgnoreCase))
+            {
+                string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
+                throw new ValidationException(message, nameof(SearchCriteria.OrderBy));
+            }
         }
     }
 }
