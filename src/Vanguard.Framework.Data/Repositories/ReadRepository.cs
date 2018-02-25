@@ -10,6 +10,7 @@
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Extensions;
     using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Extensions;
 
     /// <summary>
     /// The read repository class.
@@ -154,7 +155,10 @@
                 Type type = typeof(TEntity);
                 var properties = type
                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(prop => prop.PropertyType.IsPrimitive || prop.PropertyType.IsEnum || prop.PropertyType == typeof(string));
+                    .Where(prop => prop.PropertyType.IsPrimitive ||
+                                   prop.PropertyType.IsEnum ||
+                                   prop.PropertyType.IsString() ||
+                                   prop.PropertyType.IsDateTime());
 
                 properties.ForEach(property => _entityProperties.Add(property.Name));
             }

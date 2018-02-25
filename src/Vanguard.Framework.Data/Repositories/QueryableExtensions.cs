@@ -7,6 +7,7 @@
     using System.Reflection;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Exceptions;
+    using Vanguard.Framework.Data.Extensions;
     using Vanguard.Framework.Core.Repositories;
     using Vanguard.Framework.Data.Resources;
 
@@ -244,7 +245,10 @@
             var type = typeof(TEntity);
             var properties = type
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(prop => prop.PropertyType.IsPrimitive || prop.PropertyType.IsEnum || prop.PropertyType == typeof(string));
+                .Where(prop => prop.PropertyType.IsPrimitive ||
+                               prop.PropertyType.IsEnum ||
+                               prop.PropertyType.IsString() ||
+                               prop.PropertyType.IsDateTime());
             return properties.Select(property => property.Name);
         }
 
