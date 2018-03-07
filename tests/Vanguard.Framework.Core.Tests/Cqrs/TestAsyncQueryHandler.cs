@@ -5,7 +5,7 @@
 
     public class TestAsyncQueryHandler : IAsyncQueryHandler<string, TestAsyncQuery>
     {
-        public async Task<string> Retrieve(TestAsyncQuery query)
+        public async Task<string> RetrieveAsync(TestAsyncQuery query)
         {
             await Task.Delay(10);
             return "Success";

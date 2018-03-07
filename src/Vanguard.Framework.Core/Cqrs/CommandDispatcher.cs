@@ -43,7 +43,7 @@
         {
             Guard.ArgumentNotNull(command, nameof(command));
             var commandHandler = ServiceProvider.GetRequiredService<IAsyncCommandHandler<TCommand>>();
-            await commandHandler.Execute(command);
+            await commandHandler.ExecuteAsync(command);
         }
     }
 }

@@ -14,6 +14,6 @@
         /// </summary>
         /// <param name="command">The command.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task Execute(TCommand command);
+        Task ExecuteAsync(TCommand command);
     }
 }

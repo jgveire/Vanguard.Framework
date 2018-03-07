@@ -5,7 +5,7 @@
 
     public class TestAsyncEventHandler : IAsyncEventHandler<TestAsyncEvent>
     {
-        public async Task Handle(TestAsyncEvent domainEvent)
+        public async Task HandleAsync(TestAsyncEvent domainEvent)
         {
             await Task.Delay(10);
             domainEvent.IsHandlerExecuted = true;

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.11</Version>
+    <Version>1.0.0-alfa</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
@@ -14,8 +14,10 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework</PackageTags>
-    <PackageReleaseNotes>Version 0.0.11
-- Add enumeration base clas.</PackageReleaseNotes>
+    <PackageReleaseNotes>Version 1.0.0; Breaking changes 
+- The Handle method of the IAsyncQueryHandler has been renamed to HandleAsync to follow .NET convention.
+- The Handle method of the IAsyncEventHandler has been renamed to HandleAsync to follow .NET convention.
+- The Execute method of the IAsyncCommandHandler has been renamed to ExecuteAsync to follow .NET convention.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.</Description>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>

@@ -14,6 +14,6 @@
         /// </summary>
         /// <param name="domainEvent">The event that needs to be handled.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        Task Handle(TEvent domainEvent);
+        Task HandleAsync(TEvent domainEvent);
     }
 }

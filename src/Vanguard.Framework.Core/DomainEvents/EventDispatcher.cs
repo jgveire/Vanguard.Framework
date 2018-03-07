@@ -88,7 +88,7 @@
 
             foreach (var eventHandler in eventHandlers)
             {
-                await eventHandler.Handle(domainEvent);
+                await eventHandler.HandleAsync(domainEvent);
             }
         }
     }

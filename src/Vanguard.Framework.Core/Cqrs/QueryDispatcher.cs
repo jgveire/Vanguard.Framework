@@ -41,7 +41,7 @@
             var queryHandler = ServiceProvider.GetRequiredService(queryHandlerType);
 
             // Invoke retrieve method.
-            MethodInfo retrieveMethod = queryHandlerType.GetMethod("Retrieve");
+            MethodInfo retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
             var result = (TResult)retrieveMethod.Invoke(queryHandler, new object[] { query });
             return result;
         }
@@ -58,7 +58,7 @@
             var queryHandler = ServiceProvider.GetRequiredService(queryHandlerType);
 
             // Invoke retrieve method.
-            MethodInfo retrieveMethod = queryHandlerType.GetMethod("Retrieve");
+            MethodInfo retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
             var result = (Task<TResult>)retrieveMethod.Invoke(queryHandler, new object[] { query });
             return await result;
         }
@@ -78,7 +78,7 @@
         {
             Guard.ArgumentNotNull(query, nameof(query));
             var queryHandler = ServiceProvider.GetRequiredService<IAsyncQueryHandler<TResult, TQuery>>();
-            return await queryHandler.Retrieve(query);
+            return await queryHandler.RetrieveAsync(query);
         }
     }
 }

@@ -5,7 +5,7 @@
 
     public class TestAsyncCommandHandler : IAsyncCommandHandler<TestAsyncCommand>
     {
-        public async Task Execute(TestAsyncCommand command)
+        public async Task ExecuteAsync(TestAsyncCommand command)
         {
             await Task.Delay(10);
             command.IsHandlerExecuted = true;

@@ -15,6 +15,6 @@
         /// </summary>
         /// <param name="query">The query.</param>
         /// <returns>The query result asynchronously.</returns>
-        Task<TResult> Retrieve(TQuery query);
+        Task<TResult> RetrieveAsync(TQuery query);
     }
 }
