@@ -60,7 +60,7 @@
             foreach (var eventHandler in eventHandlers)
             {
                 // Invoke handle method.
-                MethodInfo retrieveMethod = eventHandlerType.GetMethod("Handle");
+                MethodInfo retrieveMethod = eventHandlerType.GetMethod("HandleAsync");
                 var result = (Task)retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
                 await result;
             }

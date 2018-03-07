@@ -41,7 +41,7 @@
             var queryHandler = ServiceProvider.GetRequiredService(queryHandlerType);
 
             // Invoke retrieve method.
-            MethodInfo retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
+            MethodInfo retrieveMethod = queryHandlerType.GetMethod("Retrieve");
             var result = (TResult)retrieveMethod.Invoke(queryHandler, new object[] { query });
             return result;
         }
