@@ -7,8 +7,8 @@
     using System.Reflection;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Exceptions;
-    using Vanguard.Framework.Data.Extensions;
     using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Data.Extensions;
     using Vanguard.Framework.Data.Resources;
 
     /// <summary>

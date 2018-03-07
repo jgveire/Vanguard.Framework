@@ -1,7 +1,6 @@
 ﻿namespace Vanguard.Framework.Data.Extensions
 {
     using System;
-    using System.Reflection;
 
     /// <summary>
     /// The type extensions.
