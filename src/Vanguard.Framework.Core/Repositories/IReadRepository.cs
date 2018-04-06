@@ -16,21 +16,21 @@
         /// <summary>
         /// Finds entities accoording to the supplied find criteria.
         /// </summary>
-        /// <param name="searchCriteria">The find criteria.</param>
+        /// <param name="filterQuery">The find criteria.</param>
         /// <param name="filter">An aditional filter to apply on the result query.</param>
         /// <returns>A collection of entities.</returns>
         IEnumerable<TEntity> Find(
-            SearchCriteria searchCriteria,
+            FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null);
 
         /// <summary>
         /// Finds entities accoording to the supplied find criteria asynchronously.
         /// </summary>
-        /// <param name="searchCriteria">The find criteria.</param>
+        /// <param name="filterQuery">The find criteria.</param>
         /// <param name="filter">An aditional filter to apply on the result query.</param>
         /// <returns>A collection of entities.</returns>
         Task<IEnumerable<TEntity>> FindAsync(
-            SearchCriteria searchCriteria,
+            FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null);
 
         /// <summary>
@@ -74,9 +74,9 @@
         /// <summary>
         /// Gets the number of items in the database accoording to the supplied find criteria.
         /// </summary>
-        /// <param name="searchCriteria">The find criteria.</param>
+        /// <param name="filterQuery">The find criteria.</param>
         /// <returns>The total number of items in the database accoording to the supplied find criteria.</returns>
-        int GetCount(SearchCriteria searchCriteria);
+        int GetCount(FilterQuery filterQuery);
 
         /// <summary>
         /// Gets the number of items in the database accoording to the supplied filter.
@@ -88,9 +88,9 @@
         /// <summary>
         /// Gets the number of items in the database accoording to the supplied find criteria asynchronously.
         /// </summary>
-        /// <param name="searchCriteria">The find criteria.</param>
+        /// <param name="filterQuery">The find criteria.</param>
         /// <returns>The total number of items in the database accoording to the supplied find criteria.</returns>
-        Task<int> GetCountAsync(SearchCriteria searchCriteria);
+        Task<int> GetCountAsync(FilterQuery filterQuery);
 
         /// <summary>
         /// Gets the number of items in the database accoording to the supplied filter asynchronously.

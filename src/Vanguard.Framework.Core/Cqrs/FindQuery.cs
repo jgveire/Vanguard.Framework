@@ -13,7 +13,7 @@
         /// Initializes a new instance of the <see cref="FindQuery{TModel}"/> class.
         /// </summary>
         /// <param name="criteria">The find criteria.</param>
-        public FindQuery(SearchCriteria criteria)
+        public FindQuery(FilterQuery criteria)
         {
             Guard.ArgumentNotNull(criteria, nameof(criteria));
             Criteria = criteria;
@@ -25,6 +25,6 @@
         /// <value>
         /// The find criteria.
         /// </value>
-        public SearchCriteria Criteria { get; }
+        public FilterQuery Criteria { get; }
     }
 }

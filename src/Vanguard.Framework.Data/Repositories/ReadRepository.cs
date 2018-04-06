@@ -53,19 +53,19 @@
 
         /// <inheritdoc />
         public IEnumerable<TEntity> Find(
-            SearchCriteria searchCriteria = null,
+            FilterQuery filterQuery = null,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            var query = CompileQuery(searchCriteria, filter);
+            var query = CompileQuery(filterQuery, filter);
             return query.ToList();
         }
 
         /// <inheritdoc />
         public async Task<IEnumerable<TEntity>> FindAsync(
-            SearchCriteria searchCriteria,
+            FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            var query = CompileQuery(searchCriteria, filter);
+            var query = CompileQuery(filterQuery, filter);
             return await query.ToListAsync();
         }
 
@@ -99,12 +99,12 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(SearchCriteria searchCriteria)
+        public int GetCount(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
-            if (searchCriteria != null && !string.IsNullOrEmpty(searchCriteria.Search))
+            if (filterQuery != null && !string.IsNullOrEmpty(filterQuery.Search))
             {
-                query = query.Search(searchCriteria.Search);
+                query = query.Search(filterQuery.Search);
             }
 
             return query.Count();
@@ -135,12 +135,12 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(SearchCriteria searchCriteria)
+        public async Task<int> GetCountAsync(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
-            if (searchCriteria != null && !string.IsNullOrEmpty(searchCriteria.Search))
+            if (filterQuery != null && !string.IsNullOrEmpty(filterQuery.Search))
             {
-                query = query.Search(searchCriteria.Search);
+                query = query.Search(filterQuery.Search);
             }
 
             return await query.CountAsync();
@@ -195,7 +195,7 @@
         }
 
         private IQueryable<TEntity> CompileQuery(
-            SearchCriteria searchCriteria,
+            FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter)
         {
             IQueryable<TEntity> query = DbSet;
@@ -206,7 +206,7 @@
                 query = query.Where(filter);
             }
 
-            return query.ApplySearch(searchCriteria);
+            return query.Filter(filterQuery);
         }
     }
 }

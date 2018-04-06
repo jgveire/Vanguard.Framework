@@ -5,8 +5,8 @@
     /// <summary>
     /// The find criteria class.
     /// </summary>
-    [Obsolete("Use Vanguard.Framework.Core.SearchCriteria instead.")]
-    public class FindCriteria : SearchCriteria
+    [Obsolete("Use Vanguard.Framework.Core.FilterQuery instead.")]
+    public class FindCriteria : FilterQuery
     {
     }
 }

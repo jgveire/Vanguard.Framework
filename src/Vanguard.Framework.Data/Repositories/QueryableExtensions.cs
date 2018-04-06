@@ -17,45 +17,45 @@
     internal static class QueryableExtensions
     {
         /// <summary>
-        /// Applies the find criteria to the querable.
+        /// Applies the filter query to the querable.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="source">The queryable.</param>
-        /// <param name="searchCriteria">The find criteria.</param>
+        /// <param name="filterQuery">The filter query.</param>
         /// <returns>A collection of entities.</returns>
-        public static IQueryable<TEntity> ApplySearch<TEntity>(
+        public static IQueryable<TEntity> Filter<TEntity>(
             this IQueryable<TEntity> source,
-            SearchCriteria searchCriteria)
+            FilterQuery filterQuery)
             where TEntity : class, IDataEntity
         {
-            if (source == null || searchCriteria == null)
+            if (source == null || filterQuery == null)
             {
                 return source;
             }
 
-            Validate<TEntity>(searchCriteria);
+            Validate<TEntity>(filterQuery);
 
             // Search
-            if (!string.IsNullOrEmpty(searchCriteria.Search))
+            if (!string.IsNullOrEmpty(filterQuery.Search))
             {
-                source = source.Search(searchCriteria.Search);
+                source = source.Search(filterQuery.Search);
             }
 
             // Order by
-            if (!string.IsNullOrEmpty(searchCriteria.OrderBy))
+            if (!string.IsNullOrEmpty(filterQuery.OrderBy))
             {
-                source = source.OrderBy(searchCriteria.OrderBy, searchCriteria.SortOrder);
+                source = source.OrderBy(filterQuery.OrderBy, filterQuery.SortOrder);
             }
 
             // Select
-            if (!string.IsNullOrWhiteSpace(searchCriteria.Select))
+            if (!string.IsNullOrWhiteSpace(filterQuery.Select))
             {
-                string[] fields = GetEntityProperties<TEntity>(searchCriteria.Select);
+                string[] fields = GetEntityProperties<TEntity>(filterQuery.Select);
                 source = source.Select(fields);
             }
 
             // Paging
-            source = source.GetPage(searchCriteria.Page, searchCriteria.PageSize);
+            source = source.GetPage(filterQuery.Page, filterQuery.PageSize);
 
             return source;
         }
@@ -327,11 +327,11 @@
             return (IOrderedQueryable<T>)source.Provider.CreateQuery(methodCall);
         }
 
-        private static void Validate<TEntity>(SearchCriteria searchCriteria)
+        private static void Validate<TEntity>(FilterQuery filterQuery)
         {
-            if (!string.IsNullOrWhiteSpace(searchCriteria.OrderBy))
+            if (!string.IsNullOrWhiteSpace(filterQuery.OrderBy))
             {
-                ValidateOrderBy<TEntity>(searchCriteria.OrderBy);
+                ValidateOrderBy<TEntity>(filterQuery.OrderBy);
             }
         }
 
@@ -340,7 +340,7 @@
             if (!GetEntityProperties<TEntity>().Contains(orderBy, StringComparer.InvariantCultureIgnoreCase))
             {
                 string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
-                throw new ValidationException(message, nameof(SearchCriteria.OrderBy));
+                throw new ValidationException(message, nameof(FilterQuery.OrderBy));
             }
         }
     }

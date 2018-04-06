@@ -32,19 +32,19 @@
         protected TDbContext DbContext { get; }
 
         /// <summary>
-        /// Applies the find criteria to the querable.
+        /// Applies the filter query to the querable.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="query">The queryable.</param>
-        /// <param name="searchCriteria">The find criteria.</param>
+        /// <param name="filterQuery">The filter query.</param>
         /// <returns>A collection of entities.</returns>
-        [Obsolete("Make use of the Vanguard.Framework.Data.Repositories.QueryableExtensions.ApplySearch instead.")]
+        [Obsolete("Make use of the Vanguard.Framework.Data.Repositories.QueryableExtensions.Filter instead.")]
         protected IQueryable<TEntity> ApplyFindCriteria<TEntity>(
             IQueryable<TEntity> query,
-            SearchCriteria searchCriteria)
+            FilterQuery filterQuery)
             where TEntity : class, IDataEntity
         {
-            return query.ApplySearch(searchCriteria);
+            return query.Filter(filterQuery);
         }
     }
 }

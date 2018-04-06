@@ -44,7 +44,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_collection_should_be_ordered_ascending()
         {
             // Arrange
-            var searchCriteria = new SearchCriteria
+            var searchCriteria = new FilterQuery
             {
                 OrderBy = "name"
             };
@@ -60,7 +60,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_collection_should_be_ordered_descending()
         {
             // Arrange
-            var searchCriteria = new SearchCriteria
+            var searchCriteria = new FilterQuery
             {
                 OrderBy = "name",
                 SortOrder = SortOrder.Desc
@@ -77,7 +77,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_collection_should_be_paged()
         {
             // Arrange
-            var searchCriteria = new SearchCriteria
+            var searchCriteria = new FilterQuery
             {
                 Page = 2,
                 PageSize = 1
@@ -109,7 +109,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         public void When_Find_is_called_then_fields_should_be_selected()
         {
             // Arrange
-            var searchCriteria = new SearchCriteria
+            var searchCriteria = new FilterQuery
             {
                 Select = "Id,Name"
             };

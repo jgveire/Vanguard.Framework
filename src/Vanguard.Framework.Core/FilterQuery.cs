@@ -1,9 +1,10 @@
 ﻿namespace Vanguard.Framework.Core
 {
     /// <summary>
-    /// The search criteria class.
+    /// The filter query.
+    /// Used for filtering search results.
     /// </summary>
-    public class SearchCriteria
+    public class FilterQuery
     {
         /// <summary>
         /// Gets or sets the order by.
