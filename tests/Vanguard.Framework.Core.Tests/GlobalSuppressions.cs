@@ -1,0 +1,1 @@
+﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations", Justification = "False positive.", Scope = "member", Target = "~M:Vanguard.Framework.Core.Tests.DomainEvents.EventDispatcherTests.When_DispatchAsync_is_called_the_event_handler_should_set_the_value_to_true")]

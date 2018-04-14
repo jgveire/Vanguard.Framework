@@ -39,6 +39,84 @@
         public int Value { get; }
 
         /// <summary>
+        /// Implements the operator ==.
+        /// </summary>
+        /// <param name="left">The left value.</param>
+        /// <param name="right">The right value.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the left value is equal to the right value.
+        /// </returns>
+        public static bool operator ==(Enumeration left, Enumeration right)
+        {
+            return left?.Value == right?.Value;
+        }
+
+        /// <summary>
+        /// Implements the operator &gt;.
+        /// </summary>
+        /// <param name="left">The left value.</param>
+        /// <param name="right">The right value.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the left value is greater then the right value.
+        /// </returns>
+        public static bool operator >(Enumeration left, Enumeration right)
+        {
+            return (left?.Value ?? 0) > (right?.Value ?? 0);
+        }
+
+        /// <summary>
+        /// Implements the operator &gt;=.
+        /// </summary>
+        /// <param name="left">The left value.</param>
+        /// <param name="right">The right value.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the left value is greater or equal to the right value.
+        /// </returns>
+        public static bool operator >=(Enumeration left, Enumeration right)
+        {
+            return (left?.Value ?? 0) >= (right?.Value ?? 0);
+        }
+
+        /// <summary>
+        /// Implements the operator !=.
+        /// </summary>
+        /// <param name="left">The left value.</param>
+        /// <param name="right">The right value.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the left value is not equal to the right value.
+        /// </returns>
+        public static bool operator !=(Enumeration left, Enumeration right)
+        {
+            return left?.Value != right?.Value;
+        }
+
+        /// <summary>
+        /// Implements the operator &lt;.
+        /// </summary>
+        /// <param name="left">The left value.</param>
+        /// <param name="right">The right value.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the left value is smaller then the right value.
+        /// </returns>
+        public static bool operator <(Enumeration left, Enumeration right)
+        {
+            return (left?.Value ?? 0) < (right?.Value ?? 0);
+        }
+
+        /// <summary>
+        /// Implements the operator &lt;=.
+        /// </summary>
+        /// <param name="left">The left value.</param>
+        /// <param name="right">The right value.</param>
+        /// <returns>
+        /// Returns <c>true</c> if the left value is smaller or equal then the right value.
+        /// </returns>
+        public static bool operator <=(Enumeration left, Enumeration right)
+        {
+            return (left?.Value ?? 0) <= (right?.Value ?? 0);
+        }
+
+        /// <summary>
         /// Gets the absolutes difference between two enumerations.
         /// </summary>
         /// <param name="firstValue">The first value.</param>
@@ -99,9 +177,9 @@
         }
 
         /// <inheritdoc />
-        public int CompareTo(object other)
+        public int CompareTo(object obj)
         {
-            return Value.CompareTo(((Enumeration)other).Value);
+            return Value.CompareTo(((Enumeration)obj).Value);
         }
 
         /// <inheritdoc />
@@ -149,7 +227,7 @@
             if (matchingItem == null)
             {
                 var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof(TEnumeration));
-                throw new ApplicationException(message);
+                throw new InvalidOperationException(message);
             }
 
             return matchingItem;

@@ -6,6 +6,7 @@
     /// The validation exception class.
     /// </summary>
     /// <seealso cref="System.Exception" />
+    [Serializable]
     public class ValidationException : Exception
     {
         /// <summary>

@@ -1,1 +1,2 @@
-﻿
+﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S1118:Utility classes should not have public constructors", Justification = "By design.", Scope = "type", Target = "~T:ExampleService.Program")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "By design.", Scope = "member", Target = "~M:ExampleService.Startup.SetupSwaggerUi(Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIOptions)")]

@@ -53,7 +53,7 @@
 
         /// <inheritdoc />
         public IEnumerable<TEntity> Find(
-            FilterQuery filterQuery = null,
+            FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null)
         {
             var query = CompileQuery(filterQuery, filter);
