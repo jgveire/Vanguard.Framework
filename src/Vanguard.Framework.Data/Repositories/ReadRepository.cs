@@ -7,10 +7,12 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Extensions;
     using Vanguard.Framework.Core.Repositories;
     using Vanguard.Framework.Data.Extensions;
+    using Vanguard.Framework.Data.Resources;
 
     /// <summary>
     /// The read repository class.
@@ -87,15 +89,43 @@
         }
 
         /// <inheritdoc />
-        public virtual TEntity GetById(params object[] id)
+        public virtual TEntity GetById(object id, params string[] includeProperties)
         {
-            return DbSet.Find(id);
+            Guard.ArgumentNotNull(id, nameof(id));
+            return GetById(new object[] { id }, includeProperties);
         }
 
         /// <inheritdoc />
-        public async Task<TEntity> GetByIdAsync(params object[] id)
+        public TEntity GetById(object[] ids, params string[] includeProperties)
         {
-            return await DbSet.FindAsync(id);
+            Guard.ArgumentNotNull(ids, nameof(ids));
+            var pairs = GetIdValuePairs(ids);
+
+            var query = DbSet
+                .Include(includeProperties)
+                .WhereEqual(pairs);
+
+            return query.SingleOrDefault();
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<TEntity> GetByIdAsync(object id, params string[] includeProperties)
+        {
+            Guard.ArgumentNotNull(id, nameof(id));
+            return await GetByIdAsync(new object[] { id }, includeProperties);
+        }
+
+        /// <inheritdoc />
+        public async Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties)
+        {
+            Guard.ArgumentNotNull(id, nameof(id));
+            var pairs = GetIdValuePairs(id);
+
+            var query = DbSet
+                .Include(includeProperties)
+                .WhereEqual(pairs);
+
+            return await query.SingleOrDefaultAsync();
         }
 
         /// <inheritdoc />
@@ -180,10 +210,7 @@
 
             if (includeProperties != null)
             {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
+                query = query.Include(includeProperties);
             }
 
             if (orderBy != null)
@@ -207,6 +234,37 @@
             }
 
             return query.Filter(filterQuery);
+        }
+
+        private List<KeyValuePair<string, object>> GetIdValuePairs(object[] id)
+        {
+            IEntityType entityType = DbContext.Model.FindEntityType(typeof(TEntity));
+            if (entityType == null)
+            {
+                var messge = string.Format(ExceptionResource.CannotFindEntityType, typeof(TEntity).FullName);
+                throw new InvalidOperationException(messge);
+            }
+
+            IKey primaryKey = entityType.FindPrimaryKey();
+            if (primaryKey == null)
+            {
+                var messge = string.Format(ExceptionResource.CannotFindPrimaryKey, typeof(TEntity).FullName);
+                throw new InvalidOperationException(messge);
+            }
+
+            if (primaryKey.Properties.Count != id.Length)
+            {
+                var messge = string.Format(ExceptionResource.InvalidIdCount, primaryKey.Properties.Count, id.Length);
+                throw new InvalidOperationException(messge);
+            }
+
+            var pairs = new List<KeyValuePair<string, object>>();
+            for (int i = 0; i < primaryKey.Properties.Count; i++)
+            {
+                pairs.Add(new KeyValuePair<string, object>(primaryKey.Properties[i].Name, id[i]));
+            }
+
+            return pairs;
         }
     }
 }

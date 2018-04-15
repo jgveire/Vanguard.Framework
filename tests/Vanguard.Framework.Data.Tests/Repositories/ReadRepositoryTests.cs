@@ -18,9 +18,12 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             base.TestInitialize();
             using (var context = new ProductContext())
             {
-                context.Products.Add(new Product(1, "Bear", "Pets"));
-                context.Products.Add(new Product(2, "How To Cook", "Book"));
-                context.Products.Add(new Product(3, "Apple", "Food"));
+                context.ProductCategories.Add(new ProductCategory(1, "Pets"));
+                context.ProductCategories.Add(new ProductCategory(2, "Book"));
+                context.ProductCategories.Add(new ProductCategory(3, "Food"));
+                context.Products.Add(new Product(1, "Bear", 1));
+                context.Products.Add(new Product(2, "How To Cook", 2));
+                context.Products.Add(new Product(3, "Apple", 3));
                 context.SaveChanges();
             }
         }
@@ -121,6 +124,17 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             result.Any(product => product.Id == 0).Should().BeFalse(because: "we selected the field Id and Name");
             result.Any(product => product.Name == null).Should().BeFalse(because: "we selected the field Id and Name");
             result.All(product => product.Category == null).Should().BeTrue(because: "we selected the field Id and Name and not Category");
+        }
+
+        [TestMethod]
+        public void When_GetById_is_called_with_include_then_included_field_should_be_returned()
+        {
+            // Act
+            var result = SystemUnderTest.GetById(1, nameof(Product.Category));
+
+            // Assert
+            result.Should().NotBeNull(because: "The database contains a product with identifier 1.");
+            result.Category.Should().NotBeNull(because: "We specified to include category.");
         }
 
         protected override Repository<Product> CreateSystemUnderTest()

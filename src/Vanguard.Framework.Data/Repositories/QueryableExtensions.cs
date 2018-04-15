@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Exceptions;
     using Vanguard.Framework.Core.Repositories;
@@ -17,7 +18,7 @@
     internal static class QueryableExtensions
     {
         /// <summary>
-        /// Applies the filter query to the querable.
+        /// Applies the filter query to the queryable.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="source">The queryable.</param>
@@ -63,12 +64,12 @@
         /// <summary>
         /// Gets the specified page of a sequence of elements.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="page">The page to retrieve.</param>
         /// <param name="pageSize">Size of an page.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are restricted to the specified page.</returns>
-        public static IQueryable<TSource> GetPage<TSource>(this IQueryable<TSource> source, int page, int pageSize)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are restricted to the specified page.</returns>
+        public static IQueryable<TEntity> GetPage<TEntity>(this IQueryable<TEntity> source, int page, int pageSize)
         {
             int index = Math.Max(1, page) - 1;
             int skip = index * pageSize;
@@ -76,14 +77,40 @@
         }
 
         /// <summary>
+        /// Gets the specified page of a sequence of elements.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="navigationPropertyPaths">The navigation property paths to include in the query.</param>
+        /// <returns>
+        /// A <see cref="IQueryable{T}" /> whose elements are restricted to the specified page.
+        /// </returns>
+        public static IQueryable<TEntity> Include<TEntity>(this IQueryable<TEntity> source, string[] navigationPropertyPaths)
+            where TEntity : class
+        {
+            if (source == null || navigationPropertyPaths == null)
+            {
+                return source;
+            }
+
+            var query = source;
+            foreach (string navigationPropertyPath in navigationPropertyPaths)
+            {
+                query = query.Include(navigationPropertyPath);
+            }
+
+            return query;
+        }
+
+        /// <summary>
         /// Sorts the elements of a sequence in ascending order according to a key.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="memberPath">The ordering.</param>
         /// <param name="sortOrder">The sort order.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> source, string memberPath, SortOrder sortOrder)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> source, string memberPath, SortOrder sortOrder)
         {
             if (sortOrder == SortOrder.Desc)
             {
@@ -96,11 +123,11 @@
         /// <summary>
         /// Sorts the elements of a sequence in ascending order according to a key.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="memberPath">The ordering.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> source, string memberPath)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TEntity> OrderBy<TEntity>(this IQueryable<TEntity> source, string memberPath)
         {
             return source.OrderByUsing(memberPath, "OrderBy");
         }
@@ -108,11 +135,11 @@
         /// <summary>
         /// Sorts the elements of a sequence in descending order according to a key.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="memberPath">The ordering.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> OrderByDescending<TSource>(this IQueryable<TSource> source, string memberPath)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TEntity> OrderByDescending<TEntity>(this IQueryable<TEntity> source, string memberPath)
         {
             return source.OrderByUsing(memberPath, "OrderByDescending");
         }
@@ -120,22 +147,22 @@
         /// <summary>
         /// Searches for elements that have properties that contain the specified search string.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="searchString">The search string.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are filtered according to the specified search string.</returns>
-        public static IQueryable<TSource> Search<TSource>(this IQueryable<TSource> source, string searchString)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are filtered according to the specified search string.</returns>
+        public static IQueryable<TEntity> Search<TEntity>(this IQueryable<TEntity> source, string searchString)
         {
             Guard.ArgumentNotNullOrEmpty(searchString, nameof(searchString));
 
-            IEnumerable<PropertyInfo> properties = GetSearchableProperties(typeof(TSource));
+            IEnumerable<PropertyInfo> properties = GetSearchableProperties(typeof(TEntity));
             if (!properties.Any())
             {
                 return source;
             }
 
             Expression expression = null;
-            var parameter = Expression.Parameter(typeof(TSource), "item");
+            var parameter = Expression.Parameter(typeof(TEntity), "item");
             foreach (var property in properties)
             {
                 Expression searchExpression = GetSearchExpression(parameter, property, searchString);
@@ -160,18 +187,18 @@
                 new[] { parameter.Type },
                 source.Expression,
                 Expression.Lambda(expression, parameter));
-            return (IQueryable<TSource>)source.Provider.CreateQuery(methodCall);
+            return (IQueryable<TEntity>)source.Provider.CreateQuery(methodCall);
         }
 
         /// <summary>
         /// Selects the specified fields, all other fields will have their
         /// default value.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="fields">The fields to select.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/>.</returns>
-        public static IQueryable<TSource> Select<TSource>(this IQueryable<TSource> source, params string[] fields)
+        /// <returns>A <see cref="IQueryable{T}"/>.</returns>
+        public static IQueryable<TEntity> Select<TEntity>(this IQueryable<TEntity> source, params string[] fields)
         {
             if (fields == null || fields.Length == 0)
             {
@@ -179,17 +206,17 @@
             }
 
             // Input parameter "item"
-            var parameter = Expression.Parameter(typeof(TSource), "item");
+            var parameter = Expression.Parameter(typeof(TEntity), "item");
 
             // New statement "new Data()"
-            var newExpression = Expression.New(typeof(TSource));
+            var newExpression = Expression.New(typeof(TEntity));
 
             // Create initializers
             var bindings = fields
                 .Select(item =>
                     {
                         // Property "Field1"
-                        var propertyInfo = typeof(TSource).GetProperty(item);
+                        var propertyInfo = typeof(TEntity).GetProperty(item);
 
                         // Original value "item.Field1"
                         var property = Expression.Property(parameter, propertyInfo);
@@ -202,7 +229,7 @@
             var memberInit = Expression.MemberInit(newExpression, bindings);
 
             // Expression "item => new Data { Field1 = item.Field1, Field2 = item.Field2 }"
-            var lambda = Expression.Lambda<Func<TSource, TSource>>(memberInit, parameter);
+            var lambda = Expression.Lambda<Func<TEntity, TEntity>>(memberInit, parameter);
 
             // Call select method "source.Select(item => new Data { Field1 = item.Field1, Field2 = item.Field2 })"
             var methodCall = Expression.Call(
@@ -213,17 +240,17 @@
                 lambda);
 
             // Create the final source
-            return (IQueryable<TSource>)source.Provider.CreateQuery(methodCall);
+            return (IQueryable<TEntity>)source.Provider.CreateQuery(methodCall);
         }
 
         /// <summary>
         /// Performs a subsequent ordering of the elements in a sequence in ascending order according to a key.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="memberPath">The member path.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> ThenBy<TSource>(this IOrderedQueryable<TSource> source, string memberPath)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TEntity> ThenBy<TEntity>(this IOrderedQueryable<TEntity> source, string memberPath)
         {
             return source.OrderByUsing(memberPath, "ThenBy");
         }
@@ -231,13 +258,50 @@
         /// <summary>
         /// Performs a subsequent ordering of the elements in a sequence in descending order according to a key.
         /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the source.</typeparam>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
         /// <param name="source">The source.</param>
         /// <param name="memberPath">The member path.</param>
-        /// <returns>A <see cref="IQueryable{TSource}"/> whose elements are sorted according to the specified ordering.</returns>
-        public static IOrderedQueryable<TSource> ThenByDescending<TSource>(this IOrderedQueryable<TSource> source, string memberPath)
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are sorted according to the specified ordering.</returns>
+        public static IOrderedQueryable<TEntity> ThenByDescending<TEntity>(this IOrderedQueryable<TEntity> source, string memberPath)
         {
             return source.OrderByUsing(memberPath, "ThenByDescending");
+        }
+
+        /// <summary>
+        /// Searches for elements that have the supplied values.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="keyValuePairs">The property name and value pairs.</param>
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are filtered according to the specified property name and value pairs.</returns>
+        internal static IQueryable<TEntity> WhereEqual<TEntity>(this IQueryable<TEntity> source, IEnumerable<KeyValuePair<string, object>> keyValuePairs)
+            where TEntity : class
+        {
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(keyValuePairs, nameof(keyValuePairs));
+
+            Expression expression = null;
+            var parameter = Expression.Parameter(typeof(TEntity), "item");
+            foreach (KeyValuePair<string, object> keyValuePair in keyValuePairs)
+            {
+                Expression searchExpression = GetEqualExpression(parameter, keyValuePair.Key, keyValuePair.Value);
+                if (expression == null)
+                {
+                    expression = searchExpression;
+                }
+                else
+                {
+                    expression = Expression.And(expression, searchExpression);
+                }
+            }
+
+            var methodCall = Expression.Call(
+                typeof(Queryable),
+                "Where",
+                new[] { parameter.Type },
+                source.Expression,
+                Expression.Lambda(expression, parameter));
+            return (IQueryable<TEntity>)source.Provider.CreateQuery(methodCall);
         }
 
         private static IEnumerable<string> GetEntityProperties<TEntity>()
@@ -266,6 +330,14 @@
         private static BinaryExpression GetEqualExpression(ParameterExpression parameter, PropertyInfo property, object value)
         {
             var memberExpression = Expression.PropertyOrField(parameter, property.Name);
+            var valueExpression = Expression.Constant(value, value.GetType());
+            var equalExpression = Expression.Equal(memberExpression, valueExpression);
+            return equalExpression;
+        }
+
+        private static BinaryExpression GetEqualExpression(ParameterExpression parameter, string propertyName, object value)
+        {
+            var memberExpression = Expression.PropertyOrField(parameter, propertyName);
             var valueExpression = Expression.Constant(value, value.GetType());
             var equalExpression = Expression.Equal(memberExpression, valueExpression);
             return equalExpression;

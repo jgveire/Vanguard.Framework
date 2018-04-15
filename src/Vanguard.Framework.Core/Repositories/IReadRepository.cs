@@ -61,15 +61,33 @@
         /// Gets a entity by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
+        /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>A entity.</returns>
-        TEntity GetById(params object[] id);
+        TEntity GetById(object id, params string[] includeProperties);
+
+        /// <summary>
+        /// Gets a entity by identifier.
+        /// </summary>
+        /// <param name="ids">The identifier.</param>
+        /// <param name="includeProperties">The properties that should be include in the query.</param>
+        /// <returns>A entity.</returns>
+        TEntity GetById(object[] ids, params string[] includeProperties);
 
         /// <summary>
         /// Gets a entity by identifier asynchronously.
         /// </summary>
         /// <param name="id">The identifier.</param>
+        /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>A entity.</returns>
-        Task<TEntity> GetByIdAsync(params object[] id);
+        Task<TEntity> GetByIdAsync(object id, params string[] includeProperties);
+
+        /// <summary>
+        /// Gets a entity by identifier asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="includeProperties">The properties that should be include in the query.</param>
+        /// <returns>A entity.</returns>
+        Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties);
 
         /// <summary>
         /// Gets the number of items in the database according to the supplied find criteria.

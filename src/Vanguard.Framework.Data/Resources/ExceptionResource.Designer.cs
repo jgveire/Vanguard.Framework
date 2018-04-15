@@ -61,11 +61,38 @@ namespace Vanguard.Framework.Data.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The entity type for &quot;{0}&quot; could not be found in de model of the database context..
+        /// </summary>
+        internal static string CannotFindEntityType {
+            get {
+                return ResourceManager.GetString("CannotFindEntityType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The primary key for &quot;{0}&quot; could not be found in de model of the database context..
+        /// </summary>
+        internal static string CannotFindPrimaryKey {
+            get {
+                return ResourceManager.GetString("CannotFindPrimaryKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot order by &quot;{0}&quot;..
         /// </summary>
         internal static string CannotOrderBy {
             get {
                 return ResourceManager.GetString("CannotOrderBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected {0} identifiers to be supplied but got {1}..
+        /// </summary>
+        internal static string InvalidIdCount {
+            get {
+                return ResourceManager.GetString("InvalidIdCount", resourceCulture);
             }
         }
     }

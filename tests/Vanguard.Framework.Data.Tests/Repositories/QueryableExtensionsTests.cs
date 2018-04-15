@@ -70,10 +70,10 @@
             {
                 _products = new List<Product>
                 {
-                    new Product(1, "How to program", "Books"),
-                    new Product(2, "Apple", "Fruit"),
-                    new Product(3, "BMX Bike", "Bikes"),
-                    new Product(4, "Mountain Bike", "Bikes")
+                    new Product(1, "How to program", 1),
+                    new Product(2, "Apple", 2),
+                    new Product(3, "BMX Bike", 3),
+                    new Product(4, "Mountain Bike", 3)
                 }.AsQueryable();
             }
 
