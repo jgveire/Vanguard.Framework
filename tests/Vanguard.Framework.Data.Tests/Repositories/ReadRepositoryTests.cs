@@ -34,6 +34,11 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             base.TestCleanup();
             using (var context = new ProductContext())
             {
+                foreach (var category in context.ProductCategories.ToList())
+                {
+                    context.ProductCategories.Remove(category);
+                }
+
                 foreach (var product in context.Products.ToList())
                 {
                     context.Products.Remove(product);
