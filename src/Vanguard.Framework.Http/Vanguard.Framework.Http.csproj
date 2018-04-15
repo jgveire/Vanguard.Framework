@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.8</Version>
+    <Version>1.0.0</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,29 +15,8 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Http</PackageTags>
-    <PackageReleaseNotes>Version 0.0.8
-- SelectFieldContractResolver did not work for multiple fields.
-
-Version 0.0.7
-- Added documentation to package.
-
-Version 0.0.6
-- Added contructor to ControllerBase
-
-Version 0.0.5
-- Bugfix: SelectFieldContractResolver did not filter fields.
-
-Version 0.0.4
-- Added default constructor to SelectFieldJsonOutputFormatter
-
-Version 0.0.3
-- Changed order of fields in the SelectFieldContractResolver.
-
-Version 0.0.2
-- Did some refactoring on the CRUD controllers.
-
-Version 0.0.1
--First release</PackageReleaseNotes>
+    <PackageReleaseNotes>First major release.
+Breaking changes concerning FindCriteria class.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>

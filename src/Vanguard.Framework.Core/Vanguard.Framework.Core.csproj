@@ -14,7 +14,8 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework</PackageTags>
-    <PackageReleaseNotes>Version 1.0.0; Breaking changes 
+    <PackageReleaseNotes>First major release.
+- Breaking changes concerning repositories.
 - The Handle method of the IAsyncQueryHandler has been renamed to HandleAsync to follow .NET convention.
 - The Retrieve method of the IAsyncEventHandler has been renamed to RetrieveAsync to follow .NET convention.
 - The Execute method of the IAsyncCommandHandler has been renamed to ExecuteAsync to follow .NET convention.</PackageReleaseNotes>

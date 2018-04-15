@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.16</Version>
+    <Version>1.0.0</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -15,45 +15,8 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Version 0.0.16 and 0.0.15
-- Made some changes to the AuditEntry class.
-
-Version 0.0.12
-- Implemented audit manager in context base.
-
-Version 0.0.12
-- Added audit manager.
-
-Version 0.0.11
-- Fixed null reference issue in repository base.
-
-Version 0.0.9
-- Nothing changed
-
-Version 0.0.8
-- Added repository base
-
-Version 0.0.6
-- Fixed issue in repository concerning field selection.
-
-Version 0.0.6
-- Added async functionalitity to the repositories
-- Refactored async commands, queries and domain events.
-
-Version 0.0.5
-- The select fields is now also executed database side instead of only web server side.
-
-Version 0.0.4
-- Added documentation to package.
-
-Version 0.0.3
-- Renamed IEntity to IDataEntity.
-
-Version 0.0.2
-- The Id property of DataEntity isn't auto generated anymore.
-
-Version 0.0.1
--First release</PackageReleaseNotes>
+    <PackageReleaseNotes>First major release.
+Breaking changes concerning repositories.</PackageReleaseNotes>
     <NeutralLanguage>Eng</NeutralLanguage>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
