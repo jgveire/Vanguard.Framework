@@ -142,6 +142,17 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             result.Category.Should().NotBeNull(because: "We specified to include category.");
         }
 
+        [TestMethod]
+        public void When_GetSingle_is_called_with_include_then_included_field_should_be_returned()
+        {
+            // Act
+            var result = SystemUnderTest.GetSingle(e => e.Id == 2, nameof(Product.Category));
+
+            // Assert
+            result.Should().NotBeNull(because: "The database contains a product with identifier 2.");
+            result.Category.Should().NotBeNull(because: "We specified to include category.");
+        }
+
         protected override Repository<Product> CreateSystemUnderTest()
         {
             return new Repository<Product>(new ProductContext());
