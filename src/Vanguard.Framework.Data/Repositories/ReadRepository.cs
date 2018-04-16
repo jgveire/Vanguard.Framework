@@ -165,6 +165,30 @@
         }
 
         /// <inheritdoc />
+        public TEntity GetSingle(
+            Expression<Func<TEntity, bool>> filter,
+            params string[] includeProperties)
+        {
+            Guard.ArgumentNotNull(filter, nameof(filter));
+            return DbSet
+                .Include(includeProperties)
+                .Where(filter)
+                .SingleOrDefault();
+        }
+
+        /// <inheritdoc />
+        public async Task<TEntity> GetSingleAsync(
+            Expression<Func<TEntity, bool>> filter,
+            params string[] includeProperties)
+        {
+            Guard.ArgumentNotNull(filter, nameof(filter));
+            return await DbSet
+                .Include(includeProperties)
+                .Where(filter)
+                .SingleOrDefaultAsync();
+        }
+
+        /// <inheritdoc />
         public async Task<int> GetCountAsync(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;

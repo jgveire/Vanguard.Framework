@@ -62,7 +62,7 @@
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
-        /// <returns>A entity.</returns>
+        /// <returns>An entity.</returns>
         TEntity GetById(object id, params string[] includeProperties);
 
         /// <summary>
@@ -70,7 +70,7 @@
         /// </summary>
         /// <param name="ids">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
-        /// <returns>A entity.</returns>
+        /// <returns>An entity.</returns>
         TEntity GetById(object[] ids, params string[] includeProperties);
 
         /// <summary>
@@ -78,7 +78,7 @@
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
-        /// <returns>A entity.</returns>
+        /// <returns>An entity.</returns>
         Task<TEntity> GetByIdAsync(object id, params string[] includeProperties);
 
         /// <summary>
@@ -86,7 +86,7 @@
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
-        /// <returns>A entity.</returns>
+        /// <returns>An entity.</returns>
         Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties);
 
         /// <summary>
@@ -116,5 +116,25 @@
         /// <param name="filter">The filter predicate.</param>
         /// <returns>The total number of items in the database according to the supplied filter.</returns>
         Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Gets a single entity.
+        /// </summary>
+        /// <param name="filter">A filter to retrieve the entity.</param>
+        /// <param name="includeProperties">The properties that should be include in the query.</param>
+        /// <returns>An entity.</returns>
+        TEntity GetSingle(
+            Expression<Func<TEntity, bool>> filter,
+            params string[] includeProperties);
+
+        /// <summary>
+        /// Gets a single entity asynchronously.
+        /// </summary>
+        /// <param name="filter">A filter to retrieve the entity.</param>
+        /// <param name="includeProperties">The properties that should be include in the query.</param>
+        /// <returns>A task that returns an entity.</returns>
+        Task<TEntity> GetSingleAsync(
+            Expression<Func<TEntity, bool>> filter,
+            params string[] includeProperties);
     }
 }
