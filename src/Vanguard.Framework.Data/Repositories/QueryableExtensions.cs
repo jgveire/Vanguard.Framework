@@ -15,7 +15,7 @@
     /// <summary>
     /// The queryable extension method class.
     /// </summary>
-    internal static class QueryableExtensions
+    public static class QueryableExtensions
     {
         /// <summary>
         /// Applies the filter query to the queryable.
