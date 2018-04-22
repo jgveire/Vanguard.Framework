@@ -17,15 +17,16 @@
         /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ExceptionContext" />.</param>
         public void OnException(ExceptionContext context)
         {
-            var innerExceptionType = context.Exception.InnerException?.GetType();
-            if (innerExceptionType == typeof(ValidationException))
+            var exception = context.Exception.InnerException as ValidationException ?? context.Exception as ValidationException;
+            if (exception == null)
             {
-                var exception = context.Exception.InnerException as ValidationException;
-                var status = HttpStatusCode.BadRequest;
-                var errorResponse = new ErrorResponse(status.ToString(), exception.Message, exception.Target);
-                context.HttpContext.Response.StatusCode = (int)status;
-                context.Result = new JsonResult(errorResponse);
+                return;
             }
+
+            var status = HttpStatusCode.BadRequest;
+            var errorResponse = new ErrorResponse(status.ToString(), exception.Message, exception.Target);
+            context.HttpContext.Response.StatusCode = (int)status;
+            context.Result = new JsonResult(errorResponse);
         }
     }
 }
