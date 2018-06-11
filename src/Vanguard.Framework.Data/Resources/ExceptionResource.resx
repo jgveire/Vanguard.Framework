@@ -123,6 +123,9 @@
   <data name="CannotFindPrimaryKey" xml:space="preserve">
     <value>The primary key for "{0}" could not be found in de model of the database context.</value>
   </data>
+  <data name="CannotInclude" xml:space="preserve">
+    <value>Cannot include "{0}".</value>
+  </data>
   <data name="CannotOrderBy" xml:space="preserve">
     <value>Cannot order by "{0}".</value>
   </data>

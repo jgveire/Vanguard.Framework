@@ -79,6 +79,15 @@ namespace Vanguard.Framework.Data.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot include &quot;{0}&quot;..
+        /// </summary>
+        internal static string CannotInclude {
+            get {
+                return ResourceManager.GetString("CannotInclude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot order by &quot;{0}&quot;..
         /// </summary>
         internal static string CannotOrderBy {
