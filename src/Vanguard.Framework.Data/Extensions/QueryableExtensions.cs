@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Core.Parsers;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Exceptions;
@@ -42,6 +43,12 @@
                 source = source.Search(filterQuery.Search);
             }
 
+            // Filter
+            if (!string.IsNullOrEmpty(filterQuery.Filter))
+            {
+                source = source.Filter(filterQuery.Filter);
+            }
+
             // Order by
             if (!string.IsNullOrEmpty(filterQuery.OrderBy))
             {
@@ -59,6 +66,29 @@
             source = source.GetPage(filterQuery.Page, filterQuery.PageSize);
 
             return source;
+        }
+
+        /// <summary>
+        /// Filters the collection.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="filter">The filter to apply.</param>
+        /// <returns>A <see cref="IQueryable{T}"/> whose elements are filtered according to the specified filter.</returns>
+        public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> source, string filter)
+        {
+            Guard.ArgumentNotNullOrEmpty(filter, nameof(filter));
+            var parser = new FilterParser<TEntity>(filter);
+
+            try
+            {
+                var result = parser.ApplyFilter(source);
+                return result;
+            }
+            catch (FormatException exception)
+            {
+                throw new ValidationException(exception.Message, exception);
+            }
         }
 
         /// <summary>
@@ -404,6 +434,22 @@
             if (!string.IsNullOrWhiteSpace(filterQuery.OrderBy))
             {
                 ValidateOrderBy<TEntity>(filterQuery.OrderBy);
+            }
+            else if (!string.IsNullOrWhiteSpace(filterQuery.Include))
+            {
+                ValidateInclude<TEntity>(filterQuery.Include);
+            }
+        }
+
+        private static void ValidateInclude<TEntity>(string include)
+        {
+            foreach (string propertyName in include.Split(',', StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (!GetEntityProperties<TEntity>().Contains(include, StringComparer.InvariantCultureIgnoreCase))
+                {
+                    string message = string.Format(ExceptionResource.CannotInclude, propertyName);
+                    throw new ValidationException(message, nameof(FilterQuery.Include));
+                }
             }
         }
 
