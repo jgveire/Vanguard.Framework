@@ -15,6 +15,7 @@ namespace ExampleData.Migrations
     [Migration("20180611192038_InitialCreate")]
     partial class InitialCreate
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
