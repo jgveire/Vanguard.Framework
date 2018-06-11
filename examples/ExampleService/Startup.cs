@@ -103,7 +103,8 @@
                     options.OutputFormatters.Add(new SelectFieldJsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared));
                 });
 
-            services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Example"));
+            //services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Example"));
+            services.AddDbContext<ExampleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Example")));
             services.AddSwaggerGen(SetupSwagger);
 
             // Add Autofac
