@@ -37,6 +37,13 @@
 
             Validate<TEntity>(filterQuery);
 
+            // Include
+            if (!string.IsNullOrWhiteSpace(filterQuery.Include))
+            {
+                var paths = filterQuery.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                source = source.Include(paths);
+            }
+
             // Search
             if (!string.IsNullOrEmpty(filterQuery.Search))
             {

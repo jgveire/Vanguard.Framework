@@ -132,7 +132,7 @@
         public virtual int GetCount(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
-            if (filterQuery != null && !string.IsNullOrEmpty(filterQuery.Search))
+            if (!string.IsNullOrEmpty(filterQuery?.Search))
             {
                 query = query.Search(filterQuery.Search);
             }
@@ -192,7 +192,7 @@
         public virtual async Task<int> GetCountAsync(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
-            if (filterQuery != null && !string.IsNullOrEmpty(filterQuery.Search))
+            if (!string.IsNullOrEmpty(filterQuery?.Search))
             {
                 query = query.Search(filterQuery.Search);
             }
