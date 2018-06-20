@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-    using Vanguard.Framework.Core.Extensions;
 
     /// <summary>
     /// The filter parser class.
@@ -69,8 +68,22 @@
             var items = new List<string>();
             var sb = new StringBuilder();
             var foundString = false;
-            foreach (char c in Filter)
+            for (int i = 0; i < Filter.Length; i++)
             {
+                char c = Filter[i];
+
+                char? prev = null;
+                if (i > 0)
+                {
+                    prev = Filter[i - 1];
+                }
+
+                char? next = null;
+                if (i < Filter.Length - 1)
+                {
+                    next = Filter[i + 1];
+                }
+
                 if (c == Seperator && !foundString)
                 {
                     if (sb.Length > 0)
@@ -82,10 +95,16 @@
                 }
                 else if (c == StringIndicator && foundString)
                 {
-                    sb.Append(c);
-                    items.Add(sb.ToString());
-                    sb.Clear();
-                    foundString = false;
+                    if (next == StringIndicator)
+                    {
+                        sb.Append(c);
+                    }
+                    else if (prev != StringIndicator)
+                    {
+                        items.Add(sb.ToString());
+                        sb.Clear();
+                        foundString = false;
+                    }
                 }
                 else
                 {
@@ -93,8 +112,10 @@
                     {
                         foundString = true;
                     }
-
-                    sb.Append(c);
+                    else
+                    {
+                        sb.Append(c);
+                    }
                 }
             }
 

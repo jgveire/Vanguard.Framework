@@ -38,6 +38,20 @@
             result.Should().HaveCount(1, because: "we only have one product with the name 'Car'.");
         }
 
+        [TestMethod]
+        public void When_string_equal_filter_with_single_quote_is_passed_then_result_should_be_true()
+        {
+            // Arrange
+            var systemUnderTest = new FilterParser<Product>("name eq  'She''s fun'");
+            var items = GetProducts();
+
+            // Act
+            var result = systemUnderTest.ApplyFilter(items);
+
+            // Assert
+            result.Should().HaveCount(1, because: "we only have one product with the name 'She's fun'.");
+        }
+
         private static IQueryable<Product> GetProducts()
         {
             var items = new List<Product>
@@ -46,6 +60,7 @@
                 new Product(2, "Car", 2000),
                 new Product(3, "Chair", 10),
                 new Product(4, "Plane", 20000),
+                new Product(5, "She's fun", 10),
             }.AsQueryable();
             return items;
         }
