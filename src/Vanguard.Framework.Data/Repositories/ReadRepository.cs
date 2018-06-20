@@ -54,7 +54,7 @@
         protected DbSet<TEntity> DbSet { get; }
 
         /// <inheritdoc />
-        public IEnumerable<TEntity> Find(
+        public virtual IEnumerable<TEntity> Find(
             FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null)
         {
@@ -63,7 +63,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<TEntity>> FindAsync(
+        public virtual async Task<IEnumerable<TEntity>> FindAsync(
             FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null)
         {
@@ -82,7 +82,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params string[] includeProperties)
+        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params string[] includeProperties)
         {
             var query = CompileQuery(filter, orderBy, includeProperties);
             return await query.ToListAsync();
@@ -96,7 +96,7 @@
         }
 
         /// <inheritdoc />
-        public TEntity GetById(object[] ids, params string[] includeProperties)
+        public virtual TEntity GetById(object[] ids, params string[] includeProperties)
         {
             Guard.ArgumentNotNull(ids, nameof(ids));
             var pairs = GetIdValuePairs(ids);
@@ -116,7 +116,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties)
+        public virtual async Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties)
         {
             Guard.ArgumentNotNull(id, nameof(id));
             var pairs = GetIdValuePairs(id);
@@ -129,7 +129,7 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(FilterQuery filterQuery)
+        public virtual int GetCount(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
             if (filterQuery != null && !string.IsNullOrEmpty(filterQuery.Search))
@@ -141,7 +141,7 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(Expression<Func<TEntity, bool>> filter = null)
+        public virtual int GetCount(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -153,7 +153,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null)
+        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -165,7 +165,7 @@
         }
 
         /// <inheritdoc />
-        public TEntity GetSingle(
+        public virtual TEntity GetSingle(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties)
         {
@@ -177,7 +177,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<TEntity> GetSingleAsync(
+        public virtual async Task<TEntity> GetSingleAsync(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties)
         {
@@ -189,7 +189,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(FilterQuery filterQuery)
+        public virtual async Task<int> GetCountAsync(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
             if (filterQuery != null && !string.IsNullOrEmpty(filterQuery.Search))

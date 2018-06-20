@@ -25,31 +25,31 @@
         }
 
         /// <inheritdoc />
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
             DbSet.Add(entity);
         }
 
         /// <inheritdoc />
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             DbSet.Remove(entity);
         }
 
         /// <inheritdoc />
-        public int Save()
+        public virtual int Save()
         {
             return DbContext.SaveChanges();
         }
 
         /// <inheritdoc />
-        public async Task<int> SaveAsync()
+        public virtual async Task<int> SaveAsync()
         {
             return await DbContext.SaveChangesAsync();
         }
 
         /// <inheritdoc />
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             DbContext.Entry(entity).State = EntityState.Modified;
         }
