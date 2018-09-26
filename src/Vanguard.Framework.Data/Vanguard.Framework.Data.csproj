@@ -3,19 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.4.1</Version>
+    <Version>2.0.1</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
     <Description>The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.</Description>
-    <Copyright>Copyright (c) 2017 Veire Solutions</Copyright>
+    <Copyright>Copyright 2018 Veire Solutions</Copyright>
     <PackageLicenseUrl>https://github.com/jgveire/Vanguard.Framework/License.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
     <PackageIconUrl>https://jgveire.github.io/Vanguard/Vanguard.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>The include property of the filter query was not used.</PackageReleaseNotes>
+    <PackageReleaseNotes>Breaking change: The domain events are now dispatched after the save changes of the DB Context instead of before. This solves a lot off issues concerning domain events and data that is available in the database.</PackageReleaseNotes>
     <NeutralLanguage>Eng</NeutralLanguage>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>

@@ -1,6 +1,7 @@
 ﻿namespace Vanguard.Framework.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
@@ -75,9 +76,11 @@
         /// <inheritdoc />
         public override int SaveChanges()
         {
-            DispatchEvents();
+            var events = GetAndClearEvents();
             CreateAuditRecords();
-            return base.SaveChanges();
+            var result = base.SaveChanges();
+            DispatchEvents(events);
+            return result;
         }
 
         private void CreateAuditRecords()
@@ -90,24 +93,31 @@
             _auditManager.CreateAuditRecords(_currentUser.UserId, DateTime.UtcNow);
         }
 
-        private void DispatchEvents()
+        private void DispatchEvents(IEnumerable<IDomainEvent> events)
         {
             if (_eventDispatcher == null)
             {
                 return;
             }
 
-            var entities = GetChangedDomainEntities();
+            foreach (var domainEvent in events)
+            {
+                _eventDispatcher.Dispatch(domainEvent);
+            }
+        }
 
+        private List<IDomainEvent> GetAndClearEvents()
+        {
+            var events = new List<IDomainEvent>();
+
+            var entities = GetChangedDomainEntities();
             foreach (var entity in entities)
             {
-                var events = entity.Events.ToArray();
+                events.AddRange(entity.Events);
                 entity.Events.Clear();
-                foreach (var domainEvent in events)
-                {
-                    _eventDispatcher.Dispatch(domainEvent);
-                }
             }
+
+            return events;
         }
 
         private IDomainEntity[] GetChangedDomainEntities()

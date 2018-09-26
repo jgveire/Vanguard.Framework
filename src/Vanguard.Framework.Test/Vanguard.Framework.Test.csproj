@@ -12,7 +12,7 @@
     <PackageLicenseUrl>https://github.com/jgveire/Vanguard.Framework/License.txt</PackageLicenseUrl>
     <PackageTags>Vanguard Framework Unit Test</PackageTags>
     <PackageReleaseNotes>-Changed to major version.</PackageReleaseNotes>
-    <Copyright>Copyright (c) 2017 Veire Solutions</Copyright>
+    <Copyright>Copyright 2018 Veire Solutions</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Base unit test classes that makes it easier to unit test code. This framework make use of Moq as mocking framework.</Description>
