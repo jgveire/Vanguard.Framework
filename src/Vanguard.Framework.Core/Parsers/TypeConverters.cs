@@ -37,7 +37,9 @@
                 { typeof(double?), new DoubleConverter() },
                 { typeof(string), new StringConverter() },
                 { typeof(char), new CharConverter() },
-                { typeof(char?), new CharConverter() }
+                { typeof(char?), new CharConverter() },
+                { typeof(Guid), new GuidConverter() },
+                { typeof(Guid?), new GuidConverter() }
             };
         }
     }
