@@ -1,7 +1,9 @@
 ﻿namespace Vanguard.Framework.Data.Tests.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,6 +22,16 @@
 
             // Assert
             result.First().Name.Should().Be("Apple", because: "we ordered on the name property ascending");
+        }
+
+        [TestMethod]
+        public void When_OrderBy_is_called_then_bike_should_be_first_item_in_the_collection()
+        {
+            // Act
+            var result = Data.Repositories.QueryableExtensions.OrderBy(Products, "Category.Name");
+
+            // Assert
+            result.First().Name.Should().Contain("Bike", because: "we ordered on the category name property ascending");
         }
 
         [TestMethod]
@@ -64,16 +76,36 @@
             result.All(product => product.Category == null).Should().BeTrue(because: "we selected the field Id and not Category");
         }
 
+        [TestMethod]
+        public void When_Validate_is_called_with_member_path_then_no_validation_exception_should_be_thrown()
+        {
+            // Arrange
+            var filter = new FilterQuery
+            {
+                OrderBy = "category.name"
+            };
+
+            // Act
+            Action action = () => Data.Repositories.QueryableExtensions.Filter(Products, filter);
+
+            // Assert
+            action.ShouldNotThrow(because: "it is allowed to order via member paths");
+        }
+
         private static IQueryable<Product> GetProducts()
         {
             if (_products == null)
             {
+                var books = new ProductCategory(1, "Books");
+                var computers = new ProductCategory(1, "Computers");
+                var bikes = new ProductCategory(1, "Bikes");
+
                 _products = new List<Product>
                 {
-                    new Product(1, "How to program", 1),
-                    new Product(2, "Apple", 2),
-                    new Product(3, "BMX Bike", 3),
-                    new Product(4, "Mountain Bike", 3)
+                    new Product(1, "How to program", books),
+                    new Product(2, "Apple", computers),
+                    new Product(3, "BMX Bike", bikes),
+                    new Product(4, "Mountain Bike", bikes)
                 }.AsQueryable();
             }
 

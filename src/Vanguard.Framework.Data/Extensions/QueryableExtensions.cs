@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Core.Extensions;
     using Core.Parsers;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
@@ -345,7 +346,7 @@
         {
             var type = typeof(TEntity);
             var properties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetField | BindingFlags.GetField)
                 .Where(prop => prop.PropertyType.IsPrimitive ||
                                prop.PropertyType.IsEnum ||
                                prop.PropertyType.IsString() ||
@@ -462,10 +463,18 @@
 
         private static void ValidateOrderBy<TEntity>(string orderBy)
         {
-            if (!GetEntityProperties<TEntity>().Contains(orderBy, StringComparer.InvariantCultureIgnoreCase))
+            var type = typeof(TEntity);
+            var fields = orderBy.Split('.', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var field in fields)
             {
-                string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
-                throw new ValidationException(message, nameof(FilterQuery.OrderBy));
+                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetField | BindingFlags.GetField);
+                var s = field.Capitalize();
+                var property = properties.FirstOrDefault(e => e.Name == s);
+                if (property == null)
+                {
+                    string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
+                    throw new ValidationException(message, nameof(FilterQuery.OrderBy));
+                }
             }
         }
     }

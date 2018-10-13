@@ -17,6 +17,14 @@
             CategoryId = categoryId;
         }
 
+        internal Product(int id, string name, ProductCategory category)
+        {
+            Id = id;
+            Name = name;
+            CategoryId = category.Id;
+            Category = category;
+        }
+
         [Key]
         public int Id { get; set; }
 

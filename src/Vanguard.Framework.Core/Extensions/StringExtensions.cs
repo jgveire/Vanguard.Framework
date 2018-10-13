@@ -27,6 +27,21 @@
         }
 
         /// <summary>
+        /// Capitalizes the first letter of the supplied string.
+        /// </summary>
+        /// <param name="source">The source string.</param>
+        /// <returns>A capitalized string.</returns>
+        public static string Capitalize(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                return source;
+            }
+
+            return char.ToUpper(source[0]) + source.Substring(1);
+        }
+
+        /// <summary>
         /// Gets the next character in the string relative to the specified index
         /// of null when the end of the string has been reached.
         /// </summary>
