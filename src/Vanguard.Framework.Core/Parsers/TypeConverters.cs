@@ -10,6 +10,11 @@
     internal class TypeConverters : ReadOnlyDictionary<Type, TypeConverterBase>
     {
         /// <summary>
+        /// The default instance.
+        /// </summary>
+        public static readonly TypeConverters Instance = new TypeConverters();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TypeConverters"/> class.
         /// </summary>
         public TypeConverters()

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using Extensions;
 
     /// <summary>
     /// The filter parser class.
@@ -45,15 +46,24 @@
             {
                 throw new FormatException("The filter should contain 3 elements, for example \"id eq 1\" or \"name = 'beer'\"");
             }
-            else if (!string.Equals(entries[1], EqualParser.Operator, StringComparison.OrdinalIgnoreCase))
+            else if (!string.Equals(entries[1], EqualParser.Operator, StringComparison.OrdinalIgnoreCase) &&
+                     !string.Equals(entries[1], LikeParser.Operator, StringComparison.OrdinalIgnoreCase))
             {
-                throw new FormatException("Only the equal (eq) filter is supported.");
+                throw new FormatException("Only the 'eq' (equel) and 'like' filter are supported.");
             }
 
-            var parser = new EqualParser(entries[0], entries[2]);
+            IOperatorParser parser;
             var parameter = Expression.Parameter(typeof(TEntity), "item");
-            var equalExpression = parser.CreateExpression<TEntity>(parameter);
+            if (string.Equals(entries[1], EqualParser.Operator, StringComparison.OrdinalIgnoreCase))
+            {
+                parser = new EqualParser(entries[0], entries[2]);
+            }
+            else
+            {
+                parser = new LikeParser(entries[0], entries[2]);
+            }
 
+            var equalExpression = parser.CreateExpression<TEntity>(parameter);
             var methodCall = Expression.Call(
                 typeof(Queryable),
                 "Where",
@@ -70,21 +80,11 @@
             var foundString = false;
             for (int i = 0; i < Filter.Length; i++)
             {
-                char c = Filter[i];
+                char curr = Filter[i];
+                char? prev = Filter.Previous(i);
+                char? next = Filter.Next(i);
 
-                char? prev = null;
-                if (i > 0)
-                {
-                    prev = Filter[i - 1];
-                }
-
-                char? next = null;
-                if (i < Filter.Length - 1)
-                {
-                    next = Filter[i + 1];
-                }
-
-                if (c == Seperator && !foundString)
+                if (curr == Seperator && !foundString)
                 {
                     if (sb.Length > 0)
                     {
@@ -93,11 +93,11 @@
 
                     sb.Clear();
                 }
-                else if (c == StringIndicator && foundString)
+                else if (curr == StringIndicator && foundString)
                 {
                     if (next == StringIndicator)
                     {
-                        sb.Append(c);
+                        sb.Append(curr);
                     }
                     else if (prev != StringIndicator)
                     {
@@ -108,18 +108,18 @@
                 }
                 else
                 {
-                    if (sb.Length == 0 && c == StringIndicator)
+                    if (sb.Length == 0 && curr == StringIndicator)
                     {
                         foundString = true;
                     }
                     else
                     {
-                        sb.Append(c);
+                        sb.Append(curr);
                     }
                 }
             }
 
-            if (sb.Length != 0)
+            if (sb.Length != 0 || foundString)
             {
                 items.Add(sb.ToString());
             }

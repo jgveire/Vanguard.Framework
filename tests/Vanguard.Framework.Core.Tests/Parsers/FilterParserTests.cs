@@ -55,6 +55,20 @@
         }
 
         [TestMethod]
+        public void When_empty_string_equal_filter_is_passed_then_result_should_be_zero()
+        {
+            // Arrange
+            var systemUnderTest = new FilterParser<Product>("name eq ''");
+            var items = GetProducts();
+
+            // Act
+            var result = systemUnderTest.ApplyFilter(items);
+
+            // Assert
+            result.Should().HaveCount(0, because: "there are no product names with an empty string");
+        }
+
+        [TestMethod]
         public void When_guid_equal_filter_is_passed_then_result_should_be_true()
         {
             // Arrange
@@ -66,6 +80,62 @@
 
             // Assert
             result.Should().HaveCount(5, because: "all products have the same category id.");
+        }
+
+        [TestMethod]
+        public void When_string_like_filter_is_passed_then_result_should_have_two_results()
+        {
+            // Arrange
+            var systemUnderTest = new FilterParser<Product>("name like 'C'");
+            var items = GetProducts();
+
+            // Act
+            var result = systemUnderTest.ApplyFilter(items);
+
+            // Assert
+            result.Should().HaveCount(2, because: "there are two products with the letter C in the name.");
+        }
+
+        [TestMethod]
+        public void When_string_like_filter_is_passed_then_result_should_have_no_results()
+        {
+            // Arrange
+            var systemUnderTest = new FilterParser<Product>("name like 'C r'");
+            var items = GetProducts();
+
+            // Act
+            var result = systemUnderTest.ApplyFilter(items);
+
+            // Assert
+            result.Should().HaveCount(0, because: "there are no products with the name 'C r'.");
+        }
+
+        [TestMethod]
+        public void When_empty_string_like_filter_is_passed_then_all_results_should_be_returned()
+        {
+            // Arrange
+            var systemUnderTest = new FilterParser<Product>("name like ''");
+            var items = GetProducts();
+
+            // Act
+            var result = systemUnderTest.ApplyFilter(items);
+
+            // Assert
+            result.Should().HaveCount(5, because: "all product names contain an empty string.");
+        }
+
+        [TestMethod]
+        public void When_int_like_filter_is_passed_then_an_exeption_should_be_thrown()
+        {
+            // Arrange
+            var systemUnderTest = new FilterParser<Product>("price like 2");
+            var items = GetProducts();
+
+            // Act
+            Action action = () => systemUnderTest.ApplyFilter(items);
+
+            // Assert
+            action.ShouldThrow<FormatException>(because: "the like operator only works for string properties.");
         }
 
         private static IQueryable<Product> GetProducts()

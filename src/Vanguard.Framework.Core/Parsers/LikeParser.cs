@@ -6,18 +6,18 @@
     using System.Reflection;
 
     /// <summary>
-    /// The equal operator parser.
+    /// The like operator parser.
     /// </summary>
-    internal class EqualParser : IOperatorParser
+    internal class LikeParser : IOperatorParser
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EqualParser" /> class.
+        /// Initializes a new instance of the <see cref="LikeParser" /> class.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="value">The value.</param>
         /// <exception cref="ArgumentNullException">Thrown when propertyName or value is null.</exception>
         /// <exception cref="ArgumentException">Thrown when propertyName or value is an empty string.</exception>
-        public EqualParser(string propertyName, string value)
+        public LikeParser(string propertyName, string value)
         {
             Guard.ArgumentNotNullOrEmpty(propertyName, nameof(propertyName));
             Guard.ArgumentNotNull(value, nameof(value));
@@ -31,7 +31,7 @@
         /// <value>
         /// The operator the parser supports.
         /// </value>
-        public static string Operator { get; } = "eq";
+        public static string Operator { get; } = "like";
 
         /// <summary>
         /// Gets the name of the property.
@@ -63,11 +63,13 @@
         public Expression CreateExpression<TEntity>(ParameterExpression parameter)
         {
             var property = GetProperty<TEntity>(PropertyName);
-            object value = GetValue(property, Value);
+            string value = GetValue(property, Value);
 
             var memberExpression = Expression.PropertyOrField(parameter, property.Name);
-            var valueExpression = Expression.Constant(value, property.PropertyType);
-            return Expression.Equal(memberExpression, valueExpression);
+            var methodInfo = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+            var valueExpression = Expression.Constant(value, typeof(string));
+            var containsExpression = Expression.Call(memberExpression, methodInfo, valueExpression);
+            return containsExpression;
         }
 
         private PropertyInfo GetProperty<TEntity>(string propertyName)
@@ -89,14 +91,14 @@
             return property;
         }
 
-        private object GetValue(PropertyInfo property, string value)
+        private string GetValue(PropertyInfo property, string value)
         {
-            if (!TypeConverters.Instance.ContainsKey(property.PropertyType))
+            if (property.PropertyType != typeof(string))
             {
                 throw new FormatException($"Cannot convert property {property.Name} because type {property.PropertyType} is not supported.");
             }
 
-            return TypeConverters.Instance[property.PropertyType].Convert(value);
+            return (string)TypeConverters.Instance[property.PropertyType].Convert(value);
         }
     }
 }
