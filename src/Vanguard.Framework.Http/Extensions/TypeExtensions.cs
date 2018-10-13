@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// The source extensions class.
+    /// The source extensions.
     /// </summary>
     public static class TypeExtensions
     {
