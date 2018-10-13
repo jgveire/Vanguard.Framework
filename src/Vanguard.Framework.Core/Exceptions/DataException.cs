@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// The data exception class.
+    /// The data exception.
     /// </summary>
     /// <seealso cref="System.Exception" />
     public class DataException : Exception

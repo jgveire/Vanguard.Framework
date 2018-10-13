@@ -5,7 +5,7 @@
     using Vanguard.Framework.Core.Resources;
 
     /// <summary>
-    /// The update command handler class.
+    /// The update command handler.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>

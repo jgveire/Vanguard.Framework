@@ -1,7 +1,7 @@
 ﻿namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
-    /// The total count query class.
+    /// The total count query.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <seealso cref="Vanguard.Framework.Core.Cqrs.ICommand" />

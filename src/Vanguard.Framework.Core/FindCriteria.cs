@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// The find criteria class.
+    /// The find criteria.
     /// </summary>
     [Obsolete("Use Vanguard.Framework.Core.FilterQuery instead.")]
     public class FindCriteria : FilterQuery

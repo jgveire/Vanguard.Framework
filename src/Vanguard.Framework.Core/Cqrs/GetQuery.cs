@@ -1,7 +1,7 @@
 ﻿namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
-    /// The get query class.
+    /// The get query.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <seealso cref="Vanguard.Framework.Core.Cqrs.ICommand" />

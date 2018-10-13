@@ -6,7 +6,7 @@
     using Vanguard.Framework.Core.Exceptions;
 
     /// <summary>
-    /// The validation exception filter class.
+    /// The validation exception filter.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter" />
     public class ValidationExceptionFilter : IExceptionFilter

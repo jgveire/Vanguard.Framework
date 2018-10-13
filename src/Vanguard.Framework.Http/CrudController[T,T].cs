@@ -7,7 +7,7 @@
     using Vanguard.Framework.Core.Repositories;
 
     /// <summary>
-    /// The Create, Read, Update and Delete (CRUD) controller class.
+    /// The Create, Read, Update and Delete (CRUD) controller.
     /// </summary>
     /// <typeparam name="TIdentifier">The type of the identifier.</typeparam>
     /// <typeparam name="TModel">The type of the model.</typeparam>

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// The find query class.
+    /// The find query.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <seealso cref="IQuery{TResult}" />

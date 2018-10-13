@@ -5,7 +5,7 @@
     using Vanguard.Framework.Core.Repositories;
 
     /// <summary>
-    /// The repository class.
+    /// The repository.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="ReadRepository{TEntity}" />

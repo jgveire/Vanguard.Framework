@@ -1,7 +1,7 @@
 ﻿namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
-    /// The update command class.
+    /// The update command.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <seealso cref="Vanguard.Framework.Core.Cqrs.ICommand" />

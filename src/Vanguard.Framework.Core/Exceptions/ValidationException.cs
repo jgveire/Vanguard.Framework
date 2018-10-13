@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// The validation exception class.
+    /// The validation exception.
     /// </summary>
     /// <seealso cref="System.Exception" />
     [Serializable]

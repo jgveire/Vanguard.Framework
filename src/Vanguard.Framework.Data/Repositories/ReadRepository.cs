@@ -15,7 +15,7 @@
     using Vanguard.Framework.Data.Resources;
 
     /// <summary>
-    /// The read repository class.
+    /// The read repository.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="IReadRepository{TEntity}" />

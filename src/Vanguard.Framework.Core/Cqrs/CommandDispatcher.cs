@@ -5,7 +5,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// The command dispatcher class.
+    /// The command dispatcher.
     /// </summary>
     /// <seealso cref="ICommandDispatcher" />
     public class CommandDispatcher : ICommandDispatcher

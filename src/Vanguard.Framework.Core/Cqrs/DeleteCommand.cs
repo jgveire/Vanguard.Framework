@@ -1,7 +1,7 @@
 ﻿namespace Vanguard.Framework.Core.Cqrs
 {
     /// <summary>
-    /// The delete command class.
+    /// The delete command.
     /// </summary>
     /// <remarks>
     /// TModel is used to make the command unique so that

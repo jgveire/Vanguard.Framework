@@ -8,7 +8,7 @@
     using Extensions;
 
     /// <summary>
-    /// The filter parser class.
+    /// The filter parser.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public class FilterParser<TEntity>

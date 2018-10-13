@@ -6,7 +6,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// The event dispatcher class.
+    /// The event dispatcher.
     /// </summary>
     /// <seealso cref="IEventDispatcher" />
     public class EventDispatcher : IEventDispatcher

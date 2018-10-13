@@ -3,7 +3,7 @@
     using Vanguard.Framework.Core.Repositories;
 
     /// <summary>
-    /// The total count command handler class.
+    /// The total count command handler.
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>

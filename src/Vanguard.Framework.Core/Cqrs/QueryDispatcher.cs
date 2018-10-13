@@ -6,7 +6,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// The query dispatcher class.
+    /// The query dispatcher.
     /// </summary>
     /// <seealso cref="IQueryDispatcher" />
     public class QueryDispatcher : IQueryDispatcher

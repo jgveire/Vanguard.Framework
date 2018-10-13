@@ -4,7 +4,7 @@
     using Vanguard.Framework.Core.Repositories;
 
     /// <summary>
-    /// The unique model class.
+    /// The unique model.
     /// </summary>
     public class UniqueModel : IUniqueEntity
     {

@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The asynchronous domain event handler class.
+    /// The asynchronous domain event handler.
     /// </summary>
     /// <typeparam name="TEvent">The type of the event.</typeparam>
     public interface IAsyncEventHandler<in TEvent>

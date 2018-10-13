@@ -11,7 +11,7 @@
     using Vanguard.Framework.Http.Extensions;
 
     /// <summary>
-    /// The select field contract resolver class.
+    /// The select field contract resolver.
     /// </summary>
     /// <seealso cref="Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver" />
     public class SelectFieldContractResolver : CamelCasePropertyNamesContractResolver

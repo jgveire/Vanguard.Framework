@@ -9,7 +9,7 @@
     using Vanguard.Framework.Http.Resources;
 
     /// <summary>
-    /// The validate model attribute class.
+    /// The validate model attribute.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute" />
     public class ValidateModelAttribute : ActionFilterAttribute
