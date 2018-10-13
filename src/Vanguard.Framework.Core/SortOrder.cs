@@ -8,11 +8,11 @@
         /// <summary>
         /// The ascending sort order.
         /// </summary>
-        Asc,
+        Asc = 0,
 
         /// <summary>
         /// The descending sort order.
         /// </summary>
-        Desc
+        Desc = 1
     }
 }
