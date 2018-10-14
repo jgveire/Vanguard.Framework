@@ -111,7 +111,20 @@
         {
             int index = Math.Max(1, page) - 1;
             int skip = index * pageSize;
-            return source.Skip(skip).Take(Math.Max(1, pageSize));
+            int take = Math.Max(1, pageSize);
+
+            var result = source;
+            if (skip != 0)
+            {
+                result = result.Skip(skip);
+            }
+
+            if (take != int.MaxValue)
+            {
+                result = result.Take(take);
+            }
+
+            return result;
         }
 
         /// <summary>
