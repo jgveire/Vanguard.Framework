@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using Core.Collections;
     using Core.Extensions;
     using Core.Parsers;
     using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@
             if (!string.IsNullOrWhiteSpace(filterQuery.Include))
             {
                 var paths = filterQuery.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                paths = filterQuery.PropertyMappings.MapProperties(paths).ToArray();
                 source = source.Include(paths);
             }
 
@@ -54,19 +56,22 @@
             // Filter
             if (!string.IsNullOrEmpty(filterQuery.Filter))
             {
-                source = source.Filter(filterQuery.Filter);
+                source = source.Filter(filterQuery.Filter, filterQuery.PropertyMappings);
             }
 
             // Order by
             if (!string.IsNullOrEmpty(filterQuery.OrderBy))
             {
-                source = source.OrderBy(filterQuery.OrderBy, filterQuery.SortOrder);
+                var orderBy = filterQuery.PropertyMappings.MapProperty(filterQuery.OrderBy);
+                source = source.OrderBy(orderBy, filterQuery.SortOrder);
             }
 
             // Select
             if (!string.IsNullOrWhiteSpace(filterQuery.Select))
             {
-                string[] fields = GetEntityProperties<TEntity>(filterQuery.Select);
+                var paths = filterQuery.Select.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                paths = filterQuery.PropertyMappings.MapProperties(paths).ToArray();
+                string[] fields = GetEntityProperties<TEntity>(paths);
                 source = source.Select(fields);
             }
 
@@ -84,6 +89,21 @@
         /// <param name="filter">The filter to apply.</param>
         /// <returns>A <see cref="IQueryable{T}"/> whose elements are filtered according to the specified filter.</returns>
         public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> source, string filter)
+        {
+            var propertyMapper = new PropertyMappings();
+            return Filter(source, filter, propertyMapper);
+        }
+
+        /// <summary>
+        /// Filters the collection.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="filter">The filter to apply.</param>
+        /// <param name="propertyMapper">The property mapper.</param>
+        /// <returns>A <see cref="IQueryable{T}" /> whose elements are filtered according to the specified filter.</returns>
+        /// <exception cref="ValidationException">Thrown when the filter is not in the correct format.</exception>
+        public static IQueryable<TEntity> Filter<TEntity>(this IQueryable<TEntity> source, string filter, IPropertyMapper propertyMapper)
         {
             Guard.ArgumentNotNullOrEmpty(filter, nameof(filter));
             var parser = new FilterParser<TEntity>(filter);
@@ -367,13 +387,10 @@
             return properties.Select(property => property.Name);
         }
 
-        private static string[] GetEntityProperties<TEntity>(string select)
+        private static string[] GetEntityProperties<TEntity>(string[] navigationPropertyPaths)
         {
-            IEnumerable<string> selectItems = select
-                .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(item => item.Trim());
             IEnumerable<string> items = GetEntityProperties<TEntity>()
-                .Where(item => selectItems.Contains(item, StringComparer.InvariantCultureIgnoreCase));
+                .Where(item => navigationPropertyPaths.Contains(item, StringComparer.InvariantCultureIgnoreCase));
 
             return items.ToArray();
         }
@@ -454,19 +471,22 @@
         {
             if (!string.IsNullOrWhiteSpace(filterQuery.OrderBy))
             {
-                ValidateOrderBy<TEntity>(filterQuery.OrderBy);
+                var orderBy = filterQuery.PropertyMappings.MapProperty(filterQuery.OrderBy);
+                ValidateOrderBy<TEntity>(orderBy);
             }
             else if (!string.IsNullOrWhiteSpace(filterQuery.Include))
             {
-                ValidateInclude<TEntity>(filterQuery.Include);
+                var propertyNames = filterQuery.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                propertyNames = filterQuery.PropertyMappings.MapProperties(propertyNames).ToArray();
+                ValidateInclude<TEntity>(propertyNames);
             }
         }
 
-        private static void ValidateInclude<TEntity>(string include)
+        private static void ValidateInclude<TEntity>(string[] propertyNames)
         {
-            foreach (string propertyName in include.Split(',', StringSplitOptions.RemoveEmptyEntries))
+            foreach (string propertyName in propertyNames)
             {
-                if (!GetEntityProperties<TEntity>().Contains(include, StringComparer.InvariantCultureIgnoreCase))
+                if (!GetEntityProperties<TEntity>().Contains(propertyName, StringComparer.InvariantCultureIgnoreCase))
                 {
                     string message = string.Format(ExceptionResource.CannotInclude, propertyName);
                     throw new ValidationException(message, nameof(FilterQuery.Include));

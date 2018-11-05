@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core;
+    using Core.Collections;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -84,6 +85,23 @@
             {
                 OrderBy = "category.name"
             };
+
+            // Act
+            Action action = () => Data.Repositories.QueryableExtensions.Filter(Products, filter);
+
+            // Assert
+            action.ShouldNotThrow(because: "it is allowed to order via member paths");
+        }
+
+        [TestMethod]
+        public void When_a_property_is_mapped_no_order_by_validation_error_should_be_thrown()
+        {
+            // Arrange
+            var filter = new FilterQuery
+            {
+                OrderBy = "categoryName",
+            };
+            filter.PropertyMappings.Add("categoryName", "category.name");
 
             // Act
             Action action = () => Data.Repositories.QueryableExtensions.Filter(Products, filter);

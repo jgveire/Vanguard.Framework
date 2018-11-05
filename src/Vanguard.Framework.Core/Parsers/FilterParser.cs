@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using Collections;
     using Extensions;
 
     /// <summary>
@@ -41,6 +42,19 @@
         /// <exception cref="FormatException">Thrown when the filter is not in the correct format.</exception>
         public IQueryable<TEntity> ApplyFilter(IQueryable<TEntity> source)
         {
+            var propertyMapper = new PropertyMappings();
+            return ApplyFilter(source, propertyMapper);
+        }
+
+        /// <summary>
+        /// Applies the filter.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="propertyMapper">The property mapper.</param>
+        /// <returns>A filtered collection.</returns>
+        /// <exception cref="FormatException">Thrown when the filter is not in the correct format.</exception>
+        public IQueryable<TEntity> ApplyFilter(IQueryable<TEntity> source, IPropertyMapper propertyMapper)
+        {
             var entries = GetEntries();
             if (entries.Length != 3)
             {
@@ -56,11 +70,13 @@
             var parameter = Expression.Parameter(typeof(TEntity), "item");
             if (string.Equals(entries[1], EqualParser.Operator, StringComparison.OrdinalIgnoreCase))
             {
-                parser = new EqualParser(entries[0], entries[2]);
+                var propertyName = propertyMapper.MapProperty(entries[0]);
+                parser = new EqualParser(propertyName, entries[2]);
             }
             else
             {
-                parser = new LikeParser(entries[0], entries[2]);
+                var propertyName = propertyMapper.MapProperty(entries[0]);
+                parser = new LikeParser(propertyName, entries[2]);
             }
 
             var equalExpression = parser.CreateExpression<TEntity>(parameter);

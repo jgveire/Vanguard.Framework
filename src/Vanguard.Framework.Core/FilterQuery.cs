@@ -1,5 +1,8 @@
 ﻿namespace Vanguard.Framework.Core
 {
+    using System.Collections.Generic;
+    using Collections;
+
     /// <summary>
     /// The filter query.
     /// Used for filtering search results.
@@ -53,6 +56,15 @@
         /// The size of the page.
         /// </value>
         public int PageSize { get; set; } = 20;
+
+        /// <summary>
+        /// Gets the property mappings. These mappings are used
+        /// to map the model properties to the entity properties.
+        /// </summary>
+        /// <value>
+        /// The property mappings.
+        /// </value>
+        public PropertyMappings PropertyMappings { get; } = new PropertyMappings();
 
         /// <summary>
         /// Gets or sets the search string.
