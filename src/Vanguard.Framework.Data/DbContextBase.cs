@@ -83,7 +83,10 @@
             return result;
         }
 
-        private void CreateAuditRecords()
+        /// <summary>
+        /// Creates the audit records.
+        /// </summary>
+        protected virtual void CreateAuditRecords()
         {
             if (_currentUser == null)
             {
