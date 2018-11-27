@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Vanguard.Framework.Core.Tests.Parsers
+﻿namespace Vanguard.Framework.Core.Tests.Parsers
 {
+    using System;
+
     public class Product
     {
         public Product()
