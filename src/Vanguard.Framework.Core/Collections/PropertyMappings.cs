@@ -18,7 +18,7 @@
         {
             if (properties == null)
             {
-                return null;
+                return new string[] { };
             }
 
             var mappedProperties = new List<string>();

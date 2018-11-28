@@ -29,7 +29,7 @@
         /// otherwise an <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundObjectResult" /> response.
         /// </returns>
         [HttpGet("{id:guid}")]
-        public override IActionResult GetById([FromRoute]Guid id)
+        public override ActionResult<TModel> GetById([FromRoute]Guid id)
         {
             return base.GetById(id);
         }

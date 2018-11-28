@@ -17,7 +17,7 @@
         /// <inheritdoc />
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if (context.ModelState.IsValid == false)
+            if (!context.ModelState.IsValid)
             {
                 var status = HttpStatusCode.BadRequest;
                 var errorResponse = new ErrorResponse(ErrorCode.ValidationError, ExceptionResource.ValidationError);

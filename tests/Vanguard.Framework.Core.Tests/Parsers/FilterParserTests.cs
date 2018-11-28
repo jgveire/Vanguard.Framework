@@ -135,7 +135,7 @@
             Action action = () => systemUnderTest.ApplyFilter(items);
 
             // Assert
-            action.ShouldThrow<FormatException>(because: "the like operator only works for string properties.");
+            action.Should().Throw<FormatException>(because: "the like operator only works for string properties.");
         }
 
         private static IQueryable<Product> GetProducts()

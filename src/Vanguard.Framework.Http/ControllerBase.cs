@@ -40,17 +40,18 @@
         protected IQueryDispatcher QueryDispatcher { get; }
 
         /// <summary>
-        /// Creates an <see cref="OkObjectResult"/> object that produces an
-        /// <see cref="Microsoft.AspNetCore.Http.StatusCodes.Status200OK"/> response
-        /// when the value is not null otherwise an <see cref="NotFoundObjectResult"/> object that produces an
-        /// <see cref="Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound"/>.
+        /// Creates an <see cref="OkObjectResult" /> object that produces an
+        /// <see cref="Microsoft.AspNetCore.Http.StatusCodes.Status200OK" /> response
+        /// when the value is not null otherwise an <see cref="NotFoundObjectResult" /> object that produces an
+        /// <see cref="Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound" />.
         /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="value">The content value to format in the entity body.</param>
         /// <returns>
-        /// An <see cref="OkObjectResult"/> response when the value is not null
-        /// otherwise an <see cref="NotFoundObjectResult"/> response.
+        /// An <see cref="OkObjectResult" /> response when the value is not null
+        /// otherwise an <see cref="NotFoundObjectResult" /> response.
         /// </returns>
-        protected IActionResult OkOrNotFound(object value)
+        protected ActionResult<TResult> OkOrNotFound<TResult>(TResult value)
         {
             if (value == null)
             {

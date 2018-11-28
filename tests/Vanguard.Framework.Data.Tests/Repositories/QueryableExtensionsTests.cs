@@ -90,7 +90,7 @@
             Action action = () => Data.Repositories.QueryableExtensions.Filter(Products, filter);
 
             // Assert
-            action.ShouldNotThrow(because: "it is allowed to order via member paths");
+            action.Should().NotThrow(because: "it is allowed to order via member paths");
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@
             Action action = () => Data.Repositories.QueryableExtensions.Filter(Products, filter);
 
             // Assert
-            action.ShouldNotThrow(because: "it is allowed to order via member paths");
+            action.Should().NotThrow(because: "it is allowed to order via member paths");
         }
 
         private static IQueryable<Product> GetProducts()

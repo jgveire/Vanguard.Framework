@@ -60,7 +60,7 @@
         /// otherwise an <see cref="NotFoundObjectResult"/> response.
         /// </returns>
         [HttpGet("{id}")]
-        public virtual IActionResult GetById([FromRoute]TIdentifier id)
+        public virtual ActionResult<TModel> GetById([FromRoute]TIdentifier id)
         {
             var query = new GetQuery<TModel>(id);
             var result = QueryDispatcher.Dispatch(query);
