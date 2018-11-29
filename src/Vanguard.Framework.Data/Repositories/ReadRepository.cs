@@ -137,6 +137,33 @@
                 query = query.Search(filterQuery.Search);
             }
 
+            if (!string.IsNullOrEmpty(filterQuery?.Filter))
+            {
+                query = query.Filter(filterQuery.Filter);
+            }
+
+            return query.Count();
+        }
+
+        /// <inheritdoc />
+        public int GetCount(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (!string.IsNullOrEmpty(filterQuery?.Search))
+            {
+                query = query.Search(filterQuery.Search);
+            }
+
+            if (!string.IsNullOrEmpty(filterQuery?.Filter))
+            {
+                query = query.Filter(filterQuery.Filter);
+            }
+
             return query.Count();
         }
 
@@ -150,6 +177,28 @@
             }
 
             return query.Count();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (!string.IsNullOrEmpty(filterQuery?.Search))
+            {
+                query = query.Search(filterQuery.Search);
+            }
+
+            if (!string.IsNullOrEmpty(filterQuery?.Filter))
+            {
+                query = query.Filter(filterQuery.Filter);
+            }
+
+            return await query.CountAsync();
         }
 
         /// <inheritdoc />
@@ -195,6 +244,11 @@
             if (!string.IsNullOrEmpty(filterQuery?.Search))
             {
                 query = query.Search(filterQuery.Search);
+            }
+
+            if (!string.IsNullOrEmpty(filterQuery?.Filter))
+            {
+                query = query.Filter(filterQuery.Filter);
             }
 
             return await query.CountAsync();

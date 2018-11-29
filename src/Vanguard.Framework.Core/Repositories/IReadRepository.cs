@@ -97,6 +97,14 @@
         int GetCount(FilterQuery filterQuery);
 
         /// <summary>
+        /// Gets the number of items in the database according to the supplied find criteria.
+        /// </summary>
+        /// <param name="filterQuery">The find criteria.</param>
+        /// <param name="filter">The filter predicate.</param>
+        /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
+        int GetCount(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter);
+
+        /// <summary>
         /// Gets the number of items in the database according to the supplied filter.
         /// </summary>
         /// <param name="filter">The filter predicate.</param>
@@ -109,6 +117,14 @@
         /// <param name="filterQuery">The find criteria.</param>
         /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
         Task<int> GetCountAsync(FilterQuery filterQuery);
+
+        /// <summary>
+        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="filterQuery">The find criteria.</param>
+        /// <param name="filter">The filter predicate.</param>
+        /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
+        Task<int> GetCountAsync(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
         /// Gets the number of items in the database according to the supplied filter asynchronously.

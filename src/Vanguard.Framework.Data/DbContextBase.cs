@@ -11,16 +11,12 @@
     /// <inheritdoc />
     public class DbContextBase : DbContext
     {
-        private readonly IAuditManager _auditManager;
-        private readonly ICurrentUser _currentUser;
-        private readonly IEventDispatcher _eventDispatcher;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DbContextBase"/> class.
         /// </summary>
         public DbContextBase()
         {
-            _auditManager = new AuditManager(this);
+            AuditManager = new AuditManager(this);
         }
 
         /// <summary>
@@ -30,7 +26,7 @@
         public DbContextBase(DbContextOptions options)
             : base(options)
         {
-            _auditManager = new AuditManager(this);
+            AuditManager = new AuditManager(this);
         }
 
         /// <summary>
@@ -40,8 +36,8 @@
         public DbContextBase(IEventDispatcher eventDispatcher)
         {
             Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
-            _auditManager = new AuditManager(this);
-            _eventDispatcher = eventDispatcher;
+            AuditManager = new AuditManager(this);
+            EventDispatcher = eventDispatcher;
         }
 
         /// <summary>
@@ -53,8 +49,8 @@
             : base(options)
         {
             Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
-            _auditManager = new AuditManager(this);
-            _eventDispatcher = eventDispatcher;
+            AuditManager = new AuditManager(this);
+            EventDispatcher = eventDispatcher;
         }
 
         /// <summary>
@@ -68,10 +64,34 @@
         {
             Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
             Guard.ArgumentNotNull(currentUser, nameof(currentUser));
-            _auditManager = new AuditManager(this);
-            _eventDispatcher = eventDispatcher;
-            _currentUser = currentUser;
+            AuditManager = new AuditManager(this);
+            EventDispatcher = eventDispatcher;
+            CurrentUser = currentUser;
         }
+
+        /// <summary>
+        /// Gets the audit manager.
+        /// </summary>
+        /// <value>
+        /// The audit manager.
+        /// </value>
+        protected IAuditManager AuditManager { get; }
+
+        /// <summary>
+        /// Gets the current user.
+        /// </summary>
+        /// <value>
+        /// The current user.
+        /// </value>
+        protected ICurrentUser CurrentUser { get; }
+
+        /// <summary>
+        /// Gets the event dispatcher.
+        /// </summary>
+        /// <value>
+        /// The event dispatcher.
+        /// </value>
+        protected IEventDispatcher EventDispatcher { get; }
 
         /// <inheritdoc />
         public override int SaveChanges()
@@ -83,26 +103,29 @@
             return result;
         }
 
-        private void CreateAuditRecords()
+        /// <summary>
+        /// Creates the audit records.
+        /// </summary>
+        protected virtual void CreateAuditRecords()
         {
-            if (_currentUser == null)
+            if (CurrentUser == null)
             {
                 return;
             }
 
-            _auditManager.CreateAuditRecords(_currentUser.UserId, DateTime.UtcNow);
+            AuditManager.CreateAuditRecords(CurrentUser.UserId, DateTime.UtcNow);
         }
 
         private void DispatchEvents(IEnumerable<IDomainEvent> events)
         {
-            if (_eventDispatcher == null)
+            if (EventDispatcher == null)
             {
                 return;
             }
 
             foreach (var domainEvent in events)
             {
-                _eventDispatcher.Dispatch(domainEvent);
+                EventDispatcher.Dispatch(domainEvent);
             }
         }
 
