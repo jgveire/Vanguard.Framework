@@ -500,14 +500,18 @@
             var fields = orderBy.Split('.', StringSplitOptions.RemoveEmptyEntries);
             foreach (var field in fields)
             {
-                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetField | BindingFlags.GetField);
                 var s = field.Capitalize();
-                var property = properties.FirstOrDefault(e => e.Name == s);
+                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                var property = properties.FirstOrDefault(e => e.Name == s) ??
+                               properties.FirstOrDefault(e => string.Equals(e.Name, s, StringComparison.OrdinalIgnoreCase));
+
                 if (property == null)
                 {
                     string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
                     throw new ValidationException(message, nameof(FilterQuery.OrderBy));
                 }
+
+                type = property.PropertyType;
             }
         }
     }

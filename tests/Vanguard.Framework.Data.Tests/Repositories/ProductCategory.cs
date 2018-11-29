@@ -16,10 +16,10 @@
         }
 
         [Key]
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Name { get; protected set; }
     }
 }
