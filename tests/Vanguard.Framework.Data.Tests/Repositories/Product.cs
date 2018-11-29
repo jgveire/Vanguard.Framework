@@ -26,18 +26,18 @@
         }
 
         [Key]
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
         [Required]
-        public int CategoryId { get; set; }
+        public int CategoryId { get; protected set; }
 
-        public ProductCategory Category { get; set; }
+        public ProductCategory Category { get; protected set; }
 
         [Required]
-        public DateTime StockDate { get; set; }
+        public DateTime StockDate { get; protected set; }
     }
 }
