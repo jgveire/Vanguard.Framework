@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -11,7 +11,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageLicenseUrl>https://github.com/jgveire/Vanguard.Framework/License.txt</PackageLicenseUrl>
     <PackageTags>Vanguard Framework Unit Test</PackageTags>
-    <PackageReleaseNotes>Updated library to .NET Core 2.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated Moq library</PackageReleaseNotes>
     <Copyright>Copyright 2018 Veire Solutions</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.0.0" />
+    <PackageReference Include="Moq" Version="4.10.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.9.0.7583">
       <PrivateAssets>all</PrivateAssets>
