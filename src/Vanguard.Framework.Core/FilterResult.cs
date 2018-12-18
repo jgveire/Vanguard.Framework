@@ -29,12 +29,12 @@
         }
 
         /// <summary>
-        /// Gets or sets the items.
+        /// Gets the items.
         /// </summary>
         /// <value>
         /// The items.
         /// </value>
-        public ICollection<TItem> Items { get; set; }
+        public ICollection<TItem> Items { get; } = new List<TItem>();
 
         /// <summary>
         /// Gets or sets the total count in the database.
