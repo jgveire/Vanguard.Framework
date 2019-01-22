@@ -1,13 +1,9 @@
 ﻿namespace Vanguard.Framework.Core
 {
-    using System;
-
     /// <summary>
-    /// The filter query.
-    /// Used for filtering search results.
+    /// The search filter.
     /// </summary>
-    [Obsolete("Make use of the AdvancedFilter class.")]
-    public class FilterQuery : AdvancedFilter
+    public class SearchFilter : OrderByFilter
     {
         /// <summary>
         /// Gets or sets the search string.

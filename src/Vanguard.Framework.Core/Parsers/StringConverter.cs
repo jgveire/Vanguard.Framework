@@ -1,7 +1,5 @@
 ﻿namespace Vanguard.Framework.Core.Parsers
 {
-    using System;
-
     /// <summary>
     /// The string converter.
     /// </summary>

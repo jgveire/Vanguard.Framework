@@ -100,13 +100,31 @@ namespace Vanguard.Framework.Data.Tests.Repositories
         }
 
         [TestMethod]
+        public void When_Find_is_called_with_order_by_filter_then_collection_should_be_paged()
+        {
+            // Arrange
+            var filter = new OrderByFilter
+            {
+                Page = 2,
+                PageSize = 1
+            };
+
+            // Act
+            var result = SystemUnderTest.Find(filter);
+
+            // Assert
+            result.Count().Should().Be(1, because: "the page size is 1");
+            result.First().Name.Should().Be("How To Cook", because: "the page is 2, the page size is 1 and the product 'How To Cook' is the second item in the collection");
+        }
+
+        [TestMethod]
         public void When_Find_is_called_with_filter_then_collection_should_be_filtered()
         {
             // Arrange
             Expression<Func<Product, bool>> filter = product => product.Name == "Bear";
 
             // Act
-            var result = SystemUnderTest.Find(null, filter);
+            var result = SystemUnderTest.Find((SearchFilter)null, filter);
 
             // Assert
             result.Count().Should().Be(1, because: "we have only 1 bear in our collection");

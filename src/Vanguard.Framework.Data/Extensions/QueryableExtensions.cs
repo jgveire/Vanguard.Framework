@@ -27,6 +27,7 @@
         /// <param name="source">The queryable.</param>
         /// <param name="filterQuery">The filter query.</param>
         /// <returns>A collection of entities.</returns>
+        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         public static IQueryable<TEntity> Filter<TEntity>(
             this IQueryable<TEntity> source,
             FilterQuery filterQuery)
@@ -77,6 +78,153 @@
 
             // Paging
             source = source.GetPage(filterQuery.Page, filterQuery.PageSize);
+
+            return source;
+        }
+
+        /// <summary>
+        /// Applies the advanced filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="advancedFilter">The advanced filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static IQueryable<TEntity> Filter<TEntity>(
+            this IQueryable<TEntity> source,
+            AdvancedFilter advancedFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null || advancedFilter == null)
+            {
+                return source;
+            }
+
+            ValidateOrderBy<TEntity>(advancedFilter);
+            ValidateInclude<TEntity>(advancedFilter);
+
+            // Include
+            if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
+            {
+                var paths = advancedFilter.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
+                source = source.Include(paths);
+            }
+
+            // Filter
+            if (!string.IsNullOrEmpty(advancedFilter.Filter))
+            {
+                source = source.Filter(advancedFilter.Filter, advancedFilter.PropertyMappings);
+            }
+
+            // Order by
+            if (!string.IsNullOrEmpty(advancedFilter.OrderBy))
+            {
+                var orderBy = advancedFilter.PropertyMappings.MapProperty(advancedFilter.OrderBy);
+                source = source.OrderBy(orderBy, advancedFilter.SortOrder);
+            }
+
+            // Select
+            if (!string.IsNullOrWhiteSpace(advancedFilter.Select))
+            {
+                var paths = advancedFilter.Select.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
+                string[] fields = GetEntityProperties<TEntity>(paths);
+                source = source.Select(fields);
+            }
+
+            // Paging
+            source = source.GetPage(advancedFilter.Page, advancedFilter.PageSize);
+
+            return source;
+        }
+
+        /// <summary>
+        /// Applies the order by filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static IQueryable<TEntity> Filter<TEntity>(
+            this IQueryable<TEntity> source,
+            OrderByFilter orderByFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null || orderByFilter == null)
+            {
+                return source;
+            }
+
+            ValidateOrderBy<TEntity>(orderByFilter);
+
+            // Order by
+            if (!string.IsNullOrEmpty(orderByFilter.OrderBy))
+            {
+                var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
+                source = source.OrderBy(orderBy, orderByFilter.SortOrder);
+            }
+
+            // Paging
+            source = source.GetPage(orderByFilter.Page, orderByFilter.PageSize);
+
+            return source;
+        }
+
+        /// <summary>
+        /// Applies the paging filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static IQueryable<TEntity> Filter<TEntity>(
+            this IQueryable<TEntity> source,
+            PagingFilter pagingFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null || pagingFilter == null)
+            {
+                return source;
+            }
+
+            // Paging
+            return source.GetPage(pagingFilter.Page, pagingFilter.PageSize);
+        }
+
+        /// <summary>
+        /// Applies the search filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static IQueryable<TEntity> Filter<TEntity>(
+            this IQueryable<TEntity> source,
+            SearchFilter searchFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null || searchFilter == null)
+            {
+                return source;
+            }
+
+            ValidateOrderBy<TEntity>(searchFilter);
+
+            // Search
+            if (!string.IsNullOrEmpty(searchFilter.Search))
+            {
+                source = source.Search(searchFilter.Search);
+            }
+
+            // Order by
+            if (!string.IsNullOrEmpty(searchFilter.OrderBy))
+            {
+                var orderBy = searchFilter.PropertyMappings.MapProperty(searchFilter.OrderBy);
+                source = source.OrderBy(orderBy, searchFilter.SortOrder);
+            }
+
+            // Paging
+            source = source.GetPage(searchFilter.Page, searchFilter.PageSize);
 
             return source;
         }
@@ -478,6 +626,25 @@
             {
                 var propertyNames = filterQuery.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 propertyNames = filterQuery.PropertyMappings.MapProperties(propertyNames).ToArray();
+                ValidateInclude<TEntity>(propertyNames);
+            }
+        }
+
+        private static void ValidateOrderBy<TEntity>(OrderByFilter orderByFilter)
+        {
+            if (!string.IsNullOrWhiteSpace(orderByFilter.OrderBy))
+            {
+                var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
+                ValidateOrderBy<TEntity>(orderBy);
+            }
+        }
+
+        private static void ValidateInclude<TEntity>(AdvancedFilter advancedFilter)
+        {
+            if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
+            {
+                var propertyNames = advancedFilter.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                propertyNames = advancedFilter.PropertyMappings.MapProperties(propertyNames).ToArray();
                 ValidateInclude<TEntity>(propertyNames);
             }
         }

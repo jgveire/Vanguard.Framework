@@ -19,6 +19,7 @@
         /// <param name="filterQuery">The find criteria.</param>
         /// <param name="filter">An additional filter to apply on the result query.</param>
         /// <returns>A collection of entities.</returns>
+        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         IEnumerable<TEntity> Find(
             FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null);
@@ -29,8 +30,81 @@
         /// <param name="filterQuery">The find criteria.</param>
         /// <param name="filter">An additional filter to apply on the result query.</param>
         /// <returns>A collection of entities.</returns>
+        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         Task<IEnumerable<TEntity>> FindAsync(
             FilterQuery filterQuery,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Finds entities according to the supplied find criteria.</summary>
+        /// <param name="advancedFilter">The advanced filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        IEnumerable<TEntity> Find(
+            AdvancedFilter advancedFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Finds entities according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="advancedFilter">The advanced filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        Task<IEnumerable<TEntity>> FindAsync(
+            AdvancedFilter advancedFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Finds entities according to the supplied find criteria.</summary>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        IEnumerable<TEntity> Find(
+            OrderByFilter orderByFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Finds entities according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        Task<IEnumerable<TEntity>> FindAsync(
+            OrderByFilter orderByFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Finds entities according to the supplied find criteria.</summary>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        IEnumerable<TEntity> Find(
+            PagingFilter pagingFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Finds entities according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        Task<IEnumerable<TEntity>> FindAsync(
+            PagingFilter pagingFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Finds entities according to the supplied find criteria.</summary>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        IEnumerable<TEntity> Find(
+            SearchFilter searchFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Finds entities according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>A collection of entities.</returns>
+        Task<IEnumerable<TEntity>> FindAsync(
+            SearchFilter searchFilter,
             Expression<Func<TEntity, bool>> filter = null);
 
         /// <summary>
@@ -94,6 +168,7 @@
         /// </summary>
         /// <param name="filterQuery">The find criteria.</param>
         /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         int GetCount(FilterQuery filterQuery);
 
         /// <summary>
@@ -102,6 +177,7 @@
         /// <param name="filterQuery">The find criteria.</param>
         /// <param name="filter">The filter predicate.</param>
         /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         int GetCount(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
@@ -116,6 +192,7 @@
         /// </summary>
         /// <param name="filterQuery">The find criteria.</param>
         /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         Task<int> GetCountAsync(FilterQuery filterQuery);
 
         /// <summary>
@@ -124,6 +201,7 @@
         /// <param name="filterQuery">The find criteria.</param>
         /// <param name="filter">The filter predicate.</param>
         /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         Task<int> GetCountAsync(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
@@ -132,6 +210,78 @@
         /// <param name="filter">The filter predicate.</param>
         /// <returns>The total number of items in the database according to the supplied filter.</returns>
         Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Gets the number of items in the database according to the supplied find criteria.</summary>
+        /// <param name="advancedFilter">The advanced filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        int GetCount(
+            AdvancedFilter advancedFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="advancedFilter">The advanced filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        Task<int> GetCountAsync(
+            AdvancedFilter advancedFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Gets the number of items in the database according to the supplied find criteria.</summary>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        int GetCount(
+            OrderByFilter orderByFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        Task<int> GetCountAsync(
+            OrderByFilter orderByFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Gets the number of items in the database according to the supplied find criteria.</summary>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        int GetCount(
+            PagingFilter pagingFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        Task<int> GetCountAsync(
+            PagingFilter pagingFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>Gets the number of items in the database according to the supplied find criteria.</summary>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        int GetCount(
+            SearchFilter searchFilter,
+            Expression<Func<TEntity, bool>> filter = null);
+
+        /// <summary>
+        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
+        /// </summary>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <param name="filter">An additional filter to apply on the result query.</param>
+        /// <returns>The total number of items in the database according to the supplied filter.</returns>
+        Task<int> GetCountAsync(
+            SearchFilter searchFilter,
+            Expression<Func<TEntity, bool>> filter = null);
 
         /// <summary>
         /// Gets a single entity.

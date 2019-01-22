@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
+    <Version>3.1.0-Release1</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>

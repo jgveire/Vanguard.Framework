@@ -54,21 +54,165 @@
         protected DbSet<TEntity> DbSet { get; }
 
         /// <inheritdoc />
+        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         public virtual IEnumerable<TEntity> Find(
             FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            var query = CompileQuery(filterQuery, filter);
-            return query.ToList();
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(filterQuery).ToList();
         }
 
         /// <inheritdoc />
+        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         public virtual async Task<IEnumerable<TEntity>> FindAsync(
             FilterQuery filterQuery,
             Expression<Func<TEntity, bool>> filter = null)
         {
-            var query = CompileQuery(filterQuery, filter);
-            return await query.ToListAsync();
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(filterQuery).ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public virtual IEnumerable<TEntity> Find(
+            AdvancedFilter advancedFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(advancedFilter).ToList();
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<IEnumerable<TEntity>> FindAsync(
+            AdvancedFilter advancedFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(advancedFilter).ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public virtual IEnumerable<TEntity> Find(
+            OrderByFilter orderByFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(orderByFilter).ToList();
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<IEnumerable<TEntity>> FindAsync(
+            OrderByFilter orderByFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(orderByFilter).ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public virtual IEnumerable<TEntity> Find(
+            PagingFilter pagingFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(pagingFilter).ToList();
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<IEnumerable<TEntity>> FindAsync(
+            PagingFilter pagingFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(pagingFilter).ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public virtual IEnumerable<TEntity> Find(
+            SearchFilter searchFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(searchFilter).ToList();
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<IEnumerable<TEntity>> FindAsync(
+            SearchFilter searchFilter,
+            Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+
+            // Filter
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(searchFilter).ToListAsync();
         }
 
         /// <inheritdoc />
@@ -129,6 +273,7 @@
         }
 
         /// <inheritdoc />
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         public virtual int GetCount(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
@@ -146,6 +291,7 @@
         }
 
         /// <inheritdoc />
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         public int GetCount(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter)
         {
             IQueryable<TEntity> query = DbSet;
@@ -180,6 +326,7 @@
         }
 
         /// <inheritdoc />
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         public async Task<int> GetCountAsync(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter)
         {
             IQueryable<TEntity> query = DbSet;
@@ -214,6 +361,102 @@
         }
 
         /// <inheritdoc />
+        public int GetCount(AdvancedFilter advancedFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(advancedFilter).Count();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(AdvancedFilter advancedFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(advancedFilter).CountAsync();
+        }
+
+        /// <inheritdoc />
+        public int GetCount(OrderByFilter orderByFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(orderByFilter).Count();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(OrderByFilter orderByFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(orderByFilter).CountAsync();
+        }
+
+        /// <inheritdoc />
+        public int GetCount(PagingFilter pagingFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(pagingFilter).Count();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(PagingFilter pagingFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(pagingFilter).CountAsync();
+        }
+
+        /// <inheritdoc />
+        public int GetCount(SearchFilter searchFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.Filter(searchFilter).Count();
+        }
+
+        /// <inheritdoc />
+        public async Task<int> GetCountAsync(SearchFilter searchFilter, Expression<Func<TEntity, bool>> filter = null)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return await query.Filter(searchFilter).CountAsync();
+        }
+
+        /// <inheritdoc />
         public virtual TEntity GetSingle(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties)
@@ -238,6 +481,7 @@
         }
 
         /// <inheritdoc />
+        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
         public virtual async Task<int> GetCountAsync(FilterQuery filterQuery)
         {
             IQueryable<TEntity> query = DbSet;
@@ -297,21 +541,6 @@
             }
 
             return query;
-        }
-
-        private IQueryable<TEntity> CompileQuery(
-            FilterQuery filterQuery,
-            Expression<Func<TEntity, bool>> filter)
-        {
-            IQueryable<TEntity> query = DbSet;
-
-            // Filter
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            return query.Filter(filterQuery);
         }
 
         private List<KeyValuePair<string, object>> GetIdValuePairs(object[] id)
