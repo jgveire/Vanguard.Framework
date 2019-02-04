@@ -43,7 +43,7 @@
             // Include
             if (!string.IsNullOrWhiteSpace(filterQuery.Include))
             {
-                var paths = filterQuery.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var paths = filterQuery.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = filterQuery.PropertyMappings.MapProperties(paths).ToArray();
                 source = source.Include(paths);
             }
@@ -70,7 +70,7 @@
             // Select
             if (!string.IsNullOrWhiteSpace(filterQuery.Select))
             {
-                var paths = filterQuery.Select.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var paths = filterQuery.Select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = filterQuery.PropertyMappings.MapProperties(paths).ToArray();
                 string[] fields = GetEntityProperties<TEntity>(paths);
                 source = source.Select(fields);
@@ -105,7 +105,7 @@
             // Include
             if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
             {
-                var paths = advancedFilter.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var paths = advancedFilter.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
                 source = source.Include(paths);
             }
@@ -126,7 +126,7 @@
             // Select
             if (!string.IsNullOrWhiteSpace(advancedFilter.Select))
             {
-                var paths = advancedFilter.Select.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var paths = advancedFilter.Select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
                 string[] fields = GetEntityProperties<TEntity>(paths);
                 source = source.Select(fields);
@@ -624,7 +624,7 @@
             }
             else if (!string.IsNullOrWhiteSpace(filterQuery.Include))
             {
-                var propertyNames = filterQuery.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var propertyNames = filterQuery.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 propertyNames = filterQuery.PropertyMappings.MapProperties(propertyNames).ToArray();
                 ValidateInclude<TEntity>(propertyNames);
             }
@@ -643,7 +643,7 @@
         {
             if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
             {
-                var propertyNames = advancedFilter.Include.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                var propertyNames = advancedFilter.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 propertyNames = advancedFilter.PropertyMappings.MapProperties(propertyNames).ToArray();
                 ValidateInclude<TEntity>(propertyNames);
             }
@@ -664,7 +664,7 @@
         private static void ValidateOrderBy<TEntity>(string orderBy)
         {
             var type = typeof(TEntity);
-            var fields = orderBy.Split('.', StringSplitOptions.RemoveEmptyEntries);
+            var fields = orderBy.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var field in fields)
             {
                 var s = field.Capitalize();

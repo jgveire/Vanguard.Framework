@@ -77,7 +77,7 @@
             var fields = new List<string>();
             foreach (string field in selectFields)
             {
-                string[] items = field.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] items = field.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 fields.AddRange(items.Select(item => item.Trim()));
             }
 

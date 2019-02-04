@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.1.0-Release1</Version>
+    <Version>3.2.0</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
-    <Description>Changed the CreateAuditRecords method in the DbContext class from private to protected.</Description>
+    <Description>Changed the CreateAuditRecords method in the DbContext class from private to protected.
+Changed from .net Core 2.1 to .NET Standard 2.0 Framework</Description>
     <Copyright>Copyright 2018 Veire Solutions</Copyright>
     <PackageLicenseUrl>https://github.com/jgveire/Vanguard.Framework/License.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
