@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.2.0</Version>
+    <Version>3.3.1</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
@@ -16,7 +16,7 @@ Changed from .net Core 2.1 to .NET Standard 2.0 Framework</Description>
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Updated library to .NET Core 2.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Added contains method to repositories.</PackageReleaseNotes>
     <NeutralLanguage>Eng</NeutralLanguage>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>

@@ -54,6 +54,36 @@
         protected DbSet<TEntity> DbSet { get; }
 
         /// <inheritdoc />
+        public virtual bool Contains(object id)
+        {
+            Guard.ArgumentNotNull(id, nameof(id));
+            return Contains(new[] { id });
+        }
+
+        /// <inheritdoc />
+        public virtual bool Contains(object[] ids)
+        {
+            Guard.ArgumentNotNull(ids, nameof(ids));
+            var pairs = GetIdValuePairs(ids);
+            return DbSet.WhereEqual(pairs).Any();
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<bool> ContainsAsync(object id)
+        {
+            Guard.ArgumentNotNull(id, nameof(id));
+            return await ContainsAsync(new[] { id });
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<bool> ContainsAsync(object[] ids)
+        {
+            Guard.ArgumentNotNull(ids, nameof(ids));
+            var pairs = GetIdValuePairs(ids);
+            return await DbSet.WhereEqual(pairs).AnyAsync();
+        }
+
+        /// <inheritdoc />
         [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         public virtual IEnumerable<TEntity> Find(
             FilterQuery filterQuery,

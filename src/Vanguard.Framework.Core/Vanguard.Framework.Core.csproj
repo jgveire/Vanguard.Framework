@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.0</Version>
+    <Version>2.3.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework</PackageTags>
-    <PackageReleaseNotes>The FilterResult class was not correctly initialized.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added contains method to repositories.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.</Description>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>

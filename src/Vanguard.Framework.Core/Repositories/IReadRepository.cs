@@ -14,6 +14,34 @@
         where TEntity : class, IDataEntity
     {
         /// <summary>
+        /// Determines whether the repository contains an entity with the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><c>true</c> if the repository contains an entity with the specified identifier; otherwise, <c>false</c>.</returns>
+        bool Contains(object id);
+
+        /// <summary>
+        /// Determines whether the repository contains an entity with the specified identifiers.
+        /// </summary>
+        /// <param name="ids">The identifiers.</param>
+        /// <returns><c>true</c> if the repository contains an entity with the specified identifiers; otherwise, <c>false</c>.</returns>
+        bool Contains(object[] ids);
+
+        /// <summary>
+        /// Determines whether the repository contains an entity with the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>A task that return <c>true</c> if the repository contains an entity with the specified identifier; otherwise, <c>false</c>.</returns>
+        Task<bool> ContainsAsync(object id);
+
+        /// <summary>
+        /// Determines whether the repository contains an entity with the specified identifiers.
+        /// </summary>
+        /// <param name="ids">The identifiers.</param>
+        /// <returns>A task that return <c>true</c> if the repository contains an entity with the specified identifiers; otherwise, <c>false</c>.</returns>
+        Task<bool> ContainsAsync(object[] ids);
+
+        /// <summary>
         /// Finds entities according to the supplied find criteria.
         /// </summary>
         /// <param name="filterQuery">The find criteria.</param>
