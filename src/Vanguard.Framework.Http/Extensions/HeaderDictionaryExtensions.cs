@@ -2,6 +2,7 @@
 {
     using System.Net.Mime;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Net.Http.Headers;
 
     /// <summary>
     /// The header dictionary extensions.
@@ -22,7 +23,7 @@
                 FileName = fileName,
                 Inline = displayInline
             };
-            source.Add("Content-Disposition", contentDisposition.ToString());
+            source.Add(HeaderNames.ContentDisposition, contentDisposition.ToString());
         }
 
         /// <summary>

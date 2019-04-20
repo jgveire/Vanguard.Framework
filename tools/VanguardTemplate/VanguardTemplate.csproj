@@ -54,13 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <VSTemplate Include="Command.cs" />
-    <VSTemplate Include="CommandHandler.cs" />
-    <VSTemplate Include="QueryHandler.cs" />
-    <VSTemplate Include="Query.cs" />
-    <VSTemplate Include="Event.cs" />
-    <VSTemplate Include="EventHandler.cs" />
-    <VSTemplate Include="UnitTests.cs" />
+    <None Include="Command.cs" />
+    <None Include="CommandHandler.cs" />
+    <None Include="QueryHandler.cs" />
+    <None Include="Query.cs" />
+    <None Include="Event.cs" />
+    <None Include="EventHandler.cs" />
+    <None Include="UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <VSTemplate Include="command.vstemplate">
       <SubType>Designer</SubType>
