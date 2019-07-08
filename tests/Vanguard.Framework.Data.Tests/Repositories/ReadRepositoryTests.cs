@@ -124,7 +124,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
             Expression<Func<Product, bool>> filter = product => product.Name == "Bear";
 
             // Act
-            var result = SystemUnderTest.Find((SearchFilter)null, filter);
+            var result = SystemUnderTest.Find((SearchFilter?)null, filter);
 
             // Assert
             result.Count().Should().Be(1, because: "we have only 1 bear in our collection");

@@ -17,7 +17,7 @@
         where TSystemUnderTest : class
     {
         private readonly Dictionary<Type, Mock> _mockDictionary = new Dictionary<Type, Mock>();
-        private TSystemUnderTest _systemUnderTest;
+        private TSystemUnderTest? _systemUnderTest;
 
         /// <summary>
         /// Gets the system under test.
@@ -34,7 +34,7 @@
         public override void TestInitialize()
         {
             base.TestInitialize();
-            _systemUnderTest = default(TSystemUnderTest);
+            _systemUnderTest = default;
             _mockDictionary.Clear();
        }
 
@@ -81,7 +81,7 @@
                 throw new InvalidOperationException(message);
             }
 
-            ConstructorInfo constructor = type
+            ConstructorInfo? constructor = type
                 .GetConstructors(BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance)
                 .OrderBy(x => x.GetParameters().Count())
                 .FirstOrDefault();
@@ -106,9 +106,9 @@
             return _systemUnderTest;
         }
 
-        private object[] GetParameters(ParameterInfo[] parameters)
+        private object?[] GetParameters(ParameterInfo[] parameters)
         {
-            var result = new List<object>();
+            var result = new List<object?>();
 
             foreach (var parameter in parameters)
             {

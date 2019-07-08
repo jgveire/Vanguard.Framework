@@ -63,7 +63,7 @@
         public Expression CreateExpression<TEntity>(ParameterExpression parameter)
         {
             var property = GetProperty<TEntity>(PropertyName);
-            string value = GetValue(property, Value);
+            var value = GetValue(property, Value);
 
             var memberExpression = Expression.PropertyOrField(parameter, property.Name);
             var methodInfo = typeof(string).GetMethod("Contains", new[] { typeof(string) });
@@ -75,7 +75,7 @@
         private PropertyInfo GetProperty<TEntity>(string propertyName)
         {
             var type = typeof(TEntity);
-            var property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo? property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             if (property == null)
             {
                 property = type
@@ -91,14 +91,14 @@
             return property;
         }
 
-        private string GetValue(PropertyInfo property, string value)
+        private string? GetValue(PropertyInfo property, string value)
         {
             if (property.PropertyType != typeof(string))
             {
                 throw new FormatException($"Cannot convert property {property.Name} because type {property.PropertyType} is not supported.");
             }
 
-            return (string)TypeConverters.Instance[property.PropertyType].Convert(value);
+            return (string?)TypeConverters.Instance[property.PropertyType].Convert(value);
         }
     }
 }

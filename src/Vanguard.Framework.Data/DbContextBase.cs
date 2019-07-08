@@ -75,7 +75,7 @@
         /// <value>
         /// The audit manager.
         /// </value>
-        protected IAuditManager AuditManager { get; }
+        protected IAuditManager? AuditManager { get; }
 
         /// <summary>
         /// Gets the current user.
@@ -83,7 +83,7 @@
         /// <value>
         /// The current user.
         /// </value>
-        protected ICurrentUser CurrentUser { get; }
+        protected ICurrentUser? CurrentUser { get; }
 
         /// <summary>
         /// Gets the event dispatcher.
@@ -91,7 +91,7 @@
         /// <value>
         /// The event dispatcher.
         /// </value>
-        protected IEventDispatcher EventDispatcher { get; }
+        protected IEventDispatcher? EventDispatcher { get; }
 
         /// <inheritdoc />
         public override int SaveChanges()
@@ -108,7 +108,7 @@
         /// </summary>
         protected virtual void CreateAuditRecords()
         {
-            if (CurrentUser == null)
+            if (CurrentUser == null || AuditManager == null)
             {
                 return;
             }

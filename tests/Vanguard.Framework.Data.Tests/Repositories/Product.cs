@@ -6,10 +6,6 @@
 
     public class Product : IDataEntity
     {
-        public Product()
-        {
-        }
-
         public Product(int id, string name, int categoryId)
         {
             Id = id;
@@ -25,17 +21,21 @@
             Category = category;
         }
 
+        protected Product()
+        {
+        }
+
         [Key]
         public int Id { get; protected set; }
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = string.Empty;
 
         [Required]
         public int CategoryId { get; protected set; }
 
-        public ProductCategory Category { get; protected set; }
+        public ProductCategory? Category { get; protected set; }
 
         [Required]
         public DateTime StockDate { get; protected set; }

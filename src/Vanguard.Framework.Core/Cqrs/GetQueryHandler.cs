@@ -37,7 +37,9 @@
             var entity = _repository.GetById(query.Id);
             if (entity == null)
             {
-                return default(TModel);
+#pragma warning disable CS8603 // Possible null reference return.
+                return default;
+#pragma warning restore CS8603 // Possible null reference return.
             }
 
             var model = _mapper.Map<TModel>(entity);

@@ -200,7 +200,7 @@
         /// <returns>A collection of entities.</returns>
         public static IQueryable<TEntity> Filter<TEntity>(
             this IQueryable<TEntity> source,
-            SearchFilter searchFilter)
+            SearchFilter? searchFilter)
             where TEntity : class, IDataEntity
         {
             if (source == null || searchFilter == null)
@@ -380,11 +380,11 @@
                 return source;
             }
 
-            Expression expression = null;
+            Expression? expression = null;
             var parameter = Expression.Parameter(typeof(TEntity), "item");
             foreach (var property in properties)
             {
-                Expression searchExpression = GetSearchExpression(parameter, property, searchString);
+                Expression? searchExpression = GetSearchExpression(parameter, property, searchString);
                 if (searchExpression == null)
                 {
                     continue;
@@ -499,7 +499,7 @@
             Guard.ArgumentNotNull(source, nameof(source));
             Guard.ArgumentNotNull(keyValuePairs, nameof(keyValuePairs));
 
-            Expression expression = null;
+            Expression? expression = null;
             var parameter = Expression.Parameter(typeof(TEntity), "item");
             foreach (KeyValuePair<string, object> keyValuePair in keyValuePairs)
             {
@@ -559,7 +559,7 @@
             return equalExpression;
         }
 
-        private static BinaryExpression GetIntegerExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
+        private static BinaryExpression? GetIntegerExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
         {
             if (int.TryParse(searchString, out int value))
             {
@@ -577,7 +577,7 @@
                 .Where(prop => supportedTypes.Contains(prop.PropertyType) && prop.CanWrite);
         }
 
-        private static Expression GetSearchExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
+        private static Expression? GetSearchExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
         {
             if (property.PropertyType == typeof(string))
             {
@@ -669,8 +669,8 @@
             {
                 var s = field.Capitalize();
                 var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                var property = properties.FirstOrDefault(e => e.Name == s) ??
-                               properties.FirstOrDefault(e => string.Equals(e.Name, s, StringComparison.OrdinalIgnoreCase));
+                PropertyInfo? property = properties.FirstOrDefault(e => e.Name == s) ??
+                    properties.FirstOrDefault(e => string.Equals(e.Name, s, StringComparison.OrdinalIgnoreCase));
 
                 if (property == null)
                 {

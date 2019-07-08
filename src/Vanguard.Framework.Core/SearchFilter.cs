@@ -11,6 +11,6 @@
         /// <value>
         /// The search string.
         /// </value>
-        public string Search { get; set; }
+        public string? Search { get; set; }
     }
 }

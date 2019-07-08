@@ -34,7 +34,7 @@
         /// </value>
         [Required]
         [MaxLength(50)]
-        public string EntityName { get; set; }
+        public string EntityName { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the entity identifier.
@@ -44,7 +44,7 @@
         /// </value>
         [Required]
         [MaxLength(100)]
-        public string EntityId { get; set; }
+        public string EntityId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets a string representation of the entity.
@@ -53,7 +53,7 @@
         /// A string representation of the entity.
         /// </value>
         [Required]
-        public string Entity { get; set; }
+        public string Entity { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the user identifier who made the change.
@@ -63,7 +63,7 @@
         /// </value>
         [Required]
         [MaxLength(50)]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the UTC date and time the user made the change.

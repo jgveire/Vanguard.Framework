@@ -15,7 +15,7 @@
         /// <value>
         /// The filter to apply.
         /// </value>
-        public string Filter { get; set; }
+        public string? Filter { get; set; }
 
         /// <summary>
         /// Gets or sets a comma separated list of complex properties
@@ -25,7 +25,7 @@
         /// <value>
         /// A comma separated list of properties.
         /// </value>
-        public string Include { get; set; }
+        public string? Include { get; set; }
 
         /// <summary>
         /// Gets or sets the fields that should be selected.
@@ -33,6 +33,6 @@
         /// <value>
         /// The fields that should be selected.
         /// </value>
-        public string Select { get; set; }
+        public string? Select { get; set; }
     }
 }

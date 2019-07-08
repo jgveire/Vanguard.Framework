@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The converted value.</returns>
-        public abstract object Convert(string value);
+        public abstract object? Convert(string value);
 
         /// <summary>
         /// Determines whether the value is a null value.

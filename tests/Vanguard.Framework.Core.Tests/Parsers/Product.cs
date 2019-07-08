@@ -4,10 +4,6 @@
 
     public class Product
     {
-        public Product()
-        {
-        }
-
         public Product(int id, string name, decimal price, Guid categoryId)
         {
             Id = id;
@@ -16,12 +12,16 @@
             CategoryId = categoryId;
         }
 
+        protected Product()
+        {
+        }
+
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
 
-        public Guid CategoryId { get; set; }
+        public Guid CategoryId { get; set; } = Guid.Empty;
     }
 }

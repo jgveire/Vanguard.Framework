@@ -10,7 +10,7 @@
     internal class DoubleConverter : TypeConverterBase
     {
         /// <inheritdoc />
-        public override object Convert(string value)
+        public override object? Convert(string value)
         {
             Guard.ArgumentNotNullOrEmpty(value, nameof(value));
             if (IsNullValue(value))

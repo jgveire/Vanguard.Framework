@@ -39,6 +39,6 @@
         /// <value>
         /// The error.
         /// </value>
-        public Error Error { get; set; }
+        public Error? Error { get; set; }
     }
 }

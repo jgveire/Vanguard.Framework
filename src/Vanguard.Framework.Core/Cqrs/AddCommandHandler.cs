@@ -33,9 +33,12 @@
         /// <param name="command">The command.</param>
         public virtual void Execute(AddCommand<TModel> command)
         {
-            var entity = _mapper.Map<TEntity>(command.Model);
-            _repository.Add(entity);
-            _repository.Save();
+            if (command != null && command.Model != null)
+            {
+                var entity = _mapper.Map<TEntity>(command.Model);
+                _repository.Add(entity);
+                _repository.Save();
+            }
         }
     }
 }

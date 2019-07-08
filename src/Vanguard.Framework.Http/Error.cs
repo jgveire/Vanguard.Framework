@@ -44,7 +44,7 @@
         /// <value>
         /// The error code.
         /// </value>
-        public string Code { get; set; }
+        public string Code { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the error message.
@@ -52,7 +52,7 @@
         /// <value>
         /// The error message.
         /// </value>
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the error target.
@@ -61,7 +61,7 @@
         /// <value>
         /// The error target.
         /// </value>
-        public string Target { get; set; }
+        public string Target { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the error details.
@@ -69,6 +69,6 @@
         /// <value>
         /// The error details.
         /// </value>
-        public IEnumerable<Error> Details { get; set; }
+        public IEnumerable<Error> Details { get; set; } = new List<Error>();
     }
 }

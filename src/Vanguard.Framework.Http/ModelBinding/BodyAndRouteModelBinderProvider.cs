@@ -30,7 +30,7 @@
         /// <returns>
         /// An <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder" />.
         /// </returns>
-        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        public IModelBinder? GetBinder(ModelBinderProviderContext context)
         {
             var bodyBinder = _bodyModelBinderProvider.GetBinder(context);
             var complexBinder = _complexTypeModelBinderProvider.GetBinder(context);

@@ -17,7 +17,7 @@
         /// </value>
         [Required]
         [MaxLength(100)]
-        public string Brand { get; set; }
+        public string Brand { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the model name of the car.
@@ -27,7 +27,7 @@
         /// </value>
         [Required]
         [MaxLength(100)]
-        public string Model { get; set; }
+        public string Model { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the license plate of the car.
@@ -37,7 +37,7 @@
         /// </value>
         [Required]
         [MaxLength(20)]
-        public string LicensePlate { get; set; }
+        public string LicensePlate { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets a value indicating whether the car is stolen.

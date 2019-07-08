@@ -15,7 +15,7 @@
         /// <value>
         /// The mock repository.
         /// </value>
-        protected MockRepository MockRepository { get; private set; }
+        protected MockRepository MockRepository { get; private set; } = new MockRepository(MockBehavior.Strict);
 
         /// <summary>
         /// Initializes each test and therefor is run before each test.

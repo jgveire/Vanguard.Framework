@@ -39,7 +39,7 @@
         /// <value>
         /// The audit entries.
         /// </value>
-        public DbSet<AuditEntry> AuditEntries { get; set; }
+        public DbSet<AuditEntry> AuditEntries { get; set; } = new DummyDbSet<AuditEntry>();
 
         /// <summary>
         /// Gets or sets the cars.
@@ -47,7 +47,7 @@
         /// <value>
         /// The cars.
         /// </value>
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Car> Cars { get; set; } = new DummyDbSet<Car>();
 
         /// <summary>
         /// Gets or sets the garages.
@@ -55,7 +55,7 @@
         /// <value>
         /// The garages.
         /// </value>
-        public DbSet<Garage> Garages { get; set; }
+        public DbSet<Garage> Garages { get; set; } = new DummyDbSet<Garage>();
 
         /// <inheritdoc />
         public override int SaveChanges()

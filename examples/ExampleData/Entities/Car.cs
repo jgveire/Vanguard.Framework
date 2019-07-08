@@ -16,13 +16,6 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Car"/> class.
         /// </summary>
-        public Car()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Car"/> class.
-        /// </summary>
         /// <param name="brand">The car brand name.</param>
         /// <param name="model">The car model name.</param>
         /// <param name="licensePlate">The car license plate.</param>
@@ -52,6 +45,13 @@
             NewPrice = newPrice;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Car"/> class.
+        /// </summary>
+        private Car()
+        {
+        }
+
         /// <inheritdoc />
         public string EntityId => Id.ToString();
 
@@ -63,7 +63,7 @@
         /// </value>
         [Required]
         [MaxLength(20)]
-        public string Brand { get; protected set; }
+        public string Brand { get; protected set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the car model name.
@@ -73,7 +73,7 @@
         /// </value>
         [Required]
         [MaxLength(20)]
-        public string Model { get; protected set; }
+        public string Model { get; protected set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the license plate of the car.
@@ -83,7 +83,7 @@
         /// </value>
         [Required]
         [MaxLength(20)]
-        public string LicensePlate { get; protected set; }
+        public string LicensePlate { get; protected set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the new price of the car.

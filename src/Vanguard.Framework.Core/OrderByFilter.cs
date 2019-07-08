@@ -13,7 +13,7 @@
         /// <value>
         /// The order by.
         /// </value>
-        public string OrderBy { get; set; }
+        public string? OrderBy { get; set; }
 
         /// <summary>
         /// Gets the property mappings. These mappings are used

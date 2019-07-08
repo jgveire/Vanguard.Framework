@@ -53,6 +53,6 @@
         /// <value>
         /// The target of the validation exception.
         /// </value>
-        public string Target { get; }
+        public string? Target { get; }
     }
 }

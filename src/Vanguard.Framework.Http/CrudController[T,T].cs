@@ -62,6 +62,11 @@
         [HttpGet("{id}")]
         public virtual ActionResult<TModel> GetById([FromRoute]TIdentifier id)
         {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
             var query = new GetQuery<TModel>(id);
             var result = QueryDispatcher.Dispatch(query);
             return OkOrNotFound(result);
@@ -89,6 +94,11 @@
         [HttpPut("{id}")]
         public virtual IActionResult Update([FromRoute]TIdentifier id, [FromBody, Required]TModel model)
         {
+            if (id == null || model == null)
+            {
+                return BadRequest();
+            }
+
             var command = new UpdateCommand<TModel>(id, model);
             CommandDispatcher.Dispatch(command);
             return new NoContentResult();
@@ -102,6 +112,11 @@
         [HttpDelete("{id}")]
         public virtual IActionResult Delete([FromRoute]TIdentifier id)
         {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
             var command = new DeleteCommand<TModel>(id);
             CommandDispatcher.Dispatch(command);
             return new NoContentResult();

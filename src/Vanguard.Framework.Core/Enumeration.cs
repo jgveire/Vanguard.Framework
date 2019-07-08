@@ -183,17 +183,16 @@
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            var otherValue = obj as Enumeration;
-            if (otherValue == null)
+            if (obj == null || obj.GetType() != GetType())
             {
                 return false;
             }
 
+            var otherValue = (Enumeration)obj;
             var typeMatches = GetType().Equals(obj.GetType());
             var valueMatches = Value.Equals(otherValue.Value);
-
             return typeMatches && valueMatches;
         }
 
@@ -218,19 +217,17 @@
         /// <param name="description">The enumeration description.</param>
         /// <param name="predicate">The predicate.</param>
         /// <returns>A enumeration.</returns>
-        /// <exception cref="ApplicationException">Thrown when the enumeration could not be found.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the enumeration could not be found.</exception>
         private static TEnumeration Parse<TEnumeration, TValue>(TValue value, string description, Func<TEnumeration, bool> predicate)
             where TEnumeration : Enumeration
         {
-            var matchingItem = GetAll<TEnumeration>().FirstOrDefault(predicate);
-
-            if (matchingItem == null)
+            if (!GetAll<TEnumeration>().Any(predicate))
             {
                 var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof(TEnumeration));
                 throw new InvalidOperationException(message);
             }
 
-            return matchingItem;
+            return GetAll<TEnumeration>().First(predicate);
         }
     }
 }

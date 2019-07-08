@@ -1,5 +1,6 @@
 ﻿namespace Vanguard.Framework.Http.ModelBinding
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -18,8 +19,16 @@
         {
             var bodyProvider = providers.Single(provider => provider.GetType() == typeof(BodyModelBinderProvider)) as BodyModelBinderProvider;
             var complexProvider = providers.Single(provider => provider.GetType() == typeof(ComplexTypeModelBinderProvider)) as ComplexTypeModelBinderProvider;
-            var bodyAndRouteProvider = new BodyAndRouteModelBinderProvider(bodyProvider, complexProvider);
+            if (bodyProvider == null)
+            {
+                throw new InvalidOperationException("Could not find the BodyModelBinderProvider in the model binder provider collection.");
+            }
+            else if (complexProvider == null)
+            {
+                throw new InvalidOperationException("Could not find the ComplexTypeModelBinderProvider in the model binder provider collection.");
+            }
 
+            var bodyAndRouteProvider = new BodyAndRouteModelBinderProvider(bodyProvider, complexProvider);
             providers.Insert(0, bodyAndRouteProvider);
         }
     }

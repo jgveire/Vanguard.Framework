@@ -87,7 +87,7 @@
         [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         public virtual IEnumerable<TEntity> Find(
             FilterQuery filterQuery,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -104,7 +104,7 @@
         [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
         public virtual async Task<IEnumerable<TEntity>> FindAsync(
             FilterQuery filterQuery,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -120,7 +120,7 @@
         /// <inheritdoc />
         public virtual IEnumerable<TEntity> Find(
             AdvancedFilter advancedFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -136,7 +136,7 @@
         /// <inheritdoc />
         public virtual async Task<IEnumerable<TEntity>> FindAsync(
             AdvancedFilter advancedFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -152,7 +152,7 @@
         /// <inheritdoc />
         public virtual IEnumerable<TEntity> Find(
             OrderByFilter orderByFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -168,7 +168,7 @@
         /// <inheritdoc />
         public virtual async Task<IEnumerable<TEntity>> FindAsync(
             OrderByFilter orderByFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -184,7 +184,7 @@
         /// <inheritdoc />
         public virtual IEnumerable<TEntity> Find(
             PagingFilter pagingFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -200,7 +200,7 @@
         /// <inheritdoc />
         public virtual async Task<IEnumerable<TEntity>> FindAsync(
             PagingFilter pagingFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -215,8 +215,8 @@
 
         /// <inheritdoc />
         public virtual IEnumerable<TEntity> Find(
-            SearchFilter searchFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            SearchFilter? searchFilter,
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -231,8 +231,8 @@
 
         /// <inheritdoc />
         public virtual async Task<IEnumerable<TEntity>> FindAsync(
-            SearchFilter searchFilter,
-            Expression<Func<TEntity, bool>> filter = null)
+            SearchFilter? searchFilter,
+            Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
 
@@ -247,8 +247,8 @@
 
         /// <inheritdoc />
         public virtual IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Expression<Func<TEntity, bool>>? filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             params string[] includeProperties)
         {
             var query = CompileQuery(filter, orderBy, includeProperties);
@@ -256,7 +256,10 @@
         }
 
         /// <inheritdoc />
-        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params string[] includeProperties)
+        public virtual async Task<IEnumerable<TEntity>> GetAsync(
+            Expression<Func<TEntity, bool>>? filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+            params string[] includeProperties)
         {
             var query = CompileQuery(filter, orderBy, includeProperties);
             return await query.ToListAsync();
@@ -344,7 +347,7 @@
         }
 
         /// <inheritdoc />
-        public virtual int GetCount(Expression<Func<TEntity, bool>> filter = null)
+        public virtual int GetCount(Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -379,7 +382,7 @@
         }
 
         /// <inheritdoc />
-        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>> filter = null)
+        public virtual async Task<int> GetCountAsync(Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -391,7 +394,7 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(AdvancedFilter advancedFilter, Expression<Func<TEntity, bool>> filter = null)
+        public int GetCount(AdvancedFilter advancedFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -403,7 +406,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(AdvancedFilter advancedFilter, Expression<Func<TEntity, bool>> filter = null)
+        public async Task<int> GetCountAsync(AdvancedFilter advancedFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -415,7 +418,7 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(OrderByFilter orderByFilter, Expression<Func<TEntity, bool>> filter = null)
+        public int GetCount(OrderByFilter orderByFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -427,7 +430,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(OrderByFilter orderByFilter, Expression<Func<TEntity, bool>> filter = null)
+        public async Task<int> GetCountAsync(OrderByFilter orderByFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -439,7 +442,7 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(PagingFilter pagingFilter, Expression<Func<TEntity, bool>> filter = null)
+        public int GetCount(PagingFilter pagingFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -451,7 +454,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(PagingFilter pagingFilter, Expression<Func<TEntity, bool>> filter = null)
+        public async Task<int> GetCountAsync(PagingFilter pagingFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -463,7 +466,7 @@
         }
 
         /// <inheritdoc />
-        public int GetCount(SearchFilter searchFilter, Expression<Func<TEntity, bool>> filter = null)
+        public int GetCount(SearchFilter? searchFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -475,7 +478,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<int> GetCountAsync(SearchFilter searchFilter, Expression<Func<TEntity, bool>> filter = null)
+        public async Task<int> GetCountAsync(SearchFilter? searchFilter, Expression<Func<TEntity, bool>>? filter = null)
         {
             IQueryable<TEntity> query = DbSet;
             if (filter != null)
@@ -549,8 +552,8 @@
         }
 
         private IQueryable<TEntity> CompileQuery(
-            Expression<Func<TEntity, bool>> filter,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+            Expression<Func<TEntity, bool>>? filter,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy,
             params string[] includeProperties)
         {
             IQueryable<TEntity> query = DbSet;

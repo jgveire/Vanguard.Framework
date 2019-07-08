@@ -20,6 +20,6 @@
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = string.Empty;
     }
 }

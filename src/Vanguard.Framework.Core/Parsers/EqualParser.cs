@@ -63,7 +63,7 @@
         public Expression CreateExpression<TEntity>(ParameterExpression parameter)
         {
             var property = GetProperty<TEntity>(PropertyName);
-            object value = GetValue(property, Value);
+            var value = GetValue(property, Value);
 
             var memberExpression = Expression.PropertyOrField(parameter, property.Name);
             var valueExpression = Expression.Constant(value, property.PropertyType);
@@ -73,7 +73,7 @@
         private PropertyInfo GetProperty<TEntity>(string propertyName)
         {
             var type = typeof(TEntity);
-            var property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo? property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             if (property == null)
             {
                 property = type
@@ -89,7 +89,7 @@
             return property;
         }
 
-        private object GetValue(PropertyInfo property, string value)
+        private object? GetValue(PropertyInfo property, string value)
         {
             if (!TypeConverters.Instance.ContainsKey(property.PropertyType))
             {

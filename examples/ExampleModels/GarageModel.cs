@@ -17,7 +17,7 @@
         /// </value>
         [Required]
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the address of the garage.
@@ -27,6 +27,6 @@
         /// </value>
         [Required]
         [MaxLength(200)]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
     }
 }
