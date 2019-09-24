@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+    using System.Threading.Tasks;
     using Core.Collections;
     using Core.Extensions;
     using Core.Parsers;
@@ -487,6 +488,219 @@
         }
 
         /// <summary>
+        /// Applies the order by filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static FilterResult<TEntity> ToFilteredResult<TEntity>(
+            this IQueryable<TEntity> source,
+            OrderByFilter orderByFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null)
+            {
+                return new FilterResult<TEntity>();
+            }
+            else if (orderByFilter == null)
+            {
+                return new FilterResult<TEntity>(source.GetPage(1, 20).ToList(), source.Count());
+            }
+
+            ValidateOrderBy<TEntity>(orderByFilter);
+
+            // Order by
+            if (!string.IsNullOrEmpty(orderByFilter.OrderBy))
+            {
+                var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
+                source = source.OrderBy(orderBy, orderByFilter.SortOrder);
+            }
+
+            // Paging
+            return new FilterResult<TEntity>(source.GetPage(orderByFilter.Page, orderByFilter.PageSize).ToList(), source.Count());
+        }
+
+        /// <summary>
+        /// Applies the paging filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static FilterResult<TEntity> ToFilteredResult<TEntity>(
+            this IQueryable<TEntity> source,
+            PagingFilter pagingFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null)
+            {
+                return new FilterResult<TEntity>();
+            }
+            else if (pagingFilter == null)
+            {
+                return new FilterResult<TEntity>(source.GetPage(1, 20).ToList(), source.Count());
+            }
+
+            return new FilterResult<TEntity>(source.GetPage(pagingFilter.Page, pagingFilter.PageSize).ToList(), source.Count());
+        }
+
+        /// <summary>
+        /// Applies the search filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static FilterResult<TEntity> ToFilteredResult<TEntity>(
+            this IQueryable<TEntity> source,
+            SearchFilter? searchFilter)
+            where TEntity : class, IDataEntity
+        {
+            if (source == null)
+            {
+                return new FilterResult<TEntity>();
+            }
+            else if (searchFilter == null)
+            {
+                return new FilterResult<TEntity>(source.GetPage(1, 20).ToList(), source.Count());
+            }
+
+            ValidateOrderBy<TEntity>(searchFilter);
+
+            // Search
+            if (!string.IsNullOrEmpty(searchFilter.Search))
+            {
+                source = source.Search(searchFilter.Search);
+            }
+
+            // Order by
+            if (!string.IsNullOrEmpty(searchFilter.OrderBy))
+            {
+                var orderBy = searchFilter.PropertyMappings.MapProperty(searchFilter.OrderBy);
+                source = source.OrderBy(orderBy, searchFilter.SortOrder);
+            }
+
+            // Paging
+            return new FilterResult<TEntity>(source.GetPage(searchFilter.Page, searchFilter.PageSize).ToList(), source.Count());
+        }
+
+        /// <summary>
+        /// Applies the order by filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="orderByFilter">The order by filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static async Task<FilterResult<TEntity>> ToFilteredResultAsync<TEntity>(
+            this IQueryable<TEntity> source,
+            OrderByFilter orderByFilter)
+            where TEntity : class, IDataEntity
+        {
+            List<TEntity> items;
+            int count;
+            if (source == null)
+            {
+                return new FilterResult<TEntity>();
+            }
+            else if (orderByFilter == null)
+            {
+                items = await source.GetPage(1, 20).ToListAsync();
+                count = await source.CountAsync();
+                return new FilterResult<TEntity>(items, count);
+            }
+
+            ValidateOrderBy<TEntity>(orderByFilter);
+
+            // Order by
+            if (!string.IsNullOrEmpty(orderByFilter.OrderBy))
+            {
+                var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
+                source = source.OrderBy(orderBy, orderByFilter.SortOrder);
+            }
+
+            // Paging
+            items = await source.GetPage(orderByFilter.Page, orderByFilter.PageSize).ToListAsync();
+            count = await source.CountAsync();
+            return new FilterResult<TEntity>(items, count);
+        }
+
+        /// <summary>
+        /// Applies the paging filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="pagingFilter">The paging filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static async Task<FilterResult<TEntity>> ToFilteredResultAsync<TEntity>(
+            this IQueryable<TEntity> source,
+            PagingFilter pagingFilter)
+            where TEntity : class, IDataEntity
+        {
+            List<TEntity> items;
+            int count;
+            if (source == null)
+            {
+                return new FilterResult<TEntity>();
+            }
+            else if (pagingFilter == null)
+            {
+                items = await source.GetPage(1, 20).ToListAsync();
+                count = await source.CountAsync();
+                return new FilterResult<TEntity>(items, count);
+            }
+
+            items = await source.GetPage(pagingFilter.Page, pagingFilter.PageSize).ToListAsync();
+            count = await source.CountAsync();
+            return new FilterResult<TEntity>(items, count);
+        }
+
+        /// <summary>
+        /// Applies the search filter to the queryable.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <param name="source">The queryable.</param>
+        /// <param name="searchFilter">The search filter.</param>
+        /// <returns>A collection of entities.</returns>
+        public static async Task<FilterResult<TEntity>> ToFilteredResultAsync<TEntity>(
+            this IQueryable<TEntity> source,
+            SearchFilter? searchFilter)
+            where TEntity : class, IDataEntity
+        {
+            List<TEntity> items;
+            int count;
+            if (source == null)
+            {
+                return new FilterResult<TEntity>();
+            }
+            else if (searchFilter == null)
+            {
+                items = await source.GetPage(1, 20).ToListAsync();
+                count = await source.CountAsync();
+                return new FilterResult<TEntity>(items, count);
+            }
+
+            ValidateOrderBy<TEntity>(searchFilter);
+
+            // Search
+            if (!string.IsNullOrEmpty(searchFilter.Search))
+            {
+                source = source.Search(searchFilter.Search);
+            }
+
+            // Order by
+            if (!string.IsNullOrEmpty(searchFilter.OrderBy))
+            {
+                var orderBy = searchFilter.PropertyMappings.MapProperty(searchFilter.OrderBy);
+                source = source.OrderBy(orderBy, searchFilter.SortOrder);
+            }
+
+            // Paging
+            items = await source.GetPage(searchFilter.Page, searchFilter.PageSize).ToListAsync();
+            count = await source.CountAsync();
+            return new FilterResult<TEntity>(items, count);
+        }
+        /// <summary>
         /// Searches for elements that have the supplied values.
         /// </summary>
         /// <typeparam name="TEntity">The type of the elements of the source.</typeparam>
@@ -630,15 +844,6 @@
             }
         }
 
-        private static void ValidateOrderBy<TEntity>(OrderByFilter orderByFilter)
-        {
-            if (!string.IsNullOrWhiteSpace(orderByFilter.OrderBy))
-            {
-                var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
-                ValidateOrderBy<TEntity>(orderBy);
-            }
-        }
-
         private static void ValidateInclude<TEntity>(AdvancedFilter advancedFilter)
         {
             if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
@@ -661,6 +866,14 @@
             }
         }
 
+        private static void ValidateOrderBy<TEntity>(OrderByFilter orderByFilter)
+        {
+            if (!string.IsNullOrWhiteSpace(orderByFilter.OrderBy))
+            {
+                var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
+                ValidateOrderBy<TEntity>(orderBy);
+            }
+        }
         private static void ValidateOrderBy<TEntity>(string orderBy)
         {
             var type = typeof(TEntity);
