@@ -62,7 +62,7 @@
                     EntityName = entityEntry.Entity.GetType().Name,
                     UserId = userId,
                     UtcDate = utcChangeDate,
-                    Entity = SerializeEntity(entityEntry)
+                    Entity = SerializeEntity(entityEntry),
                 };
                 _dbContext.Add(auditEntry);
             }

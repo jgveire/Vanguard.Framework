@@ -28,12 +28,12 @@
         /// <summary>
         /// Gets the number of items that conform with the specified find criteria.
         /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
+        /// <param name="searchFilter">The search filter.</param>
         /// <returns>The number of items that conform with the specified find criteria.</returns>
         [HttpGet("count")]
-        public virtual IActionResult Count([FromQuery]FilterQuery filterQuery)
+        public virtual IActionResult Count([FromQuery]SearchFilter searchFilter)
         {
-            var query = new CountQuery<TModel>(filterQuery);
+            var query = new CountQuery<TModel>(searchFilter);
             var result = QueryDispatcher.Dispatch(query);
             return Ok(result);
         }
@@ -41,12 +41,12 @@
         /// <summary>
         /// Gets the items that conform with the specified find criteria.
         /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
+        /// <param name="searchFilter">The search filter.</param>
         /// <returns>A collection of items that conform with the specified find criteria.</returns>
         [HttpGet]
-        public virtual IActionResult Find([FromQuery]FilterQuery filterQuery)
+        public virtual IActionResult Find([FromQuery]SearchFilter searchFilter)
         {
-            var query = new FindQuery<TModel>(filterQuery);
+            var query = new FindQuery<TModel>(searchFilter);
             var result = QueryDispatcher.Dispatch(query);
             return Ok(result);
         }

@@ -58,7 +58,7 @@
         /// Writes the given <paramref name="value"/> as JSON using the given
         /// <paramref name="writer"/>.
         /// </summary>
-        /// <param name="writer">The <see cref="TextWriter"/> used to write the <paramref name="value"/></param>
+        /// <param name="writer">The <see cref="TextWriter"/> used to write the <paramref name="value"/>.</param>
         /// <param name="value">The value to write as JSON.</param>
         /// <param name="query">The query collection from the request.</param>
         protected void WriteObject(TextWriter writer, object value, IQueryCollection query)

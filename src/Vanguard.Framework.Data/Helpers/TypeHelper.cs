@@ -24,7 +24,7 @@
             typeof(double),
             typeof(float),
             typeof(float),
-            typeof(decimal)
+            typeof(decimal),
         };
 
         /// <summary>

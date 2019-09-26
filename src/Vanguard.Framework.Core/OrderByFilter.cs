@@ -1,6 +1,6 @@
 ﻿namespace Vanguard.Framework.Core
 {
-    using Collections;
+    using Vanguard.Framework.Core.Collections;
 
     /// <summary>
     /// The order by filter.

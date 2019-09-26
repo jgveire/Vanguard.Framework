@@ -24,7 +24,7 @@
             }
 
             var status = HttpStatusCode.BadRequest;
-            var errorResponse = new ErrorResponse(status.ToString(), exception.Message, exception.Target);
+            var errorResponse = new ErrorResponse(status.ToString(), exception.Message, exception.Target ?? string.Empty);
             context.HttpContext.Response.StatusCode = (int)status;
             context.Result = new JsonResult(errorResponse);
         }

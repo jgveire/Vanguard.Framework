@@ -6,12 +6,12 @@
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Threading.Tasks;
-    using Core.Collections;
-    using Core.Extensions;
-    using Core.Parsers;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
+    using Vanguard.Framework.Core.Collections;
     using Vanguard.Framework.Core.Exceptions;
+    using Vanguard.Framework.Core.Extensions;
+    using Vanguard.Framework.Core.Parsers;
     using Vanguard.Framework.Core.Repositories;
     using Vanguard.Framework.Data.Extensions;
     using Vanguard.Framework.Data.Resources;
@@ -34,7 +34,11 @@
             FilterQuery filterQuery)
             where TEntity : class, IDataEntity
         {
-            if (source == null || filterQuery == null)
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            else if (filterQuery == null)
             {
                 return source;
             }
@@ -95,7 +99,11 @@
             AdvancedFilter advancedFilter)
             where TEntity : class, IDataEntity
         {
-            if (source == null || advancedFilter == null)
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            else if (advancedFilter == null)
             {
                 return source;
             }
@@ -151,7 +159,11 @@
             OrderByFilter orderByFilter)
             where TEntity : class, IDataEntity
         {
-            if (source == null || orderByFilter == null)
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            else if (orderByFilter == null)
             {
                 return source;
             }
@@ -183,7 +195,11 @@
             PagingFilter pagingFilter)
             where TEntity : class, IDataEntity
         {
-            if (source == null || pagingFilter == null)
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            else if (pagingFilter == null)
             {
                 return source;
             }
@@ -204,7 +220,11 @@
             SearchFilter? searchFilter)
             where TEntity : class, IDataEntity
         {
-            if (source == null || searchFilter == null)
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            else if (searchFilter == null)
             {
                 return source;
             }
@@ -308,7 +328,11 @@
         public static IQueryable<TEntity> Include<TEntity>(this IQueryable<TEntity> source, string[] navigationPropertyPaths)
             where TEntity : class
         {
-            if (source == null || navigationPropertyPaths == null)
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            else if (navigationPropertyPaths == null)
             {
                 return source;
             }
@@ -700,6 +724,7 @@
             count = await source.CountAsync();
             return new FilterResult<TEntity>(items, count);
         }
+
         /// <summary>
         /// Searches for elements that have the supplied values.
         /// </summary>
@@ -829,7 +854,9 @@
             return (IOrderedQueryable<T>)source.Provider.CreateQuery(methodCall);
         }
 
+#pragma warning disable CS0618 // Type or member is obsolete
         private static void Validate<TEntity>(FilterQuery filterQuery)
+#pragma warning restore CS0618 // Type or member is obsolete
         {
             if (!string.IsNullOrWhiteSpace(filterQuery.OrderBy))
             {
@@ -861,7 +888,7 @@
                 if (!GetEntityProperties<TEntity>().Contains(propertyName, StringComparer.InvariantCultureIgnoreCase))
                 {
                     string message = string.Format(ExceptionResource.CannotInclude, propertyName);
-                    throw new ValidationException(message, nameof(FilterQuery.Include));
+                    throw new ValidationException(message, nameof(AdvancedFilter.Include));
                 }
             }
         }
@@ -874,6 +901,7 @@
                 ValidateOrderBy<TEntity>(orderBy);
             }
         }
+
         private static void ValidateOrderBy<TEntity>(string orderBy)
         {
             var type = typeof(TEntity);
@@ -888,7 +916,7 @@
                 if (property == null)
                 {
                     string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
-                    throw new ValidationException(message, nameof(FilterQuery.OrderBy));
+                    throw new ValidationException(message, nameof(AdvancedFilter.OrderBy));
                 }
 
                 type = property.PropertyType;

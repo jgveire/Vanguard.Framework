@@ -13,6 +13,6 @@
         /// <summary>
         /// The descending sort order.
         /// </summary>
-        Desc = 1
+        Desc = 1,
     }
 }

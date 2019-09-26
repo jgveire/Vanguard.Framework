@@ -21,7 +21,7 @@
             var contentDisposition = new ContentDisposition
             {
                 FileName = fileName,
-                Inline = displayInline
+                Inline = displayInline,
             };
             source.Add(HeaderNames.ContentDisposition, contentDisposition.ToString());
         }

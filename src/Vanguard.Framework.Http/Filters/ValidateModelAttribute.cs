@@ -20,7 +20,10 @@
             if (!context.ModelState.IsValid)
             {
                 var status = HttpStatusCode.BadRequest;
-                var errorResponse = new ErrorResponse(ErrorCode.ValidationError, ExceptionResource.ValidationError);
+                var errorResponse = new ErrorResponse
+                {
+                    Error = new Error(ErrorCode.ValidationError, ExceptionResource.ValidationError),
+                };
                 errorResponse.Error.Details = GetErrorDetails(context.ModelState);
                 context.HttpContext.Response.StatusCode = (int)status;
                 context.Result = new JsonResult(errorResponse);

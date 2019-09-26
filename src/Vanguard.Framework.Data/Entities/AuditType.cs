@@ -18,6 +18,6 @@
         /// <summary>
         /// Represents an record that has been deleted.
         /// </summary>
-        Delete = 2
+        Delete = 2,
     }
 }
