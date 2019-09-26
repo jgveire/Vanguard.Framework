@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
 EndProject
@@ -14,10 +14,19 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data", "src\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj", "{7EF90957-2464-4445-99B3-9450F4ACA9A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{598C29F1-A96E-4ECE-9A0B-076173C0B418}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5910B2D3-89FA-4698-98E3-E29205FDF9E7}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{9028BADB-AB90-4432-8E23-40D533008578}"
+	ProjectSection(SolutionItems) = preProject
+		examples\Directory.Build.props = examples\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Data.Tests", "tests\Vanguard.Framework.Data.Tests\Vanguard.Framework.Data.Tests.csproj", "{969C100B-D456-4108-9FB3-32E271E59105}"
 EndProject
@@ -29,6 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleData", "examples\Exa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{75CAECAC-6B90-4794-BCE4-97A21A817956}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		settings\Vanguard.ruleset = settings\Vanguard.ruleset
 		settings\VanguardTest.ruleset = settings\VanguardTest.ruleset
 	EndProjectSection

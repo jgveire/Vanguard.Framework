@@ -35,7 +35,7 @@
         /// <returns>The query result.</returns>
         public IEnumerable<TModel> Retrieve(FindQuery<TModel> query)
         {
-            var entities = _repository.Find(query.Criteria);
+            var entities = _repository.Find(query.Filter);
             var model = _mapper.Map<IEnumerable<TModel>>(entities);
             return model;
         }

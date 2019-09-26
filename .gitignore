@@ -259,3 +259,14 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Generated documentation
+**/Vanguard.Framework.Core.xml
+**/Vanguard.Framework.Data.xml
+**/Vanguard.Framework.Http.xml
+**/Vanguard.Framework.Test.xml
+**/ExampleBusiness.xml
+**/ExampleCommon.xml
+**/ExampleData.xml
+**/ExampleModels.xml
+**/ExampleService.xml

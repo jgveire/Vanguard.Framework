@@ -5,8 +5,8 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-    using Collections;
-    using Extensions;
+    using Vanguard.Framework.Core.Collections;
+    using Vanguard.Framework.Core.Extensions;
 
     /// <summary>
     /// The filter parser.

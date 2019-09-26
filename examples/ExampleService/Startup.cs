@@ -32,7 +32,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
-        /// <param name="env">The hosting environment</param>
+        /// <param name="env">The hosting environment.</param>
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -103,7 +103,7 @@
                     options.OutputFormatters.Add(new SelectFieldJsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared));
                 });
 
-            // services.AddDbContext<ExampleContext>(options => options.UseInMemoryDatabase("Example"));
+            // You can also use in memory database instead if you don't have SQL Server.
             services.AddDbContext<ExampleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Example")));
             services.AddSwaggerGen(SetupSwagger);
 

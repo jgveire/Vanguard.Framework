@@ -44,7 +44,7 @@
                 { typeof(char), new CharConverter() },
                 { typeof(char?), new CharConverter() },
                 { typeof(Guid), new GuidConverter() },
-                { typeof(Guid?), new GuidConverter() }
+                { typeof(Guid?), new GuidConverter() },
             };
         }
     }

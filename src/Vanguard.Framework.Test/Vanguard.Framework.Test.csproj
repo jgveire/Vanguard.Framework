@@ -9,29 +9,19 @@
     <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageLicenseUrl>https://github.com/jgveire/Vanguard.Framework/License.txt</PackageLicenseUrl>
     <PackageTags>Vanguard Framework Unit Test</PackageTags>
     <PackageReleaseNotes>Changed from .net Core 2.1 to .NET Standard 2.0 Framework</PackageReleaseNotes>
-    <Copyright>Copyright 2018 Veire Solutions</Copyright>
+    <Copyright>Copyright 2019 Veire Solutions</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Base unit test classes that makes it easier to unit test code. This framework make use of Moq as mocking framework.</Description>
     <PackageIconUrl>https://jgveire.github.io/Vanguard/Vanguard.png</PackageIconUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <LangVersion>8.0</LangVersion>
-    <NullableContextOptions>enable</NullableContextOptions>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.1|AnyCPU'">
-    <CodeAnalysisRuleSet>..\..\settings\VanguardTest.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Debug\netcoreapp2.1\Vanguard.Framework.Test.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp2.1|AnyCPU'">
-    <CodeAnalysisRuleSet>..\..\settings\VanguardTest.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Release\netcoreapp2.1\Vanguard.Framework.Test.xml</DocumentationFile>
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,15 +34,6 @@
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.10.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.9.0.7583">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
-	  <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-
   </ItemGroup>
 
   <ItemGroup>

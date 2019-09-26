@@ -10,19 +10,19 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CountQuery{TModel}"/> class.
         /// </summary>
-        /// <param name="criteria">The find criteria.</param>
-        public CountQuery(FilterQuery criteria)
+        /// <param name="filter">The search filter.</param>
+        public CountQuery(SearchFilter filter)
         {
-            Guard.ArgumentNotNull(criteria, nameof(criteria));
-            Criteria = criteria;
+            Guard.ArgumentNotNull(filter, nameof(filter));
+            Filter = filter;
         }
 
         /// <summary>
-        /// Gets the find criteria.
+        /// Gets the search filter.
         /// </summary>
         /// <value>
-        /// The find criteria.
+        /// The search filter.
         /// </value>
-        public FilterQuery Criteria { get; }
+        public SearchFilter Filter { get; }
     }
 }
