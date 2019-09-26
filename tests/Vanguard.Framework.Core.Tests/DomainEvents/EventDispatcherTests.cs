@@ -29,7 +29,7 @@ namespace Vanguard.Framework.Core.Tests.DomainEvents
             var domainEvent = new TestEvent();
             var eventHandlers = new List<IEventHandler<TestEvent>>
             {
-                new TestEventHandler()
+                new TestEventHandler(),
             };
 
             // Arrange mocks
@@ -51,7 +51,7 @@ namespace Vanguard.Framework.Core.Tests.DomainEvents
             var domainEvent = new TestEvent();
             var eventHandlers = new List<IEventHandler<TestEvent>>
             {
-                new TestEventHandler()
+                new TestEventHandler(),
             };
 
             // Arrange mocks

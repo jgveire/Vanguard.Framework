@@ -1,8 +1,8 @@
 ﻿namespace Vanguard.Framework.Core.Tests.Extensions
 {
-    using Core.Extensions;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Core.Extensions;
 
     [TestClass]
     public class StringExtensionsTests

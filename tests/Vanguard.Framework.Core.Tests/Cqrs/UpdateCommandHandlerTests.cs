@@ -1,6 +1,7 @@
 namespace Vanguard.Framework.Core.Tests.Cqrs
 {
     using System;
+    using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Vanguard.Framework.Core.Cqrs;
     using Vanguard.Framework.Core.Repositories;
@@ -44,9 +45,10 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
                 .Returns(entity);
 
             // Act
-            SystemUnderTest.Execute(command);
+            Action action = () => SystemUnderTest.Execute(command);
 
             // Assert
+            action.Should().NotThrow(because: "the mocks have been setup correctly");
         }
     }
 }

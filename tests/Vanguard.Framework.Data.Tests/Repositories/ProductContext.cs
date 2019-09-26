@@ -4,9 +4,9 @@
 
     public class ProductContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; } = new DummyDbSet<Product>();
 
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; } = new DummyDbSet<ProductCategory>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

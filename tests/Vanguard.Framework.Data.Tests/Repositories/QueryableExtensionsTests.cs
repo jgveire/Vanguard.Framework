@@ -3,10 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Core;
-    using Core.Collections;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Vanguard.Framework.Core;
 
     [TestClass]
     public class QueryableExtensionsTests
@@ -81,9 +80,9 @@
         public void When_Validate_is_called_with_member_path_then_no_validation_exception_should_be_thrown()
         {
             // Arrange
-            var filter = new FilterQuery
+            var filter = new OrderByFilter
             {
-                OrderBy = "category.name"
+                OrderBy = "category.name",
             };
 
             // Act
@@ -97,7 +96,7 @@
         public void When_a_property_is_mapped_no_order_by_validation_error_should_be_thrown()
         {
             // Arrange
-            var filter = new FilterQuery
+            var filter = new OrderByFilter
             {
                 OrderBy = "categoryName",
             };
@@ -123,7 +122,7 @@
                     new Product(1, "How to program", books),
                     new Product(2, "Apple", computers),
                     new Product(3, "BMX Bike", bikes),
-                    new Product(4, "Mountain Bike", bikes)
+                    new Product(4, "Mountain Bike", bikes),
                 }.AsQueryable();
             }
 
