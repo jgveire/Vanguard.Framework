@@ -72,7 +72,7 @@
 
             // Assert
             result.Any(product => product.Id == 0).Should().BeFalse(because: "we selected the field Id");
-            result.All(product => product.Name == null).Should().BeTrue(because: "we selected the field Id and not Name");
+            result.All(product => product.Name == string.Empty).Should().BeTrue(because: "we selected the field Id and not Name");
             result.All(product => product.Category == null).Should().BeTrue(because: "we selected the field Id and not Category");
         }
 
