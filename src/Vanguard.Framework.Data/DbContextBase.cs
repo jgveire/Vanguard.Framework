@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.DomainEvents;
@@ -103,6 +105,36 @@
             return result;
         }
 
+        /// <inheritdoc />
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            var events = GetAndClearEvents();
+            CreateAuditRecords();
+            var result = base.SaveChanges(acceptAllChangesOnSuccess);
+            DispatchEvents(events);
+            return result;
+        }
+
+        /// <inheritdoc />
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var events = GetAndClearEvents();
+            CreateAuditRecords();
+            var result = await base.SaveChangesAsync(cancellationToken);
+            await DispatchEventsAsync(events);
+            return result;
+        }
+
+        /// <inheritdoc />
+        public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            var events = GetAndClearEvents();
+            CreateAuditRecords();
+            var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+            await DispatchEventsAsync(events);
+            return result;
+        }
+
         /// <summary>
         /// Creates the audit records.
         /// </summary>
@@ -116,25 +148,59 @@
             AuditManager.CreateAuditRecords(CurrentUser.UserId, DateTime.UtcNow);
         }
 
-        private void DispatchEvents(IEnumerable<IDomainEvent> events)
+        private void DispatchEvents(IEnumerable<object> events)
         {
             if (EventDispatcher == null)
             {
                 return;
             }
 
-            foreach (var domainEvent in events)
+            foreach (var @event in events)
             {
-                EventDispatcher.Dispatch(domainEvent);
+                if (@event is IDomainEvent domainEvent)
+                {
+                    EventDispatcher.Dispatch(domainEvent);
+                }
+                else if (@event is IAsyncDomainEvent asyncDomainEvent)
+                {
+                    EventDispatcher.DispatchAsync(asyncDomainEvent).RunSynchronously();
+                }
             }
         }
 
-        private List<IDomainEvent> GetAndClearEvents()
+        private async Task DispatchEventsAsync(IEnumerable<object> events)
         {
-            var events = new List<IDomainEvent>();
+            if (EventDispatcher == null)
+            {
+                return;
+            }
+
+            foreach (var @event in events)
+            {
+                if (@event is IDomainEvent domainEvent)
+                {
+                    EventDispatcher.Dispatch(domainEvent);
+                }
+                else if (@event is IAsyncDomainEvent asyncDomainEvent)
+                {
+                    await EventDispatcher.DispatchAsync(asyncDomainEvent);
+                }
+            }
+        }
+
+        private List<object> GetAndClearEvents()
+        {
+            var events = new List<object>();
 
             var entities = GetChangedDomainEntities();
             foreach (var entity in entities)
+            {
+                events.AddRange(entity.Events);
+                entity.Events.Clear();
+            }
+
+            var asyncEntities = GetChangedAsyncDomainEntities();
+            foreach (var entity in asyncEntities)
             {
                 events.AddRange(entity.Events);
                 entity.Events.Clear();
@@ -146,6 +212,15 @@
         private IDomainEntity[] GetChangedDomainEntities()
         {
             var entities = ChangeTracker.Entries<IDomainEntity>()
+                .Select(entry => entry.Entity)
+                .Where(entry => entry.Events.Any())
+                .ToArray();
+            return entities;
+        }
+
+        private IAsyncDomainEntity[] GetChangedAsyncDomainEntities()
+        {
+            var entities = ChangeTracker.Entries<IAsyncDomainEntity>()
                 .Select(entry => entry.Entity)
                 .Where(entry => entry.Events.Any())
                 .ToArray();
