@@ -32,7 +32,7 @@
             var bytes = new byte[byteLength];
 
             CryptoProvider.GetBytes(bytes);
-            
+
             // Convert to string and replace padding characters.
             string token = Convert
                 .ToBase64String(bytes)

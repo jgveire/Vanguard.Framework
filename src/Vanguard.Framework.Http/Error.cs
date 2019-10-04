@@ -69,6 +69,6 @@
         /// <value>
         /// The error details.
         /// </value>
-        public IEnumerable<Error> Details { get; set; } = new List<Error>();
+        public List<Error> Details { get; set; } = new List<Error>();
     }
 }

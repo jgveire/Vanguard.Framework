@@ -30,16 +30,19 @@
             }
         }
 
-        private IEnumerable<Error> GetErrorDetails(ModelStateDictionary modelState)
+        private List<Error> GetErrorDetails(ModelStateDictionary modelState)
         {
+            var result = new List<Error>();
             foreach (var modelStateItem in modelState)
             {
                 foreach (var error in modelStateItem.Value.Errors)
                 {
                     string target = GetTargetName(modelStateItem.Key);
-                    yield return new Error(ErrorCode.ValidationError, error.ErrorMessage, target);
+                    result.Add(new Error(ErrorCode.ValidationError, error.ErrorMessage, target));
                 }
             }
+
+            return result;
         }
 
         private string GetTargetName(string key)
