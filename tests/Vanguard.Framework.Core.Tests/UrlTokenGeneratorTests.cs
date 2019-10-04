@@ -9,7 +9,7 @@
     public class UrlTokenGeneratorTests : TestBase<UrlTokenGenerator>
     {
         [TestMethod]
-        public void When_generate_is_callid_a_token_should_be_generated()
+        public void When_generate_is_called_a_token_should_be_generated()
         {
             // Act
             string result = SystemUnderTest.Generate(100);
