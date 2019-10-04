@@ -163,7 +163,7 @@
                 }
                 else if (@event is IAsyncDomainEvent asyncDomainEvent)
                 {
-                    EventDispatcher.DispatchAsync(asyncDomainEvent).RunSynchronously();
+                    throw new InvalidOperationException("Asynchronous domain events cannot be dispatched in the SaveChanges method, please make use of the SaveChangesAsync method.");
                 }
             }
         }
