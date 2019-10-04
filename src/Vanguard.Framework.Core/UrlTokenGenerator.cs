@@ -27,11 +27,13 @@
             Guard.ArgumentInRange(length, 1, int.MaxValue, nameof(length));
 
             // Make sure the length is dividable by 3
-            // other we will get padding characters.
+            // otherwise we will get padding characters.
             int byteLength = length - (length % 3) + 3;
             var bytes = new byte[byteLength];
 
             CryptoProvider.GetBytes(bytes);
+            
+            // Convert to string and replace padding characters.
             string token = Convert
                 .ToBase64String(bytes)
                 .Replace('/', 'a')
