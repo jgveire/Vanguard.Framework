@@ -53,7 +53,7 @@
             }
 
             // Converts C# property name to Json property name.
-            return Regex.Replace(key, @"^([A-Z]{1})|\.([A-Z]{1})", match => match.ToString().ToLower());
+            return Regex.Replace(key, @"(^|\.)[A-Z]", match => match.ToString().ToLower());
         }
     }
 }
