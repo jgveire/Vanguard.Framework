@@ -10,7 +10,7 @@
     [TestClass]
     public class QueryableExtensionsTests
     {
-        private static IQueryable<Product> _products;
+        private static IQueryable<Product>? _products;
 
         private static IQueryable<Product> Products => GetProducts();
 

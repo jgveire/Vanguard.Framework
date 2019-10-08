@@ -13,8 +13,7 @@
         /// <param name="model">The model.</param>
         public AddCommand(TModel model)
         {
-            Guard.ArgumentNotNull(model, nameof(model));
-            Model = model;
+            Model = Guard.ArgumentNotNull(model, nameof(model));
         }
 
         /// <summary>

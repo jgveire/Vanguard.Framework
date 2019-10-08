@@ -13,8 +13,7 @@
         /// <param name="filter">The search filter.</param>
         public CountQuery(SearchFilter filter)
         {
-            Guard.ArgumentNotNull(filter, nameof(filter));
-            Filter = filter;
+            Filter = Guard.ArgumentNotNull(filter, nameof(filter));
         }
 
         /// <summary>

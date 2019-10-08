@@ -17,8 +17,7 @@
         /// <param name="id">The identifier of the entity that needs to be deleted.</param>
         public DeleteCommand(object id)
         {
-            Guard.ArgumentNotNull(id, nameof(id));
-            Id = id;
+            Id = Guard.ArgumentNotNull(id, nameof(id));
         }
 
         /// <summary>

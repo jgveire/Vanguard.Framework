@@ -13,8 +13,7 @@
         /// <param name="id">The identifier of the entity that needs to be retrieved.</param>
         public GetQuery(object id)
         {
-            Guard.ArgumentNotNull(id, nameof(id));
-            Id = id;
+            Id = Guard.ArgumentNotNull(id, nameof(id));
         }
 
         /// <summary>

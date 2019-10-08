@@ -37,9 +37,8 @@
         /// <param name="eventDispatcher">The event dispatcher.</param>
         public DbContextBase(IEventDispatcher eventDispatcher)
         {
-            Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
             AuditManager = new AuditManager(this);
-            EventDispatcher = eventDispatcher;
         }
 
         /// <summary>
@@ -50,9 +49,8 @@
         public DbContextBase(IEventDispatcher eventDispatcher, DbContextOptions options)
             : base(options)
         {
-            Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
             AuditManager = new AuditManager(this);
-            EventDispatcher = eventDispatcher;
         }
 
         /// <summary>
@@ -64,11 +62,9 @@
         public DbContextBase(IEventDispatcher eventDispatcher, ICurrentUser currentUser, DbContextOptions options)
             : base(options)
         {
-            Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
-            Guard.ArgumentNotNull(currentUser, nameof(currentUser));
+            EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            CurrentUser = Guard.ArgumentNotNull(currentUser, nameof(currentUser));
             AuditManager = new AuditManager(this);
-            EventDispatcher = eventDispatcher;
-            CurrentUser = currentUser;
         }
 
         /// <summary>

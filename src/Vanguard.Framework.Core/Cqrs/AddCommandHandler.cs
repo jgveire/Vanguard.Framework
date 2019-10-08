@@ -21,10 +21,8 @@
         /// <param name="mapper">The entity mapper.</param>
         public AddCommandHandler(IRepository<TEntity> repository, IMapper mapper)
         {
-            Guard.ArgumentNotNull(repository, nameof(repository));
-            Guard.ArgumentNotNull(mapper, nameof(mapper));
-            _repository = repository;
-            _mapper = mapper;
+            _repository = Guard.ArgumentNotNull(repository, nameof(repository));
+            _mapper = Guard.ArgumentNotNull(mapper, nameof(mapper));
         }
 
         /// <summary>

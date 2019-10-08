@@ -14,10 +14,8 @@
         /// <param name="model">The model.</param>
         public UpdateCommand(object id, TModel model)
         {
-            Guard.ArgumentNotNull(id, nameof(id));
-            Guard.ArgumentNotNull(model, nameof(model));
-            Id = id;
-            Model = model;
+            Id = Guard.ArgumentNotNull(id, nameof(id));
+            Model = Guard.ArgumentNotNull(model, nameof(model));
         }
 
         /// <summary>

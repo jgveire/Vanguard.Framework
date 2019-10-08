@@ -16,11 +16,8 @@
         /// <param name="queryDispatcher">The query dispatcher.</param>
         public ControllerBase(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
         {
-            Guard.ArgumentNotNull(commandDispatcher, nameof(commandDispatcher));
-            Guard.ArgumentNotNull(queryDispatcher, nameof(queryDispatcher));
-
-            CommandDispatcher = commandDispatcher;
-            QueryDispatcher = queryDispatcher;
+            CommandDispatcher = Guard.ArgumentNotNull(commandDispatcher, nameof(commandDispatcher));
+            QueryDispatcher = Guard.ArgumentNotNull(queryDispatcher, nameof(queryDispatcher));
         }
 
         /// <summary>

@@ -12,10 +12,8 @@
         /// <param name="destination">The destination property.</param>
         public PropertyMapping(string source, string destination)
         {
-            Source = source;
-            Destination = destination;
-            Guard.ArgumentNotNullOrEmpty(source, nameof(source));
-            Guard.ArgumentNotNullOrEmpty(destination, nameof(destination));
+            Source = Guard.ArgumentNotNullOrEmpty(source, nameof(source));
+            Destination = Guard.ArgumentNotNullOrEmpty(destination, nameof(destination));
         }
 
         /// <summary>

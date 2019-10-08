@@ -1,10 +1,6 @@
 ﻿namespace Vanguard.Framework.Data.Repositories
 {
-    using System;
-    using System.Linq;
     using Microsoft.EntityFrameworkCore;
-    using Vanguard.Framework.Core;
-    using Vanguard.Framework.Core.Repositories;
 
     /// <summary>
     /// The repository base class.
@@ -19,8 +15,7 @@
         /// <param name="dbContext">The database context.</param>
         public RepositoryBase(TDbContext dbContext)
         {
-            Guard.ArgumentNotNull(dbContext, nameof(dbContext));
-            DbContext = dbContext;
+            DbContext = Guard.ArgumentNotNull(dbContext, nameof(dbContext));
         }
 
         /// <summary>
@@ -30,21 +25,5 @@
         /// The database context.
         /// </value>
         protected TDbContext DbContext { get; }
-
-        /// <summary>
-        /// Applies the filter query to the querable.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="query">The queryable.</param>
-        /// <param name="filterQuery">The filter query.</param>
-        /// <returns>A collection of entities.</returns>
-        [Obsolete("Make use of the Vanguard.Framework.Data.Repositories.QueryableExtensions.Filter instead.")]
-        protected IQueryable<TEntity> ApplyFindCriteria<TEntity>(
-            IQueryable<TEntity> query,
-            FilterQuery filterQuery)
-            where TEntity : class, IDataEntity
-        {
-            return query.Filter(filterQuery);
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace VanguardWizard
     /// <summary>
     /// The Vanguard Framework wizard.
     /// </summary>
-    public class VanguardFrameworkWizard: IWizard
+    public class VanguardFrameworkWizard : IWizard
     {
         /// <inheritdoc />
         public void RunStarted(
@@ -65,7 +65,7 @@ namespace VanguardWizard
         {
             // Do nothing.
         }
-        
+
         internal void AddCommandName(Dictionary<string, string> replacementsDictionary)
         {
             var value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Command");

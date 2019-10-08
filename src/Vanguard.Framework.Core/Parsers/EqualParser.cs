@@ -19,10 +19,8 @@
         /// <exception cref="ArgumentException">Thrown when propertyName or value is an empty string.</exception>
         public EqualParser(string propertyName, string value)
         {
-            Guard.ArgumentNotNullOrEmpty(propertyName, nameof(propertyName));
-            Guard.ArgumentNotNull(value, nameof(value));
-            PropertyName = propertyName;
-            Value = value;
+            PropertyName = Guard.ArgumentNotNullOrEmpty(propertyName, nameof(propertyName));
+            Value = Guard.ArgumentNotNull(value, nameof(value));
         }
 
         /// <summary>

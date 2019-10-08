@@ -41,28 +41,6 @@
         /// <returns>A task that return <c>true</c> if the repository contains an entity with the specified identifiers; otherwise, <c>false</c>.</returns>
         Task<bool> ContainsAsync(object[] ids);
 
-        /// <summary>
-        /// Finds entities according to the supplied find criteria.
-        /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
-        /// <param name="filter">An additional filter to apply on the result query.</param>
-        /// <returns>A collection of entities.</returns>
-        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
-        IEnumerable<TEntity> Find(
-            FilterQuery filterQuery,
-            Expression<Func<TEntity, bool>>? filter = null);
-
-        /// <summary>
-        /// Finds entities according to the supplied find criteria asynchronously.
-        /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
-        /// <param name="filter">An additional filter to apply on the result query.</param>
-        /// <returns>A collection of entities.</returns>
-        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
-        Task<IEnumerable<TEntity>> FindAsync(
-            FilterQuery filterQuery,
-            Expression<Func<TEntity, bool>>? filter = null);
-
         /// <summary>Finds entities according to the supplied find criteria.</summary>
         /// <param name="advancedFilter">The advanced filter.</param>
         /// <param name="filter">An additional filter to apply on the result query.</param>
@@ -192,45 +170,11 @@
         Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties);
 
         /// <summary>
-        /// Gets the number of items in the database according to the supplied find criteria.
-        /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
-        /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
-        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
-        int GetCount(FilterQuery filterQuery);
-
-        /// <summary>
-        /// Gets the number of items in the database according to the supplied find criteria.
-        /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
-        /// <param name="filter">The filter predicate.</param>
-        /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
-        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
-        int GetCount(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter);
-
-        /// <summary>
         /// Gets the number of items in the database according to the supplied filter.
         /// </summary>
         /// <param name="filter">The filter predicate.</param>
         /// <returns>The total number of items in the database according to the supplied filter.</returns>
         int GetCount(Expression<Func<TEntity, bool>>? filter = null);
-
-        /// <summary>
-        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
-        /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
-        /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
-        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
-        Task<int> GetCountAsync(FilterQuery filterQuery);
-
-        /// <summary>
-        /// Gets the number of items in the database according to the supplied find criteria asynchronously.
-        /// </summary>
-        /// <param name="filterQuery">The find criteria.</param>
-        /// <param name="filter">The filter predicate.</param>
-        /// <returns>The total number of items in the database according to the supplied find criteria.</returns>
-        [Obsolete("Make use of the AdvancedFilter, SearchFilter, OrderByFilter or PagingFilter class.")]
-        Task<int> GetCountAsync(FilterQuery filterQuery, Expression<Func<TEntity, bool>> filter);
 
         /// <summary>
         /// Gets the number of items in the database according to the supplied filter asynchronously.

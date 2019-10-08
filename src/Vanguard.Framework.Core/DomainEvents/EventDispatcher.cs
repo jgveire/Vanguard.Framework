@@ -17,8 +17,7 @@
         /// <param name="serviceProvider">The service provider.</param>
         public EventDispatcher(IServiceProvider serviceProvider)
         {
-            Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
-            ServiceProvider = serviceProvider;
+            ServiceProvider = Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
         }
 
         /// <summary>

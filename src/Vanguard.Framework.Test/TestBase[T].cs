@@ -36,7 +36,7 @@
             base.TestInitialize();
             _systemUnderTest = default;
             _mockDictionary.Clear();
-       }
+        }
 
         /// <summary>
         /// Cleans up after each test and therefor is run after each test.

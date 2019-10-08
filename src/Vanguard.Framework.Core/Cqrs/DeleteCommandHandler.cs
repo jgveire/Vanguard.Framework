@@ -19,8 +19,7 @@
         /// <param name="repository">The entity repository.</param>
         public DeleteCommandHandler(IRepository<TEntity> repository)
         {
-            Guard.ArgumentNotNull(repository, nameof(repository));
-            _repository = repository;
+            _repository = Guard.ArgumentNotNull(repository, nameof(repository));
         }
 
         /// <summary>

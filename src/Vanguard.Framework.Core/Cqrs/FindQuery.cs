@@ -15,8 +15,7 @@
         /// <param name="filter">The find criteria.</param>
         public FindQuery(SearchFilter filter)
         {
-            Guard.ArgumentNotNull(filter, nameof(filter));
-            Filter = filter;
+            Filter = Guard.ArgumentNotNull(filter, nameof(filter));
         }
 
         /// <summary>

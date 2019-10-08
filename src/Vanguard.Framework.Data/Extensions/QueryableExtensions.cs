@@ -22,72 +22,6 @@
     public static class QueryableExtensions
     {
         /// <summary>
-        /// Applies the filter query to the queryable.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity.</typeparam>
-        /// <param name="source">The queryable.</param>
-        /// <param name="filterQuery">The filter query.</param>
-        /// <returns>A collection of entities.</returns>
-        [Obsolete("Use one of the following filters: AdvancedFilter, OrderByFilter, PagingFilter or SearchFilter")]
-        public static IQueryable<TEntity> Filter<TEntity>(
-            this IQueryable<TEntity> source,
-            FilterQuery filterQuery)
-            where TEntity : class, IDataEntity
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            else if (filterQuery == null)
-            {
-                return source;
-            }
-
-            Validate<TEntity>(filterQuery);
-
-            // Include
-            if (!string.IsNullOrWhiteSpace(filterQuery.Include))
-            {
-                var paths = filterQuery.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                paths = filterQuery.PropertyMappings.MapProperties(paths).ToArray();
-                source = source.Include(paths);
-            }
-
-            // Search
-            if (!string.IsNullOrEmpty(filterQuery.Search))
-            {
-                source = source.Search(filterQuery.Search);
-            }
-
-            // Filter
-            if (!string.IsNullOrEmpty(filterQuery.Filter))
-            {
-                source = source.Filter(filterQuery.Filter, filterQuery.PropertyMappings);
-            }
-
-            // Order by
-            if (!string.IsNullOrEmpty(filterQuery.OrderBy))
-            {
-                var orderBy = filterQuery.PropertyMappings.MapProperty(filterQuery.OrderBy);
-                source = source.OrderBy(orderBy, filterQuery.SortOrder);
-            }
-
-            // Select
-            if (!string.IsNullOrWhiteSpace(filterQuery.Select))
-            {
-                var paths = filterQuery.Select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                paths = filterQuery.PropertyMappings.MapProperties(paths).ToArray();
-                string[] fields = GetEntityProperties<TEntity>(paths);
-                source = source.Select(fields);
-            }
-
-            // Paging
-            source = source.GetPage(filterQuery.Page, filterQuery.PageSize);
-
-            return source;
-        }
-
-        /// <summary>
         /// Applies the advanced filter to the queryable.
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
@@ -112,7 +46,7 @@
             ValidateInclude<TEntity>(advancedFilter);
 
             // Include
-            if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
+            if (advancedFilter.Include != null && !string.IsNullOrWhiteSpace(advancedFilter.Include))
             {
                 var paths = advancedFilter.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
@@ -120,20 +54,20 @@
             }
 
             // Filter
-            if (!string.IsNullOrEmpty(advancedFilter.Filter))
+            if (advancedFilter.Filter != null && !string.IsNullOrEmpty(advancedFilter.Filter))
             {
                 source = source.Filter(advancedFilter.Filter, advancedFilter.PropertyMappings);
             }
 
             // Order by
-            if (!string.IsNullOrEmpty(advancedFilter.OrderBy))
+            if (advancedFilter.OrderBy != null && !string.IsNullOrEmpty(advancedFilter.OrderBy))
             {
                 var orderBy = advancedFilter.PropertyMappings.MapProperty(advancedFilter.OrderBy);
                 source = source.OrderBy(orderBy, advancedFilter.SortOrder);
             }
 
             // Select
-            if (!string.IsNullOrWhiteSpace(advancedFilter.Select))
+            if (advancedFilter.Select != null && !string.IsNullOrWhiteSpace(advancedFilter.Select))
             {
                 var paths = advancedFilter.Select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
@@ -171,7 +105,7 @@
             ValidateOrderBy<TEntity>(orderByFilter);
 
             // Order by
-            if (!string.IsNullOrEmpty(orderByFilter.OrderBy))
+            if (orderByFilter.OrderBy != null && !string.IsNullOrEmpty(orderByFilter.OrderBy))
             {
                 var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
                 source = source.OrderBy(orderBy, orderByFilter.SortOrder);
@@ -232,13 +166,13 @@
             ValidateOrderBy<TEntity>(searchFilter);
 
             // Search
-            if (!string.IsNullOrEmpty(searchFilter.Search))
+            if (searchFilter.Search != null && !string.IsNullOrEmpty(searchFilter.Search))
             {
                 source = source.Search(searchFilter.Search);
             }
 
             // Order by
-            if (!string.IsNullOrEmpty(searchFilter.OrderBy))
+            if (searchFilter.OrderBy != null && !string.IsNullOrEmpty(searchFilter.OrderBy))
             {
                 var orderBy = searchFilter.PropertyMappings.MapProperty(searchFilter.OrderBy);
                 source = source.OrderBy(orderBy, searchFilter.SortOrder);
@@ -535,7 +469,7 @@
             ValidateOrderBy<TEntity>(orderByFilter);
 
             // Order by
-            if (!string.IsNullOrEmpty(orderByFilter.OrderBy))
+            if (orderByFilter.OrderBy != null && !string.IsNullOrEmpty(orderByFilter.OrderBy))
             {
                 var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
                 source = source.OrderBy(orderBy, orderByFilter.SortOrder);
@@ -593,13 +527,13 @@
             ValidateOrderBy<TEntity>(searchFilter);
 
             // Search
-            if (!string.IsNullOrEmpty(searchFilter.Search))
+            if (searchFilter.Search != null && !string.IsNullOrEmpty(searchFilter.Search))
             {
                 source = source.Search(searchFilter.Search);
             }
 
             // Order by
-            if (!string.IsNullOrEmpty(searchFilter.OrderBy))
+            if (searchFilter.OrderBy != null && !string.IsNullOrEmpty(searchFilter.OrderBy))
             {
                 var orderBy = searchFilter.PropertyMappings.MapProperty(searchFilter.OrderBy);
                 source = source.OrderBy(orderBy, searchFilter.SortOrder);
@@ -637,7 +571,7 @@
             ValidateOrderBy<TEntity>(orderByFilter);
 
             // Order by
-            if (!string.IsNullOrEmpty(orderByFilter.OrderBy))
+            if (orderByFilter.OrderBy != null && !string.IsNullOrEmpty(orderByFilter.OrderBy))
             {
                 var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
                 source = source.OrderBy(orderBy, orderByFilter.SortOrder);
@@ -707,13 +641,13 @@
             ValidateOrderBy<TEntity>(searchFilter);
 
             // Search
-            if (!string.IsNullOrEmpty(searchFilter.Search))
+            if (searchFilter.Search != null && !string.IsNullOrEmpty(searchFilter.Search))
             {
                 source = source.Search(searchFilter.Search);
             }
 
             // Order by
-            if (!string.IsNullOrEmpty(searchFilter.OrderBy))
+            if (searchFilter.OrderBy != null && !string.IsNullOrEmpty(searchFilter.OrderBy))
             {
                 var orderBy = searchFilter.PropertyMappings.MapProperty(searchFilter.OrderBy);
                 source = source.OrderBy(orderBy, searchFilter.SortOrder);
@@ -854,26 +788,9 @@
             return (IOrderedQueryable<T>)source.Provider.CreateQuery(methodCall);
         }
 
-#pragma warning disable CS0618 // Type or member is obsolete
-        private static void Validate<TEntity>(FilterQuery filterQuery)
-#pragma warning restore CS0618 // Type or member is obsolete
-        {
-            if (!string.IsNullOrWhiteSpace(filterQuery.OrderBy))
-            {
-                var orderBy = filterQuery.PropertyMappings.MapProperty(filterQuery.OrderBy);
-                ValidateOrderBy<TEntity>(orderBy);
-            }
-            else if (!string.IsNullOrWhiteSpace(filterQuery.Include))
-            {
-                var propertyNames = filterQuery.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                propertyNames = filterQuery.PropertyMappings.MapProperties(propertyNames).ToArray();
-                ValidateInclude<TEntity>(propertyNames);
-            }
-        }
-
         private static void ValidateInclude<TEntity>(AdvancedFilter advancedFilter)
         {
-            if (!string.IsNullOrWhiteSpace(advancedFilter.Include))
+            if (advancedFilter.Include != null && !string.IsNullOrWhiteSpace(advancedFilter.Include))
             {
                 var propertyNames = advancedFilter.Include.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 propertyNames = advancedFilter.PropertyMappings.MapProperties(propertyNames).ToArray();
@@ -895,7 +812,7 @@
 
         private static void ValidateOrderBy<TEntity>(OrderByFilter orderByFilter)
         {
-            if (!string.IsNullOrWhiteSpace(orderByFilter.OrderBy))
+            if (orderByFilter.OrderBy != null && !string.IsNullOrWhiteSpace(orderByFilter.OrderBy))
             {
                 var orderBy = orderByFilter.PropertyMappings.MapProperty(orderByFilter.OrderBy);
                 ValidateOrderBy<TEntity>(orderBy);
