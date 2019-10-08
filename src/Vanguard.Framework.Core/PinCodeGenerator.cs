@@ -28,7 +28,7 @@
 
             var bytes = new byte[sizeof(ulong)];
             CryptoProvider.GetBytes(bytes);
-            var pin = BitConverter.ToInt64(bytes, 0);
+            var pin = Math.Abs(BitConverter.ToInt64(bytes, 0));
 
             return pin.ToString().PadRight(20, '0').Substring(0, length);
         }
