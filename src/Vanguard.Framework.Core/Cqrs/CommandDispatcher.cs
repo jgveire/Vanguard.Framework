@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Vanguard;
 
     /// <summary>
     /// The command dispatcher.
@@ -10,6 +12,8 @@
     /// <seealso cref="ICommandDispatcher" />
     public class CommandDispatcher : ICommandDispatcher
     {
+        private readonly ILogger<CommandDispatcher>? _logger;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandDispatcher"/> class.
         /// </summary>
@@ -17,6 +21,17 @@
         public CommandDispatcher(IServiceProvider serviceProvider)
         {
             ServiceProvider = Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandDispatcher" /> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="logger">The logger.</param>
+        public CommandDispatcher(IServiceProvider serviceProvider, ILogger<CommandDispatcher> logger)
+        {
+            ServiceProvider = Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
+            _logger = Guard.ArgumentNotNull(logger, nameof(logger));
         }
 
         /// <summary>
@@ -32,6 +47,9 @@
             where TCommand : ICommand
         {
             Guard.ArgumentNotNull(command, nameof(command));
+            var commandType = typeof(TCommand);
+            _logger?.LogDebug($"Dispatch command: {commandType.Name}");
+
             var commandHandler = ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
             commandHandler.Execute(command);
         }
@@ -41,6 +59,9 @@
             where TCommand : IAsyncCommand
         {
             Guard.ArgumentNotNull(command, nameof(command));
+            var commandType = typeof(TCommand);
+            _logger?.LogDebug($"Dispatch command: {commandType.Name}");
+
             var commandHandler = ServiceProvider.GetRequiredService<IAsyncCommandHandler<TCommand>>();
             await commandHandler.ExecuteAsync(command);
         }

@@ -4,6 +4,8 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Vanguard;
 
     /// <summary>
     /// The event dispatcher.
@@ -11,6 +13,8 @@
     /// <seealso cref="IEventDispatcher" />
     public class EventDispatcher : IEventDispatcher
     {
+        private readonly ILogger<EventDispatcher>? _logger;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EventDispatcher"/> class.
         /// </summary>
@@ -18,6 +22,17 @@
         public EventDispatcher(IServiceProvider serviceProvider)
         {
             ServiceProvider = Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EventDispatcher" /> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="logger">The logger.</param>
+        public EventDispatcher(IServiceProvider serviceProvider, ILogger<EventDispatcher> logger)
+        {
+            ServiceProvider = Guard.ArgumentNotNull(serviceProvider, nameof(serviceProvider));
+            _logger = Guard.ArgumentNotNull(logger, nameof(logger));
         }
 
         /// <summary>
@@ -35,10 +50,12 @@
 
             // Retriever query handler.
             Type genericType = typeof(IEventHandler<>);
-            Type[] typeArguments = { domainEvent.GetType() };
+            Type eventType = domainEvent.GetType();
+            Type[] typeArguments = { eventType };
             Type eventHandlerType = genericType.MakeGenericType(typeArguments);
             var eventHandlers = ServiceProvider.GetServices(eventHandlerType);
 
+            _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
                 // Invoke handle method.
@@ -52,10 +69,12 @@
         {
             // Retriever query handler.
             Type genericType = typeof(IAsyncEventHandler<>);
-            Type[] typeArguments = { domainEvent.GetType() };
+            Type eventType = domainEvent.GetType();
+            Type[] typeArguments = { eventType };
             Type eventHandlerType = genericType.MakeGenericType(typeArguments);
             var eventHandlers = ServiceProvider.GetServices(eventHandlerType);
 
+            _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
                 // Invoke handle method.
@@ -71,7 +90,9 @@
         {
             Guard.ArgumentNotNull(domainEvent, nameof(domainEvent));
             var eventHandlers = ServiceProvider.GetServices<IEventHandler<TEvent>>();
+            var eventType = typeof(TEvent);
 
+            _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
                 eventHandler.Handle(domainEvent);
@@ -84,7 +105,9 @@
         {
             Guard.ArgumentNotNull(domainEvent, nameof(domainEvent));
             var eventHandlers = ServiceProvider.GetServices<IAsyncEventHandler<TEvent>>();
+            var eventType = typeof(TEvent);
 
+            _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
                 await eventHandler.HandleAsync(domainEvent);
