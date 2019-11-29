@@ -13,7 +13,7 @@
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class CrudController<TIdentifier, TModel> : ControllerBase
-        where TModel : IUniqueEntity
+        where TModel : IUniqueEntity<TIdentifier>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CrudController{TIdentifier, TModel}"/> class.
