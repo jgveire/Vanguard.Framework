@@ -30,7 +30,7 @@
         /// <returns>A collection of entities.</returns>
         public static IQueryable<TEntity> Filter<TEntity>(
             this IQueryable<TEntity> source,
-            AdvancedFilter advancedFilter)
+            AdvancedFilter? advancedFilter)
             where TEntity : class, IDataEntity
         {
             if (source == null)
@@ -90,7 +90,7 @@
         /// <returns>A collection of entities.</returns>
         public static IQueryable<TEntity> Filter<TEntity>(
             this IQueryable<TEntity> source,
-            OrderByFilter orderByFilter)
+            OrderByFilter? orderByFilter)
             where TEntity : class, IDataEntity
         {
             if (source == null)
@@ -126,7 +126,7 @@
         /// <returns>A collection of entities.</returns>
         public static IQueryable<TEntity> Filter<TEntity>(
             this IQueryable<TEntity> source,
-            PagingFilter pagingFilter)
+            PagingFilter? pagingFilter)
             where TEntity : class, IDataEntity
         {
             if (source == null)

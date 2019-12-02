@@ -4,11 +4,14 @@
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core.Cqrs;
-    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Core.Models;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// The Create, Read, Update and Delete (CRUD) controller.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model.</typeparam>
     public class CrudController<TModel> : CrudController<Guid, TModel>
-        where TModel : IUniqueEntity
+        where TModel : IUniqueModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CrudController{TModel}"/> class.

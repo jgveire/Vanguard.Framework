@@ -1,7 +1,7 @@
 ﻿namespace ExampleService.Extensions
 {
-    using System.Collections.Generic;
     using Autofac;
+    using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Cqrs;
     using Vanguard.Framework.Core.Repositories;
 
@@ -20,8 +20,8 @@
             where TEntity : class, IDataEntity
         {
             builder.RegisterType<GetQueryHandler<TModel, TEntity>>().As<IQueryHandler<TModel, GetQuery<TModel>>>();
-            builder.RegisterType<CountQueryHandler<TModel, TEntity>>().As<IQueryHandler<int, CountQuery<TModel>>>();
-            builder.RegisterType<FindQueryHandler<TModel, TEntity>>().As<IQueryHandler<IEnumerable<TModel>, FindQuery<TModel>>>();
+            builder.RegisterType<TotalCountQueryHandler<TModel, TEntity>>().As<IQueryHandler<int, TotalCountQuery<TModel>>>();
+            builder.RegisterType<FindQueryHandler<TModel, TEntity>>().As<IQueryHandler<FilterResult<TModel>, FindQuery<TModel>>>();
             builder.RegisterType<DeleteCommandHandler<TModel, TEntity>>().As<ICommandHandler<DeleteCommand<TModel>>>();
             builder.RegisterType<AddCommandHandler<TModel, TEntity>>().As<ICommandHandler<AddCommand<TModel>>>();
             builder.RegisterType<UpdateCommandHandler<TModel, TEntity>>().As<ICommandHandler<UpdateCommand<TModel>>>();

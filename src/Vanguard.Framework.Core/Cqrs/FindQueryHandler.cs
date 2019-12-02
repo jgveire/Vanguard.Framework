@@ -9,7 +9,7 @@
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="IQueryHandler{TResult, TQuery}" />
-    public class FindQueryHandler<TModel, TEntity> : IQueryHandler<IEnumerable<TModel>, FindQuery<TModel>>
+    public class FindQueryHandler<TModel, TEntity> : IQueryHandler<FilterResult<TModel>, FindQuery<TModel>>
             where TEntity : class, IDataEntity
     {
         private readonly IReadRepository<TEntity> _repository;
@@ -31,11 +31,12 @@
         /// </summary>
         /// <param name="query">The query.</param>
         /// <returns>The query result.</returns>
-        public IEnumerable<TModel> Retrieve(FindQuery<TModel> query)
+        public FilterResult<TModel> Retrieve(FindQuery<TModel> query)
         {
             var entities = _repository.Find(query.Filter);
-            var model = _mapper.Map<IEnumerable<TModel>>(entities);
-            return model;
+            var totalCount = _repository.GetCount(query.Filter);
+            var items = _mapper.Map<ICollection<TModel>>(entities);
+            return new FilterResult<TModel>(items, totalCount);
         }
     }
 }

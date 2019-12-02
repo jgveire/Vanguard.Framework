@@ -1,12 +1,11 @@
 ﻿namespace Vanguard.Framework.Core.Models
 {
     using System;
-    using Vanguard.Framework.Core.Repositories;
 
     /// <summary>
     /// The unique model.
     /// </summary>
-    public class UniqueModel : IUniqueEntity
+    public class UniqueModel : IUniqueModel
     {
         /// <summary>
         /// Gets or sets the model identifier.

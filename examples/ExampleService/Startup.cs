@@ -1,7 +1,6 @@
 ﻿namespace ExampleService
 {
     using System;
-    using System.Buffers;
     using System.IO;
     using System.Linq;
     using Autofac;
@@ -12,7 +11,6 @@
     using ExampleModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +20,6 @@
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Swashbuckle.AspNetCore.SwaggerUI;
     using Vanguard.Framework.Http.Filters;
-    using Vanguard.Framework.Http.Formatters;
 
     /// <summary>
     /// The startup class.
@@ -99,8 +96,6 @@
                 {
                     options.Filters.Add(typeof(ValidationExceptionFilter));
                     options.Filters.Add(typeof(ValidateModelAttribute));
-                    options.OutputFormatters.Clear();
-                    options.OutputFormatters.Add(new SelectFieldJsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<char>.Shared));
                 });
 
             // You can also use in memory database instead if you don't have SQL Server.

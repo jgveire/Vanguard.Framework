@@ -4,16 +4,16 @@
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Cqrs;
-    using Vanguard.Framework.Core.Repositories;
+    using Vanguard.Framework.Core.Models;
+    using Vanguard.Framework.Http.Extensions;
 
     /// <summary>
     /// The Create, Read, Update and Delete (CRUD) controller.
     /// </summary>
     /// <typeparam name="TIdentifier">The type of the identifier.</typeparam>
     /// <typeparam name="TModel">The type of the model.</typeparam>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
-    public class CrudController<TIdentifier, TModel> : ControllerBase
-        where TModel : IUniqueEntity<TIdentifier>
+    public class CrudController<TIdentifier, TModel> : ApiController
+        where TModel : IUniqueModel<TIdentifier>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CrudController{TIdentifier, TModel}"/> class.
@@ -33,7 +33,7 @@
         [HttpGet("count")]
         public virtual IActionResult Count([FromQuery]SearchFilter searchFilter)
         {
-            var query = new CountQuery<TModel>(searchFilter);
+            var query = new TotalCountQuery<TModel>(searchFilter);
             var result = QueryDispatcher.Dispatch(query);
             return Ok(result);
         }
@@ -48,7 +48,8 @@
         {
             var query = new FindQuery<TModel>(searchFilter);
             var result = QueryDispatcher.Dispatch(query);
-            return Ok(result);
+            Response.Headers.AddTotalCount(result.TotalCount);
+            return Ok(result.Items);
         }
 
         /// <summary>

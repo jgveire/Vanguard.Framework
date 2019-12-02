@@ -5,13 +5,13 @@
     /// </summary>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <seealso cref="Vanguard.Framework.Core.Cqrs.ICommand" />
-    public class CountQuery<TModel> : IQuery<int>
+    public class TotalCountQuery<TModel> : IQuery<int>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CountQuery{TModel}"/> class.
+        /// Initializes a new instance of the <see cref="TotalCountQuery{TModel}"/> class.
         /// </summary>
         /// <param name="filter">The search filter.</param>
-        public CountQuery(SearchFilter filter)
+        public TotalCountQuery(SearchFilter filter)
         {
             Filter = Guard.ArgumentNotNull(filter, nameof(filter));
         }
