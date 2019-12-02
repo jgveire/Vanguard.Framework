@@ -1,5 +1,6 @@
 ﻿namespace Vanguard.Framework.Http
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core;
@@ -31,7 +32,7 @@
         /// <param name="searchFilter">The search filter.</param>
         /// <returns>The number of items that conform with the specified find criteria.</returns>
         [HttpGet("count")]
-        public virtual IActionResult Count([FromQuery]SearchFilter searchFilter)
+        public virtual ActionResult<int> Count([FromQuery]SearchFilter searchFilter)
         {
             var query = new CountQuery<TModel>(searchFilter);
             var result = QueryDispatcher.Dispatch(query);
@@ -44,7 +45,7 @@
         /// <param name="searchFilter">The search filter.</param>
         /// <returns>A collection of items that conform with the specified find criteria.</returns>
         [HttpGet]
-        public virtual IActionResult Find([FromQuery]SearchFilter searchFilter)
+        public virtual ActionResult<ICollection<TModel>> Find([FromQuery]SearchFilter searchFilter)
         {
             var query = new FindQuery<TModel>(searchFilter);
             var result = QueryDispatcher.Dispatch(query);
@@ -82,7 +83,7 @@
         {
             var command = new AddCommand<TModel>(model);
             CommandDispatcher.Dispatch(command);
-            return CreatedAtRoute(nameof(GetById), model.Id, model);
+            return CreatedAtRoute(nameof(GetById), model.Id, new { model.Id });
         }
 
         /// <summary>
