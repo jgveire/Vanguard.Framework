@@ -34,7 +34,7 @@
         public FilterResult<TModel> Retrieve(FindQuery<TModel> query)
         {
             var entities = _repository.Find(query.Filter);
-            var totalCount = _repository.GetCount(query.Filter);
+            var totalCount = _repository.GetTotalCount(query.Filter);
             var items = _mapper.Map<ICollection<TModel>>(entities);
             return new FilterResult<TModel>(items, totalCount);
         }

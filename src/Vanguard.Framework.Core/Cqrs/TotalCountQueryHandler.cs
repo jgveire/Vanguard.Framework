@@ -29,7 +29,7 @@
         /// <returns>The query result.</returns>
         public virtual int Retrieve(TotalCountQuery<TModel> query)
         {
-            return _repository.GetCount(query.Filter);
+            return _repository.GetTotalCount(query.Filter);
         }
     }
 }
