@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Linq;
+    using System.Text.Json.Serialization;
     using Autofac;
     using Autofac.Extensions.DependencyInjection;
     using AutoMapper;
@@ -11,11 +12,14 @@
     using ExampleModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.PlatformAbstractions;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.Swagger;
     using Swashbuckle.AspNetCore.SwaggerGen;
     using Swashbuckle.AspNetCore.SwaggerUI;
@@ -29,102 +33,86 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
-        /// <param name="env">The hosting environment.</param>
-        public Startup(IHostingEnvironment env)
+        /// <param name="configuration">The application configuration.</param>
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
 
             Mapper.Initialize(config =>
-                {
-                    config.CreateMap<Car, CarModel>();
-                    config.CreateMap<CarModel, Car>();
-                    config.CreateMap<Garage, GarageModel>();
-                    config.CreateMap<GarageModel, Garage>();
-                });
-
-            ////var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-            ////jsonFormatter.SerializerSettings.ContractResolver = new SelectFieldContractResolver()
+            {
+                config.CreateMap<Car, CarModel>();
+                config.CreateMap<CarModel, Car>();
+                config.CreateMap<Garage, GarageModel>();
+                config.CreateMap<GarageModel, Garage>();
+            });
         }
 
         /// <summary>
-        /// Gets the configuration.
+        /// Gets the application configuration.
         /// </summary>
-        /// <value>
-        /// The configuration.
-        /// </value>
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         /// <summary>
-        /// Configures the application.
-        /// </summary>
-        /// <remarks>
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        /// </remarks>
+        /// </summary>
         /// <param name="app">The application.</param>
         /// <param name="env">The hosting environment.</param>
         /// <param name="loggerFactory">The logger factory.</param>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
-            app.UseMvc();
-            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             app.UseSwagger();
-            app.UseSwaggerUI(SetupSwaggerUi);
-            app.UseDeveloperExceptionPage();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/v1/swagger.json", $"Example API v1");
+            });
         }
 
         /// <summary>
-        /// Configures the services.
-        /// </summary>
-        /// <remarks>
         /// This method gets called by the runtime. Use this method to add services to the container.
-        /// </remarks>
+        /// </summary>
         /// <param name="services">The service collection.</param>
-        /// <returns>The service provider.</returns>
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
             services
-                .AddMvc(options =>
-                {
-                    options.Filters.Add(typeof(ValidationExceptionFilter));
-                    options.Filters.Add(typeof(ValidateModelAttribute));
-                });
+                .AddControllers()
+                .AddJsonOptions(SetupJson);
 
-            // You can also use in memory database instead if you don't have SQL Server.
-            services.AddDbContext<ExampleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Example")));
-            services.AddSwaggerGen(SetupSwagger);
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Example API", Version = "v1" });
+            });
 
-            // Add Autofac
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterModule<DefaultModule>();
-            containerBuilder.Populate(services);
-            var container = containerBuilder.Build();
+            //InitContext(services.Resolve<ExampleContext>());
 
-            InitContext(container.Resolve<ExampleContext>());
-
-            return new AutofacServiceProvider(container);
         }
 
-        private static void SetupSwagger(SwaggerGenOptions options)
+        /// <summary>
+        /// Configures the container builder.
+        /// </summary>
+        /// <param name="builder">The container builder.</param>
+        public void ConfigureContainer(ContainerBuilder builder)
         {
-            options.SwaggerDoc("v1", new Info { Title = "Example API", Version = "v1" });
-
-            var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-            options.IncludeXmlComments(Path.Combine(basePath, "ExampleService.xml"));
-            options.IncludeXmlComments(Path.Combine(basePath, "Vanguard.Framework.Http.xml"));
+            builder.RegisterModule<DefaultModule>();
+            var optionsBuilder = new DbContextOptionsBuilder<ExampleContext>();
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Example"));
+            builder.RegisterInstance(optionsBuilder.Options).As<DbContextOptions<ExampleContext>>();
         }
 
-        private static void SetupSwaggerUi(SwaggerUIOptions options)
+        private void SetupJson(JsonOptions options)
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Example API V1");
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         }
 
         private void InitContext(ExampleContext context)
