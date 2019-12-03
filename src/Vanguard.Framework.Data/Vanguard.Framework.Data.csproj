@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>6.0.0</Version>
     <Authors>Veire Solutions</Authors>
@@ -29,8 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Vanguard" Version="5.0.0" />
   </ItemGroup>
 
