@@ -54,7 +54,7 @@
         }
 
         /// <inheritdoc />
-        public async Task DispatchAsync<TCommand>(TCommand command)
+        public Task DispatchAsync<TCommand>(TCommand command)
             where TCommand : IAsyncCommand
         {
             Guard.ArgumentNotNull(command, nameof(command));
@@ -62,7 +62,7 @@
             _logger?.LogDebug($"Dispatch command: {commandType.Name}");
 
             var commandHandler = ServiceProvider.GetRequiredService<IAsyncCommandHandler<TCommand>>();
-            await commandHandler.ExecuteAsync(command);
+            return commandHandler.ExecuteAsync(command);
         }
     }
 }
