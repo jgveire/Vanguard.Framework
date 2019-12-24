@@ -1,4 +1,4 @@
-namespace Vanguard.Framework.Data.Repositories
+﻿namespace Vanguard.Framework.Data.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -160,7 +160,7 @@ namespace Vanguard.Framework.Data.Repositories
                 query = query.Where(filter);
             }
 
-            return await query.Filter(advancedFilter).ToListAsync();
+            return await query.Filter(advancedFilter).ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -176,7 +176,7 @@ namespace Vanguard.Framework.Data.Repositories
                 query = query.Where(filter);
             }
 
-            return await query.Filter(orderByFilter).ToListAsync();
+            return await query.Filter(orderByFilter).ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -192,7 +192,7 @@ namespace Vanguard.Framework.Data.Repositories
                 query = query.Where(filter);
             }
 
-            return await query.Filter(pagingFilter).ToListAsync();
+            return await query.Filter(pagingFilter).ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -208,7 +208,7 @@ namespace Vanguard.Framework.Data.Repositories
                 query = query.Where(filter);
             }
 
-            return await query.Filter(searchFilter).ToListAsync();
+            return await query.Filter(searchFilter).ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -228,7 +228,7 @@ namespace Vanguard.Framework.Data.Repositories
             params string[] includeProperties)
         {
             var query = CompileQuery(filter, orderBy, includeProperties);
-            return await query.ToListAsync();
+            return await query.ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
