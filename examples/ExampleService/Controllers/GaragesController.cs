@@ -1,5 +1,6 @@
 ﻿namespace ExampleService.Controllers
 {
+    using System;
     using ExampleModels;
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core.Cqrs;
@@ -10,7 +11,7 @@
     /// </summary>
     /// <seealso cref="Vanguard.Framework.Http.CrudController{TModel}" />
     [Route("api/v1/garages")]
-    public class GaragesController : CrudController<GarageModel>
+    public class GaragesController : CrudController<Guid, GarageModel>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaragesController"/> class.

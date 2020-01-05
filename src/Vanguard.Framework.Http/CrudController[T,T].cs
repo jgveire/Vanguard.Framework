@@ -61,7 +61,7 @@
         /// An <see cref="OkObjectResult"/> response when the item is found
         /// otherwise an <see cref="NotFoundObjectResult"/> response.
         /// </returns>
-        [HttpGet("{id}", Name = nameof(GetById))]
+        [HttpGet("{id}")]
         public virtual ActionResult<TModel> GetById([FromRoute]TIdentifier id)
         {
             if (id == null)
@@ -85,7 +85,7 @@
             var command = new AddCommand<TModel>(model);
             CommandDispatcher.Dispatch(command);
             var idModel = new { model.Id };
-            return CreatedAtRoute(nameof(GetById), idModel, idModel);
+            return CreatedAtRoute(idModel, idModel);
         }
 
         /// <summary>
