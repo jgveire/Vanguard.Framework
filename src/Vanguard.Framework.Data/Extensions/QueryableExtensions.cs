@@ -563,8 +563,8 @@
             }
             else if (orderByFilter == null)
             {
-                items = await source.GetPage(1, 20).ToListAsync();
-                count = await source.CountAsync();
+                items = await source.GetPage(1, 20).ToListAsync().ConfigureAwait(false);
+                count = await source.CountAsync().ConfigureAwait(false);
                 return new FilterResult<TEntity>(items, count);
             }
 
@@ -578,8 +578,8 @@
             }
 
             // Paging
-            items = await source.GetPage(orderByFilter.Page, orderByFilter.PageSize).ToListAsync();
-            count = await source.CountAsync();
+            items = await source.GetPage(orderByFilter.Page, orderByFilter.PageSize).ToListAsync().ConfigureAwait(false);
+            count = await source.CountAsync().ConfigureAwait(false);
             return new FilterResult<TEntity>(items, count);
         }
 
@@ -603,13 +603,13 @@
             }
             else if (pagingFilter == null)
             {
-                items = await source.GetPage(1, 20).ToListAsync();
-                count = await source.CountAsync();
+                items = await source.GetPage(1, 20).ToListAsync().ConfigureAwait(false);
+                count = await source.CountAsync().ConfigureAwait(false);
                 return new FilterResult<TEntity>(items, count);
             }
 
-            items = await source.GetPage(pagingFilter.Page, pagingFilter.PageSize).ToListAsync();
-            count = await source.CountAsync();
+            items = await source.GetPage(pagingFilter.Page, pagingFilter.PageSize).ToListAsync().ConfigureAwait(false);
+            count = await source.CountAsync().ConfigureAwait(false);
             return new FilterResult<TEntity>(items, count);
         }
 
@@ -633,8 +633,8 @@
             }
             else if (searchFilter == null)
             {
-                items = await source.GetPage(1, 20).ToListAsync();
-                count = await source.CountAsync();
+                items = await source.GetPage(1, 20).ToListAsync().ConfigureAwait(false);
+                count = await source.CountAsync().ConfigureAwait(false);
                 return new FilterResult<TEntity>(items, count);
             }
 
@@ -654,8 +654,8 @@
             }
 
             // Paging
-            items = await source.GetPage(searchFilter.Page, searchFilter.PageSize).ToListAsync();
-            count = await source.CountAsync();
+            items = await source.GetPage(searchFilter.Page, searchFilter.PageSize).ToListAsync().ConfigureAwait(false);
+            count = await source.CountAsync().ConfigureAwait(false);
             return new FilterResult<TEntity>(items, count);
         }
 

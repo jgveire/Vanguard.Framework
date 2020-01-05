@@ -43,9 +43,9 @@
         }
 
         /// <inheritdoc />
-        public virtual async Task<int> SaveAsync()
+        public virtual Task<int> SaveAsync()
         {
-            return await DbContext.SaveChangesAsync();
+            return DbContext.SaveChangesAsync();
         }
 
         /// <inheritdoc />

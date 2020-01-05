@@ -42,14 +42,14 @@
         /// </returns>
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            await _bodyBinder.BindModelAsync(bindingContext);
+            await _bodyBinder.BindModelAsync(bindingContext).ConfigureAwait(false);
 
             if (bindingContext.Result.IsModelSet)
             {
                 bindingContext.Model = bindingContext.Result.Model;
             }
 
-            await _complexBinder.BindModelAsync(bindingContext);
+            await _complexBinder.BindModelAsync(bindingContext).ConfigureAwait(false);
         }
     }
 }

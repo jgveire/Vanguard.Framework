@@ -116,8 +116,8 @@
         {
             var events = GetAndClearEvents();
             CreateAuditRecords();
-            var result = await base.SaveChangesAsync(cancellationToken);
-            await DispatchEventsAsync(events);
+            var result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            await DispatchEventsAsync(events).ConfigureAwait(false);
             return result;
         }
 
@@ -126,8 +126,8 @@
         {
             var events = GetAndClearEvents();
             CreateAuditRecords();
-            var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-            await DispatchEventsAsync(events);
+            var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken).ConfigureAwait(false);
+            await DispatchEventsAsync(events).ConfigureAwait(false);
             return result;
         }
 
@@ -179,7 +179,7 @@
                 }
                 else if (@event is IAsyncDomainEvent asyncDomainEvent)
                 {
-                    await EventDispatcher.DispatchAsync(asyncDomainEvent);
+                    await EventDispatcher.DispatchAsync(asyncDomainEvent).ConfigureAwait(false);
                 }
             }
         }

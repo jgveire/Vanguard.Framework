@@ -79,7 +79,7 @@
                 // Invoke handle method.
                 MethodInfo retrieveMethod = eventHandlerType.GetMethod("HandleAsync");
                 var result = (Task)retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
-                await result;
+                await result.ConfigureAwait(false);
             }
         }
 
@@ -109,7 +109,7 @@
             _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
-                await eventHandler.HandleAsync(domainEvent);
+                await eventHandler.HandleAsync(domainEvent).ConfigureAwait(false);
             }
         }
     }

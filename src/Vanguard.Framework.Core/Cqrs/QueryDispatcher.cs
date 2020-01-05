@@ -63,7 +63,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<TResult> DispatchAsync<TResult>(IAsyncQuery<TResult> query)
+        public Task<TResult> DispatchAsync<TResult>(IAsyncQuery<TResult> query)
         {
             Guard.ArgumentNotNull(query, nameof(query));
 
@@ -79,7 +79,7 @@
             // Invoke retrieve method.
             MethodInfo retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
             var result = (Task<TResult>)retrieveMethod.Invoke(queryHandler, new object[] { query });
-            return await result;
+            return result;
         }
 
         /// <inheritdoc />
@@ -95,7 +95,7 @@
         }
 
         /// <inheritdoc />
-        public async Task<TResult> DispatchAsync<TResult, TQuery>(TQuery query)
+        public Task<TResult> DispatchAsync<TResult, TQuery>(TQuery query)
             where TQuery : IAsyncQuery<TResult>
         {
             Guard.ArgumentNotNull(query, nameof(query));
@@ -103,7 +103,7 @@
             _logger?.LogDebug($"Dispatch query: {queryType.Name}");
 
             var queryHandler = ServiceProvider.GetRequiredService<IAsyncQueryHandler<TResult, TQuery>>();
-            return await queryHandler.RetrieveAsync(query);
+            return queryHandler.RetrieveAsync(query);
         }
     }
 }
