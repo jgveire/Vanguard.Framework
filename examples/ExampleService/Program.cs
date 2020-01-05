@@ -1,7 +1,8 @@
 ﻿namespace ExampleService
 {
-    using System.IO;
+    using Autofac.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// The main program class.
@@ -14,14 +15,22 @@
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+            CreateHostBuilder(args).Build().Run();
+        }
 
-            host.Run();
+        /// <summary>
+        /// Builds the web host.
+        /// </summary>
+        /// <param name="args">The web host arguments.</param>
+        /// <returns>A web host.</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
         }
     }
 }

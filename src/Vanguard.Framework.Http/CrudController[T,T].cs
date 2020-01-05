@@ -84,7 +84,8 @@
         {
             var command = new AddCommand<TModel>(model);
             CommandDispatcher.Dispatch(command);
-            return CreatedAtRoute(nameof(GetById), model.Id, new { model.Id });
+            var idModel = new { model.Id };
+            return CreatedAtRoute(idModel, idModel);
         }
 
         /// <summary>
