@@ -1,11 +1,9 @@
 ﻿namespace ExampleService
 {
     using System;
-    using System.IO;
     using System.Linq;
     using System.Text.Json.Serialization;
     using Autofac;
-    using Autofac.Extensions.DependencyInjection;
     using AutoMapper;
     using ExampleData;
     using ExampleData.Entities;
@@ -18,12 +16,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.PlatformAbstractions;
     using Microsoft.OpenApi.Models;
-    using Swashbuckle.AspNetCore.Swagger;
-    using Swashbuckle.AspNetCore.SwaggerGen;
-    using Swashbuckle.AspNetCore.SwaggerUI;
-    using Vanguard.Framework.Http.Filters;
+    using Vanguard.Framework.Http.ModelBinding;
 
     /// <summary>
     /// The startup class.
@@ -80,24 +74,6 @@
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to add services to the container.
-        /// </summary>
-        /// <param name="services">The service collection.</param>
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services
-                .AddControllers()
-                .AddJsonOptions(SetupJson);
-
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Example API", Version = "v1" });
-            });
-
-            // InitContext(services.Resolve<ExampleContext>());
-        }
-
-        /// <summary>
         /// Configures the container builder.
         /// </summary>
         /// <param name="builder">The container builder.</param>
@@ -109,9 +85,22 @@
             builder.RegisterInstance(optionsBuilder.Options).As<DbContextOptions<ExampleContext>>();
         }
 
-        private void SetupJson(JsonOptions options)
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">The service collection.</param>
+        public void ConfigureServices(IServiceCollection services)
         {
-            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            services
+                .AddControllers(SetupMvc)
+                .AddJsonOptions(SetupJson);
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Example API", Version = "v1" });
+            });
+
+            // InitContext(services.Resolve<ExampleContext>());
         }
 
         private void InitContext(ExampleContext context)
@@ -130,6 +119,16 @@
 
                 context.SaveChanges();
             }
+        }
+
+        private void SetupJson(JsonOptions options)
+        {
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        }
+
+        private void SetupMvc(MvcOptions options)
+        {
+            options.ModelBinderProviders.InsertBodyAndRouteBinding();
         }
     }
 }
