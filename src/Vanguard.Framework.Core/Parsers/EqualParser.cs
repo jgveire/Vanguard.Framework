@@ -71,7 +71,7 @@
         private PropertyInfo GetProperty<TEntity>(string propertyName)
         {
             var type = typeof(TEntity);
-            PropertyInfo? property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            var property = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             if (property == null)
             {
                 property = type

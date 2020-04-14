@@ -94,11 +94,11 @@
             var items = new List<string>();
             var sb = new StringBuilder();
             var foundString = false;
-            for (int i = 0; i < Filter.Length; i++)
+            for (var i = 0; i < Filter.Length; i++)
             {
-                char curr = Filter[i];
-                char? prev = Filter.Previous(i);
-                char? next = Filter.Next(i);
+                var curr = Filter[i];
+                var prev = Filter.Previous(i);
+                var next = Filter.Next(i);
 
                 if (curr == Seperator && !foundString)
                 {

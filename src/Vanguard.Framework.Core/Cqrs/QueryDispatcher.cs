@@ -48,16 +48,16 @@
             Guard.ArgumentNotNull(query, nameof(query));
 
             // Retriever query handler.
-            Type genericType = typeof(IQueryHandler<,>);
+            var genericType = typeof(IQueryHandler<,>);
             Type[] typeArguments = { typeof(TResult), query.GetType() };
-            Type queryHandlerType = genericType.MakeGenericType(typeArguments);
+            var queryHandlerType = genericType.MakeGenericType(typeArguments);
             var queryHandler = ServiceProvider.GetRequiredService(queryHandlerType);
 
             var queryType = query.GetType();
             _logger?.LogDebug($"Dispatch query: {queryType.Name}");
 
             // Invoke retrieve method.
-            MethodInfo retrieveMethod = queryHandlerType.GetMethod("Retrieve");
+            var retrieveMethod = queryHandlerType.GetMethod("Retrieve");
             var result = (TResult)retrieveMethod.Invoke(queryHandler, new object[] { query });
             return result;
         }
@@ -68,16 +68,16 @@
             Guard.ArgumentNotNull(query, nameof(query));
 
             // Retriever query handler.
-            Type genericType = typeof(IAsyncQueryHandler<,>);
+            var genericType = typeof(IAsyncQueryHandler<,>);
             Type[] typeArguments = { typeof(TResult), query.GetType() };
-            Type queryHandlerType = genericType.MakeGenericType(typeArguments);
+            var queryHandlerType = genericType.MakeGenericType(typeArguments);
             var queryHandler = ServiceProvider.GetRequiredService(queryHandlerType);
 
             var queryType = query.GetType();
             _logger?.LogDebug($"Dispatch query: {queryType.Name}");
 
             // Invoke retrieve method.
-            MethodInfo retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
+            var retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
             var result = (Task<TResult>)retrieveMethod.Invoke(queryHandler, new object[] { query });
             return result;
         }

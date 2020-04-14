@@ -24,7 +24,7 @@
         /// <inheritdoc />
         public void Execute(ReportCarStolenCommand command)
         {
-            Car car = _carRepository.GetById(command.CarId);
+            var car = _carRepository.GetById(command.CarId);
             if (car == null)
             {
                 return;

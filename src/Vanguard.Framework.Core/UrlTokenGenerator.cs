@@ -28,13 +28,13 @@
 
             // Make sure the length is dividable by 3
             // otherwise we will get padding characters.
-            int byteLength = length - (length % 3) + 3;
+            var byteLength = length - (length % 3) + 3;
             var bytes = new byte[byteLength];
 
             CryptoProvider.GetBytes(bytes);
 
             // Convert to string and replace padding characters.
-            string token = Convert
+            var token = Convert
                 .ToBase64String(bytes)
                 .Replace('/', 'a')
                 .Replace('=', 'B')

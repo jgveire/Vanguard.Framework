@@ -12,8 +12,8 @@
         public void When_generate_is_called_a_token_should_be_generated()
         {
             // Act
-            string result = SystemUnderTest.Generate(100);
-            string encodedString = HttpUtility.UrlEncode(result);
+            var result = SystemUnderTest.Generate(100);
+            var encodedString = HttpUtility.UrlEncode(result);
 
             // Assert
             result.Should().NotBeNullOrEmpty(because: "we supplied the generate method with a length of 100");

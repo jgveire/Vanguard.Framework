@@ -11,7 +11,7 @@
         public void When_generate_is_called_a_pin_code_should_be_generated()
         {
             // Act
-            string result = SystemUnderTest.Generate(10);
+            var result = SystemUnderTest.Generate(10);
 
             // Assert
             result.Should().NotBeNullOrEmpty(because: "we supplied the generate method with a length of 10");

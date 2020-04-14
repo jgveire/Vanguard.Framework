@@ -57,7 +57,7 @@
                 return "null";
             }
 
-            string stringValue = Convert.ToString(value, _cultureInfo);
+            var stringValue = Convert.ToString(value, _cultureInfo);
             if (TypeHelper.IsNumeric(valueType))
             {
                 return stringValue;

@@ -86,15 +86,15 @@ namespace VanguardWizard
 
         internal static string GetStrippedName(string value, string endsWith)
         {
-            string endsWithHandler = endsWith + "Handler";
+            var endsWithHandler = endsWith + "Handler";
             if (value.EndsWith(endsWith, StringComparison.OrdinalIgnoreCase))
             {
-                int length = value.Length - endsWith.Length;
+                var length = value.Length - endsWith.Length;
                 return value.Substring(0, length);
             }
             else if (value.EndsWith(endsWithHandler, StringComparison.OrdinalIgnoreCase))
             {
-                int length = value.Length - endsWithHandler.Length;
+                var length = value.Length - endsWithHandler.Length;
                 return value.Substring(0, length);
             }
 
@@ -110,26 +110,26 @@ namespace VanguardWizard
 
         internal static void AddUserFriendlyName(Dictionary<string, string> replacementsDictionary)
         {
-            string value = GetUserFriendlyName(replacementsDictionary["$safeitemname$"]);
+            var value = GetUserFriendlyName(replacementsDictionary["$safeitemname$"]);
             replacementsDictionary.Add("$userfriendlyname$", value);
         }
         private void AddUserFriendlyCommandName(Dictionary<string, string> replacementsDictionary)
         {
-            string value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Command");
+            var value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Command");
             value = GetUserFriendlyName(value);
             replacementsDictionary.Add("$userfriendlycommandname$", value);
         }
 
         private void AddUserFriendlyQueryName(Dictionary<string, string> replacementsDictionary)
         {
-            string value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Query");
+            var value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Query");
             value = GetUserFriendlyName(value);
             replacementsDictionary.Add("$userfriendlyqueryname$", value);
         }
 
         private void AddUserFriendlyEventName(Dictionary<string, string> replacementsDictionary)
         {
-            string value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Event");
+            var value = GetStrippedName(replacementsDictionary["$safeitemname$"], "Event");
             value = GetUserFriendlyName(value);
             replacementsDictionary.Add("$userfriendlyeventname$", value);
         }

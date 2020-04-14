@@ -50,7 +50,7 @@
         /// <returns>The next character in the string relative to the specified index.</returns>
         internal static char? Next(this string source, int index)
         {
-            int nextIndex = index + 1;
+            var nextIndex = index + 1;
             if (source != null && nextIndex < source.Length)
             {
                 return source[nextIndex];
@@ -68,7 +68,7 @@
         /// <returns>The precious character in the string relative to the specified index.</returns>
         internal static char? Previous(this string source, int index)
         {
-            int prevIndex = index - 1;
+            var prevIndex = index - 1;
             if (source != null && prevIndex >= 0)
             {
                 return source[prevIndex];

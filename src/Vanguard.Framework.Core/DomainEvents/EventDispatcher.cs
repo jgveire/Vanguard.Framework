@@ -48,17 +48,17 @@
             Guard.ArgumentNotNull(domainEvent, nameof(domainEvent));
 
             // Retriever query handler.
-            Type genericType = typeof(IEventHandler<>);
-            Type eventType = domainEvent.GetType();
+            var genericType = typeof(IEventHandler<>);
+            var eventType = domainEvent.GetType();
             Type[] typeArguments = { eventType };
-            Type eventHandlerType = genericType.MakeGenericType(typeArguments);
+            var eventHandlerType = genericType.MakeGenericType(typeArguments);
             var eventHandlers = ServiceProvider.GetServices(eventHandlerType);
 
             _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
                 // Invoke handle method.
-                MethodInfo retrieveMethod = eventHandlerType.GetMethod("Handle");
+                var retrieveMethod = eventHandlerType.GetMethod("Handle");
                 retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
             }
         }
@@ -67,17 +67,17 @@
         public async Task DispatchAsync(IAsyncDomainEvent domainEvent)
         {
             // Retriever query handler.
-            Type genericType = typeof(IAsyncEventHandler<>);
-            Type eventType = domainEvent.GetType();
+            var genericType = typeof(IAsyncEventHandler<>);
+            var eventType = domainEvent.GetType();
             Type[] typeArguments = { eventType };
-            Type eventHandlerType = genericType.MakeGenericType(typeArguments);
+            var eventHandlerType = genericType.MakeGenericType(typeArguments);
             var eventHandlers = ServiceProvider.GetServices(eventHandlerType);
 
             _logger?.LogDebug($"Dispatch event: {eventType.Name}");
             foreach (var eventHandler in eventHandlers)
             {
                 // Invoke handle method.
-                MethodInfo retrieveMethod = eventHandlerType.GetMethod("HandleAsync");
+                var retrieveMethod = eventHandlerType.GetMethod("HandleAsync");
                 var result = (Task)retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
                 await result.ConfigureAwait(false);
             }

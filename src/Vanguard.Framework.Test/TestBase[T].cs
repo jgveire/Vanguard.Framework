@@ -55,10 +55,10 @@
         protected Mock<T> Mocks<T>()
             where T : class
         {
-            Type type = typeof(T);
+            var type = typeof(T);
             if (!_mockDictionary.ContainsKey(type))
             {
-                Mock<T> mock = MockRepository.Create<T>();
+                var mock = MockRepository.Create<T>();
                 _mockDictionary.Add(type, mock);
             }
 
@@ -74,20 +74,20 @@
         /// </exception>
         protected virtual TSystemUnderTest CreateSystemUnderTest()
         {
-            Type type = typeof(TSystemUnderTest);
+            var type = typeof(TSystemUnderTest);
             if (!type.IsClass || type.IsAbstract)
             {
-                string message = string.Format(ExceptionResource.SystemUnderTestInvalidType, type.Name);
+                var message = string.Format(ExceptionResource.SystemUnderTestInvalidType, type.Name);
                 throw new InvalidOperationException(message);
             }
 
-            ConstructorInfo? constructor = type
+            var constructor = type
                 .GetConstructors(BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance)
                 .OrderBy(x => x.GetParameters().Count())
                 .FirstOrDefault();
             if (constructor == null)
             {
-                string message = string.Format(ExceptionResource.SystemUnderTestHasNoConstructor, type.Name);
+                var message = string.Format(ExceptionResource.SystemUnderTestHasNoConstructor, type.Name);
                 throw new InvalidOperationException(message);
             }
 
@@ -112,7 +112,7 @@
 
             foreach (var parameter in parameters)
             {
-                Type type = parameter.ParameterType;
+                var type = parameter.ParameterType;
                 if (_mockDictionary.ContainsKey(type))
                 {
                     result.Add(_mockDictionary[type].Object);

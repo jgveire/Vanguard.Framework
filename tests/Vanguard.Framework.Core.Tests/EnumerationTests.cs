@@ -10,7 +10,7 @@
         public void When_FromValue_is_called_then_the_correct_Truck_should_be_returned()
         {
             // Act
-            CarType result = Enumeration.FromValue<CarType>(1);
+            var result = Enumeration.FromValue<CarType>(1);
 
             // Assert
             result.Should().Be(CarType.Truck, because: "the car type truck has the value 1");
@@ -20,7 +20,7 @@
         public void When_FromDisplayName_is_called_then_the_correct_Truck_should_be_returned()
         {
             // Act
-            CarType result = Enumeration.FromDisplayName<CarType>("Truck");
+            var result = Enumeration.FromDisplayName<CarType>("Truck");
 
             // Assert
             result.Should().Be(CarType.Truck, because: "the car type truck has the display name 'Truck'");

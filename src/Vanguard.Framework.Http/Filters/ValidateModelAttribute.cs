@@ -37,7 +37,7 @@
             {
                 foreach (var error in modelStateItem.Value.Errors)
                 {
-                    string target = GetTargetName(modelStateItem.Key);
+                    var target = GetTargetName(modelStateItem.Key);
                     result.Add(new Error(ErrorCode.ValidationError, error.ErrorMessage, target));
                 }
             }

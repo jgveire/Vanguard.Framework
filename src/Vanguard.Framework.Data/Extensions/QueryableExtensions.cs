@@ -71,7 +71,7 @@
             {
                 var paths = advancedFilter.Select.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 paths = advancedFilter.PropertyMappings.MapProperties(paths).ToArray();
-                string[] fields = GetEntityProperties<TEntity>(paths);
+                var fields = GetEntityProperties<TEntity>(paths);
                 source = source.Select(fields);
             }
 
@@ -232,9 +232,9 @@
         /// <returns>A <see cref="IQueryable{T}"/> whose elements are restricted to the specified page.</returns>
         public static IQueryable<TEntity> GetPage<TEntity>(this IQueryable<TEntity> source, int page, int pageSize)
         {
-            int index = Math.Max(1, page) - 1;
-            int skip = index * pageSize;
-            int take = Math.Max(1, pageSize);
+            var index = Math.Max(1, page) - 1;
+            var skip = index * pageSize;
+            var take = Math.Max(1, pageSize);
 
             var result = source;
             if (skip != 0)
@@ -272,7 +272,7 @@
             }
 
             var query = source;
-            foreach (string navigationPropertyPath in navigationPropertyPaths)
+            foreach (var navigationPropertyPath in navigationPropertyPaths)
             {
                 query = query.Include(navigationPropertyPath);
             }
@@ -333,7 +333,7 @@
         {
             Guard.ArgumentNotNullOrEmpty(searchString, nameof(searchString));
 
-            IEnumerable<PropertyInfo> properties = GetSearchableProperties(typeof(TEntity));
+            var properties = GetSearchableProperties(typeof(TEntity));
             if (!properties.Any())
             {
                 return source;
@@ -343,7 +343,7 @@
             var parameter = Expression.Parameter(typeof(TEntity), "item");
             foreach (var property in properties)
             {
-                Expression? searchExpression = GetSearchExpression(parameter, property, searchString);
+                var searchExpression = GetSearchExpression(parameter, property, searchString);
                 if (searchExpression == null)
                 {
                     continue;
@@ -674,7 +674,7 @@
 
             Expression? expression = null;
             var parameter = Expression.Parameter(typeof(TEntity), "item");
-            foreach (KeyValuePair<string, object> keyValuePair in keyValuePairs)
+            foreach (var keyValuePair in keyValuePairs)
             {
                 Expression searchExpression = GetEqualExpression(parameter, keyValuePair.Key, keyValuePair.Value);
                 if (expression == null)
@@ -710,7 +710,7 @@
 
         private static string[] GetEntityProperties<TEntity>(string[] navigationPropertyPaths)
         {
-            IEnumerable<string> items = GetEntityProperties<TEntity>()
+            var items = GetEntityProperties<TEntity>()
                 .Where(item => navigationPropertyPaths.Contains(item, StringComparer.InvariantCultureIgnoreCase));
 
             return items.ToArray();
@@ -734,7 +734,7 @@
 
         private static BinaryExpression? GetIntegerExpression(ParameterExpression parameter, PropertyInfo property, string searchString)
         {
-            if (int.TryParse(searchString, out int value))
+            if (int.TryParse(searchString, out var value))
             {
                 return GetEqualExpression(parameter, property, value);
             }
@@ -800,11 +800,11 @@
 
         private static void ValidateInclude<TEntity>(string[] propertyNames)
         {
-            foreach (string propertyName in propertyNames)
+            foreach (var propertyName in propertyNames)
             {
                 if (!GetEntityProperties<TEntity>().Contains(propertyName, StringComparer.InvariantCultureIgnoreCase))
                 {
-                    string message = string.Format(ExceptionResource.CannotInclude, propertyName);
+                    var message = string.Format(ExceptionResource.CannotInclude, propertyName);
                     throw new ValidationException(message, nameof(AdvancedFilter.Include));
                 }
             }
@@ -827,12 +827,12 @@
             {
                 var s = field.Capitalize();
                 var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                PropertyInfo? property = properties.FirstOrDefault(e => e.Name == s) ??
+                var property = properties.FirstOrDefault(e => e.Name == s) ??
                     properties.FirstOrDefault(e => string.Equals(e.Name, s, StringComparison.OrdinalIgnoreCase));
 
                 if (property == null)
                 {
-                    string message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
+                    var message = string.Format(ExceptionResource.CannotOrderBy, orderBy);
                     throw new ValidationException(message, nameof(AdvancedFilter.OrderBy));
                 }
 

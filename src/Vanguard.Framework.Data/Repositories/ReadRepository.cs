@@ -525,7 +525,7 @@
             {
                 _entityProperties = new List<string>();
 
-                Type type = typeof(TEntity);
+                var type = typeof(TEntity);
                 var properties = type
                     .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .Where(prop => prop.PropertyType.IsPrimitive ||
@@ -566,14 +566,14 @@
 
         private List<KeyValuePair<string, object>> GetIdValuePairs(object[] id)
         {
-            IEntityType entityType = DbContext.Model.FindEntityType(typeof(TEntity));
+            var entityType = DbContext.Model.FindEntityType(typeof(TEntity));
             if (entityType == null)
             {
                 var messge = string.Format(ExceptionResource.CannotFindEntityType, typeof(TEntity).FullName);
                 throw new InvalidOperationException(messge);
             }
 
-            IKey primaryKey = entityType.FindPrimaryKey();
+            var primaryKey = entityType.FindPrimaryKey();
             if (primaryKey == null)
             {
                 var messge = string.Format(ExceptionResource.CannotFindPrimaryKey, typeof(TEntity).FullName);
@@ -587,7 +587,7 @@
             }
 
             var pairs = new List<KeyValuePair<string, object>>();
-            for (int i = 0; i < primaryKey.Properties.Count; i++)
+            for (var i = 0; i < primaryKey.Properties.Count; i++)
             {
                 pairs.Add(new KeyValuePair<string, object>(primaryKey.Properties[i].Name, id[i]));
             }

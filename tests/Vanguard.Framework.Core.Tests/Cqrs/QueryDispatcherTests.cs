@@ -34,7 +34,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
                 .Returns(queryHandler);
 
             // Act
-            string result = SystemUnderTest.Dispatch(query);
+            var result = SystemUnderTest.Dispatch(query);
 
             // Assert
             result.Should().Be("Success", because: "the query handler returns the string 'Success'");
@@ -53,7 +53,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
                 .Returns(queryHandler);
 
             // Act
-            string result = SystemUnderTest.Dispatch<string, TestQuery>(query);
+            var result = SystemUnderTest.Dispatch<string, TestQuery>(query);
 
             // Assert
             result.Should().Be("Success", because: "the query handler returns the string 'Success'");
@@ -72,7 +72,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
                 .Returns(queryHandler);
 
             // Act
-            string result = SystemUnderTest.DispatchAsync(query).Result;
+            var result = SystemUnderTest.DispatchAsync(query).Result;
 
             // Assert
             result.Should().Be("Success", because: "the query handler returns the string 'Success'");
@@ -91,7 +91,7 @@ namespace Vanguard.Framework.Core.Tests.Cqrs
                 .Returns(queryHandler);
 
             // Act
-            string result = SystemUnderTest.DispatchAsync<string, TestAsyncQuery>(query).Result;
+            var result = SystemUnderTest.DispatchAsync<string, TestAsyncQuery>(query).Result;
 
             // Assert
             result.Should().Be("Success", because: "the query handler returns the string 'Success'");

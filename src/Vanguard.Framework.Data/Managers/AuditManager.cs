@@ -53,7 +53,7 @@
 
         private void CreateAuditRecords(AuditType auditType, string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
         {
-            foreach (EntityEntry<IAuditable> entityEntry in entityEntries)
+            foreach (var entityEntry in entityEntries)
             {
                 var auditEntry = new AuditEntry
                 {
@@ -101,14 +101,14 @@
         private string SerializeEntity(EntityEntry<IAuditable> entry)
         {
             var jsonBuilder = new JsonBuilder();
-            foreach (PropertyEntry propertyEntry in entry.Properties)
+            foreach (var propertyEntry in entry.Properties)
             {
                 if (TypeHelper.IsByteArray(propertyEntry.Metadata.ClrType))
                 {
                     continue;
                 }
 
-                string name = propertyEntry.Metadata.Name;
+                var name = propertyEntry.Metadata.Name;
                 jsonBuilder.AddProperty(name, propertyEntry.Metadata.ClrType, propertyEntry.CurrentValue);
             }
 

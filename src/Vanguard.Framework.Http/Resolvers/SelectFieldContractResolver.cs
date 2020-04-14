@@ -41,7 +41,7 @@
                 throw new ArgumentNullException(nameof(type));
             }
 
-            JsonContract contract = CreateContract(type);
+            var contract = CreateContract(type);
             return contract;
         }
 
@@ -51,7 +51,7 @@
             var property = base.CreateProperty(member, memberSerialization);
             property.GetIsSpecified = (obj) =>
             {
-                StringValues selectFields = Query["select"];
+                var selectFields = Query["select"];
                 if (selectFields.Count == 0)
                 {
                     return true;
@@ -75,9 +75,9 @@
         private static bool IsFieldInSelect(string fieldName, StringValues selectFields)
         {
             var fields = new List<string>();
-            foreach (string field in selectFields)
+            foreach (var field in selectFields)
             {
-                string[] items = field.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                var items = field.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 fields.AddRange(items.Select(item => item.Trim()));
             }
 

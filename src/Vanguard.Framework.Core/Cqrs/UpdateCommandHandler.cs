@@ -36,7 +36,7 @@
             var entity = _repository.GetById(command.Id);
             if (entity == null)
             {
-                string message = string.Format(ExceptionResource.CannotFindEntity, command.Id);
+                var message = string.Format(ExceptionResource.CannotFindEntity, command.Id);
                 throw new DataException(message);
             }
 
