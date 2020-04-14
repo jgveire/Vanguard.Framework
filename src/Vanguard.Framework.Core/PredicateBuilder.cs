@@ -19,8 +19,7 @@
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> source, Expression<Func<T, bool>> expression)
         {
             var invokedExpr = Expression.Invoke(expression, source.Parameters.Cast<Expression>());
-            return Expression.Lambda<Func<T, bool>>
-                  (Expression.AndAlso(source.Body, invokedExpr), source.Parameters);
+            return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(source.Body, invokedExpr), source.Parameters);
         }
 
         /// <summary>
