@@ -3,18 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>7.0.0</Version>
+    <Version>8.0.0</Version>
     <Authors>Veire Solutions</Authors>
     <Company>Veire Solutions</Company>
     <Product>Vanguard Framework</Product>
     <Description>The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.</Description>
     <Copyright>Copyright 2019 Veire Solutions</Copyright>
     <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
-    <PackageIconUrl>https://jgveire.github.io/Vanguard/Vanguard.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Data</PackageTags>
-    <PackageReleaseNotes>Updated to .NET standard 2.1</PackageReleaseNotes>
+    <PackageReleaseNotes>Audit entries are now created after entites have been saved to the database.
+Fixed duplicate record issue.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
@@ -22,9 +23,19 @@
 
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <PackageIcon>Vanguard.png</PackageIcon>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\Vanguard.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="Resources\ExceptionResource.resx" />
   </ItemGroup>
 

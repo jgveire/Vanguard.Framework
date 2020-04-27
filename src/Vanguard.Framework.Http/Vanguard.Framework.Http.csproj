@@ -10,7 +10,7 @@
     <Description>The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.</Description>
     <Copyright>Copyright 2019 Veire Solutions</Copyright>
     <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
-    <PackageIconUrl>https://jgveire.github.io/Vanguard/Vanguard.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework Http</PackageTags>
@@ -22,6 +22,8 @@
 
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <PackageIcon>Vanguard.png</PackageIcon>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,6 +50,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\Vanguard.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -92,21 +92,18 @@
         protected IEventDispatcher? EventDispatcher { get; }
 
         /// <inheritdoc />
-        public override int SaveChanges()
-        {
-            var events = GetAndClearEvents();
-            CreateAuditRecords();
-            var result = base.SaveChanges();
-            DispatchEvents(events);
-            return result;
-        }
-
-        /// <inheritdoc />
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             var events = GetAndClearEvents();
-            CreateAuditRecords();
+            var records = AuditManager?.GetAuditRecords() ?? new List<AuditRecord>();
             var result = base.SaveChanges(acceptAllChangesOnSuccess);
+
+            if (records.Any())
+            {
+                AuditManager?.CreateAuditEntries(CurrentUser?.UserId, records);
+                base.SaveChanges(acceptAllChangesOnSuccess);
+            }
+
             DispatchEvents(events);
             return result;
         }
@@ -115,8 +112,15 @@
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var events = GetAndClearEvents();
-            CreateAuditRecords();
+            var records = AuditManager?.GetAuditRecords() ?? new List<AuditRecord>();
             var result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+            if (records.Any())
+            {
+                AuditManager?.CreateAuditEntries(CurrentUser?.UserId, records);
+                await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            }
+
             await DispatchEventsAsync(events).ConfigureAwait(false);
             return result;
         }
@@ -125,23 +129,17 @@
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             var events = GetAndClearEvents();
-            CreateAuditRecords();
+            var records = AuditManager?.GetAuditRecords() ?? new List<AuditRecord>();
             var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken).ConfigureAwait(false);
-            await DispatchEventsAsync(events).ConfigureAwait(false);
-            return result;
-        }
 
-        /// <summary>
-        /// Creates the audit records.
-        /// </summary>
-        protected virtual void CreateAuditRecords()
-        {
-            if (CurrentUser == null || AuditManager == null)
+            if (records.Any())
             {
-                return;
+                AuditManager?.CreateAuditEntries(CurrentUser?.UserId, records);
+                await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken).ConfigureAwait(false);
             }
 
-            AuditManager.CreateAuditRecords(CurrentUser.UserId, DateTime.UtcNow);
+            await DispatchEventsAsync(events).ConfigureAwait(false);
+            return result;
         }
 
         private void DispatchEvents(IEnumerable<object> events)

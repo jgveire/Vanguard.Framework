@@ -56,13 +56,5 @@
         /// The garages.
         /// </value>
         public DbSet<Garage> Garages { get; set; } = new DummyDbSet<Garage>();
-
-        /// <inheritdoc />
-        public override int SaveChanges()
-        {
-            var auditManager = new AuditManager(this);
-            auditManager.CreateAuditRecords("Test", DateTime.UtcNow);
-            return base.SaveChanges();
-        }
     }
 }

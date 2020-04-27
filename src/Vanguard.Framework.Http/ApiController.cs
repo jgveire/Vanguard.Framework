@@ -6,7 +6,7 @@
     /// <summary>
     /// The API controller base class.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     public class ApiController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         /// <summary>

@@ -24,78 +24,34 @@
             _dbContext = dbContext;
         }
 
-        /// <inheritdoc />
-        public void CreateAuditRecords(string userId, DateTime utcChangeDate)
+        /// <inheritdoc/>
+        public void CreateAuditEntries(string? userId, ICollection<AuditRecord> auditRecords)
         {
-            Guard.ArgumentNotNullOrEmpty(userId, nameof(userId));
-            CreateInsertAuditRecords(userId, utcChangeDate);
-            CreateUpdateAuditRecords(userId, utcChangeDate);
-            CreateDeleteAuditRecords(userId, utcChangeDate);
-        }
-
-        /// <inheritdoc />
-        public void CreateDeleteAuditRecords(string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
-        {
-            CreateAuditRecords(AuditType.Delete, userId, utcChangeDate, entityEntries);
-        }
-
-        /// <inheritdoc />
-        public void CreateInsertAuditRecords(string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
-        {
-            CreateAuditRecords(AuditType.Insert, userId, utcChangeDate, entityEntries);
-        }
-
-        /// <inheritdoc />
-        public void CreateUpdateAuditRecords(string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
-        {
-            CreateAuditRecords(AuditType.Update, userId, utcChangeDate, entityEntries);
-        }
-
-        private void CreateAuditRecords(AuditType auditType, string userId, DateTime utcChangeDate, List<EntityEntry<IAuditable>> entityEntries)
-        {
-            foreach (var entityEntry in entityEntries)
+            var utcChangeDate = DateTime.UtcNow;
+            foreach (var record in auditRecords)
             {
                 var auditEntry = new AuditEntry
                 {
-                    AuditType = auditType,
-                    EntityId = entityEntry.Entity.EntityId,
-                    EntityName = entityEntry.Entity.GetType().Name,
-                    UserId = userId,
+                    AuditType = record.AuditType,
+                    EntityId = record.Entity.EntityId,
+                    EntityName = record.Entity.GetType().Name,
+                    UserId = userId ?? "Unknown",
                     UtcDate = utcChangeDate,
-                    Entity = SerializeEntity(entityEntry),
+                    Entity = SerializeEntity(record.EntityEntry),
                 };
                 _dbContext.Add(auditEntry);
             }
         }
 
-        private void CreateDeleteAuditRecords(string userId, DateTime utcChangeDate)
+        /// <inheritdoc/>
+        public ICollection<AuditRecord> GetAuditRecords()
         {
-            var deletedEntries = _dbContext
-                .ChangeTracker
-                .Entries<IAuditable>()
-                .Where(e => e.State == EntityState.Deleted)
-                .ToList();
-            CreateDeleteAuditRecords(userId, utcChangeDate, deletedEntries);
-        }
-
-        private void CreateInsertAuditRecords(string userId, DateTime utcChangeDate)
-        {
-            var addedEntries = _dbContext
-                .ChangeTracker
-                .Entries<IAuditable>()
-                .Where(e => e.State == EntityState.Added)
-                .ToList();
-            CreateInsertAuditRecords(userId, utcChangeDate, addedEntries);
-        }
-
-        private void CreateUpdateAuditRecords(string userId, DateTime utcChangeDate)
-        {
-            var updatedEntries = _dbContext
-                .ChangeTracker
-                .Entries<IAuditable>()
-                .Where(e => e.State == EntityState.Modified)
-                .ToList();
-            CreateUpdateAuditRecords(userId, utcChangeDate, updatedEntries);
+            return _dbContext
+               .ChangeTracker
+               .Entries<IAuditable>()
+               .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+               .Select(e => new AuditRecord(e.State, e))
+               .ToList();
         }
 
         private string SerializeEntity(EntityEntry<IAuditable> entry)

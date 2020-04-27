@@ -7,7 +7,6 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.Extensions;
     using Vanguard.Framework.Core.Repositories;

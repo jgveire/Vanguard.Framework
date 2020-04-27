@@ -9,7 +9,7 @@
     <Product>Vanguard Framework</Product>
     <Copyright>Copyright 2019 Veire Solutions</Copyright>
     <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
-    <PackageIconUrl>https://jgveire.github.io/Vanguard/Vanguard.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Vanguard Framework</PackageTags>
@@ -22,6 +22,8 @@
 
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
+    <PackageIcon>Vanguard.png</PackageIcon>
   </PropertyGroup>
   
   <ItemGroup>
@@ -43,6 +45,17 @@
       <LastGenOutput>ExceptionResource.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\Vanguard.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
