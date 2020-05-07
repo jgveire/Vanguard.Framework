@@ -8,6 +8,7 @@
     using Microsoft.EntityFrameworkCore;
     using Vanguard.Framework.Core;
     using Vanguard.Framework.Core.DomainEvents;
+    using Vanguard.Framework.Data.Entities;
     using Vanguard.Framework.Data.Managers;
 
     /// <inheritdoc />
@@ -18,7 +19,7 @@
         /// </summary>
         public DbContextBase()
         {
-            AuditManager = new AuditManager(this);
+            AuditManager = new AuditManager();
         }
 
         /// <summary>
@@ -28,7 +29,7 @@
         public DbContextBase(DbContextOptions options)
             : base(options)
         {
-            AuditManager = new AuditManager(this);
+            AuditManager = new AuditManager();
         }
 
         /// <summary>
@@ -38,7 +39,7 @@
         public DbContextBase(IEventDispatcher eventDispatcher)
         {
             EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
-            AuditManager = new AuditManager(this);
+            AuditManager = new AuditManager();
         }
 
         /// <summary>
@@ -50,7 +51,7 @@
             : base(options)
         {
             EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
-            AuditManager = new AuditManager(this);
+            AuditManager = new AuditManager();
         }
 
         /// <summary>
@@ -64,7 +65,7 @@
         {
             EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
             CurrentUser = Guard.ArgumentNotNull(currentUser, nameof(currentUser));
-            AuditManager = new AuditManager(this);
+            AuditManager = new AuditManager();
         }
 
         /// <summary>
@@ -88,7 +89,7 @@
         /// <value>
         /// The audit manager.
         /// </value>
-        protected IAuditManager? AuditManager { get; }
+        protected IAuditManager AuditManager { get; }
 
         /// <summary>
         /// Gets the current user.
@@ -110,12 +111,12 @@
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             var events = GetAndClearEvents();
-            var records = AuditManager?.GetAuditRecords() ?? new List<AuditRecord>();
+            var entries = AuditManager.CreateAuditEntries(CurrentUser?.UserId, ChangeTracker);
             var result = base.SaveChanges(acceptAllChangesOnSuccess);
 
-            if (records.Any())
+            if (entries.Any())
             {
-                AuditManager?.CreateAuditEntries(CurrentUser?.UserId, records);
+                Set<AuditEntry>().AddRange(entries);
                 base.SaveChanges(acceptAllChangesOnSuccess);
             }
 
@@ -127,12 +128,12 @@
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             var events = GetAndClearEvents();
-            var records = AuditManager?.GetAuditRecords() ?? new List<AuditRecord>();
+            var entries = AuditManager.CreateAuditEntries(CurrentUser?.UserId, ChangeTracker);
             var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken).ConfigureAwait(false);
 
-            if (records.Any())
+            if (entries.Any())
             {
-                AuditManager?.CreateAuditEntries(CurrentUser?.UserId, records);
+                Set<AuditEntry>().AddRange(entries);
                 await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken).ConfigureAwait(false);
             }
 

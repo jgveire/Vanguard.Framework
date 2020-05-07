@@ -13,45 +13,46 @@
     /// <inheritdoc />
     public class AuditManager : IAuditManager
     {
-        private readonly DbContext _dbContext;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AuditManager"/> class.
-        /// </summary>
-        /// <param name="dbContext">The database context.</param>
-        public AuditManager(DbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
         /// <inheritdoc/>
-        public void CreateAuditEntries(string? userId, ICollection<AuditRecord> auditRecords)
+        public ICollection<AuditEntry> CreateAuditEntries(string? userId, ChangeTracker changeTracker)
         {
+            var items = new List<AuditEntry>();
             var utcChangeDate = DateTime.UtcNow;
-            foreach (var record in auditRecords)
+            var entries = changeTracker
+               .Entries<IAuditable>()
+               .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+               .ToList();
+
+            foreach (var entry in entries)
             {
                 var auditEntry = new AuditEntry
                 {
-                    AuditType = record.AuditType,
-                    EntityId = record.Entity.EntityId,
-                    EntityName = record.Entity.GetType().Name,
+                    AuditType = GetAuditType(entry.State),
+                    EntityId = entry.Entity.EntityId,
+                    EntityName = entry.Entity.GetType().Name,
                     UserId = userId ?? "Unknown",
                     UtcDate = utcChangeDate,
-                    Entity = SerializeEntity(record.EntityEntry),
+                    Entity = SerializeEntity(entry),
                 };
-                _dbContext.Add(auditEntry);
+                items.Add(auditEntry);
             }
+
+            return items;
         }
 
-        /// <inheritdoc/>
-        public ICollection<AuditRecord> GetAuditRecords()
+        private AuditType GetAuditType(EntityState state)
         {
-            return _dbContext
-               .ChangeTracker
-               .Entries<IAuditable>()
-               .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
-               .Select(e => new AuditRecord(e.State, e))
-               .ToList();
+            switch (state)
+            {
+                case EntityState.Deleted:
+                    return AuditType.Delete;
+                case EntityState.Modified:
+                    return AuditType.Update;
+                case EntityState.Added:
+                    return AuditType.Insert;
+                default:
+                    throw new NotSupportedException($"The state {state} is not supported.");
+            }
         }
 
         private string SerializeEntity(EntityEntry<IAuditable> entry)
