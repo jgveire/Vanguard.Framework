@@ -124,23 +124,6 @@
         }
 
         /// <inheritdoc />
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            var events = GetAndClearEvents();
-            var records = AuditManager?.GetAuditRecords() ?? new List<AuditRecord>();
-            var result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-
-            if (records.Any())
-            {
-                AuditManager?.CreateAuditEntries(CurrentUser?.UserId, records);
-                await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-            }
-
-            await DispatchEventsAsync(events).ConfigureAwait(false);
-            return result;
-        }
-
-        /// <inheritdoc />
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             var events = GetAndClearEvents();
