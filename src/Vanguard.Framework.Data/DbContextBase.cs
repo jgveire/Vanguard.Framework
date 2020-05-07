@@ -68,6 +68,21 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DbContextBase"/> class.
+        /// </summary>
+        /// <param name="eventDispatcher">The event dispatcher.</param>
+        /// <param name="auditManager">the audit manager.</param>
+        /// <param name="currentUser">The current user.</param>
+        /// <param name="options">The options for this context.</param>
+        public DbContextBase(IEventDispatcher eventDispatcher, IAuditManager auditManager, ICurrentUser currentUser, DbContextOptions options)
+            : base(options)
+        {
+            EventDispatcher = Guard.ArgumentNotNull(eventDispatcher, nameof(eventDispatcher));
+            CurrentUser = Guard.ArgumentNotNull(currentUser, nameof(currentUser));
+            AuditManager = Guard.ArgumentNotNull(auditManager, nameof(auditManager));
+        }
+
+        /// <summary>
         /// Gets the audit manager.
         /// </summary>
         /// <value>

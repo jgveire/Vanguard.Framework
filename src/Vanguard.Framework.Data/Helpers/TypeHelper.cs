@@ -6,7 +6,7 @@
     /// <summary>
     /// The type helper class.
     /// </summary>
-    internal static class TypeHelper
+    public static class TypeHelper
     {
         private static readonly HashSet<Type> NumericTypes = new HashSet<Type>
         {
@@ -47,7 +47,7 @@
         /// <returns>
         ///   <c>true</c> if the specified type is boolean; otherwise, <c>false</c>.
         /// </returns>
-        internal static bool IsBoolean(Type type)
+        public static bool IsBoolean(Type type)
         {
             return type == typeof(bool) ||
                    type == typeof(bool?);
@@ -60,7 +60,7 @@
         /// <returns>
         ///   <c>true</c> if the specified type is DateTime; otherwise, <c>false</c>.
         /// </returns>
-        internal static bool IsDateTime(Type type)
+        public static bool IsDateTime(Type type)
         {
             return type == typeof(DateTime) ||
                    type == typeof(DateTime?);
@@ -73,7 +73,7 @@
         /// <returns>
         ///   <c>true</c> if the specified type is numeric; otherwise, <c>false</c>.
         /// </returns>
-        internal static bool IsNumeric(Type type)
+        public static bool IsNumeric(Type type)
         {
             return NumericTypes.Contains(type) ||
                    NumericTypes.Contains(Nullable.GetUnderlyingType(type));

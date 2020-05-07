@@ -10,7 +10,7 @@
     /// </summary>
     internal class JsonBuilder
     {
-        private readonly CultureInfo _cultureInfo = CreateCulture();
+        private readonly CultureInfo _cultureInfo = new CultureInfo("en-US");
         private readonly StringBuilder stringBuilder = new StringBuilder();
 
         /// <summary>
@@ -42,12 +42,6 @@
         public override string ToString()
         {
             return $"{{{stringBuilder}}}";
-        }
-
-        private static CultureInfo CreateCulture()
-        {
-            var cultureInfo = new CultureInfo("en-US");
-            return cultureInfo;
         }
 
         private string ConvertValue(Type valueType, object value)

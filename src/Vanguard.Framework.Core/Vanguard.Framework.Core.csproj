@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
-    <PackageReference Include="vanguard" Version="5.0.0" />
+    <PackageReference Include="Vanguard" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
