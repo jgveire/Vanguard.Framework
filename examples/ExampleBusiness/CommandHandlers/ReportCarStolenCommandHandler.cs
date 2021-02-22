@@ -1,5 +1,6 @@
 ﻿namespace ExampleBusiness.CommandHandlers
 {
+    using System;
     using ExampleBusiness.Commands;
     using ExampleData.Entities;
     using Vanguard.Framework.Core.Cqrs;
@@ -18,7 +19,7 @@
         /// <param name="carRepository">The car repository.</param>
         public ReportCarStolenCommandHandler(IRepository<Car> carRepository)
         {
-            _carRepository = carRepository;
+            _carRepository = carRepository ?? throw new ArgumentNullException(nameof(carRepository));
         }
 
         /// <inheritdoc />

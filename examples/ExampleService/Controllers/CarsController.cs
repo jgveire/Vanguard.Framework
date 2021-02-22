@@ -2,6 +2,7 @@
 {
     using System;
     using ExampleBusiness.Commands;
+    using ExampleBusiness.Queries;
     using ExampleModels;
     using Microsoft.AspNetCore.Mvc;
     using Vanguard.Framework.Core.Cqrs;
@@ -22,6 +23,18 @@
         public CarsController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
             : base(commandDispatcher, queryDispatcher)
         {
+        }
+
+        /// <summary>
+        /// Gets the car by its identifier.
+        /// </summary>
+        /// <param name="id">The car identifier.</param>
+        /// <returns>A car.</returns>
+        public override ActionResult<CarModel> GetById([FromRoute] Guid id)
+        {
+            var query = new GetCarByIdQuery(id);
+            var result = QueryDispatcher.Dispatch(query);
+            return OkOrNotFound(result);
         }
 
         /// <summary>

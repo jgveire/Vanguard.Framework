@@ -7,7 +7,6 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
-    <WarningsAsErrors>NU1605;CS8600;CS8602;CS8603</WarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\settings\Vanguard.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   
