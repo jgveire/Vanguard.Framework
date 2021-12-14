@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>7.0.0</Version>
+		<Version>7.0.0-release1</Version>
 		<Authors>Veire Solutions</Authors>
 		<Company>Veire Solutions</Company>
 		<Product>Vanguard Framework</Product>
