@@ -157,7 +157,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
 
             // Assert
             result.Should().NotBeNull(because: "The database contains a product with identifier 1.");
-            result.Category.Should().NotBeNull(because: "We specified to include category.");
+            result!.Category.Should().NotBeNull(because: "We specified to include category.");
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@ namespace Vanguard.Framework.Data.Tests.Repositories
 
             // Assert
             result.Should().NotBeNull(because: "The database contains a product with identifier 2.");
-            result.Category.Should().NotBeNull(because: "We specified to include category.");
+            result!.Category.Should().NotBeNull(because: "We specified to include category.");
         }
 
         protected override Repository<Product> CreateSystemUnderTest()

@@ -58,8 +58,17 @@
 
             // Invoke retrieve method.
             var retrieveMethod = queryHandlerType.GetMethod("Retrieve");
+            if (retrieveMethod == null)
+            {
+#pragma warning disable CS8603 // Possible null reference return.
+                return default;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
+
             var result = (TResult)retrieveMethod.Invoke(queryHandler, new object[] { query });
+#pragma warning disable CS8603 // Possible null reference return.
             return result;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         /// <inheritdoc />
@@ -78,7 +87,21 @@
 
             // Invoke retrieve method.
             var retrieveMethod = queryHandlerType.GetMethod("RetrieveAsync");
-            var result = (Task<TResult>)retrieveMethod.Invoke(queryHandler, new object[] { query });
+            if (retrieveMethod == null)
+            {
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
+                return Task.FromResult(default(TResult));
+#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+            }
+
+            var result = retrieveMethod.Invoke(queryHandler, new object[] { query }) as Task<TResult>;
+            if (result == null)
+            {
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
+                return Task.FromResult(default(TResult));
+#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+            }
+
             return result;
         }
 

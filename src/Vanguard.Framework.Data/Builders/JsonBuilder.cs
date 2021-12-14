@@ -19,7 +19,7 @@
         /// <param name="name">The property name.</param>
         /// <param name="valueType">Type of the value.</param>
         /// <param name="value">The value.</param>
-        public void AddProperty(string name, Type valueType, object value)
+        public void AddProperty(string name, Type valueType, object? value)
         {
             if (stringBuilder.Length > 0)
             {
@@ -44,7 +44,7 @@
             return $"{{{stringBuilder}}}";
         }
 
-        private string ConvertValue(Type valueType, object value)
+        private string? ConvertValue(Type valueType, object? value)
         {
             if (value == null)
             {
@@ -58,7 +58,7 @@
             }
             else if (TypeHelper.IsBoolean(valueType))
             {
-                return stringValue.ToLower();
+                return stringValue?.ToLower();
             }
             else if (TypeHelper.IsDateTime(valueType))
             {

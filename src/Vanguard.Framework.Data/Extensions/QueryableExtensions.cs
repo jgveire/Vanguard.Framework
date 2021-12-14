@@ -359,6 +359,11 @@
                 }
             }
 
+            if (expression == null)
+            {
+                return source;
+            }
+
             var methodCall = Expression.Call(
                 typeof(Queryable),
                 "Where",
@@ -394,7 +399,12 @@
                 .Select(item =>
                     {
                         // Property "Field1"
-                        var propertyInfo = typeof(TEntity).GetProperty(item);
+                        var entityType = typeof(TEntity);
+                        var propertyInfo = entityType.GetProperty(item);
+                        if (propertyInfo == null)
+                        {
+                            throw new InvalidOperationException($"Could not find property \"{item}\" on type {entityType.Name}.");
+                        }
 
                         // Original value "item.Field1"
                         var property = Expression.Property(parameter, propertyInfo);
@@ -687,6 +697,11 @@
                 }
             }
 
+            if (expression == null)
+            {
+                return source;
+            }
+
             var methodCall = Expression.Call(
                 typeof(Queryable),
                 "Where",
@@ -768,6 +783,11 @@
         {
             var memberExpression = Expression.PropertyOrField(parameter, property.Name);
             var methodInfo = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+            if (methodInfo == null)
+            {
+                throw new InvalidOperationException("Could not find the method Contains.");
+            }
+
             var valueExpression = Expression.Constant(searchString, typeof(string));
             var containsExpression = Expression.Call(memberExpression, methodInfo, valueExpression);
             return containsExpression;

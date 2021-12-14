@@ -59,7 +59,10 @@
             {
                 // Invoke handle method.
                 var retrieveMethod = eventHandlerType.GetMethod("Handle");
-                retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
+                if (retrieveMethod != null)
+                {
+                    retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
+                }
             }
         }
 
@@ -78,8 +81,14 @@
             {
                 // Invoke handle method.
                 var retrieveMethod = eventHandlerType.GetMethod("HandleAsync");
-                var result = (Task)retrieveMethod.Invoke(eventHandler, new object[] { domainEvent });
-                await result.ConfigureAwait(false);
+                if (retrieveMethod != null)
+                {
+                    var result = retrieveMethod.Invoke(eventHandler, new object[] { domainEvent }) as Task;
+                    if (result != null)
+                    {
+                        await result.ConfigureAwait(false);
+                    }
+                }
             }
         }
 

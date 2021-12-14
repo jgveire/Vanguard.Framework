@@ -17,7 +17,6 @@
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using Microsoft.OpenApi.Models;
-    using Vanguard.Framework.Http.ModelBinding;
 
     /// <summary>
     /// The startup class.
@@ -32,13 +31,13 @@
         {
             Configuration = configuration;
 
-            Mapper.Initialize(config =>
-            {
-                config.CreateMap<Car, CarModel>();
-                config.CreateMap<CarModel, Car>();
-                config.CreateMap<Garage, GarageModel>();
-                config.CreateMap<GarageModel, Garage>();
-            });
+            // Mapper.Initialize(config =>
+            // {
+            //     config.CreateMap<Car, CarModel>();
+            //     config.CreateMap<CarModel, Car>();
+            //     config.CreateMap<Garage, GarageModel>();
+            //     config.CreateMap<GarageModel, Garage>();
+            // });
         }
 
         /// <summary>
@@ -92,7 +91,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers(SetupMvc)
+                .AddControllers()
                 .AddJsonOptions(SetupJson);
 
             services.AddSwaggerGen(options =>
@@ -124,11 +123,6 @@
         private void SetupJson(JsonOptions options)
         {
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        }
-
-        private void SetupMvc(MvcOptions options)
-        {
-            options.ModelBinderProviders.InsertBodyAndRouteBinding();
         }
     }
 }

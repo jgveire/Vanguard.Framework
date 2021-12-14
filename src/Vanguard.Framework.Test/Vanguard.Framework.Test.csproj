@@ -1,64 +1,71 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>4.0.0</Version>
-    <Authors>Veire Solutions</Authors>
-    <Company>Veire Solutions</Company>
-    <Product>Vanguard Framework</Product>
-    <PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>Vanguard Framework Unit Test</PackageTags>
-    <PackageReleaseNotes>Updated to .NET standard 2.1</PackageReleaseNotes>
-    <Copyright>Copyright 2019 Veire Solutions</Copyright>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <NeutralLanguage>en</NeutralLanguage>
-    <Description>Base unit test classes that makes it easier to unit test code. This framework make use of Moq as mocking framework.</Description>
-    <PackageIconUrl></PackageIconUrl>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Version>4.0.0</Version>
+		<Authors>Veire Solutions</Authors>
+		<Company>Veire Solutions</Company>
+		<Product>Vanguard Framework</Product>
+		<PackageProjectUrl>https://github.com/jgveire/Vanguard.Framework</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/jgveire/Vanguard.Framework</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>Vanguard Framework Unit Test</PackageTags>
+		<PackageReleaseNotes>Updated to .NET standard 2.1</PackageReleaseNotes>
+		<Copyright>Copyright 2019 Veire Solutions</Copyright>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Description>Base unit test classes that makes it easier to unit test code. This framework make use of Moq as mocking framework.</Description>
+		<PackageIconUrl></PackageIconUrl>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
-    <PackageIcon>Vanguard.png</PackageIcon>
-    <PackageLicenseFile>License.txt</PackageLicenseFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+		<PackageIcon>Vanguard.png</PackageIcon>
+		<PackageLicenseFile>License.txt</PackageLicenseFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\License.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\..\Vanguard.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="ExceptionResource.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\License.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\Vanguard.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="ExceptionResource.resx">
+			<SubType>Designer</SubType>
+			<Generator>ResXFileCodeGenerator</Generator>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Moq" Version="4.10.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Moq" Version="4.16.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="ExceptionResource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ExceptionResource.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="ExceptionResource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>ExceptionResource.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="ExceptionResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExceptionResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="ExceptionResource.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>ExceptionResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="SonarAnalyzer.CSharp" Version="8.33.0.40503">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
 
 </Project>

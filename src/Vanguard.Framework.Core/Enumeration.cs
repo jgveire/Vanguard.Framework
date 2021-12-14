@@ -177,9 +177,14 @@
         }
 
         /// <inheritdoc />
-        public int CompareTo(object obj)
+        public int CompareTo(object? obj)
         {
-            return Value.CompareTo(((Enumeration)obj).Value);
+            if (obj is Enumeration enumeration)
+            {
+                return Value.CompareTo(enumeration.Value);
+            }
+
+            return -1;
         }
 
         /// <inheritdoc />

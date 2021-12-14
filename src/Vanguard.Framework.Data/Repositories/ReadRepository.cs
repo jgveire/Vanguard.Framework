@@ -231,14 +231,14 @@
         }
 
         /// <inheritdoc />
-        public virtual TEntity GetById(object id, params string[] includeProperties)
+        public virtual TEntity? GetById(object id, params string[] includeProperties)
         {
             Guard.ArgumentNotNull(id, nameof(id));
             return GetById(new object[] { id }, includeProperties);
         }
 
         /// <inheritdoc />
-        public virtual TEntity GetById(object[] ids, params string[] includeProperties)
+        public virtual TEntity? GetById(object[] ids, params string[] includeProperties)
         {
             Guard.ArgumentNotNull(ids, nameof(ids));
             var pairs = GetIdValuePairs(ids);
@@ -251,14 +251,14 @@
         }
 
         /// <inheritdoc />
-        public virtual Task<TEntity> GetByIdAsync(object id, params string[] includeProperties)
+        public virtual Task<TEntity?> GetByIdAsync(object id, params string[] includeProperties)
         {
             Guard.ArgumentNotNull(id, nameof(id));
             return GetByIdAsync(new object[] { id }, includeProperties);
         }
 
         /// <inheritdoc />
-        public virtual Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties)
+        public virtual Task<TEntity?> GetByIdAsync(object[] id, params string[] includeProperties)
         {
             Guard.ArgumentNotNull(id, nameof(id));
             var pairs = GetIdValuePairs(id);
@@ -391,7 +391,7 @@
         }
 
         /// <inheritdoc />
-        public virtual TEntity GetSingle(
+        public virtual TEntity? GetSingle(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties)
         {
@@ -403,7 +403,7 @@
         }
 
         /// <inheritdoc />
-        public virtual Task<TEntity> GetSingleAsync(
+        public virtual Task<TEntity?> GetSingleAsync(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties)
         {

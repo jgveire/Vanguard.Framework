@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29201.188
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vanguard.Framework.Core", "src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj", "{4286E3E3-EE0F-42F4-874B-CDE114844F93}"
 EndProject
@@ -45,21 +45,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{75
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleCommon", "examples\ExampleCommon\ExampleCommon.csproj", "{836EFD32-CB85-4DCD-BDD1-E79DA303D0AD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{7453BEA9-3A90-4D9A-95AA-AD3F4F590FC7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanguardFramework", "tools\VanguardFramework\VanguardFramework.csproj", "{5AE87392-6FE2-4E47-8FAD-8B7688955DD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanguardWizard", "tools\VanguardWizard\VanguardWizard.csproj", "{F71A4945-DCD4-4695-B02A-514F0EF5C4DC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanguardWizard.Tests", "tests\VanguardWizard.Tests\VanguardWizard.Tests.csproj", "{3DFEBA29-D416-434B-BCDA-C5D635767B1A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VanguardTemplate", "tools\VanguardTemplate\VanguardTemplate.csproj", "{E8C608F5-6A67-4B89-A04B-5B6417AADA39}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleModels", "examples\ExampleModels\ExampleModels.csproj", "{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{574A978E-CD3D-4ABD-AD9F-21E3A524DCDC}"
 	ProjectSection(SolutionItems) = preProject
 		docs\Migrations.md = docs\Migrations.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{80CD2D89-FE3C-45BA-91A6-68722705E949}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global
@@ -108,22 +103,6 @@ Global
 		{836EFD32-CB85-4DCD-BDD1-E79DA303D0AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{836EFD32-CB85-4DCD-BDD1-E79DA303D0AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{836EFD32-CB85-4DCD-BDD1-E79DA303D0AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AE87392-6FE2-4E47-8FAD-8B7688955DD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AE87392-6FE2-4E47-8FAD-8B7688955DD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AE87392-6FE2-4E47-8FAD-8B7688955DD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AE87392-6FE2-4E47-8FAD-8B7688955DD0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F71A4945-DCD4-4695-B02A-514F0EF5C4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F71A4945-DCD4-4695-B02A-514F0EF5C4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F71A4945-DCD4-4695-B02A-514F0EF5C4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F71A4945-DCD4-4695-B02A-514F0EF5C4DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DFEBA29-D416-434B-BCDA-C5D635767B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DFEBA29-D416-434B-BCDA-C5D635767B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DFEBA29-D416-434B-BCDA-C5D635767B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DFEBA29-D416-434B-BCDA-C5D635767B1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8C608F5-6A67-4B89-A04B-5B6417AADA39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8C608F5-6A67-4B89-A04B-5B6417AADA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8C608F5-6A67-4B89-A04B-5B6417AADA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8C608F5-6A67-4B89-A04B-5B6417AADA39}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -143,10 +122,6 @@ Global
 		{0374F0E1-4628-4707-99E4-9BD7F962DAFF} = {9028BADB-AB90-4432-8E23-40D533008578}
 		{0DACE5EC-0B48-47FA-A5E0-646EC134F443} = {9028BADB-AB90-4432-8E23-40D533008578}
 		{836EFD32-CB85-4DCD-BDD1-E79DA303D0AD} = {9028BADB-AB90-4432-8E23-40D533008578}
-		{5AE87392-6FE2-4E47-8FAD-8B7688955DD0} = {7453BEA9-3A90-4D9A-95AA-AD3F4F590FC7}
-		{F71A4945-DCD4-4695-B02A-514F0EF5C4DC} = {7453BEA9-3A90-4D9A-95AA-AD3F4F590FC7}
-		{3DFEBA29-D416-434B-BCDA-C5D635767B1A} = {5910B2D3-89FA-4698-98E3-E29205FDF9E7}
-		{E8C608F5-6A67-4B89-A04B-5B6417AADA39} = {7453BEA9-3A90-4D9A-95AA-AD3F4F590FC7}
 		{DF8D2B6B-DE8F-4E15-AA3D-B4FEC9B67F5F} = {9028BADB-AB90-4432-8E23-40D533008578}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

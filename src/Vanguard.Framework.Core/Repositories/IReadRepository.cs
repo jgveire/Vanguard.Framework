@@ -120,7 +120,7 @@
         /// <param name="orderBy">The order by predicate.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>A collection of TEntity.</returns>
-        IEnumerable<TEntity> Get(
+        IEnumerable<TEntity?> Get(
             Expression<Func<TEntity, bool>>? filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
             params string[] includeProperties);
@@ -143,7 +143,7 @@
         /// <param name="id">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>An entity.</returns>
-        TEntity GetById(object id, params string[] includeProperties);
+        TEntity? GetById(object id, params string[] includeProperties);
 
         /// <summary>
         /// Gets a entity by identifier.
@@ -151,7 +151,7 @@
         /// <param name="ids">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>An entity.</returns>
-        TEntity GetById(object[] ids, params string[] includeProperties);
+        TEntity? GetById(object[] ids, params string[] includeProperties);
 
         /// <summary>
         /// Gets a entity by identifier asynchronously.
@@ -159,7 +159,7 @@
         /// <param name="id">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>An entity.</returns>
-        Task<TEntity> GetByIdAsync(object id, params string[] includeProperties);
+        Task<TEntity?> GetByIdAsync(object id, params string[] includeProperties);
 
         /// <summary>
         /// Gets a entity by identifier asynchronously.
@@ -167,7 +167,7 @@
         /// <param name="id">The identifier.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>An entity.</returns>
-        Task<TEntity> GetByIdAsync(object[] id, params string[] includeProperties);
+        Task<TEntity?> GetByIdAsync(object[] id, params string[] includeProperties);
 
         /// <summary>
         /// Gets the number of items in the database according to the supplied filter.
@@ -261,7 +261,7 @@
         /// <param name="filter">A filter to retrieve the entity.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>An entity.</returns>
-        TEntity GetSingle(
+        TEntity? GetSingle(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties);
 
@@ -271,7 +271,7 @@
         /// <param name="filter">A filter to retrieve the entity.</param>
         /// <param name="includeProperties">The properties that should be include in the query.</param>
         /// <returns>A task that returns an entity.</returns>
-        Task<TEntity> GetSingleAsync(
+        Task<TEntity?> GetSingleAsync(
             Expression<Func<TEntity, bool>> filter,
             params string[] includeProperties);
 

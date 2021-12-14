@@ -65,6 +65,11 @@
 
             var memberExpression = Expression.PropertyOrField(parameter, property.Name);
             var methodInfo = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+            if (methodInfo == null)
+            {
+                throw new InvalidOperationException("Could not find the Contains method.");
+            }
+
             var valueExpression = Expression.Constant(value, typeof(string));
             var containsExpression = Expression.Call(memberExpression, methodInfo, valueExpression);
             return containsExpression;

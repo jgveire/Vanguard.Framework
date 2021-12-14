@@ -75,8 +75,9 @@
         /// </returns>
         public static bool IsNumeric(Type type)
         {
+            var nullableType = Nullable.GetUnderlyingType(type);
             return NumericTypes.Contains(type) ||
-                   NumericTypes.Contains(Nullable.GetUnderlyingType(type));
+                   (nullableType != null && NumericTypes.Contains(nullableType));
         }
     }
 }
