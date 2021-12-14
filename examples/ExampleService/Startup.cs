@@ -30,14 +30,6 @@
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            // Mapper.Initialize(config =>
-            // {
-            //     config.CreateMap<Car, CarModel>();
-            //     config.CreateMap<CarModel, Car>();
-            //     config.CreateMap<Garage, GarageModel>();
-            //     config.CreateMap<GarageModel, Garage>();
-            // });
         }
 
         /// <summary>

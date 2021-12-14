@@ -17,7 +17,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
 		<ProjectReference Include="..\..\src\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj" />
-		<ProjectReference Include="..\ExampleCommon\ExampleCommon.csproj" />
 	</ItemGroup>
 
 </Project>

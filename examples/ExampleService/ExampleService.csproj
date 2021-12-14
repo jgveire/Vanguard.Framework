@@ -14,6 +14,7 @@
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.3.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
@@ -34,7 +35,6 @@
 		<ProjectReference Include="..\..\src\Vanguard.Framework.Data\Vanguard.Framework.Data.csproj" />
 		<ProjectReference Include="..\..\src\Vanguard.Framework.Http\Vanguard.Framework.Http.csproj" />
 		<ProjectReference Include="..\ExampleBusiness\ExampleBusiness.csproj" />
-		<ProjectReference Include="..\ExampleCommon\ExampleCommon.csproj" />
 		<ProjectReference Include="..\ExampleData\ExampleData.csproj" />
 		<ProjectReference Include="..\ExampleModels\ExampleModels.csproj" />
 	</ItemGroup>

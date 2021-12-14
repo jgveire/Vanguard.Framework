@@ -2,7 +2,6 @@
 {
     using Autofac;
     using ExampleBusiness;
-    using ExampleCommon;
     using ExampleData;
     using ExampleData.Entities;
     using ExampleModels;

@@ -7,7 +7,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Vanguard.Framework.Core\Vanguard.Framework.Core.csproj" />
-		<ProjectReference Include="..\ExampleCommon\ExampleCommon.csproj" />
 		<ProjectReference Include="..\ExampleData\ExampleData.csproj" />
 		<ProjectReference Include="..\ExampleModels\ExampleModels.csproj" />
 	</ItemGroup>
