@@ -1,4 +1,7 @@
-# Vanguard Framework
+# Vanguard Framework - DEPRICATED
+
+**NOTE: This project has been depricated and archived. There are other package like MediatR that do a beter job than these package. Please migrate your code to other solutions.**
+
 The Vanguard Framework is a framework for developing database driven web applications and web services. It combines a set of design patterns and best practices to kick start your project.
 
 By using the Vanguard Framework and following its design patterns you ensure that your code is of good quality, can be maintained easily and extended without a lot of hassle.
